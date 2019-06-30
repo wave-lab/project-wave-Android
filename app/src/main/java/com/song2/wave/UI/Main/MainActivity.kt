@@ -7,6 +7,8 @@ import com.song2.wave.UI.Main.Library.LibraryFragment
 import com.song2.wave.UI.Main.Scoring.ScoringFragment
 import com.song2.wave.UI.Main.Search.SearchFragment
 import com.song2.wave.R
+import android.util.Log
+
 
 class MainActivity : AppCompatActivity() {
 
