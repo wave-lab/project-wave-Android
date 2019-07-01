@@ -9,6 +9,7 @@ import com.song2.wave.UI.Main.Scoring.ScoringFragment
 import com.song2.wave.UI.Main.Search.SearchFragment
 import com.song2.wave.R
 import com.song2.wave.UI.Main.MyPage.MyPageFragment
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
