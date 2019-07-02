@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_scoring_player.*
 import java.lang.Exception
 
 class ScoringPlayerActivity : Activity() {
-
+    lateinit var playTime : String
     lateinit var mediaPlayer: MediaPlayer
     lateinit var seekbar: SeekBar
     var isPlaying = false
@@ -44,8 +44,16 @@ class ScoringPlayerActivity : Activity() {
         override fun handleMessage(msg: Message?) {
             super.handleMessage(msg)
             if (msg!!.what == 0) {
-                tv_scoring_player_duration_time.setText((mediaPlayer.getCurrentPosition() / 1000).toString())
+                //((mediaPlayer.getCurrentPosition() / 1000) % 3600 / 60) + ":" + ((mediaPlayer.getCurrentPosition() / 1000) % 3600 % 60)
+                playTime =  String.format("%02d:%02d",((mediaPlayer.getCurrentPosition() / 1000) % 3600 / 60) , ((mediaPlayer.getCurrentPosition() / 1000) % 3600 % 60))
+
+                tv_scoring_player_duration_time.setText(playTime)
+
+                //tv_scoring_player_duration_time.setText((mediaPlayer.getCurrentPosition() / 1000).toString())
                 Log.v("handlerError",(mediaPlayer.getCurrentPosition()/1000).toString())
+
+/*                Log.v("handlerError",(mediaPlayer.getCurrentPosition()/1000).toString())
+                Log.v("handlerError",(mediaPlayer.getDuration()/1000).toString())*/
             }
 
         }
@@ -55,6 +63,7 @@ class ScoringPlayerActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scoring_player)
         mediaPlayer = MediaPlayer()
+
 
         addSeekBar()
         playerBtn()
@@ -111,17 +120,6 @@ class ScoringPlayerActivity : Activity() {
             }
         })
 
-        /*
-        mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
-            override fun onCompletion(mediaPlayer: MediaPlayer) {
-
-                Log.e("CompleteListenerError-currentPosition", currentPosition.toString())
-                Log.e("CompleteListenerError-sourceArray", sourceArray.size.toString())
-
-                nextSong()
-            }
-        })
-*/
         btn_scoring_player_prev.setOnClickListener {
             prevSong()
         }
@@ -163,20 +161,24 @@ class ScoringPlayerActivity : Activity() {
     fun playAudio(url: String) {
 
         mediaPlayer.setDataSource(url)
-
         mediaPlayer.prepare()
         mediaPlayer.start()
 
         var play_duration = mediaPlayer!!.getDuration()
+        var lenthOfSong =  String.format("%02d:%02d",((play_duration / 1000) % 3600 / 60) , ((play_duration / 1000) % 3600 % 60))
+
+        tv_scoring_player_length_of_song.setText(lenthOfSong)
+
         isPlaying = true
 
         seekbar.setMax(play_duration)
         sbThread().start()
     }
 
+
     fun prevSong(){
 
-        if (currentPosition-1 >= 0) {
+        if (currentPosition > 0) {
             mediaPlayer.reset()
             currentPosition -= 1
             playAudio(sourceMusicArray[currentPosition])
