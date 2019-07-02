@@ -15,9 +15,11 @@ class ScoringPlayerActivity : Activity() {
     lateinit var playTime : String
     lateinit var mediaPlayer: MediaPlayer
     lateinit var seekbar: SeekBar
+
     var isPlaying = false
     var playbackPosition = 0
     var currentPosition = 0
+
     var n_sbHandler = sbHandler()
     var sourceMusicArray: Array<String> = arrayOf(
         "https://project-wave-1.s3.ap-northeast-2.amazonaws.com/Roller+Coaster_%EC%B2%AD%ED%95%98_320k.mp3",
@@ -30,6 +32,93 @@ class ScoringPlayerActivity : Activity() {
         "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-07.mp3",
         "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-08.mp3"
     )
+
+    inner class playThread : Thread(){
+
+        //미디어를 재생하는 사용자 정의 메소드
+        fun playAudio(url: String) {
+
+            mediaPlayer.setDataSource(url)
+            mediaPlayer.prepare()
+            mediaPlayer.start()
+
+            var play_duration = mediaPlayer!!.getDuration()
+            var lenthOfSong =  String.format("%02d:%02d",((play_duration / 1000) % 3600 / 60) , ((play_duration / 1000) % 3600 % 60))
+
+            tv_scoring_player_length_of_song.setText(lenthOfSong)
+
+            isPlaying = true
+
+            seekbar.setMax(play_duration)
+            sbThread().start()
+        }
+
+
+        fun prevSong(){
+
+            if (currentPosition > 0) {
+                mediaPlayer.reset()
+                currentPosition -= 1
+                playAudio(sourceMusicArray[currentPosition])
+
+            } else {
+                killMediaPlayer()
+                //mediaPlayer.release()
+            }
+
+        }
+
+        fun nextSong(){
+
+            if (currentPosition < sourceMusicArray.size) {
+                mediaPlayer.reset()
+                currentPosition += 1
+                playAudio(sourceMusicArray[currentPosition])
+
+            } else {
+                killMediaPlayer()
+                //mediaPlayer.release()
+            }
+
+        }
+
+        fun stopAudio() {
+
+            isPlaying = false
+
+            mediaPlayer.stop()
+            seekbar.setProgress(0)
+            killMediaPlayer()
+
+        }
+
+        fun pauseAudio() {
+
+            isPlaying = false
+
+            playbackPosition = mediaPlayer.getCurrentPosition()
+            mediaPlayer!!.pause()
+
+        }
+
+        fun restart() {
+
+            isPlaying = true // 재생하도록 flag 변경
+
+            mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
+            mediaPlayer.start() // 시작
+
+            sbThread().start()
+        }
+
+        fun killMediaPlayer() {
+/*      if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
+            mediaPlayer!!.release()
+        }*/
+            mediaPlayer!!.release()
+        }
+
+    }
 
     inner class sbThread : Thread() {
         override fun run() {
@@ -44,15 +133,11 @@ class ScoringPlayerActivity : Activity() {
         override fun handleMessage(msg: Message?) {
             super.handleMessage(msg)
             if (msg!!.what == 0) {
-                //((mediaPlayer.getCurrentPosition() / 1000) % 3600 / 60) + ":" + ((mediaPlayer.getCurrentPosition() / 1000) % 3600 % 60)
                 playTime =  String.format("%02d:%02d",((mediaPlayer.getCurrentPosition() / 1000) % 3600 / 60) , ((mediaPlayer.getCurrentPosition() / 1000) % 3600 % 60))
 
                 tv_scoring_player_duration_time.setText(playTime)
-
-                //tv_scoring_player_duration_time.setText((mediaPlayer.getCurrentPosition() / 1000).toString())
+                /*
                 Log.v("handlerError",(mediaPlayer.getCurrentPosition()/1000).toString())
-
-/*                Log.v("handlerError",(mediaPlayer.getCurrentPosition()/1000).toString())
                 Log.v("handlerError",(mediaPlayer.getDuration()/1000).toString())*/
             }
 
@@ -71,7 +156,7 @@ class ScoringPlayerActivity : Activity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        killMediaPlayer()
+        playThread().killMediaPlayer()
     }
 
     fun addSeekBar() {
@@ -116,12 +201,12 @@ class ScoringPlayerActivity : Activity() {
         mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener{
             override fun onCompletion(p0: MediaPlayer?) {
                 Log.v("Complete", "Complete")
-                nextSong()
+                playThread().nextSong()
             }
         })
 
         btn_scoring_player_prev.setOnClickListener {
-            prevSong()
+            playThread().prevSong()
         }
 
         btn_scoring_player_play.setOnClickListener {
@@ -132,7 +217,7 @@ class ScoringPlayerActivity : Activity() {
                     mediaPlayer = null
                 }*/
 
-                playAudio(sourceMusicArray[currentPosition])
+                playThread().playAudio(sourceMusicArray[currentPosition])
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -141,100 +226,20 @@ class ScoringPlayerActivity : Activity() {
         }
 
         btn_scoring_player_stop.setOnClickListener {
-            stopAudio()
+            playThread().stopAudio()
         }
 
         btn_scoring_player_pause.setOnClickListener {
-            pauseAudio()
+            playThread().pauseAudio()
         }
 
         btn_scoring_player_restart.setOnClickListener {
-            restart()
+            playThread().restart()
         }
 
         btn_scoring_player_next.setOnClickListener {
-            nextSong()
+            playThread().nextSong()
         }
     }
 
-    //미디어를 재생하는 사용자 정의 메소드
-    fun playAudio(url: String) {
-
-        mediaPlayer.setDataSource(url)
-        mediaPlayer.prepare()
-        mediaPlayer.start()
-
-        var play_duration = mediaPlayer!!.getDuration()
-        var lenthOfSong =  String.format("%02d:%02d",((play_duration / 1000) % 3600 / 60) , ((play_duration / 1000) % 3600 % 60))
-
-        tv_scoring_player_length_of_song.setText(lenthOfSong)
-
-        isPlaying = true
-
-        seekbar.setMax(play_duration)
-        sbThread().start()
-    }
-
-
-    fun prevSong(){
-
-        if (currentPosition > 0) {
-            mediaPlayer.reset()
-            currentPosition -= 1
-            playAudio(sourceMusicArray[currentPosition])
-
-        } else {
-            mediaPlayer.release()
-        }
-
-    }
-
-    fun nextSong(){
-
-        if (currentPosition < sourceMusicArray.size) {
-            mediaPlayer.reset()
-            currentPosition += 1
-            playAudio(sourceMusicArray[currentPosition])
-
-        } else {
-            mediaPlayer.release()
-        }
-
-    }
-
-    fun stopAudio() {
-
-        isPlaying = false
-
-        mediaPlayer.stop()
-        seekbar.setProgress(0)
-        killMediaPlayer()
-
-    }
-
-    fun pauseAudio() {
-
-        isPlaying = false
-
-        playbackPosition = mediaPlayer.getCurrentPosition()
-        mediaPlayer!!.pause()
-
-    }
-
-    fun restart() {
-
-        isPlaying = true // 재생하도록 flag 변경
-
-        mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
-        mediaPlayer.start() // 시작
-
-        sbThread().start()
-    }
-
-    fun killMediaPlayer() {
-/*      if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
-            mediaPlayer!!.release()
-        }*/
-        mediaPlayer!!.release()
-    }
 }
