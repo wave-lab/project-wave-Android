@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="82dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginBottom="6dp"
+    >
+    <ImageView
+        android:id="@+id/img_song_item_cover"
+        android:layout_width="82dp"
+        android:layout_height="82dp"
+        android:background="@drawable/kakaostory_icon"
+        />
+
+    <TextView
+        android:id="@+id/tv_song_item_song_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Song Name"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/img_song_item_cover"
+        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+        android:includeFontPadding="false"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_song_item_origin_artist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="- Original Arti…"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/tv_song_item_song_name"
+        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+        android:includeFontPadding="false"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_song_item_corver_artist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="blotto_archyan"
+        android:layout_below="@+id/tv_song_item_song_name"
+        android:layout_alignLeft="@+id/tv_song_item_song_name"
+        android:fontFamily="@font/noto_sans_kr_regular_hestia"
+        android:includeFontPadding="false"
+        android:layout_marginTop="2dp"
+        android:textColor="#979797"
+        />
+
+    <View
+        android:id="@+id/view_song_item_center"
+        android:layout_width="1dp"
+        android:layout_height="10dp"
+        android:layout_toRightOf="@+id/tv_song_item_corver_artist_name"
+        android:layout_marginLeft="8dp"
+        android:background="#979797"
+        android:layout_below="@+id/tv_song_item_song_name"
+        android:layout_marginTop="7dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_song_item_corver_field_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="힙합  재즈  일렉트로닉"
+        android:layout_below="@+id/tv_song_item_song_name"
+        android:layout_toRightOf="@+id/view_song_item_center"
+        android:fontFamily="@font/noto_sans_kr_regular_hestia"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="8dp"
+        android:textColor="#979797"
+        android:includeFontPadding="false"
+        />
+
+</RelativeLayout>

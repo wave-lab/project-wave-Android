@@ -28,6 +28,16 @@
     />
 
     <Button
+            android:id="@+id/btn_test_act_music_pause"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="음악 서비스 일시정지"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+    />
+
+
+    <Button
             android:id="@+id/btn_test_act_music_stop"
             android:layout_width="300dp"
             android:layout_height="wrap_content"

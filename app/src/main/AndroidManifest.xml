@@ -7,12 +7,12 @@
     <application
             android:name=".Util.Kakao.GlobalApplication"
             android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/android_app_icon"
             android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
+            android:roundIcon="@drawable/android_app_icon"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity android:name=".UI.TestActivity">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".UI.Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -25,9 +25,13 @@
                 android:value="@string/kakao_app_key"/>
 
         <activity android:name=".UI.Login.LoginActivity"/>
-        <activity android:name=".UI.Main.MainActivity">
+        <activity android:name=".UI.TestActivity">
         </activity>
-        <service android:name=".Util.Player.Service.MusicService"></service>
+
+        <service android:name=".Util.Player.Service.MusicService"/>
+
+        <activity android:name=".UI.Main.Test2Activity">
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.song2.wave.UI.Main
 
+import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,6 +10,7 @@ import com.song2.wave.UI.Main.Scoring.ScoringFragment
 import com.song2.wave.UI.Main.Search.SearchFragment
 import com.song2.wave.R
 import android.util.Log
+import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
