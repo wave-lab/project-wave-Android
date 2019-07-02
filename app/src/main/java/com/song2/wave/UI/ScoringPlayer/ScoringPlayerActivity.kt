@@ -3,6 +3,8 @@ package com.song2.wave.Util.Kakao.service
 import android.app.Activity
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.util.Log
 import android.widget.SeekBar
 import com.song2.wave.R
@@ -15,12 +17,26 @@ class ScoringPlayerActivity : Activity() {
     lateinit var seekbar: SeekBar
     var isPlaying = false
     var playbackPosition = 0
+    var n_sbHandler = sbHandler()
+
 
     inner class sbThread : Thread() {
         override fun run() {
             while (isPlaying) {
                 seekbar.setProgress(mediaPlayer.getCurrentPosition())
+                n_sbHandler.sendEmptyMessageDelayed(0, 1000)
             }
+        }
+    }
+
+    inner class sbHandler : Handler(){
+        override fun handleMessage(msg: Message?) {
+            super.handleMessage(msg)
+            if (msg!!.what == 0) {
+                tv_scoring_player_duration_time.setText((mediaPlayer.getCurrentPosition()/1000).toString())
+                //Log.e("handlerError",(mediaPlayer.getCurrentPosition()/1000).toString())
+            }
+
         }
     }
 
@@ -30,6 +46,12 @@ class ScoringPlayerActivity : Activity() {
 
         addSeekBar()
         playerBtn()
+        //setPlaytime()
+    }
+
+    fun setPlaytime(){
+        tv_scoring_player_duration_time.setText((mediaPlayer.currentPosition).toString())
+        //tv_scoring_player_length_of_song.setText(mediaPlayer.)
     }
 
     fun addSeekBar() {
@@ -53,7 +75,7 @@ class ScoringPlayerActivity : Activity() {
             override fun onStartTrackingTouch(seekbar: SeekBar) {
                 isPlaying = false
                 mediaPlayer.pause()
-                //error : lateinit을 설정 해 놔서, 처음에 아무것도 만지지 않은 상태에서 seekbar 건들면
+                //error : mediaplayer에 아 처음에 아무것도 만지지 않은 상태에서 seekbar 건들경우 error
             }
 
 
@@ -139,7 +161,6 @@ class ScoringPlayerActivity : Activity() {
         mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
         mediaPlayer.start() // 시작
 
-
         sbThread().start()
     }
 
@@ -153,7 +174,6 @@ class ScoringPlayerActivity : Activity() {
 /*        if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
             mediaPlayer!!.release()
         }*/
-
         mediaPlayer!!.release()
     }
 }
