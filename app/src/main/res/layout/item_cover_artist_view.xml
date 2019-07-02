@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="82dp"
+    android:layout_height="110dp"
+    android:orientation="vertical"
+    android:layout_marginLeft="16dp"
+    >
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_cover_artist_item_profile"
+        android:layout_width="82dp"
+        android:layout_height="82dp"
+        android:background="@drawable/img_artistprofile"
+        />
+
+    <TextView
+        android:id="@+id/tv_cover_artist_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post Ma…"
+        android:textSize="16sp"
+        android:textColor="#ffffff"
+        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+        android:includeFontPadding="false"
+        android:layout_gravity="center"
+        />
+
+</LinearLayout>
