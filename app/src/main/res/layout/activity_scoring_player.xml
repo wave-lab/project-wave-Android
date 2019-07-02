@@ -14,68 +14,94 @@
                 android:background="@color/colorPrimaryDark"
                 android:layout_width="300dp" android:layout_height="300dp"/>
 
-         <LinearLayout
-                 android:layout_marginVertical="8dp"
-                 android:layout_centerHorizontal="true"
-                 android:orientation="horizontal"
-                 android:id="@+id/rv_scoring_plater_act_seekbar_timeline"
-                 android:layout_below="@+id/iv_scoring_player_act_album_cover"
-                 android:layout_width="match_parent" android:layout_height="wrap_content">
+<RelativeLayout
+        android:layout_below="@+id/iv_scoring_player_act_album_cover"
+        android:id="@+id/rl_scoring_player_act_timeline"
+        android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-             <TextView
-                     android:id="@+id/tv_scoring_player_duration_time"
-                     android:text="00:00"
-                     android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView
+            android:layout_toLeftOf="@+id/sb_scoring_player_act_seekbar"
+            android:id="@+id/tv_scoring_player_duration_time"
+            android:text="00:00"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 
-             <SeekBar
-                     android:layout_width="288dp"
-                    android:id="@+id/sb_scoring_player_act_seekbar"
-                    android:layout_height="match_parent" />
+    <SeekBar
+            android:layout_centerHorizontal="true"
+            android:layout_width="288dp"
+            android:id="@+id/sb_scoring_player_act_seekbar"
+            android:layout_height="wrap_content"/>
 
-             <TextView
-                     android:id="@+id/tv_scoring_player_length_of_song"
-                     android:text="00:00"
-                     android:layout_alignParentRight="true"
-                     android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView
+            android:layout_toRightOf="@+id/sb_scoring_player_act_seekbar"
+            android:id="@+id/tv_scoring_player_length_of_song"
+            android:text="00:00"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 
-
-         </LinearLayout>
-
+</RelativeLayout>
 
         <LinearLayout
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/rv_scoring_plater_act_seekbar_timeline"
+                android:layout_below="@+id/rl_scoring_player_act_timeline"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content" android:layout_height="wrap_content">
             <Button
+                    android:textSize="8dp"
+                    android:layout_weight="1"
+                    android:id="@+id/btn_scoring_player_shuffle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="suffle"/>
+            <Button
+                    android:textSize="8dp"
+                    android:layout_weight="1"
+                    android:id="@+id/btn_scoring_player_prev"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="prev"/>
+            <Button
+                    android:textSize="8dp"
+                    android:layout_weight="1"
                     android:id="@+id/btn_scoring_player_play"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:width="96dp"
                     android:layout_gravity="center"
                     android:text="start"/>
             <Button
+                    android:textSize="8dp"
+                    android:layout_weight="1"
                     android:id="@+id/btn_scoring_player_stop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:width="96dp"
                     android:layout_gravity="center"
                     android:text="stop"/>
             <Button
+                    android:textSize="8dp"
+                    android:layout_weight="1"
                     android:id="@+id/btn_scoring_player_pause"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:width="96dp"
                     android:layout_gravity="center"
                     android:text="pause"/>
 
             <Button
+                    android:textSize="8dp"
+                    android:layout_weight="1"
                     android:id="@+id/btn_scoring_player_restart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:width="96dp"
                     android:layout_gravity="center"
                     android:text="restart"/>
+            <Button
+                    android:textSize="8dp"
+                    android:layout_weight="1"
+                    android:id="@+id/btn_scoring_player_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="next"/>
 
         </LinearLayout>
     </RelativeLayout>

@@ -17,8 +17,19 @@ class ScoringPlayerActivity : Activity() {
     lateinit var seekbar: SeekBar
     var isPlaying = false
     var playbackPosition = 0
+    var currentPosition = 0
     var n_sbHandler = sbHandler()
-
+    var sourceMusicArray: Array<String> = arrayOf(
+        "https://project-wave-1.s3.ap-northeast-2.amazonaws.com/Roller+Coaster_%EC%B2%AD%ED%95%98_320k.mp3",
+        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-01.mp3",
+        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-02.mp3",
+        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-03.mp3",
+        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-04.mp3",
+        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-05.mp3",
+        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-06.mp3",
+        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-07.mp3",
+        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-08.mp3"
+    )
 
     inner class sbThread : Thread() {
         override fun run() {
@@ -29,12 +40,12 @@ class ScoringPlayerActivity : Activity() {
         }
     }
 
-    inner class sbHandler : Handler(){
+    inner class sbHandler : Handler() {
         override fun handleMessage(msg: Message?) {
             super.handleMessage(msg)
             if (msg!!.what == 0) {
-                tv_scoring_player_duration_time.setText((mediaPlayer.getCurrentPosition()/1000).toString())
-                //Log.e("handlerError",(mediaPlayer.getCurrentPosition()/1000).toString())
+                tv_scoring_player_duration_time.setText((mediaPlayer.getCurrentPosition() / 1000).toString())
+                Log.v("handlerError",(mediaPlayer.getCurrentPosition()/1000).toString())
             }
 
         }
@@ -43,15 +54,15 @@ class ScoringPlayerActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scoring_player)
+        mediaPlayer = MediaPlayer()
 
         addSeekBar()
         playerBtn()
-        //setPlaytime()
     }
 
-    fun setPlaytime(){
-        tv_scoring_player_duration_time.setText((mediaPlayer.currentPosition).toString())
-        //tv_scoring_player_length_of_song.setText(mediaPlayer.)
+    override fun onDestroy() {
+        super.onDestroy()
+        killMediaPlayer()
     }
 
     fun addSeekBar() {
@@ -68,7 +79,6 @@ class ScoringPlayerActivity : Activity() {
                 mediaPlayer.start()
 
                 sbThread().start()
-
             }
 
             //seek바의 값을 변경하기 위해 터치했을 때
@@ -77,7 +87,6 @@ class ScoringPlayerActivity : Activity() {
                 mediaPlayer.pause()
                 //error : mediaplayer에 아 처음에 아무것도 만지지 않은 상태에서 seekbar 건들경우 error
             }
-
 
             //seek바의 값이 변경되었을떄 + fromUser: Boolean : 터치를 통해 변경했으면 false , 코드를 통하면 true
             override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -91,6 +100,32 @@ class ScoringPlayerActivity : Activity() {
     }
 
     fun playerBtn() {
+
+        //mediaPlayer = MediaPlayer()
+        //if Looping == False
+
+        mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener{
+            override fun onCompletion(p0: MediaPlayer?) {
+                Log.v("Complete", "Complete")
+                nextSong()
+            }
+        })
+
+        /*
+        mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
+            override fun onCompletion(mediaPlayer: MediaPlayer) {
+
+                Log.e("CompleteListenerError-currentPosition", currentPosition.toString())
+                Log.e("CompleteListenerError-sourceArray", sourceArray.size.toString())
+
+                nextSong()
+            }
+        })
+*/
+        btn_scoring_player_prev.setOnClickListener {
+            prevSong()
+        }
+
         btn_scoring_player_play.setOnClickListener {
 
             try {
@@ -98,7 +133,8 @@ class ScoringPlayerActivity : Activity() {
                     mediaPlayer!!.stop()
                     mediaPlayer = null
                 }*/
-                playAudio()
+
+                playAudio(sourceMusicArray[currentPosition])
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -117,17 +153,19 @@ class ScoringPlayerActivity : Activity() {
         btn_scoring_player_restart.setOnClickListener {
             restart()
         }
+
+        btn_scoring_player_next.setOnClickListener {
+            nextSong()
+        }
     }
 
     //미디어를 재생하는 사용자 정의 메소드
-    fun playAudio() {
-        var url = "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-08.mp3"
+    fun playAudio(url: String) {
 
-        mediaPlayer = MediaPlayer()
-        mediaPlayer!!.setDataSource(url)
+        mediaPlayer.setDataSource(url)
 
-        mediaPlayer!!.prepare()
-        mediaPlayer!!.start()
+        mediaPlayer.prepare()
+        mediaPlayer.start()
 
         var play_duration = mediaPlayer!!.getDuration()
         isPlaying = true
@@ -136,7 +174,34 @@ class ScoringPlayerActivity : Activity() {
         sbThread().start()
     }
 
+    fun prevSong(){
+
+        if (currentPosition-1 >= 0) {
+            mediaPlayer.reset()
+            currentPosition -= 1
+            playAudio(sourceMusicArray[currentPosition])
+
+        } else {
+            mediaPlayer.release()
+        }
+
+    }
+
+    fun nextSong(){
+
+        if (currentPosition < sourceMusicArray.size) {
+            mediaPlayer.reset()
+            currentPosition += 1
+            playAudio(sourceMusicArray[currentPosition])
+
+        } else {
+            mediaPlayer.release()
+        }
+
+    }
+
     fun stopAudio() {
+
         isPlaying = false
 
         mediaPlayer.stop()
@@ -164,14 +229,8 @@ class ScoringPlayerActivity : Activity() {
         sbThread().start()
     }
 
-    //액티비티가 화면에서 제거될 때 호출되는 메서드
-    override fun onDestroy() {
-        super.onDestroy()
-        killMediaPlayer()
-    }
-
     fun killMediaPlayer() {
-/*        if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
+/*      if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
             mediaPlayer!!.release()
         }*/
         mediaPlayer!!.release()
