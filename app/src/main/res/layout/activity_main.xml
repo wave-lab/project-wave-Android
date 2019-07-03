@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:id="@+id/ll_main_act_top_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@+id/ll_main_act_tab_bar"
-            android:orientation="vertical"
+        android:orientation="vertical"
         >
 
         <FrameLayout
-                android:id="@+id/main_fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                ></FrameLayout>
+            android:id="@+id/main_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            ></FrameLayout>
 
     </LinearLayout>
     <SeekBar
@@ -27,10 +27,10 @@
 
     <LinearLayout
         android:id="@+id/ll_main_act_tab_bar"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:orientation="horizontal">
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/ll_main_act_home_tab"
@@ -161,6 +161,7 @@
                 android:layout_marginTop="4dp"
                 />
         </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>
