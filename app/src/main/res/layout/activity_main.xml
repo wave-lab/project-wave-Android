@@ -1,48 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        android:layout_width="match_parent"
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
+        android:id="@+id/ll_main_act_top_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+        android:layout_above="@+id/ll_main_act_tab_bar"
+            android:orientation="vertical"
+        >
 
         <FrameLayout
                 android:id="@+id/main_fragment_container"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="574.3"></FrameLayout>
+                android:layout_height="match_parent"
+                ></FrameLayout>
 
     </LinearLayout>
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/ll_main_act_top_layout"
+        />
 
     <LinearLayout
+        android:id="@+id/ll_main_act_tab_bar"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="56dp"
             android:orientation="horizontal">
 
-        <ImageButton
+        <LinearLayout
+            android:id="@+id/ll_main_act_home_tab"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <ImageButton
                 android:id="@+id/ib_main_act_home_tab"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
-        <ImageButton
-                android:id="@+id/ib_main_act_scoring_tab"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
-        <ImageButton
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/tab_btn_home_def"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="홈"
+                android:fontFamily="@font/noto_sans_kr_medium_hestia"
+                android:textSize="9sp"
+                android:textColor="#868686"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_main_act_search_tab"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <ImageButton
                 android:id="@+id/ib_main_act_search_tab"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
-        <ImageButton
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/tab_btn_search_active"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="검색"
+                android:fontFamily="@font/noto_sans_kr_medium_hestia"
+                android:textSize="9sp"
+                android:textColor="#00b6de"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_main_act_scoring_tab"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <ImageButton
+                android:id="@+id/ib_main_act_scoring_tab"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/tab_btn_scoring_def"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="평가"
+                android:fontFamily="@font/noto_sans_kr_medium_hestia"
+                android:textSize="9sp"
+                android:textColor="#868686"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_main_act_library_tab"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <ImageButton
                 android:id="@+id/ib_main_act_library_tab"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/tab_btn_library_def"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="보관함"
+                android:fontFamily="@font/noto_sans_kr_medium_hestia"
+                android:textSize="9sp"
+                android:textColor="#868686"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <ImageButton
+                android:id="@+id/ib_main_act_mypage_tab"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/tab_btn_mypage_def"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="마이페이지"
+                android:fontFamily="@font/noto_sans_kr_medium_hestia"
+                android:textSize="9sp"
+                android:textColor="#868686"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                />
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
