@@ -10,7 +10,8 @@ import com.song2.wave.UI.Main.Search.SearchFragment
 import com.song2.wave.R
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class
+MainActivity : AppCompatActivity() {
 
     lateinit var nowFrag: Fragment
 
