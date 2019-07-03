@@ -4,6 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+
     <application
             android:name=".Util.Kakao.GlobalApplication"
             android:allowBackup="true"
@@ -13,12 +17,16 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".UI.Main.MainActivity">
+        </activity>
+        <activity android:name=".UI.Login.LoginActivity"></activity>
+        <activity android:name=".Util.Kakao.service.ScoringPlayerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
 
         <meta-data
                 android:name="com.kakao.sdk.AppKey"
@@ -32,6 +40,7 @@
 
         <activity android:name=".UI.Main.Test2Activity">
         </activity>
+
     </application>
 
 </manifest>
