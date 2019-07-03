@@ -48,10 +48,10 @@ class MainActivity : AppCompatActivity() {
 
     fun addBottomTab() {
 
-        ib_main_act_home_tab!!.setOnClickListener { callFragment("home") }
-        ib_main_act_scoring_tab!!.setOnClickListener { callFragment("scoring") }
-        ib_main_act_search_tab!!.setOnClickListener { callFragment("search") }
-        ib_main_act_library_tab!!.setOnClickListener { callFragment("library") }
+        ll_main_act_home_tab!!.setOnClickListener { callFragment("home") }
+        ll_main_act_scoring_tab!!.setOnClickListener { callFragment("scoring") }
+        ll_main_act_search_tab!!.setOnClickListener { callFragment("search") }
+        ll_main_act_library_tab!!.setOnClickListener { callFragment("library") }
 
     }
 
