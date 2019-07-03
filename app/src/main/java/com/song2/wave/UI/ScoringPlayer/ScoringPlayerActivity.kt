@@ -21,6 +21,9 @@ class ScoringPlayerActivity : Activity() {
     var currentPosition = 0
 
     var n_sbHandler = sbHandler()
+    var musicThread = playThread()
+    var seekBarThread = sbThread()
+
     var sourceMusicArray: Array<String> = arrayOf(
         "https://project-wave-1.s3.ap-northeast-2.amazonaws.com/Roller+Coaster_%EC%B2%AD%ED%95%98_320k.mp3",
         "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-01.mp3",
@@ -50,7 +53,7 @@ class ScoringPlayerActivity : Activity() {
             isPlaying = true
 
             seekbar.setMax(play_duration)
-            sbThread().start()
+            seekBarThread.start()
         }
 
 
@@ -77,7 +80,6 @@ class ScoringPlayerActivity : Activity() {
 
             } else {
                 killMediaPlayer()
-                //mediaPlayer.release()
             }
 
         }
@@ -108,7 +110,7 @@ class ScoringPlayerActivity : Activity() {
             mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
             mediaPlayer.start() // 시작
 
-            sbThread().start()
+            seekBarThread.start()
         }
 
         fun killMediaPlayer() {
@@ -149,14 +151,18 @@ class ScoringPlayerActivity : Activity() {
         setContentView(R.layout.activity_scoring_player)
         mediaPlayer = MediaPlayer()
 
-
         addSeekBar()
         playerBtn()
+
+        iv_scoring_player_act_like.setOnClickListener{
+            iv_scoring_player_act_like.isSelected = !iv_scoring_player_act_like.isSelected
+        }
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        playThread().killMediaPlayer()
+        musicThread.killMediaPlayer()
     }
 
     fun addSeekBar() {
@@ -172,7 +178,7 @@ class ScoringPlayerActivity : Activity() {
                 mediaPlayer.seekTo(p_time)
                 mediaPlayer.start()
 
-                sbThread().start()
+                seekBarThread.start()
             }
 
             //seek바의 값을 변경하기 위해 터치했을 때
@@ -195,18 +201,16 @@ class ScoringPlayerActivity : Activity() {
 
     fun playerBtn() {
 
-        //mediaPlayer = MediaPlayer()
         //if Looping == False
-
         mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener{
             override fun onCompletion(p0: MediaPlayer?) {
                 Log.v("Complete", "Complete")
-                playThread().nextSong()
+                musicThread.nextSong()
             }
         })
 
         btn_scoring_player_prev.setOnClickListener {
-            playThread().prevSong()
+            musicThread.prevSong()
         }
 
         btn_scoring_player_play.setOnClickListener {
@@ -217,7 +221,7 @@ class ScoringPlayerActivity : Activity() {
                     mediaPlayer = null
                 }*/
 
-                playThread().playAudio(sourceMusicArray[currentPosition])
+                musicThread.playAudio(sourceMusicArray[currentPosition])
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -226,20 +230,21 @@ class ScoringPlayerActivity : Activity() {
         }
 
         btn_scoring_player_stop.setOnClickListener {
-            playThread().stopAudio()
+            musicThread.stopAudio()
         }
 
         btn_scoring_player_pause.setOnClickListener {
-            playThread().pauseAudio()
+            musicThread.pauseAudio()
         }
 
         btn_scoring_player_restart.setOnClickListener {
-            playThread().restart()
+            musicThread.restart()
         }
 
         btn_scoring_player_next.setOnClickListener {
-            playThread().nextSong()
+            musicThread.nextSong()
         }
     }
+
 
 }

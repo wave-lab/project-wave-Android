@@ -9,6 +9,12 @@
             android:layout_centerInParent="true"
             android:layout_width="wrap_content" android:layout_height="wrap_content">
         <ImageView
+                android:id="@+id/iv_scoring_player_act_like"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/heart_selector"/>
+
+        <ImageView
                 android:layout_centerHorizontal="true"
                 android:id="@+id/iv_scoring_player_act_album_cover"
                 android:background="@color/colorPrimaryDark"
