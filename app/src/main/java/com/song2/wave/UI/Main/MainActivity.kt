@@ -18,16 +18,28 @@ import com.song2.wave.Util.Interface.OnBackPressedListener
 
 class MainActivity : AppCompatActivity() {
 
+    var TAG = "MainActivity"
     lateinit var nowFrag: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        mainActivity = this
         addBottomTab()
 
         backPressInFragment()
 
+    }
+
+    // 리스너 객체 생성
+    var mBackListener : OnBackPressedListener? = null
+    var listenerFlag : Int = 0
+
+    // 리스너 설정 메소드
+    fun setOnBackPressedListener(listener : OnBackPressedListener?, flag : Int ) {
+        mBackListener = listener
+        listenerFlag = flag
     }
 
     fun backPressInFragment(){
@@ -67,7 +79,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+
+        // SearchArtistFragment
+        if (mBackListener != null && listenerFlag == 1) {
+            Log.v(TAG, "아티스트 세부사항 프래그먼트 실행")
+            mBackListener!!.onBackPressed()
+            Log.e("!!!", "Listener is not null")
+            // 리스너가 설정되지 않은 상태(예를들어 메인Fragment)라면
+            // 뒤로가기 버튼을 연속적으로 두번 눌렀을 때 앱이 종료됩니다.
+        }
+        else if(mBackListener != null && listenerFlag == 2){
+            // SearchHomeFrament && SearchResult
+            if (mBackListener != null && listenerFlag == 2) {
+                Log.v(TAG, "검색 결과")
+                mBackListener!!.onBackPressed()
+                Log.e("!!!", "Listener is not null")
+                // 리스너가 설정되지 않은 상태(예를들어 메인Fragment)라면
+                // 뒤로가기 버튼을 연속적으로 두번 눌렀을 때 앱이 종료됩니다.
+            }
+        }
+        else {
+            Log.v(TAG, "MainActivity onBackPressed")
+        }
+/*
         val fragmentList = supportFragmentManager.fragments
+
         if (fragmentList != null) {
             //TODO: Perform your logic to pass back press here
             for (fragment in fragmentList) {
@@ -76,6 +112,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        */
+    }
+
+    companion object {
+        lateinit var mainActivity : MainActivity
     }
 
 }
