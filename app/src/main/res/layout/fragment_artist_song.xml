@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_search_artist_frag_song"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             >
         </android.support.v7.widget.RecyclerView>
@@ -98,4 +98,4 @@
     </LinearLayout>
 
 
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>
