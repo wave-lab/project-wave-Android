@@ -1,17 +1,17 @@
-package com.song2.wave.Util.Kakao.service
+package com.song2.wave.UI.MainPlayer
 
-import android.app.Activity
 import android.media.MediaPlayer
+import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.util.Log
 import android.widget.SeekBar
 import com.song2.wave.R
-import kotlinx.android.synthetic.main.activity_scoring_player.*
-import java.lang.Exception
+import kotlinx.android.synthetic.main.activity_main_player.*
 
-class ScoringPlayerActivity : Activity() {
+class MainPlayerActivity : AppCompatActivity() {
+
     lateinit var playTime: String
     lateinit var mediaPlayer: MediaPlayer
     lateinit var seekbar: SeekBar
@@ -49,7 +49,7 @@ class ScoringPlayerActivity : Activity() {
             var lenthOfSong =
                 String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
 
-            tv_scoring_player_length_of_song.setText(lenthOfSong)
+            tv_main_player_length_of_song.setText(lenthOfSong)
 
             isPlaying = true
 
@@ -58,7 +58,7 @@ class ScoringPlayerActivity : Activity() {
         }
 
 
-        fun prevSong() {
+/*        fun prevSong() {
 
             if (currentPosition > 0) {
                 mediaPlayer.reset()
@@ -70,7 +70,7 @@ class ScoringPlayerActivity : Activity() {
                 //mediaPlayer.release()
             }
 
-        }
+        }*/
 
         fun nextSong() {
 
@@ -85,7 +85,7 @@ class ScoringPlayerActivity : Activity() {
 
         }
 
-        fun stopAudio() {
+/*        fun stopAudio() {
 
             isPlaying = false
 
@@ -93,7 +93,7 @@ class ScoringPlayerActivity : Activity() {
             seekbar.setProgress(0)
             killMediaPlayer()
 
-        }
+        }*/
 
         fun pauseAudio() {
 
@@ -111,7 +111,8 @@ class ScoringPlayerActivity : Activity() {
             mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
             mediaPlayer.start() // 시작
 
-            seekBarThread.start()
+            //????
+            //seekBarThread.start()
         }
 
         fun killMediaPlayer() {
@@ -142,7 +143,7 @@ class ScoringPlayerActivity : Activity() {
                     ((mediaPlayer.getCurrentPosition() / 1000) % 3600 % 60)
                 )
 
-                tv_scoring_player_duration_time.setText(playTime)
+                tv_main_player_duration_time.setText(playTime)
                 /*
                 Log.v("handlerError",(mediaPlayer.getCurrentPosition()/1000).toString())
                 Log.v("handlerError",(mediaPlayer.getDuration()/1000).toString())*/
@@ -151,16 +152,18 @@ class ScoringPlayerActivity : Activity() {
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scoring_player)
+        setContentView(R.layout.activity_main_player)
+
         mediaPlayer = MediaPlayer()
 
         addSeekBar()
         playerBtn()
 
-        iv_scoring_player_act_like.setOnClickListener {
-            iv_scoring_player_act_like.isSelected = !iv_scoring_player_act_like.isSelected
+        iv_main_player_like_btn.setOnClickListener {
+            iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected
         }
 
     }
@@ -214,42 +217,49 @@ class ScoringPlayerActivity : Activity() {
             }
         })
 
-        btn_scoring_player_prev.setOnClickListener {
+/*        btn_scoring_player_prev.setOnClickListener {
             musicThread.prevSong()
-        }
+        }*/
 
-        btn_scoring_player_play.setOnClickListener {
 
-            try {
+        iv_main_player_act_stop_btn.setOnClickListener {
+            if( iv_main_player_act_stop_btn.isSelected and (mediaPlayer.getCurrentPosition()==0) ){
+                try {
 /*                if (mediaPlayer != null) {
                     mediaPlayer!!.stop()
                     mediaPlayer = null
                 }*/
+                    musicThread.playAudio(sourceMusicArray[currentPosition])
 
-                musicThread.playAudio(sourceMusicArray[currentPosition])
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Log.e("ERROR", mediaPlayer.toString())
+                }
 
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.e("ERROR", mediaPlayer.toString())
+            }else if(iv_main_player_act_stop_btn.isSelected ){
+                musicThread.pauseAudio()
+
             }
+            else{
+                musicThread.restart()
+
+            }
+            iv_main_player_act_stop_btn.isSelected = !iv_main_player_act_stop_btn.isSelected
+
+
         }
 
-        btn_scoring_player_stop.setOnClickListener {
+/*        btn_scoring_player_stop.setOnClickListener {
             musicThread.stopAudio()
-        }
+        }*/
 
-        btn_scoring_player_pause.setOnClickListener {
-            musicThread.pauseAudio()
-        }
 
-        btn_scoring_player_restart.setOnClickListener {
-            musicThread.restart()
-        }
-
-        btn_scoring_player_next.setOnClickListener {
+/*        btn_scoring_player_next.setOnClickListener {
             musicThread.nextSong()
-        }
+        }*/
     }
+
+
 
 
 }
