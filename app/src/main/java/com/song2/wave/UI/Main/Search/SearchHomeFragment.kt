@@ -7,10 +7,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
@@ -22,8 +19,6 @@ import com.song2.wave.UI.Main.Search.Adapter.CoverArtistSearchAdapter
 import com.song2.wave.UI.Main.Search.Adapter.SearchDataHistoryAdapter
 import com.song2.wave.UI.Main.Search.Adapter.SongSearchAdapter
 import com.song2.wave.Util.Interface.OnBackPressedListener
-import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.fragment_search.view.*
 import kotlinx.android.synthetic.main.fragment_search_home.*
 import kotlinx.android.synthetic.main.fragment_search_home.view.*
 
