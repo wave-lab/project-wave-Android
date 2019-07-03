@@ -12,6 +12,9 @@ import com.song2.wave.R
 import android.util.Log
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_main.*
+import com.song2.wave.Util.Interface.OnBackPressedListener
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +25,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         addBottomTab()
+
+        backPressInFragment()
+
+    }
+
+    fun backPressInFragment(){
 
     }
 
@@ -54,5 +63,19 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_fragment_container, nowFrag)
         transaction.commit()
+
     }
+
+    override fun onBackPressed() {
+        val fragmentList = supportFragmentManager.fragments
+        if (fragmentList != null) {
+            //TODO: Perform your logic to pass back press here
+            for (fragment in fragmentList) {
+                if (fragment is OnBackPressedListener) {
+                    (fragment as OnBackPressedListener).onBackPressed()
+                }
+            }
+        }
+    }
+
 }

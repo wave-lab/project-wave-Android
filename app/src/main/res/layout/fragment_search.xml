@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,6 +15,8 @@
         android:background="@drawable/img_searchbar_def"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
         >
 
         <Button
@@ -28,8 +30,8 @@
 
         <EditText
             android:id="@+id/edit_search_frag_searchbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
             android:hint="검색어를 입력해주세요"
             android:includeFontPadding="false"
@@ -44,10 +46,75 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_search_frag_focus_on"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/rl_search_frag_searchbar"
+        android:layout_marginTop="24dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="최근 검색어"
+                    android:textSize="14sp"
+                    android:includeFontPadding="false"
+                    android:textColor="#616161"
+                    android:layout_marginLeft="24dp"
+                    android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_search_frag_all_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="전체삭제"
+                    android:textColor="#00b6de"
+                    android:textSize="14sp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="24dp"
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_search_frag_search_hisory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+        <LinearLayout
+            android:id="@+id/ll_search_frag_focus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+        </LinearLayout>
+    </LinearLayout>
     <ScrollView
+        android:id="@+id/ll_search_frag_focus_off"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:layout_below="@+id/rl_search_frag_searchbar"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -150,10 +217,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="커버 아티스트"
-                    android:fontFamily="@font/noto_sans_kr_bold_hestia"
                     android:layout_marginLeft="16dp"
                     android:textColor="#ffffff"
                     android:textSize="22sp"
+                    android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                    android:includeFontPadding="false"
                     />
                 <Button
                     android:layout_width="24dp"
@@ -183,4 +251,4 @@
 
     </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>
