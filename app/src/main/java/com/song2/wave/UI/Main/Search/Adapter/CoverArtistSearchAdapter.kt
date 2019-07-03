@@ -10,7 +10,7 @@ import com.song2.wave.R
 
 class CoverArtistSearchAdapter (private var coverArtistData : ArrayList<CoverArtistData>, var requestManager : RequestManager) : RecyclerView.Adapter<CoverArtistSearchViewHolder>(){
 
-    var EXAMPLE_IMG_URL : String = "https://t1.daumcdn.net/cfile/tistory/2442394558BBBD1934"
+    var EXAMPLE_IMG_URL : String = "https://t1.daumcdn.net/cfile/tistory/2641FF4C5900DDDE1E"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoverArtistSearchViewHolder {
         val mainView : View = LayoutInflater.from(parent.context)
