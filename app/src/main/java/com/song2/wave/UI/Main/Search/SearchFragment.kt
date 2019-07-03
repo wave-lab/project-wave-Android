@@ -1,13 +1,10 @@
 package com.song2.wave.UI.Main.Search
 
-import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.song2.wave.R
-import com.song2.wave.Util.Interface.OnBackPressedListener
 
 class SearchFragment : android.support.v4.app.Fragment(){
 

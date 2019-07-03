@@ -15,7 +15,6 @@ import com.song2.wave.UI.Main.MainActivity
 import com.song2.wave.UI.Main.Search.Adapter.SongSearchAdapter
 import com.song2.wave.Util.Interface.OnBackPressedListener
 import kotlinx.android.synthetic.main.fragment_artist_song.view.*
-import kotlinx.android.synthetic.main.fragment_search_home.view.*
 
 
 class SearchArtistFragment : android.support.v4.app.Fragment(), OnBackPressedListener{
