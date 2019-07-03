@@ -9,6 +9,7 @@ import com.song2.wave.UI.Main.Library.LibraryFragment
 import com.song2.wave.UI.Main.Scoring.ScoringFragment
 import com.song2.wave.UI.Main.Search.SearchFragment
 import com.song2.wave.R
+import com.song2.wave.UI.Main.MyPage.MyPageFragment
 import android.util.Log
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mainActivity = this
+        callFragment("home")
+
         addBottomTab()
 
         backPressInFragment()
@@ -69,6 +72,9 @@ class MainActivity : AppCompatActivity() {
             }
             "library" -> {
                 nowFrag = LibraryFragment()
+            }
+            "myPage" ->{
+                nowFrag = MyPageFragment()
             }
         }
 
