@@ -14,12 +14,12 @@
             android:roundIcon="@drawable/android_app_icon"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".UI.Main.MainActivity">
+        <activity android:name=".UI.Main.MyPage.UpLoadFileActivity">
         </activity>
 
       <activity android:name=".UI.Login.LoginActivity"></activity>
         <activity android:name=".Util.Kakao.service.ScoringPlayerActivity"></activity>
-        <activity android:name=".UI.Main.MyPage.UpLoadFileActivity">
+        <activity android:name=".UI.Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -29,14 +29,11 @@
                 android:name="com.kakao.sdk.AppKey"
                 android:value="@string/kakao_app_key"/>
 
-        <activity android:name=".UI.Login.LoginActivity"/>
         <activity android:name=".UI.TestActivity">
         </activity>
 
         <service android:name=".Util.Player.Service.MusicService"/>
 
-        <activity android:name=".UI.Main.Test2Activity">
-        </activity>
 
     </application>
 
