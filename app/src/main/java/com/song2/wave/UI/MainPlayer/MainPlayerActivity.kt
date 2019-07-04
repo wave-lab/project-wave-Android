@@ -185,11 +185,18 @@ class MainPlayerActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekbar: SeekBar) {
                 isPlaying = true
 
-                val p_time = seekbar.progress
-                mediaPlayer.seekTo(p_time)
-                mediaPlayer.start()
+                playbackPosition = seekbar.progress
+                mediaPlayer.seekTo(playbackPosition)
 
-                seekBarThread.start()
+                //if 재생 중이였다면
+/*                if(iv_main_player_act_stop_btn.isSelected){
+                    mediaPlayer.start()
+                    seekBarThread.run()
+                }*/
+
+                mediaPlayer.start()
+                seekBarThread.run()
+
             }
 
             //seek바의 값을 변경하기 위해 터치했을 때
@@ -199,7 +206,7 @@ class MainPlayerActivity : AppCompatActivity() {
                 //error : mediaplayer에 아 처음에 아무것도 만지지 않은 상태에서 seekbar 건들경우 error
             }
 
-            //seek바의 값이 변경되었을떄 + fromUser: Boolean : 터치를 통해 변경했으면 false , 코드를 통하면 true
+            //seek바의 값이 변경되었을때 + fromUser: Boolean : 터치를 통해 변경했으면 false , 코드를 통하면 true
             override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
 
                 if (seekbar!!.getMax() == progress) {
@@ -327,7 +334,7 @@ class MainPlayerActivity : AppCompatActivity() {
         mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
         mediaPlayer.start() // 시작
 
-        //seekBarThread.start()
+        seekBarThread.run()
     }
 
     fun killMediaPlayer() {
@@ -336,6 +343,4 @@ class MainPlayerActivity : AppCompatActivity() {
         }*/
         mediaPlayer!!.release()
     }
-
-
 }
