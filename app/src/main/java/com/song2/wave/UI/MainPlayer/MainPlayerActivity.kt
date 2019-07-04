@@ -21,7 +21,7 @@ class MainPlayerActivity : AppCompatActivity() {
     var currentPosition = 0
 
     var n_sbHandler = sbHandler()
-    var musicThread = playThread()
+    //var musicThread = playThread()
     var seekBarThread = sbThread()
 
     var sourceMusicArray: Array<String> = arrayOf(
@@ -58,7 +58,7 @@ class MainPlayerActivity : AppCompatActivity() {
         }
 
 
-/*        fun prevSong() {
+        fun prevSong() {
 
             if (currentPosition > 0) {
                 mediaPlayer.reset()
@@ -67,10 +67,10 @@ class MainPlayerActivity : AppCompatActivity() {
 
             } else {
                 killMediaPlayer()
-                //mediaPlayer.release()
             }
 
-        }*/
+        }
+
 
         fun nextSong() {
 
@@ -85,7 +85,7 @@ class MainPlayerActivity : AppCompatActivity() {
 
         }
 
-/*        fun stopAudio() {
+        fun stopAudio() {
 
             isPlaying = false
 
@@ -93,7 +93,8 @@ class MainPlayerActivity : AppCompatActivity() {
             seekbar.setProgress(0)
             killMediaPlayer()
 
-        }*/
+        }
+
 
         fun pauseAudio() {
 
@@ -116,9 +117,10 @@ class MainPlayerActivity : AppCompatActivity() {
         }
 
         fun killMediaPlayer() {
-/*      if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
-            mediaPlayer!!.release()
-        }*/
+            if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
+                mediaPlayer!!.release()
+            }
+
             mediaPlayer!!.release()
         }
 
@@ -170,7 +172,8 @@ class MainPlayerActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        musicThread.killMediaPlayer()
+        //musicThread.killMediaPlayer()
+        killMediaPlayer()
     }
 
     fun addSeekBar() {
@@ -213,35 +216,35 @@ class MainPlayerActivity : AppCompatActivity() {
         mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
             override fun onCompletion(p0: MediaPlayer?) {
                 Log.v("Complete", "Complete")
-                musicThread.nextSong()
+                //musicThread.nextSong()
+                nextSong()
             }
         })
 
-/*        btn_scoring_player_prev.setOnClickListener {
-            musicThread.prevSong()
-        }*/
 
 
         iv_main_player_act_stop_btn.setOnClickListener {
-            if( iv_main_player_act_stop_btn.isSelected and (mediaPlayer.getCurrentPosition()==0) ){
+            if (iv_main_player_act_stop_btn.isSelected and (mediaPlayer.getCurrentPosition() == 0)) {
                 try {
 /*                if (mediaPlayer != null) {
                     mediaPlayer!!.stop()
                     mediaPlayer = null
                 }*/
-                    musicThread.playAudio(sourceMusicArray[currentPosition])
+                    //musicThread.playAudio(sourceMusicArray[currentPosition])
+                    playAudio(sourceMusicArray[currentPosition])
 
                 } catch (e: Exception) {
                     e.printStackTrace()
                     Log.e("ERROR", mediaPlayer.toString())
                 }
 
-            }else if(iv_main_player_act_stop_btn.isSelected ){
-                musicThread.pauseAudio()
+            } else if (iv_main_player_act_stop_btn.isSelected) {
+                //musicThread.pauseAudio()
+                pauseAudio()
 
-            }
-            else{
-                musicThread.restart()
+            } else {
+                //musicThread.restart()
+                restart()
 
             }
             iv_main_player_act_stop_btn.isSelected = !iv_main_player_act_stop_btn.isSelected
@@ -249,17 +252,90 @@ class MainPlayerActivity : AppCompatActivity() {
 
         }
 
-/*        btn_scoring_player_stop.setOnClickListener {
-            musicThread.stopAudio()
-        }*/
+    }
 
+    //미디어를 재생하는 사용자 정의 메소드
+    fun playAudio(url: String) {
 
-/*        btn_scoring_player_next.setOnClickListener {
-            musicThread.nextSong()
-        }*/
+        mediaPlayer.setDataSource(url)
+        mediaPlayer.prepare()
+        mediaPlayer.start()
+
+        var play_duration = mediaPlayer!!.getDuration()
+        var lenthOfSong =
+            String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
+
+        tv_main_player_length_of_song.setText(lenthOfSong)
+
+        isPlaying = true
+
+        seekbar.setMax(play_duration)
+        seekBarThread.start()
     }
 
 
+    fun prevSong() {
+
+        if (currentPosition > 0) {
+            mediaPlayer.reset()
+            currentPosition -= 1
+            playAudio(sourceMusicArray[currentPosition])
+
+        } else {
+            killMediaPlayer()
+            //mediaPlayer.release()
+        }
+
+    }
+
+    fun nextSong() {
+
+        if (currentPosition < sourceMusicArray.size) {
+            mediaPlayer.reset()
+            currentPosition += 1
+            playAudio(sourceMusicArray[currentPosition])
+
+        } else {
+            killMediaPlayer()
+        }
+
+    }
+
+    fun stopAudio() {
+
+        isPlaying = false
+
+        mediaPlayer.stop()
+        seekbar.setProgress(0)
+        killMediaPlayer()
+
+    }
+
+    fun pauseAudio() {
+
+        isPlaying = false
+
+        playbackPosition = mediaPlayer.getCurrentPosition()
+        mediaPlayer!!.pause()
+
+    }
+
+    fun restart() {
+
+        isPlaying = true // 재생하도록 flag 변경
+
+        mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
+        mediaPlayer.start() // 시작
+
+        //seekBarThread.start()
+    }
+
+    fun killMediaPlayer() {
+/*      if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
+            mediaPlayer!!.release()
+        }*/
+        mediaPlayer!!.release()
+    }
 
 
 }
