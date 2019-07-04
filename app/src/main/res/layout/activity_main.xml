@@ -22,10 +22,12 @@
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:progressTint="@color/colorPrimary"
         android:layout_below="@+id/ll_main_act_top_layout"
         />
 
     <LinearLayout
+            android:background="#000000"
         android:id="@+id/ll_main_act_tab_bar"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
