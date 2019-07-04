@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.song2.wave.R
-import com.song2.wave.UI.Main.Scoring.Adapter.FragmentScoringPagerAdapter
+import com.song2.wave.UI.Main.Library.Adapter.FragmentLibraryPagerAdapter
 import kotlinx.android.synthetic.main.fragment_library.*
-import kotlinx.android.synthetic.main.fragment_scoring.*
 
 class LibraryFragment: Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -22,9 +21,9 @@ class LibraryFragment: Fragment(){
     }
 
     private fun configureTopNavigation() {
-        vp_scoring.adapter = FragmentScoringPagerAdapter(childFragmentManager,3)
+        vp_library_frag_content.adapter = FragmentLibraryPagerAdapter(childFragmentManager,3)
         // ViewPager와 Tablayout을 엮어줍니다!
-        tl_library_frag_tabbar.setupWithViewPager(vp_scoring)
+        tl_library_frag_tabbar.setupWithViewPager(vp_library_frag_content)
         //TabLayout에 붙일 layout을 찾아준 다음
         val topNaviLayout: View = this.layoutInflater.inflate(R.layout.fragment_library_tabbar, null, false)
         //탭 하나하나 TabLayout에 연결시켜줍니다.
