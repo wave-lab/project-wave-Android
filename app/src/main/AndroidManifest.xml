@@ -13,7 +13,11 @@
             android:roundIcon="@drawable/android_app_icon"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".UI.Main.MainActivity"/>
+        <activity android:name=".UI.Main.MainActivity">
+
+
+
+        </activity>
         <activity android:name=".UI.Login.LoginActivity"/>
         <activity android:name=".Util.Kakao.service.ScoringPlayerActivity">
 
