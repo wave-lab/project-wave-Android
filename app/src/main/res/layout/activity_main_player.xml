@@ -31,8 +31,8 @@
             android:layout_marginTop="10dp"
             android:layout_below="@+id/rl_main_player_act_main_toolbar"
             android:layout_marginHorizontal="24dp"
-            android:layout_width="312dp"
-            android:layout_height="21dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Bullet In A Gun - Imagine D..."
             android:fontFamily="@font/noto_sans_kr_bold_hestia"
             android:layout_marginLeft="16dp"
@@ -42,7 +42,7 @@
 
     <TextView
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="14dp"
             android:layout_below="@+id/tv_main_player_act_title_sing"
             android:layout_width="252dp"
             android:layout_height="21dp"
