@@ -1,44 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-        android:id="@+id/rl_item_waiting_song_container"
-        android:layout_height="140dp"
-        android:layout_width="140dp"
+        android:id="@+id/rl_item_my_waiting_song_container"
+        android:layout_height="104dp"
+        android:layout_width="104dp"
+        android:layout_marginStart="12dp"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ImageView
-            android:id="@+id/iv_waiting_song_cover_img"
-            android:layout_width="match_parent" android:layout_height="match_parent"
-    android:src="@drawable/img_artwork_1"/>
 
+    <ImageView
+            android:id="@+id/iv_item_waiting_song_cover_img"
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:src="@drawable/img_artwork_1"/>
     <RelativeLayout
             android:background="#66000000"
             android:layout_width="match_parent" android:layout_height="match_parent"/>
 
     <TextView
-            android:id="@+id/tv_item_waiting_song_d_day"
-            android:layout_marginTop="34.5dp"
-
+            android:id="@+id/tv_item_waiting_song_item_song_info"
+            android:layout_marginTop="31.2dp"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/noto_sans_kr_bold_hestia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="#ffffff"
-            android:lineSpacingExtra="15sp"
-            android:text="D-5"/>
-
-    <TextView
-            android:id="@+id/tv_item_waiting_song_info"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tv_item_waiting_song_d_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="13sp"
+            android:includeFontPadding="false"
             android:textColor="#ffffff"
             android:lineSpacingExtra="6sp"
             android:gravity="center_horizontal"
-            android:text="Song name - alice"
-            android:fontFamily="@font/noto_sans_kr_regular_hestia"
-    />
+            android:text="Song2-name"/>
+
+    <TextView
+            android:includeFontPadding="false"
+            android:id="@+id/tv_item_waiting_song_origin_artist_name"
+            android:layout_below="@+id/tv_item_waiting_song_item_song_info"
+            android:layout_marginTop="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="5sp"
+            android:gravity="center_horizontal"
+            android:text="Song 2 name"
+            android:layout_centerHorizontal="true"/>
+
 
 </RelativeLayout>
