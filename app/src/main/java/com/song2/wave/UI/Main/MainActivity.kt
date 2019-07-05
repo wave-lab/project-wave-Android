@@ -1,6 +1,5 @@
 package com.song2.wave.UI.Main
 
-import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,7 +10,6 @@ import com.song2.wave.UI.Main.Search.SearchFragment
 import com.song2.wave.R
 import com.song2.wave.UI.Main.MyPage.MyPageFragment
 import android.util.Log
-import android.widget.SeekBar
 import kotlinx.android.synthetic.main.activity_main.*
 import com.song2.wave.Util.Interface.OnBackPressedListener
 
@@ -42,7 +40,7 @@ MainActivity : AppCompatActivity() {
     var listenerFlag : Int = 0
 
     // 리스너 설정 메소드
-    fun setOnBackPressedListener(listener : OnBackPressedListener?, flag : Int ) {
+    fun setOnBackPressedListener(listener: OnBackPressedListener?, flag: Int ) {
         mBackListener = listener
         listenerFlag = flag
     }
@@ -57,6 +55,7 @@ MainActivity : AppCompatActivity() {
         ll_main_act_scoring_tab!!.setOnClickListener { callFragment("scoring") }
         ll_main_act_search_tab!!.setOnClickListener { callFragment("search") }
         ll_main_act_library_tab!!.setOnClickListener { callFragment("library") }
+        ll_main_act_library_tab!!.setOnClickListener { callFragment("myPage") }
 
     }
 
