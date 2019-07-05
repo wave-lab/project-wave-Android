@@ -11,7 +11,6 @@ import com.song2.wave.R
 
 class WaitingSongHomeAdapter (private var waitingSongData: ArrayList<HomeSongData>, var requestManager : RequestManager) : RecyclerView.Adapter<WaitingSongHomeViewHolder>(){
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WaitingSongHomeViewHolder {
         val mainView : View = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_waiting_song, parent, false)

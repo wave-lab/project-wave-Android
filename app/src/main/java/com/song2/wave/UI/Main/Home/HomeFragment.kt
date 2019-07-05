@@ -10,11 +10,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.Data.model.Home.HomeSongData
 import com.song2.wave.Data.model.Home.MyWaitingSongData
+import com.song2.wave.Data.model.Home.TOP10Data
 import com.song2.wave.R
-import com.song2.wave.UI.Main.Home.Adapter.HitSongHomeAdapter
-import com.song2.wave.UI.Main.Home.Adapter.MyWaitingSongHomeAdapter
-import com.song2.wave.UI.Main.Home.Adapter.RecomentSongHomeAdapter
-import com.song2.wave.UI.Main.Home.Adapter.WaitingSongHomeAdapter
+import com.song2.wave.UI.Main.Home.Adapter.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -23,11 +21,16 @@ class HomeFragment : Fragment() {
     lateinit var waitingSongDataList: ArrayList<HomeSongData>
     lateinit var hitSongHomeDataList: ArrayList<HomeSongData>
     lateinit var recommendSongHomeDataList: ArrayList<HomeSongData>
+    lateinit var top10GenreDataList: ArrayList<TOP10Data>
+    lateinit var top10MoodDataList: ArrayList<TOP10Data>
+
 
     lateinit var myWaitingSongHomeAdapter: MyWaitingSongHomeAdapter
     lateinit var waitingSongHomeAdapter: WaitingSongHomeAdapter
     lateinit var hitSongHomeAdapter: HitSongHomeAdapter
     lateinit var recommendSongHomeAdapter: RecomentSongHomeAdapter
+    lateinit var top10GenreAdapter: Top10GenreAdapter
+    lateinit var top10MoodAdapter: Top10MoodAdapter
 
 
     lateinit var requestManager: RequestManager
@@ -46,15 +49,26 @@ class HomeFragment : Fragment() {
 
     fun attachRecyclerView(){
 
-
         waitingSongDataList = ArrayList()
         myWaitingSongDataList = ArrayList()
         hitSongHomeDataList = ArrayList()
         recommendSongHomeDataList = ArrayList()
-
+        top10GenreDataList = ArrayList()
+        top10MoodDataList = ArrayList()
+        
         requestManager = Glide.with(this)
 
         insertExampleData()
+
+        top10GenreAdapter = Top10GenreAdapter(top10GenreDataList, requestManager)
+        rv_home_frag_top10_genre_list.adapter = top10GenreAdapter
+        rv_home_frag_top10_genre_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+
+        top10MoodAdapter = Top10MoodAdapter(top10MoodDataList, requestManager)
+        rv_home_frag_top10_mood_list.adapter = top10MoodAdapter
+        rv_home_frag_top10_mood_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
 
         recommendSongHomeAdapter = RecomentSongHomeAdapter( recommendSongHomeDataList, requestManager)
         rv_home_frag_scoring_recommend_list.adapter = recommendSongHomeAdapter
@@ -75,13 +89,24 @@ class HomeFragment : Fragment() {
     }
 
     fun insertExampleData() {
-        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
 
+
+        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "힙합"))
+        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "R&D"))
+        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "일렉트로닉"))
+        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "댄"))
+
+        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "신나는"))
+        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "힙한"))
+        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "우울한"))
+        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "우울한"))
+
+        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
+        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
+        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
+        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
+        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
+        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
 
         hitSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         hitSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
