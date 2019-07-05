@@ -13,12 +13,11 @@
             android:roundIcon="@drawable/android_app_icon"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-
+      
         <!--로그인-->
         <meta-data
                 android:name="com.kakao.sdk.AppKey"
                 android:value="@string/kakao_app_key"/>
-
         <activity android:name=".UI.Login.LoginActivity"/>
 
         <!--메인-->
@@ -29,7 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".UI.Main.MyPage.UpLoadFileActivity"/>
 
         <!--음악플레이어-->

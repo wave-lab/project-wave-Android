@@ -1,4 +1,4 @@
-package com.song2.wave.UI.Main.Scoring
+package com.song2.wave.UI.Main.Library
 
 
 import android.os.Bundle
@@ -10,17 +10,17 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.Data.model.SongData
-import com.song2.wave.UI.Main.Scoring.Adapter.ScoringWaitAdapter
-import kotlinx.android.synthetic.main.fragment_scoring_wait.view.*
+import com.song2.wave.UI.Main.Library.Adapter.MyPlaylistAdapter
+import kotlinx.android.synthetic.main.fragment_library_my_playlist.view.*
 
-class ScoringWaitingFragment : Fragment() {
+class LibraryMyPlaylistFragment : Fragment() {
 
     lateinit var songDataArr : ArrayList<SongData>
     lateinit var requestManager : RequestManager
     lateinit var songFieldData : ArrayList<String>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var v: View = inflater.inflate(com.song2.wave.R.layout.fragment_scoring_wait, container, false)
+        var v: View = inflater.inflate(com.song2.wave.R.layout.fragment_library_my_playlist, container, false)
         songDataArr = ArrayList<SongData>()
         requestManager = Glide.with(this)
         insertData(v)
@@ -42,7 +42,7 @@ class ScoringWaitingFragment : Fragment() {
         songDataArr.add(SongData("https://cphoto.asiae.co.kr/listimglink/1/2014051608371615808_1.jpg", "꽃갈피", "아이유(IU)", "송제민", songFieldData))
         songDataArr.add(SongData("https://pgnqdrjultom1827145.cdn.ntruss.com/img/f8/b9/f8b99005f6cc026302a55f0cba36c19ecbf1f2109f36639664a1c4217bbb41cd_v1.jpg", "무릎", "아이유(IU)", "송제민", songFieldData))
 
-        v.recycler_scoring_wait_frag_list.adapter = ScoringWaitAdapter(songDataArr, requestManager)
-        v.recycler_scoring_wait_frag_list.layoutManager = LinearLayoutManager(v.context)
+        v.recycler_library_my_playlist_frag_list.adapter = MyPlaylistAdapter(songDataArr, requestManager)
+        v.recycler_library_my_playlist_frag_list.layoutManager = LinearLayoutManager(v.context)
     }
 }

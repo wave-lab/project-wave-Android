@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.SeekBar
 import com.song2.wave.R
 import kotlinx.android.synthetic.main.activity_main_player.*
+import java.util.*
 
 class MainPlayerActivity : AppCompatActivity() {
 
@@ -20,9 +21,8 @@ class MainPlayerActivity : AppCompatActivity() {
     var playbackPosition = 0
     var currentPosition = 0
 
-    var n_sbHandler = sbHandler()
-    //var musicThread = playThread()
-    var seekBarThread = sbThread()
+    // var n_sbHandler = sbHandler()
+    // var seekBarThread = sbThread()
 
     var sourceMusicArray: Array<String> = arrayOf(
         "https://project-wave-1.s3.ap-northeast-2.amazonaws.com/Roller+Coaster_%EC%B2%AD%ED%95%98_320k.mp3",
@@ -36,96 +36,8 @@ class MainPlayerActivity : AppCompatActivity() {
         "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-08.mp3"
     )
 
-    inner class playThread : Thread() {
 
-        //미디어를 재생하는 사용자 정의 메소드
-        fun playAudio(url: String) {
-
-            mediaPlayer.setDataSource(url)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-
-            var play_duration = mediaPlayer!!.getDuration()
-            var lenthOfSong =
-                String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
-
-            tv_main_player_length_of_song.setText(lenthOfSong)
-
-            isPlaying = true
-
-            seekbar.setMax(play_duration)
-            seekBarThread.start()
-        }
-
-
-        fun prevSong() {
-
-            if (currentPosition > 0) {
-                mediaPlayer.reset()
-                currentPosition -= 1
-                playAudio(sourceMusicArray[currentPosition])
-
-            } else {
-                killMediaPlayer()
-            }
-
-        }
-
-
-        fun nextSong() {
-
-            if (currentPosition < sourceMusicArray.size) {
-                mediaPlayer.reset()
-                currentPosition += 1
-                playAudio(sourceMusicArray[currentPosition])
-
-            } else {
-                killMediaPlayer()
-            }
-
-        }
-
-        fun stopAudio() {
-
-            isPlaying = false
-
-            mediaPlayer.stop()
-            seekbar.setProgress(0)
-            killMediaPlayer()
-
-        }
-
-
-        fun pauseAudio() {
-
-            isPlaying = false
-
-            playbackPosition = mediaPlayer.getCurrentPosition()
-            mediaPlayer!!.pause()
-
-        }
-
-        fun restart() {
-
-            isPlaying = true // 재생하도록 flag 변경
-
-            mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
-            mediaPlayer.start() // 시작
-
-            //????
-            //seekBarThread.start()
-        }
-
-        fun killMediaPlayer() {
-            if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
-                mediaPlayer!!.release()
-            }
-
-            mediaPlayer!!.release()
-        }
-
-    }
-
+    /*
     inner class sbThread : Thread() {
         override fun run() {
             while (isPlaying) {
@@ -146,12 +58,33 @@ class MainPlayerActivity : AppCompatActivity() {
                 )
 
                 tv_main_player_duration_time.setText(playTime)
-                /*
                 Log.v("handlerError",(mediaPlayer.getCurrentPosition()/1000).toString())
-                Log.v("handlerError",(mediaPlayer.getDuration()/1000).toString())*/
+                //Log.v("handlerError",(mediaPlayer.getDuration()/1000).toString())
             }
-
         }
+    } */
+
+    fun addTimer(){
+        val tt = object : TimerTask() {
+            override fun run() {
+                runOnUiThread {
+                    playTime = String.format(
+                        "%02d:%02d",
+                        ((mediaPlayer.getCurrentPosition() / 1000) % 3600 / 60),
+                        ((mediaPlayer.getCurrentPosition() / 1000) % 3600 % 60)
+                    )
+
+                    tv_main_player_duration_time.setText(playTime)
+                    seekbar.setProgress(mediaPlayer.getCurrentPosition())
+                }
+            }
+        }
+
+        /////////// / Timer 생성 //////////////
+        val timer = Timer()
+        timer.schedule(tt, 0, 1000)
+        //////////////////////////////////////
+
     }
 
 
@@ -163,6 +96,7 @@ class MainPlayerActivity : AppCompatActivity() {
 
         addSeekBar()
         playerBtn()
+        addTimer()
 
         iv_main_player_like_btn.setOnClickListener {
             iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected
@@ -177,7 +111,6 @@ class MainPlayerActivity : AppCompatActivity() {
     }
 
     fun addSeekBar() {
-
         seekbar = sb_scoring_player_act_seekbar
         seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
@@ -195,7 +128,6 @@ class MainPlayerActivity : AppCompatActivity() {
                 }*/
 
                 mediaPlayer.start()
-                seekBarThread.run()
 
             }
 
@@ -277,7 +209,7 @@ class MainPlayerActivity : AppCompatActivity() {
         isPlaying = true
 
         seekbar.setMax(play_duration)
-        seekBarThread.start()
+        //seekBarThread.start()
     }
 
 
@@ -308,16 +240,6 @@ class MainPlayerActivity : AppCompatActivity() {
 
     }
 
-    fun stopAudio() {
-
-        isPlaying = false
-
-        mediaPlayer.stop()
-        seekbar.setProgress(0)
-        killMediaPlayer()
-
-    }
-
     fun pauseAudio() {
 
         isPlaying = false
@@ -334,7 +256,7 @@ class MainPlayerActivity : AppCompatActivity() {
         mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
         mediaPlayer.start() // 시작
 
-        seekBarThread.run()
+        // seekBarThread.run()
     }
 
     fun killMediaPlayer() {
