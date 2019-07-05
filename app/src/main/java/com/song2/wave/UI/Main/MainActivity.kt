@@ -55,7 +55,7 @@ MainActivity : AppCompatActivity() {
         ll_main_act_scoring_tab!!.setOnClickListener { callFragment("scoring") }
         ll_main_act_search_tab!!.setOnClickListener { callFragment("search") }
         ll_main_act_library_tab!!.setOnClickListener { callFragment("library") }
-        ll_main_act_library_tab!!.setOnClickListener { callFragment("myPage") }
+        ll_main_act_mypage_tab!!.setOnClickListener { callFragment("myPage") }
 
     }
 

@@ -1,6 +1,7 @@
 package com.song2.wave.UI.Main.MyPage
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.media.MediaPlayer
@@ -66,7 +67,7 @@ class UpLoadFileActivity : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 data?.let {
                     Log.e("TestAudioData", data.toString())
-
+                    Log.v("UploadActivity", "실제 경로 = " + getRealPathFromURI(applicationContext, it.data).toString())
                     selectedPicUri = it.data
                     Glide.with(this).load(selectedPicUri)
                         .thumbnail(0.1f).into(iv_upload_file_act_thumb)
@@ -81,16 +82,32 @@ class UpLoadFileActivity : AppCompatActivity() {
                     var mediaPlayer = MediaPlayer()
 
                     Log.e("error selectedAudioUri",selectedAudioUri.toString())
-                    var song = selectedAudioUri.toString() + ".mp3"
-                    mediaPlayer.setDataSource(song)
-                    mediaPlayer.prepare()
-                    mediaPlayer.start()
+                    Log.v("UploadActivity", "음악 실제 경로 = " + getRealPathFromURI(applicationContext, it.data).toString())
+
+                    //var song = selectedAudioUri.toString() + ".mp3"
+                    //mediaPlayer.setDataSource(song)
+                    //mediaPlayer.prepare()
+                    //mediaPlayer.start()
 
                 }
             }
 
         }
 
+    }
+
+    // 이미지 파일을 확장자까지 표시해주는 메소드
+    fun getRealPathFromURI(context: Context, contentUri: Uri): String {
+        var cursor: Cursor? = null
+        try {
+            val proj = arrayOf(MediaStore.Images.Media.DATA)
+            cursor = context.contentResolver.query(contentUri, proj, null, null, null)
+            val column_index = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            return cursor.getString(column_index)
+        } finally {
+            cursor?.close()
+        }
     }
 
     fun getMusicList() {
