@@ -1,5 +1,6 @@
 package com.song2.wave.UI.Main.Home
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -15,7 +16,9 @@ import com.song2.wave.UI.Main.Home.Adapter.HitSongHomeAdapter
 import com.song2.wave.UI.Main.Home.Adapter.MyWaitingSongHomeAdapter
 import com.song2.wave.UI.Main.Home.Adapter.RecomentSongHomeAdapter
 import com.song2.wave.UI.Main.Home.Adapter.WaitingSongHomeAdapter
+import com.song2.wave.UI.MainPlayer.MainPlayerActivity
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
 
@@ -33,7 +36,14 @@ class HomeFragment : Fragment() {
     lateinit var requestManager: RequestManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return return inflater.inflate(R.layout.fragment_home, container, false)
+        var v : View = inflater.inflate(R.layout.fragment_home, container, false)
+
+        v.iv_home_frag_wavelogo.setOnClickListener {
+            var intent = Intent(context, MainPlayerActivity::class.java)
+            startActivity(intent)
+        }
+
+        return v
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
