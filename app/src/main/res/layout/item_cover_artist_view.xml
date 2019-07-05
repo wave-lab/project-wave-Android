@@ -5,6 +5,7 @@
     android:layout_height="110dp"
     android:orientation="vertical"
     android:layout_marginLeft="16dp"
+    android:background="#000000"
     >
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_cover_artist_item_profile"

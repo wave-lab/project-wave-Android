@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#000000"
+                android:orientation="vertical">
+    <ImageView android:layout_width="140dp"
+               android:layout_height="140dp"
+               android:id="@+id/img_cover_artist_scoring_passed"
+               />
+    <TextView
+            android:id="@+id/txt_cover_songName_scoring_passed"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="9sp"
+            android:gravity="center_horizontal"
+            android:text="Song name is..."
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:layout_marginTop="8dp"
+    />
+    <TextView
+            android:id="@+id/txt_cover_artistName_scoring_passed"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#616161"
+            android:lineSpacingExtra="6sp"
+            android:gravity="center_horizontal"
+            android:text="Cover Artist"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:layout_marginTop="2dp"
+    />
+</LinearLayout>

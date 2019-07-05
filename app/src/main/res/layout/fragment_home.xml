@@ -16,6 +16,7 @@
                         android:background="#80000000"
                         android:layout_width="match_parent" android:layout_height="match_parent">
                     <ImageView
+                            android:id="@+id/iv_home_frag_wavelogo"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="81dp"
                             android:layout_width="72dp" android:layout_height="72dp"
@@ -120,25 +121,99 @@
                         </LinearLayout> <!--contents-->
                     </LinearLayout>
                 </RelativeLayout>
-            </RelativeLayout>//info
+            </RelativeLayout>
+            //info
             <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
 
                 <TextView
+                        android:id="@+id/tv_home_frag_waiting_scoring_mine"
+                        android:includeFontPadding="false"
                         android:layout_marginTop="22dp"
                         android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                          android:text="지훈님이 평가를 기다리고 있는 곡"
-                          android:textSize="20sp"
-                          android:textColor="#ffffff"
-                          android:lineSpacingExtra="11sp"
-                          android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
+                        android:text="지훈님이 평가를 기다리고 있는 곡"
+                        android:textSize="20sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="11sp"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
 
                 <android.support.v7.widget.RecyclerView
+                        android:layout_marginHorizontal="4dp"
+                        android:id="@+id/rv_home_frag_scoring_waiting_mine"
                         android:layout_marginTop="67dp"
                         android:layout_width="match_parent" android:layout_height="140dp">
 
                 </android.support.v7.widget.RecyclerView>
 
+                <TextView
+                        android:id="@+id/tv_home_frag_waiting_scoring"
+                        android:includeFontPadding="false"
+                        android:layout_below="@+id/rv_home_frag_scoring_waiting_mine"
+                        android:layout_marginTop="56dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="지훈님의 평가를 기다리고 있는 곡"
+                        android:textSize="20sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="11sp"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
+
+                <android.support.v7.widget.RecyclerView
+
+                        android:layout_below="@+id/tv_home_frag_waiting_scoring"
+                        android:layout_marginHorizontal="4dp"
+                        android:id="@+id/rv_home_frag_scoring_waiting"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent" android:layout_height="104dp">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                        android:id="@+id/tv_home_frag_hit_song"
+                        android:includeFontPadding="false"
+                        android:layout_below="@+id/rv_home_frag_scoring_waiting"
+                        android:layout_marginTop="56dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="적중 성공 곡"
+                        android:textSize="20sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="11sp"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
+
+                <android.support.v7.widget.RecyclerView
+
+                        android:layout_below="@+id/tv_home_frag_hit_song"
+                        android:layout_marginHorizontal="4dp"
+                        android:id="@+id/rv_home_frag_scoring_hit_list"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent" android:layout_height="197dp">
+
+                </android.support.v7.widget.RecyclerView>
+
+
+                <TextView
+                        android:id="@+id/tv_home_frag_recommend_song"
+                        android:includeFontPadding="false"
+                        android:layout_below="@+id/rv_home_frag_scoring_hit_list"
+                        android:layout_marginTop="56dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="지훈님을 위한 추천곡"
+                        android:textSize="20sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="11sp"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
+
+                <android.support.v7.widget.RecyclerView
+
+                        android:layout_below="@+id/tv_home_frag_recommend_song"
+                        android:layout_marginHorizontal="4dp"
+                        android:id="@+id/rv_home_frag_scoring_recommend_list"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent" android:layout_height="197dp">
+
+                </android.support.v7.widget.RecyclerView>
             </RelativeLayout>
 
 

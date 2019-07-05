@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        android:id="@+id/rl_item_home_song_container"
+        android:layout_marginStart="12dp"
+        android:layout_height="197dp"
+        android:layout_width="140dp"
+        android:background="#000000"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+            android:id="@+id/iv_item_home_song_cover_img"
+            android:layout_width="140dp" android:layout_height="140dp"
+            android:src="@drawable/img_artwork_1"/>
+
+    <TextView
+            android:id="@+id/tv_item_home_song_song_info"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/iv_item_home_song_cover_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="9sp"
+            android:text="Song name is..."
+    />
+    <TextView
+            android:id="@+id/tv_item_home_song_artist"
+            android:layout_centerHorizontal="true"
+            android:includeFontPadding="false"
+            android:layout_below="@+id/tv_item_home_song_song_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#616161"
+            android:lineSpacingExtra="6sp"
+            android:gravity="center_horizontal"
+            android:text="John Doe"
+    />
+
+</RelativeLayout>

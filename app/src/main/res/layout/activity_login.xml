@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".UI.Login.LoginActivity"
     android:gravity="center"
+              android:background="#000000"
     >
 
     <com.kakao.usermgmt.LoginButton

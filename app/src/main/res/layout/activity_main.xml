@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+                android:background="#000000"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
@@ -41,11 +42,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <ImageButton
+            <ImageView
                 android:id="@+id/ib_main_act_home_tab"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/tab_btn_home_def"
+                android:src="@drawable/tab_btn_home_def"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 />
@@ -67,11 +68,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <ImageButton
+            <ImageView
                 android:id="@+id/ib_main_act_search_tab"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/tab_btn_search_active"
+                android:src="@drawable/tab_btn_search_active"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 />
@@ -93,14 +94,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <ImageButton
+
+            <ImageView
                 android:id="@+id/ib_main_act_scoring_tab"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/tab_btn_scoring_def"
+                android:src="@drawable/tab_btn_scoring_def"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,11 +122,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <ImageButton
+            <ImageView
                 android:id="@+id/ib_main_act_library_tab"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/tab_btn_library_def"
+                android:src="@drawable/tab_btn_library_def"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 />
@@ -139,16 +142,17 @@
                 />
         </LinearLayout>
         <LinearLayout
+                android:id="@+id/ll_main_act_mypage_tab"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <ImageButton
+            <ImageView
                 android:id="@+id/ib_main_act_mypage_tab"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/tab_btn_mypage_def"
+                android:src="@drawable/tab_btn_mypage_def"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 />

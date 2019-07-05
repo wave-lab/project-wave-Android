@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="평가"
+            android:textSize="32sp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:includeFontPadding="false"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="56dp"
+            />
 
 
         <android.support.design.widget.TabLayout
                 android:id="@+id/tl_scoring_tabbar"
                 android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
                 android:layout_height="50dp"/>
 
         <android.support.v4.view.ViewPager

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
-import com.song2.wave.Data.model.Search.CoverArtistData
+import com.song2.wave.Data.model.CoverArtistData
 import com.song2.wave.R
 
 class CoverArtistSearchAdapter (private var coverArtistData : ArrayList<CoverArtistData>, var requestManager : RequestManager) : RecyclerView.Adapter<CoverArtistSearchViewHolder>(){
