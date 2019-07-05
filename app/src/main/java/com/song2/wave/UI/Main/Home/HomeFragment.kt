@@ -54,7 +54,6 @@ class HomeFragment : Fragment() {
 
         attachRecyclerView()
 
-
     }
 
     fun attachRecyclerView(){
@@ -101,15 +100,15 @@ class HomeFragment : Fragment() {
     fun insertExampleData() {
 
 
-        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "힙합"))
-        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "R&D"))
-        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "일렉트로닉"))
-        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "댄"))
+        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
+        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
+        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
+        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
 
-        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "신나는"))
-        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "힙한"))
-        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "우울한"))
-        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "우울한"))
+        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "신나는"))
+        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "힙한"))
+        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "우울한"))
+        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "우울한"))
 
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
