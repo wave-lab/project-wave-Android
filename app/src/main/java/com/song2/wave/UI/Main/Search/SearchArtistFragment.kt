@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import com.song2.wave.Data.model.Search.SongData
+import com.song2.wave.Data.model.SongData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.MainActivity
 import com.song2.wave.UI.Main.Search.Adapter.SongSearchAdapter
