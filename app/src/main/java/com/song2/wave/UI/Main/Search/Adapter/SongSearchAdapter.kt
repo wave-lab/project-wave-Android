@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
-import com.song2.wave.Data.model.Search.SongData
+import com.song2.wave.Data.model.SongData
 import com.song2.wave.R
 
 class SongSearchAdapter (private var songData : ArrayList<SongData>, var requestManager : RequestManager) : RecyclerView.Adapter<SongSearchViewHolder>(){

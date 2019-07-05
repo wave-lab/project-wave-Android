@@ -9,9 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import com.song2.wave.Data.model.Search.SongData
-import com.song2.wave.UI.Main.Library.Adapter.PlaylistAdapter
-import kotlinx.android.synthetic.main.fragment_library_like.view.*
+import com.song2.wave.Data.model.SongData
+import com.song2.wave.UI.Main.Library.Adapter.MyPlaylistAdapter
 import kotlinx.android.synthetic.main.fragment_library_my_playlist.view.*
 
 class LibraryMyPlaylistFragment : Fragment() {
@@ -43,7 +42,7 @@ class LibraryMyPlaylistFragment : Fragment() {
         songDataArr.add(SongData("https://cphoto.asiae.co.kr/listimglink/1/2014051608371615808_1.jpg", "꽃갈피", "아이유(IU)", "송제민", songFieldData))
         songDataArr.add(SongData("https://pgnqdrjultom1827145.cdn.ntruss.com/img/f8/b9/f8b99005f6cc026302a55f0cba36c19ecbf1f2109f36639664a1c4217bbb41cd_v1.jpg", "무릎", "아이유(IU)", "송제민", songFieldData))
 
-        v.recycler_library_my_playlist_frag_list.adapter = PlaylistAdapter(songDataArr, requestManager)
+        v.recycler_library_my_playlist_frag_list.adapter = MyPlaylistAdapter(songDataArr, requestManager)
         v.recycler_library_my_playlist_frag_list.layoutManager = LinearLayoutManager(v.context)
     }
 }

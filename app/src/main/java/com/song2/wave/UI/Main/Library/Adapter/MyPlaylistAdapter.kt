@@ -1,5 +1,6 @@
 package com.song2.wave.UI.Main.Library.Adapter
 
+
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,7 @@ import com.song2.wave.Data.model.SongData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.Search.Adapter.SongSearchViewHolder
 
-class PlaylistAdapter (private var songData : ArrayList<SongData>, var requestManager : RequestManager) : RecyclerView.Adapter<SongSearchViewHolder>(){
+class MyPlaylistAdapter (private var songData : ArrayList<SongData>, var requestManager : RequestManager) : RecyclerView.Adapter<SongSearchViewHolder>(){
 
     var EXAMPLE_IMG_URL : String = "https://t1.daumcdn.net/cfile/tistory/2442394558BBBD1934"
 

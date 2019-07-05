@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import com.song2.wave.Data.model.Search.SongData
+import com.song2.wave.Data.model.SongData
 import com.song2.wave.UI.Main.Library.Adapter.PlaylistAdapter
 import kotlinx.android.synthetic.main.fragment_library_like.view.*
 
