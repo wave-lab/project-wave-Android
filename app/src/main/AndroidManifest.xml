@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
             android:name=".Util.Kakao.GlobalApplication"
@@ -13,12 +15,12 @@
             android:roundIcon="@drawable/android_app_icon"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".UI.Main.MyPage.UpLoadFileActivity">
+        <activity android:name=".UI.Main.MainActivity">
         </activity>
 
       <activity android:name=".UI.Login.LoginActivity"></activity>
         <activity android:name=".Util.Kakao.service.ScoringPlayerActivity"></activity>
-        <activity android:name=".UI.Main.MainActivity">
+        <activity android:name=".UI.Main.MyPage.UpLoadFileActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
