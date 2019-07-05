@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_scoring_player.*
 import java.lang.Exception
 
 class ScoringPlayerActivity : Activity() {
-    lateinit var playTime : String
+    lateinit var playTime: String
     lateinit var mediaPlayer: MediaPlayer
     lateinit var seekbar: SeekBar
 
@@ -36,7 +36,7 @@ class ScoringPlayerActivity : Activity() {
         "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-08.mp3"
     )
 
-    inner class playThread : Thread(){
+    inner class playThread : Thread() {
 
         //미디어를 재생하는 사용자 정의 메소드
         fun playAudio(url: String) {
@@ -46,7 +46,8 @@ class ScoringPlayerActivity : Activity() {
             mediaPlayer.start()
 
             var play_duration = mediaPlayer!!.getDuration()
-            var lenthOfSong =  String.format("%02d:%02d",((play_duration / 1000) % 3600 / 60) , ((play_duration / 1000) % 3600 % 60))
+            var lenthOfSong =
+                String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
 
             tv_scoring_player_length_of_song.setText(lenthOfSong)
 
@@ -57,7 +58,7 @@ class ScoringPlayerActivity : Activity() {
         }
 
 
-        fun prevSong(){
+        fun prevSong() {
 
             if (currentPosition > 0) {
                 mediaPlayer.reset()
@@ -71,7 +72,7 @@ class ScoringPlayerActivity : Activity() {
 
         }
 
-        fun nextSong(){
+        fun nextSong() {
 
             if (currentPosition < sourceMusicArray.size) {
                 mediaPlayer.reset()
@@ -135,7 +136,11 @@ class ScoringPlayerActivity : Activity() {
         override fun handleMessage(msg: Message?) {
             super.handleMessage(msg)
             if (msg!!.what == 0) {
-                playTime =  String.format("%02d:%02d",((mediaPlayer.getCurrentPosition() / 1000) % 3600 / 60) , ((mediaPlayer.getCurrentPosition() / 1000) % 3600 % 60))
+                playTime = String.format(
+                    "%02d:%02d",
+                    ((mediaPlayer.getCurrentPosition() / 1000) % 3600 / 60),
+                    ((mediaPlayer.getCurrentPosition() / 1000) % 3600 % 60)
+                )
 
                 tv_scoring_player_duration_time.setText(playTime)
                 /*
@@ -154,7 +159,7 @@ class ScoringPlayerActivity : Activity() {
         addSeekBar()
         playerBtn()
 
-        iv_scoring_player_act_like.setOnClickListener{
+        iv_scoring_player_act_like.setOnClickListener {
             iv_scoring_player_act_like.isSelected = !iv_scoring_player_act_like.isSelected
         }
 
@@ -202,7 +207,7 @@ class ScoringPlayerActivity : Activity() {
     fun playerBtn() {
 
         //if Looping == False
-        mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener{
+        mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
             override fun onCompletion(p0: MediaPlayer?) {
                 Log.v("Complete", "Complete")
                 musicThread.nextSong()

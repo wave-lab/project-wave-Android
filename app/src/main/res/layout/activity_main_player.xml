@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        android:background="#000000"
+        android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+            android:id="@+id/rl_main_player_act_main_toolbar"
+            android:layout_width="match_parent" android:layout_height="56dp">
+        <TextView
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:textSize="18sp"
+                android:layout_centerInParent="true"
+                android:lineSpacingExtra="6sp"
+                android:text="커버곡"
+                android:includeFontPadding="false"
+                android:layout_width="50dp"
+                android:layout_height="27dp"/>
+
+        <ImageView
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/btn_down"
+                android:layout_width="24dp" android:layout_height="24dp"/>
+    </RelativeLayout>
+
+    <TextView
+            android:id="@+id/tv_main_player_act_title_sing"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/rl_main_player_act_main_toolbar"
+            android:layout_marginHorizontal="24dp"
+            android:layout_width="312dp"
+            android:layout_height="21dp"
+            android:text="Bullet In A Gun - Imagine D..."
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:layout_marginLeft="16dp"
+            android:textColor="#e5e5e5"
+            android:textSize="22sp"
+            android:includeFontPadding="false"/>
+
+    <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:layout_below="@+id/tv_main_player_act_title_sing"
+            android:layout_width="252dp"
+            android:layout_height="21dp"
+            android:textSize="16sp"
+            android:textColor="#a1a1a1"
+            android:lineSpacingExtra="8sp"
+            android:gravity="center_horizontal"
+            android:text="Covered by Blotto"
+    />
+
+    <ImageView
+            android:id="@+id/iv_main_player_act_cover_img"
+            android:layout_marginTop="106dp"
+            android:layout_below="@+id/rl_main_player_act_main_toolbar"
+            android:layout_width="300dp" android:layout_height="300dp"
+            android:layout_marginHorizontal="30dp"
+               android:src="@drawable/img_artwork_1" android:layout_centerInParent="true"/>
+
+    <LinearLayout
+            android:layout_marginHorizontal="30dp"
+            android:id="@+id/ll_main_player_act_more"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/iv_main_player_act_cover_img"
+            android:layout_width="300dp" android:layout_height="24dp" android:orientation="horizontal">
+
+        <ImageView android:layout_width="24dp" android:layout_height="24dp"
+        android:src="@drawable/btn_shuffle"/>
+
+        <TextView
+                android:layout_marginHorizontal="92dp"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="6sp"
+                android:gravity="center_horizontal"
+                android:text="록  메탈  POP"/>
+
+        <ImageView
+                android:layout_gravity="right"
+                android:layout_width="24dp" android:layout_height="24dp"
+        android:src="@drawable/btn_play_info"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:id="@+id/ll_main_player_act_time"
+            android:layout_marginTop="44dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_below="@+id/ll_main_player_act_more"
+            android:layout_width="302dp" android:layout_height="wrap_content">
+
+        <TextView
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:id="@+id/tv_main_player_duration_time"
+                android:text="00:00"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="0dp"
+                android:layout_alignParentTop="true"/>
+
+        <TextView
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:id="@+id/tv_main_player_length_of_song"
+                android:text="00:00"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <SeekBar
+            android:layout_below="@+id/ll_main_player_act_time"
+            android:layout_centerHorizontal="true"
+            android:layout_width="330dp"
+            android:thumb="@android:color/transparent"
+            android:progressTint="#00b6de"
+            android:layout_height="12dp"
+            android:id="@+id/sb_scoring_player_act_seekbar"/>
+
+
+    <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="360dp" android:layout_height="96dp">
+        <ImageView
+                android:layout_toLeftOf="@+id/iv_main_player_act_stop_btn"
+                android:id="@+id/iv_main_player_act_share"
+                android:layout_width="32dp" android:layout_height="32dp"
+                   android:src="@drawable/btn_share_md"
+                   android:layout_centerVertical="true"/>
+        <ImageView
+                android:layout_marginStart="49dp"
+                android:id="@+id/iv_main_player_act_stop_btn"
+                android:src="@drawable/play_selector"
+                android:layout_centerInParent="true"
+                android:layout_width="36dp" android:layout_height="36dp"/>
+        <ImageView
+                android:id="@+id/iv_main_player_like_btn"
+                android:layout_marginStart="47dp"
+                android:layout_toRightOf="@id/iv_main_player_act_stop_btn"
+                android:src="@drawable/like_selector"
+                android:layout_centerVertical="true"
+                android:layout_width="32dp" android:layout_height="32dp"/>
+    </RelativeLayout>
+</RelativeLayout>
