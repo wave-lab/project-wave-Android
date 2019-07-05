@@ -13,32 +13,29 @@
             android:roundIcon="@drawable/android_app_icon"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".UI.Main.MainActivity">
 
-
-
-        </activity>
-        <activity android:name=".UI.Login.LoginActivity"/>
-        <activity android:name=".Util.Kakao.service.ScoringPlayerActivity">
-
-        </activity>
-        <activity android:name=".UI.Main.MyPage.UpLoadFileActivity"/>
-
+        <!--로그인-->
         <meta-data
                 android:name="com.kakao.sdk.AppKey"
                 android:value="@string/kakao_app_key"/>
+        <activity android:name=".UI.Login.LoginActivity"/>
 
-        <activity android:name=".UI.TestActivity"/>
-
-        <service android:name=".Util.Player.Service.MusicService"/>
-
-        <activity android:name=".UI.MainPlayer.MainPlayerActivity">
+        <!--메인-->
+        <activity android:name=".UI.Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".UI.Main.MyPage.UpLoadFileActivity"/>
+
+        <!--음악플레이어-->
+        <activity android:name=".UI.MainPlayer.MainPlayerActivity"></activity>
+        <activity android:name=".Util.Kakao.service.ScoringPlayerActivity"></activity>
+        <service android:name=".Util.Player.Service.MusicService"/>
+        <activity android:name=".UI.TestActivity"/>
+
     </application>
 
 </manifest>

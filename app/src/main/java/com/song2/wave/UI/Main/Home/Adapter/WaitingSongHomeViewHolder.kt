@@ -8,8 +8,9 @@ import android.widget.TextView
 import com.song2.wave.R
 
 class WaitingSongHomeViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-    var waitingSongContainer : RelativeLayout = itemView!!.findViewById(R.id.rl_item_waiting_song_container)
-    var songCoverImg: ImageView = itemView!!.findViewById(R.id.iv_waiting_song_cover_img)
-    var songDDay : TextView = itemView!!.findViewById(R.id.tv_item_waiting_song_d_day)
-    var songInfo : TextView = itemView!!.findViewById(R.id.tv_item_waiting_song_info)
+
+    var waitingSongContainer : RelativeLayout = itemView!!.findViewById(R.id.rl_item_my_waiting_song_container)
+    var songCoverImg: ImageView = itemView!!.findViewById(R.id.iv_item_waiting_song_cover_img)
+    var songInfo : TextView = itemView!!.findViewById(R.id.tv_item_waiting_song_item_song_info)
+    var artistname : TextView = itemView!!.findViewById(R.id.tv_item_waiting_song_origin_artist_name)
 }
