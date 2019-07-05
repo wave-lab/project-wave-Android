@@ -39,11 +39,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <ImageButton
+            <ImageView
                 android:id="@+id/ib_main_act_home_tab"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/tab_btn_home_def"
+                android:src="@drawable/tab_btn_home_def"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 />
@@ -65,11 +65,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <ImageButton
+            <ImageView
                 android:id="@+id/ib_main_act_search_tab"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/tab_btn_search_active"
+                android:src="@drawable/tab_btn_search_active"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 />
@@ -91,14 +91,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <ImageButton
+
+            <ImageView
                 android:id="@+id/ib_main_act_scoring_tab"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/tab_btn_scoring_def"
+                android:src="@drawable/tab_btn_scoring_def"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -117,11 +119,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <ImageButton
+            <ImageView
                 android:id="@+id/ib_main_act_library_tab"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/tab_btn_library_def"
+                android:src="@drawable/tab_btn_library_def"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 />
@@ -142,11 +144,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <ImageButton
+            <ImageView
                 android:id="@+id/ib_main_act_mypage_tab"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/tab_btn_mypage_def"
+                android:src="@drawable/tab_btn_mypage_def"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 />
