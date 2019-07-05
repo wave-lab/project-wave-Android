@@ -22,7 +22,8 @@
                             android:src="@drawable/img_home_wavelogo"/>
                     <LinearLayout
                             android:background="@drawable/home_dark_gra"
-                            android:layout_width="match_parent" android:layout_height="571dp">
+                            android:layout_width="match_parent" android:layout_height="571dp"
+                            android:layout_alignParentStart="true" android:layout_alignParentTop="true">
                         <LinearLayout
                                 android:layout_marginEnd="33dp"
                                 android:layout_marginStart="22dp"
@@ -126,6 +127,7 @@
 
                 <!--평가대기중인 내 곡-->
                 <TextView
+
                         android:id="@+id/tv_home_frag_waiting_scoring_mine"
                         android:includeFontPadding="false"
                         android:layout_marginTop="30dp"
@@ -138,9 +140,10 @@
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
 
                 <android.support.v7.widget.RecyclerView
+                        android:layout_below="@+id/tv_home_frag_waiting_scoring_mine"
                         android:layout_marginHorizontal="4dp"
+                        android:layout_marginTop="16dp"
                         android:id="@+id/rv_home_frag_scoring_waiting_mine"
-                        android:layout_marginTop="67dp"
                         android:layout_width="match_parent" android:layout_height="140dp">
 
                 </android.support.v7.widget.RecyclerView>
