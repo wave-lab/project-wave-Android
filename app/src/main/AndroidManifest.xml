@@ -13,7 +13,7 @@
             android:roundIcon="@drawable/android_app_icon"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-      
+
         <!--로그인-->
         <meta-data
                 android:name="com.kakao.sdk.AppKey"
