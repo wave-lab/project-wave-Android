@@ -25,13 +25,14 @@
                 android:value="@string/kakao_app_key"/>
 
         <!-- 메인 -->
-        <activity android:name=".UI.Main2Activity">
+        <activity android:name=".UI.Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".UI.Main2Activity"/>
 
         <!-- 음악플레이어 -->
         <activity android:name=".UI.MainPlayer.MainPlayerActivity"/>
