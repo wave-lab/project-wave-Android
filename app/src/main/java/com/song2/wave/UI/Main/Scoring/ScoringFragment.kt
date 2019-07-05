@@ -16,11 +16,19 @@ class ScoringFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         configureTopNavigation()
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_scoring, container, false)
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+       // setContentView(R.layout.activity_main)
+        //rv_scoring_song_passed.adapter = ScoringPassAdapter()
+        //rv_scoring_song_passed.layoutManager = LinearLayoutManager(this)
+    }
+
 
     private fun configureTopNavigation() {
         vp_scoring.adapter = FragmentScoringPagerAdapter(childFragmentManager,2)
