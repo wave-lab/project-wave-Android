@@ -5,9 +5,13 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.support.v4.view.ViewCompat
+import android.support.v4.view.ViewPager
 import android.util.Log
+import android.view.View
 import android.widget.SeekBar
 import com.song2.wave.R
+import com.song2.wave.UI.MainPlayer.Adapter.CoverImgViewPager
 import kotlinx.android.synthetic.main.activity_main_player.*
 import java.util.*
 
@@ -16,6 +20,7 @@ class MainPlayerActivity : AppCompatActivity() {
     lateinit var playTime: String
     lateinit var mediaPlayer: MediaPlayer
     lateinit var seekbar: SeekBar
+    var prevSongIdx = 0
 
     var isPlaying = false
     var playbackPosition = 0
@@ -64,7 +69,7 @@ class MainPlayerActivity : AppCompatActivity() {
         }
     } */
 
-    fun addTimer(){
+    fun addTimer() {
         val tt = object : TimerTask() {
             override fun run() {
                 runOnUiThread {
@@ -94,6 +99,8 @@ class MainPlayerActivity : AppCompatActivity() {
 
         mediaPlayer = MediaPlayer()
 
+        addCoverImgViewPager()
+
         addSeekBar()
         playerBtn()
         addTimer()
@@ -103,6 +110,76 @@ class MainPlayerActivity : AppCompatActivity() {
         }
 
     }
+
+    fun addCoverImgViewPager() {
+
+
+        var imageList = arrayListOf<String>(
+            "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
+            "https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E",
+            "https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E",
+            "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
+            "https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E",
+            "https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E"
+        )
+
+        var coverImgViewPager: ViewPager = findViewById(R.id.vp_main_player_act_cover_img)
+        coverImgViewPager.setClipToPadding(false)
+
+        val d = resources.displayMetrics.density
+        val margin = (60 * d).toInt()
+        val marginRight = (60 * d).toInt()
+
+
+        coverImgViewPager.setPadding(margin, 0, marginRight, 0)
+        coverImgViewPager.setAdapter(CoverImgViewPager(this, imageList))
+
+        coverImgViewPager.setPageTransformer(false, object : ViewPager.PageTransformer {
+            override fun transformPage(page: View, position: Float) {
+
+                var normalizedposition = Math.abs(Math.abs(position) - 1)
+
+                page.setScaleX(normalizedposition / 2 + 0.65f)
+//                page.setScaleY(normalizedposition / 2 + 0.8f)
+                page.setScaleY(normalizedposition / 2 + 0.65f)
+            }
+
+        })
+
+
+        coverImgViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageScrollStateChanged(state: Int) {
+
+                Log.v("onPageScrollStateChanged", state.toString())
+
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+                Log.e("onPageScrolled-prev", prevSongIdx.toString() )
+                Log.e("onPageScrolled-position", position.toString()+ positionOffset.toString() + positionOffsetPixels.toString())
+
+                if(position < prevSongIdx)
+                    prevSong()
+                else
+                    nextSong()
+
+                prevSongIdx = position
+
+
+                //이전으로 가면 preview
+            }
+
+            override fun onPageSelected(position: Int) {
+                Log.v("onPageSeleted", position.toString())
+            }
+
+        })
+
+
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
