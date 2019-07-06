@@ -20,6 +20,7 @@ class MainPlayerActivity : AppCompatActivity() {
     lateinit var playTime: String
     lateinit var mediaPlayer: MediaPlayer
     lateinit var seekbar: SeekBar
+    var prevSongIdx = 0
 
     var isPlaying = false
     var playbackPosition = 0
@@ -135,15 +136,46 @@ class MainPlayerActivity : AppCompatActivity() {
 
         coverImgViewPager.setPageTransformer(false, object : ViewPager.PageTransformer {
             override fun transformPage(page: View, position: Float) {
+
                 var normalizedposition = Math.abs(Math.abs(position) - 1)
 
                 page.setScaleX(normalizedposition / 2 + 0.65f)
+//                page.setScaleY(normalizedposition / 2 + 0.8f)
                 page.setScaleY(normalizedposition / 2 + 0.65f)
             }
 
         })
 
 
+        coverImgViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageScrollStateChanged(state: Int) {
+
+                Log.v("onPageScrollStateChanged", state.toString())
+
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+                Log.e("onPageScrolled-prev", prevSongIdx.toString() )
+                Log.e("onPageScrolled-position", position.toString()+ positionOffset.toString() + positionOffsetPixels.toString())
+
+                if(position < prevSongIdx)
+                    prevSong()
+                else
+                    nextSong()
+
+                prevSongIdx = position
+
+
+                //이전으로 가면 preview
+            }
+
+            override fun onPageSelected(position: Int) {
+                Log.v("onPageSeleted", position.toString())
+            }
+
+        })
 
 
     }
