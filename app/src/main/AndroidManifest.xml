@@ -25,7 +25,7 @@
                 android:value="@string/kakao_app_key"/>
 
         <!-- 메인 -->
-        <activity android:name=".UI.Main2Activity">
+        <activity android:name=".UI.Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -38,7 +38,15 @@
 
         <service android:name=".Util.Player.Service.MusicService"/>
 
+        <!-- Declare foreground service -->
+        <service
+                android:name=".Util.Player.Service.MyForeGroundService"
+                android:enabled="true"
+                android:exported="true" />
+
         <activity android:name=".UI.TestActivity"/>
+        <activity android:name=".UI.MusicTestActivity">
+        </activity>
     </application>
 
 </manifest>

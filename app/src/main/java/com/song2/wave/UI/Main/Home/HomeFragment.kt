@@ -17,6 +17,8 @@ import com.song2.wave.UI.Main.Home.Adapter.MyWaitingSongHomeAdapter
 import com.song2.wave.UI.Main.Home.Adapter.RecomentSongHomeAdapter
 import com.song2.wave.UI.Main.Home.Adapter.WaitingSongHomeAdapter
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity
+import com.song2.wave.UI.MusicTestActivity
+import com.song2.wave.UI.TestActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
@@ -43,6 +45,11 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        v.tv_home_frag_service_test.setOnClickListener {
+            var intent = Intent(context, MusicTestActivity::class.java)
+            startActivity(intent)
+        }
+
         return v
     }
 
@@ -51,11 +58,9 @@ class HomeFragment : Fragment() {
 
         attachRecyclerView()
 
-
     }
 
     fun attachRecyclerView(){
-
 
         waitingSongDataList = ArrayList()
         myWaitingSongDataList = ArrayList()

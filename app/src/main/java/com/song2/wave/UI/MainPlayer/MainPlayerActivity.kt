@@ -1,5 +1,6 @@
 package com.song2.wave.UI.MainPlayer
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -8,10 +9,13 @@ import android.os.Message
 import android.util.Log
 import android.widget.SeekBar
 import com.song2.wave.R
+import com.song2.wave.Util.Player.Service.MusicService
 import kotlinx.android.synthetic.main.activity_main_player.*
 import java.util.*
 
 class MainPlayerActivity : AppCompatActivity() {
+
+    lateinit var musicService : MusicService
 
     lateinit var playTime: String
     lateinit var mediaPlayer: MediaPlayer
@@ -35,35 +39,6 @@ class MainPlayerActivity : AppCompatActivity() {
         "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-07.mp3",
         "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-08.mp3"
     )
-
-
-    /*
-    inner class sbThread : Thread() {
-        override fun run() {
-            while (isPlaying) {
-                seekbar.setProgress(mediaPlayer.getCurrentPosition())
-                n_sbHandler.sendEmptyMessageDelayed(0, 1000)
-            }
-        }
-    }
-
-    inner class sbHandler : Handler() {
-        override fun handleMessage(msg: Message?) {
-            super.handleMessage(msg)
-            if (msg!!.what == 0) {
-                playTime = String.format(
-                    "%02d:%02d",
-                    ((mediaPlayer.getCurrentPosition() / 1000) % 3600 / 60),
-                    ((mediaPlayer.getCurrentPosition() / 1000) % 3600 % 60)
-                )
-
-                tv_main_player_duration_time.setText(playTime)
-                Log.v("handlerError",(mediaPlayer.getCurrentPosition()/1000).toString())
-                //Log.v("handlerError",(mediaPlayer.getDuration()/1000).toString())
-            }
-        }
-    } */
-
     fun addTimer(){
         val tt = object : TimerTask() {
             override fun run() {
@@ -75,7 +50,7 @@ class MainPlayerActivity : AppCompatActivity() {
                     )
 
                     tv_main_player_duration_time.setText(playTime)
-                    seekbar.setProgress(mediaPlayer.getCurrentPosition())
+                   // seekbar.setProgress(mediaPlayer.getCurrentPosition())
                 }
             }
         }
@@ -93,10 +68,11 @@ class MainPlayerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main_player)
 
         mediaPlayer = MediaPlayer()
-
-        addSeekBar()
+       // val intent = Intent(this@MainPlayerActivity, MusicService::class.java)
+        //startService(intent)
+        //addSeekBar()
         playerBtn()
-        addTimer()
+       // addTimer()
 
         iv_main_player_like_btn.setOnClickListener {
             iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected
@@ -127,7 +103,7 @@ class MainPlayerActivity : AppCompatActivity() {
                     seekBarThread.run()
                 }*/
 
-                mediaPlayer.start()
+                //잠시 지움 - mediaPlayer.start()
 
             }
 
@@ -156,20 +132,28 @@ class MainPlayerActivity : AppCompatActivity() {
             override fun onCompletion(p0: MediaPlayer?) {
                 Log.v("Complete", "Complete")
                 //musicThread.nextSong()
-                nextSong()
+                //nextSong()
             }
         })
 
 
 
         iv_main_player_act_stop_btn.setOnClickListener {
+            Log.v("TAG","테스트0")
             if (iv_main_player_act_stop_btn.isSelected and (mediaPlayer.getCurrentPosition() == 0)) {
+                Log.v("TAG","테스트1")
                 try {
 /*                if (mediaPlayer != null) {
                     mediaPlayer!!.stop()
                     mediaPlayer = null
                 }*/
+                    Log.v("TAG","startService")
                     //musicThread.playAudio(sourceMusicArray[currentPosition])
+                   // val intent = Intent(this@MainPlayerActivity, MusicService::class.java)
+                    //startService(intent)
+
+
+                    Log.v("Asdf","테스트6")
                     playAudio(sourceMusicArray[currentPosition])
 
                 } catch (e: Exception) {
@@ -179,19 +163,21 @@ class MainPlayerActivity : AppCompatActivity() {
 
             } else if (iv_main_player_act_stop_btn.isSelected) {
                 //musicThread.pauseAudio()
+                Log.v("TAG","테스트1")
                 pauseAudio()
 
             } else {
                 //musicThread.restart()
+                Log.v("TAG","테스트2")
                 restart()
 
             }
             iv_main_player_act_stop_btn.isSelected = !iv_main_player_act_stop_btn.isSelected
 
-
         }
 
     }
+
 
     //미디어를 재생하는 사용자 정의 메소드
     fun playAudio(url: String) {
@@ -208,9 +194,10 @@ class MainPlayerActivity : AppCompatActivity() {
 
         isPlaying = true
 
-        seekbar.setMax(play_duration)
+//        seekbar.setMax(play_duration)
         //seekBarThread.start()
     }
+
 
 
     fun prevSong() {
@@ -218,7 +205,7 @@ class MainPlayerActivity : AppCompatActivity() {
         if (currentPosition > 0) {
             mediaPlayer.reset()
             currentPosition -= 1
-            playAudio(sourceMusicArray[currentPosition])
+           // playAudio(sourceMusicArray[currentPosition])
 
         } else {
             killMediaPlayer()
@@ -227,11 +214,13 @@ class MainPlayerActivity : AppCompatActivity() {
 
     }
 
+    /*
     fun nextSong() {
 
         if (currentPosition < sourceMusicArray.size) {
             mediaPlayer.reset()
             currentPosition += 1
+            Log.v("TAG","테스트4")
             playAudio(sourceMusicArray[currentPosition])
 
         } else {
@@ -239,6 +228,7 @@ class MainPlayerActivity : AppCompatActivity() {
         }
 
     }
+    */
 
     fun pauseAudio() {
 
@@ -253,9 +243,13 @@ class MainPlayerActivity : AppCompatActivity() {
 
         isPlaying = true // 재생하도록 flag 변경
 
+         val intent = Intent(this@MainPlayerActivity, MusicService::class.java)
+        startService(intent)
+
+        /*
         mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
         mediaPlayer.start() // 시작
-
+*/
         // seekBarThread.run()
     }
 
@@ -263,6 +257,7 @@ class MainPlayerActivity : AppCompatActivity() {
 /*      if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
             mediaPlayer!!.release()
         }*/
+        Log.v("TAG","테스트3")
         mediaPlayer!!.release()
     }
 }
