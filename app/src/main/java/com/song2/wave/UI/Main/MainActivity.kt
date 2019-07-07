@@ -3,7 +3,7 @@ package com.song2.wave.UI.Main
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import com.song2.wave.UI.Main.Home.HomeFragment
+import com.song2.wave.UI.Main.Home.HomeOnFragment
 import com.song2.wave.UI.Main.Library.LibraryFragment
 import com.song2.wave.UI.Main.Scoring.ScoringFragment
 import com.song2.wave.UI.Main.Search.SearchFragment
@@ -63,7 +63,7 @@ MainActivity : AppCompatActivity() {
 
         when (frag) {
             "home" -> {
-                nowFrag = HomeFragment()
+                nowFrag = HomeOnFragment()
             }
             "search" -> {
                 nowFrag = SearchFragment()
