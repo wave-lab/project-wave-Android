@@ -34,7 +34,9 @@ class HomeOnFragment : Fragment() {
     lateinit var hitSongHomeAdapter: HitSongHomeAdapter
     lateinit var recommendSongHomeAdapter: RecomentSongHomeAdapter
     lateinit var top10GenreAdapter: Top10GenreAdapter
-    lateinit var top10MoodAdapter: Top10MoodAdapter
+    lateinit var top10MoodAdapter: Top10GenreAdapter
+
+    //lateinit var top10MoodAdapter: Top10MoodAdapter
 
 
     lateinit var requestManager: RequestManager
@@ -80,7 +82,7 @@ class HomeOnFragment : Fragment() {
         rv_home_frag_top10_genre_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
 
-        top10MoodAdapter = Top10MoodAdapter(top10MoodDataList, requestManager)
+        top10MoodAdapter = Top10GenreAdapter(top10MoodDataList, requestManager)
         rv_home_frag_top10_mood_list.adapter = top10MoodAdapter
         rv_home_frag_top10_mood_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
