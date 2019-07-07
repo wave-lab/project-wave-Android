@@ -294,6 +294,16 @@
                         android:lineSpacingExtra="11sp"
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
 
+                <ImageView
+                        android:padding="3dp"
+                        android:id="@+id/iv_home_frag_top10_mood_more_btn"
+                        android:layout_toRightOf="@+id/rv_home_frag_top10_mood"
+                        android:layout_below="@+id/rv_home_frag_top10_genre_list"
+                        android:layout_marginTop="56dp"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:src="@drawable/btn_more"
+                />
+
                 <android.support.v7.widget.RecyclerView
                         android:layout_marginBottom="56dp"
                         android:id="@+id/rv_home_frag_top10_mood_list"
