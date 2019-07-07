@@ -51,7 +51,10 @@ class HomeOnFragment : Fragment() {
 
         v.iv_home_frag_top10_genre_more_btn.setOnClickListener {
             HomeFragment.homeFragment.replaceFragment(Top10Fragment())
+        }
 
+        v.iv_home_frag_top10_mood_more_btn.setOnClickListener {
+            HomeFragment.homeFragment.replaceFragment(Top10Fragment())
         }
 
         return v
