@@ -22,11 +22,11 @@ class Top10Fragment: Fragment(){
     }
 
     private fun configureTopNavigation() {
-        vp_top10_frag_content.adapter = FragmentViewPagerAdapter(childFragmentManager,3)
+        vp_top10_frag_content.adapter = FragmentViewPagerAdapter(childFragmentManager,8)
         // ViewPager와 Tablayout을 엮어줍니다!
         tl_top10_frag_tabbar.setupWithViewPager(vp_top10_frag_content)
         //TabLayout에 붙일 layout을 찾아준 다음
-        val topNaviLayout: View = this.layoutInflater.inflate(R.layout.fragment_library_tabbar, null, false)
+        val topNaviLayout: View = this.layoutInflater.inflate(R.layout.fragment_top10_tabbar, null, false)
         //탭 하나하나 TabLayout에 연결시켜줍니다.
         tl_top10_frag_tabbar.getTabAt(0)!!.customView = topNaviLayout.findViewById(R.id.rl_top10_frag_idx0) as RelativeLayout
         tl_top10_frag_tabbar.getTabAt(1)!!.customView = topNaviLayout.findViewById(R.id.rl_top10_frag_idx1) as RelativeLayout

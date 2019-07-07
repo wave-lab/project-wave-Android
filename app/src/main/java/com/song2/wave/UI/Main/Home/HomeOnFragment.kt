@@ -15,6 +15,7 @@ import com.song2.wave.Data.model.Home.TOP10Data
 import com.song2.wave.R
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity
 import com.song2.wave.UI.Main.Home.Adapter.*
+import com.song2.wave.UI.Main.Home.Top10.Top10Fragment
 import kotlinx.android.synthetic.main.fragment_home_on.*
 import kotlinx.android.synthetic.main.fragment_home_on.view.*
 
@@ -46,9 +47,10 @@ class HomeOnFragment : Fragment() {
             startActivity(intent)
         }
 
-/*        v.iv_home_frag_top10_genre_more_btn.setOnClickListener {
+        v.iv_home_frag_top10_genre_more_btn.setOnClickListener {
+            HomeFragment.homeFragment.replaceFragment(Top10Fragment())
 
-        }*/
+        }
 
         return v
     }

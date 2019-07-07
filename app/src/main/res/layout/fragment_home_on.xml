@@ -261,10 +261,11 @@
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
 
                 <ImageView
+                        android:padding="3dp"
                         android:id="@+id/iv_home_frag_top10_genre_more_btn"
                         android:layout_toRightOf="@+id/tv_home_frag_top10_genre"
                         android:layout_below="@+id/iv_home_frag_challenge_img"
-                        android:layout_marginTop="60dp"
+                        android:layout_marginTop="56dp"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:src="@drawable/btn_more"
                 />
