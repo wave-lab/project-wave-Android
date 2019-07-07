@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="12dp"
+>
+    <ImageView
+            android:id="@+id/iv_chart_song_item_cover"
+            android:layout_width="82dp"
+            android:layout_height="82dp"
+            android:background="@drawable/img_artwork_1"
+    />
+
+    <TextView
+            android:id="@+id/tv_chart_song_item_rank"
+            android:textSize="16dp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:layout_toRightOf="@id/iv_chart_song_item_cover"
+            android:layout_marginStart="10dp"
+            android:includeFontPadding="false"
+            android:layout_width="12dp" android:layout_height="wrap_content"
+            android:text="2"
+            android:layout_marginLeft="10dp" android:layout_alignParentTop="true" android:layout_marginTop="-4dp"/>
+    <View
+            android:layout_marginTop="-3dp"
+            android:layout_toRightOf="@id/iv_chart_song_item_cover"
+            android:layout_marginStart="10dp"
+            android:layout_below="@+id/tv_chart_song_item_rank"
+            android:layout_width="12dp" android:layout_height="2dp"
+            android:background="#00b6de"
+    />
+
+
+    <TextView
+            android:id="@+id/tv_chart_song_item_origin_song_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="#FFFFFF"
+            android:text="Song Name - 류지훈"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_chart_song_item_cover"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:includeFontPadding="false"
+            android:textSize="16sp"
+    />
+
+    <TextView
+            android:id="@+id/tv_chart_song_item_cover_artist_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginStart="10dp"
+            android:text="blotto_archyan"
+            android:layout_toRightOf="@+id/iv_chart_song_item_cover"
+            android:layout_below="@+id/tv_chart_song_item_origin_song_info"
+            android:fontFamily="@font/noto_sans_kr_regular_hestia"
+            android:includeFontPadding="false"
+            android:layout_marginTop="2dp"
+            android:textColor="#979797"
+    />
+
+    <View
+            android:id="@+id/view_chart_song_item_center"
+            android:layout_width="1dp"
+            android:layout_height="10dp"
+            android:layout_below="@+id/tv_chart_song_item_origin_song_info"
+            android:layout_toRightOf="@+id/tv_chart_song_item_cover_artist_name"
+            android:layout_marginLeft="8dp"
+            android:background="#979797"
+            android:layout_marginTop="7dp"
+    />
+
+    <TextView
+            android:id="@+id/tv_chart_song_item_corver_field_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="힙합  재즈  일렉트로닉"
+            android:layout_below="@+id/tv_chart_song_item_origin_song_info"
+            android:layout_toRightOf="@+id/view_chart_song_item_center"
+            android:fontFamily="@font/noto_sans_kr_regular_hestia"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="8dp"
+            android:textColor="#979797"
+            android:includeFontPadding="false"
+    />
+
+    <ImageView
+            android:id="@+id/iv_chart_song_item_more_btn"
+            android:layout_width="24dp" android:layout_height="24dp"
+               android:src="@drawable/btn_threedot"
+               android:layout_centerVertical="true"
+               android:layout_alignParentRight="true"
+               android:layout_marginRight="10dp"
+    />
+
+</RelativeLayout>
