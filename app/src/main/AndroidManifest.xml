@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
-            android:name=".Util.Kakao.GlobalApplication"
+            android:name=".AudioTest.AudioApplication"
             android:allowBackup="true"
             android:icon="@drawable/android_app_icon"
             android:label="@string/app_name"
@@ -25,28 +25,42 @@
                 android:value="@string/kakao_app_key"/>
 
         <!-- 메인 -->
-        <activity android:name=".UI.Main.MainActivity">
+        <activity android:name=".AudioTest.PlayerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".UI.Main2Activity"/>
 
         <!-- 음악플레이어 -->
         <activity android:name=".UI.MainPlayer.MainPlayerActivity"/>
 
         <service android:name=".Util.Player.Service.MusicService"/>
+        <service
+                android:name=".AudioTest.AudioService"
+                android:enabled="true"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="REWIND"/>
+                <action android:name="TOGGLE_PLAY"/>
+                <action android:name="FORWARD"/>
+                <action android:name="CLOSE"/>
+            </intent-filter>
+        </service>
 
         <!-- Declare foreground service -->
         <service
                 android:name=".Util.Player.Service.MyForeGroundService"
                 android:enabled="true"
-                android:exported="true" />
+                android:exported="true"/>
 
-        <activity android:name=".UI.TestActivity"/>
         <activity android:name=".UI.MusicTestActivity">
         </activity>
+        <activity android:name=".UI.Main.MainActivity">
+        </activity>
+
     </application>
 
 </manifest>

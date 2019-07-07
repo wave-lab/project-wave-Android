@@ -23,7 +23,8 @@
                             android:src="@drawable/img_home_wavelogo"/>
                     <LinearLayout
                             android:background="@drawable/home_dark_gra"
-                            android:layout_width="match_parent" android:layout_height="571dp">
+                            android:layout_width="match_parent" android:layout_height="571dp"
+                            android:layout_alignParentStart="true" android:layout_alignParentTop="true">
                         <LinearLayout
                                 android:layout_marginEnd="33dp"
                                 android:layout_marginStart="22dp"
@@ -126,10 +127,12 @@
             //info
             <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
 
+                <!--평가대기중인 내 곡-->
                 <TextView
+
                         android:id="@+id/tv_home_frag_waiting_scoring_mine"
                         android:includeFontPadding="false"
-                        android:layout_marginTop="22dp"
+                        android:layout_marginTop="30dp"
                         android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="지훈님이 평가를 기다리고 있는 곡"
@@ -139,13 +142,15 @@
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
 
                 <android.support.v7.widget.RecyclerView
+                        android:layout_below="@+id/tv_home_frag_waiting_scoring_mine"
                         android:layout_marginHorizontal="4dp"
+                        android:layout_marginTop="16dp"
                         android:id="@+id/rv_home_frag_scoring_waiting_mine"
-                        android:layout_marginTop="67dp"
                         android:layout_width="match_parent" android:layout_height="140dp">
 
                 </android.support.v7.widget.RecyclerView>
 
+                <!--평가대기곡-->
                 <TextView
                         android:id="@+id/tv_home_frag_waiting_scoring"
                         android:includeFontPadding="false"
@@ -169,6 +174,7 @@
 
                 </android.support.v7.widget.RecyclerView>
 
+                <!--적중 성공곡-->
                 <TextView
                         android:id="@+id/tv_home_frag_hit_song"
                         android:includeFontPadding="false"
@@ -193,6 +199,7 @@
                 </android.support.v7.widget.RecyclerView>
 
 
+                <!--추천곡-->
                 <TextView
                         android:id="@+id/tv_home_frag_recommend_song"
                         android:includeFontPadding="false"
@@ -207,12 +214,83 @@
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
 
                 <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_home_frag_scoring_recommend_list"
 
                         android:layout_below="@+id/tv_home_frag_recommend_song"
                         android:layout_marginHorizontal="4dp"
-                        android:id="@+id/rv_home_frag_scoring_recommend_list"
                         android:layout_marginTop="16dp"
                         android:layout_width="match_parent" android:layout_height="197dp">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <!--위클리 챌린지-->
+                <TextView
+                        android:id="@+id/tv_home_frag_challenge"
+                        android:includeFontPadding="false"
+                        android:layout_below="@+id/rv_home_frag_scoring_recommend_list"
+                        android:layout_marginTop="56dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="위클리 챌린지"
+                        android:textSize="20sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="11sp"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
+
+                <ImageView
+                        android:layout_marginHorizontal="13dp"
+                        android:background="@color/colorPrimary"
+                        android:layout_marginTop="16dp"
+                        android:id="@+id/iv_home_frag_challenge_img"
+                        android:layout_below="@+id/tv_home_frag_challenge"
+                        android:layout_width="match_parent" android:layout_height="134dp"
+                        android:src="@drawable/img_artwork_1"
+                        android:layout_alignParentStart="true"/>
+
+                <!--TOP10 : 장르-->
+                <TextView
+                        android:id="@+id/tv_home_frag_top10_genre"
+                        android:includeFontPadding="false"
+                        android:layout_below="@+id/iv_home_frag_challenge_img"
+                        android:layout_marginTop="56dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="TOP 10: 장르"
+                        android:textSize="20sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="11sp"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
+
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_home_frag_top10_genre_list"
+                        android:layout_below="@+id/tv_home_frag_top10_genre"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent" android:layout_height="132dp">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <!--TOP10 : 무드-->
+                <TextView
+                        android:id="@+id/rv_home_frag_top10_mood"
+                        android:includeFontPadding="false"
+                        android:layout_below="@+id/rv_home_frag_top10_genre_list"
+                        android:layout_marginTop="56dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="TOP 10: 무드"
+                        android:textSize="20sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="11sp"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
+
+                <android.support.v7.widget.RecyclerView
+                        android:layout_marginBottom="56dp"
+                        android:id="@+id/rv_home_frag_top10_mood_list"
+                        android:layout_below="@+id/rv_home_frag_top10_mood"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent" android:layout_height="132dp">
 
                 </android.support.v7.widget.RecyclerView>
             </RelativeLayout>
