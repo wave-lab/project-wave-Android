@@ -1,5 +1,6 @@
 package com.song2.wave.UI.Main.Home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,11 +20,6 @@ class HomeFragment : android.support.v4.app.Fragment(){
         homeFragment = this
 
         addFragment(HomeOnFragment())
-
-        v.tv_home_frag_service_test.setOnClickListener {
-            var intent = Intent(context, MusicTestActivity::class.java)
-            startActivity(intent)
-        }
 
         return v
     }
