@@ -172,7 +172,7 @@ class SignupFirstActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "프로필 사진을 등록해주세요", Toast.LENGTH_LONG).show()
             }
             else{
-                
+
             }
         }
 
