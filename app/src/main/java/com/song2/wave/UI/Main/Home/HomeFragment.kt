@@ -29,7 +29,6 @@ class HomeFragment : android.support.v4.app.Fragment(){
     }
 
 
-
     fun addFragment(fragment : android.support.v4.app.Fragment){
         val fm = childFragmentManager
         val transaction = fm.beginTransaction()

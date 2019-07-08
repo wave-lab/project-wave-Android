@@ -25,18 +25,19 @@
             android:value="@string/kakao_app_key" />
 
         <!-- 메인 -->
+        <activity android:name=".UI.Main.MainActivity">
         <activity android:name=".UI.Signup.SignupFirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".UI.Main2Activity" />
+        <activity android:name=".UI.Artist.ArtistActivity"></activity>
+
 
         <!-- 음악플레이어 -->
         <activity android:name=".UI.MainPlayer.MainPlayerActivity" />
-
         <service android:name=".Util.Player.Service.MusicService" />
         <service
             android:name=".AudioTest.AudioService"
@@ -55,9 +56,8 @@
             android:name=".Util.Player.Service.MyForeGroundService"
             android:enabled="true"
             android:exported="true" />
-
+        <activity android:name=".UI.TestActivity"/>
         <activity android:name=".UI.MusicTestActivity"></activity>
-        <activity android:name=".UI.Main.MainActivity"></activity>
         <activity android:name=".AudioTest.PlayerActivity"></activity>
     </application>
 

@@ -6,7 +6,6 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
 import com.song2.wave.Data.model.Scoring.PassedSongData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.Scoring.Adapter.ScoringPassedRecyclerViewAdapter
