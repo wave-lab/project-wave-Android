@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_test.*
 
 
 class
+
 Main2Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

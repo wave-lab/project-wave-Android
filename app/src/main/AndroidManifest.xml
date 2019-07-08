@@ -26,11 +26,7 @@
 
         <!-- 메인 -->
         <activity android:name=".UI.Main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".UI.Main2Activity"/>
 
@@ -40,6 +36,14 @@
         <service android:name=".Util.Player.Service.MusicService"/>
 
         <activity android:name=".UI.TestActivity"/>
+        <activity android:name=".UI.Artist.ArtistActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
