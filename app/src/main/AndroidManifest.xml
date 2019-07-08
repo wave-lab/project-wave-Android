@@ -60,7 +60,8 @@
         <activity android:name=".UI.Main.MainActivity" />
         <activity android:name=".AudioTest.PlayerActivity" />
         <activity android:name=".UI.Signup.SignupSelectArtistActivity" />
-        <activity android:name=".UI.Signup.SignupGenreActivity"></activity>
+        <activity android:name=".UI.Signup.SignupGenreActivity" />
+        <activity android:name=".UI.Signup.SignupMoodActivity"></activity>
     </application>
 
 </manifest>

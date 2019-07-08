@@ -67,23 +67,23 @@
 
     </LinearLayout>
     <RelativeLayout
-        android:id="@+id/rl_signup_genre_act_pop"
+        android:id="@+id/rl_signup_mood_act_funny"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginLeft="31dp"
         android:layout_marginTop="213dp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_signup_genre_act_pop"
+            android:id="@+id/img_signup_mood_act_funny"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="#00b6de"
             />
         <TextView
-            android:id="@+id/tv_signup_genre_act_pop"
+            android:id="@+id/tv_signup_mood_act_funny"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="POP"
+            android:text="신나는"
             android:textSize="16sp"
             android:textColor="#ffffff"
             android:layout_centerInParent="true"
@@ -92,7 +92,7 @@
             />
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/rl_signup_genre_act_soul"
+        android:id="@+id/rl_signup_mood_act_flutter"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginLeft="31dp"
@@ -101,17 +101,41 @@
         android:layout_marginRight="48dp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_signup_genre_act_soul"
+            android:id="@+id/img_signup_mood_act_flutter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="#00b6de"
             />
         <TextView
-            android:id="@+id/tv_signup_genre_act_soul"
+            android:id="@+id/tv_signup_mood_act_flutter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RB
-SOUL"
+            android:text="설레는"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:includeFontPadding="true"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_signup_mood_act_hip"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="146dp"
+        android:layout_marginTop="256dp"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_signup_mood_act_hip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="#00b6de"
+            />
+        <TextView
+            android:id="@+id/tv_signup_mood_act_hip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="힙한"
             android:textSize="16sp"
             android:textColor="#ffffff"
             android:layout_centerInParent="true"
@@ -121,49 +145,24 @@ SOUL"
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rl_signup_genre_act_ballad"
+        android:id="@+id/rl_signup_mood_act_sad"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginLeft="146dp"
-        android:layout_marginTop="256dp"
-        >
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_signup_genre_act_ballad"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="#00b6de"
-            />
-        <TextView
-            android:id="@+id/tv_signup_genre_act_ballad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="발라드"
-            android:textSize="16sp"
-            android:textColor="#ffffff"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/noto_sans_kr_bold_hestia"
-            android:includeFontPadding="true"
-            />
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/rl_signup_genre_act_hiphop"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="31dp"
         android:layout_marginTop="296dp"
+        android:layout_marginRight="31dp"
+        android:layout_alignParentRight="true"
         >
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_signup_genre_act_hiphop"
+            android:id="@+id/img_signup_mood_act_sad"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="#00b6de"
             />
         <TextView
-            android:id="@+id/tv_signup_genre_act_hiphop"
+            android:id="@+id/tv_signup_mood_act_sad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="힙합"
+            android:text="슬픈"
             android:textSize="16sp"
             android:textColor="#ffffff"
             android:layout_centerInParent="true"
@@ -172,23 +171,23 @@ SOUL"
             />
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/rl_signup_genre_act_dance"
+        android:id="@+id/rl_signup_mood_act_windless"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginLeft="44dp"
         android:layout_marginTop="323dp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_signup_genre_act_dance"
+            android:id="@+id/img_signup_mood_act_windless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="#00b6de"
             />
         <TextView
-            android:id="@+id/tv_signup_genre_act_dance"
+            android:id="@+id/tv_signup_mood_act_windless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="댄스"
+            android:text="잔잔한"
             android:textSize="16sp"
             android:textColor="#ffffff"
             android:layout_centerInParent="true"
@@ -197,23 +196,23 @@ SOUL"
             />
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/rl_signup_genre_act_aqustic"
+        android:id="@+id/rl_signup_mood_act_dreamy"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginLeft="124dp"
         android:layout_marginTop="404dp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_signup_genre_act_aqustic"
+            android:id="@+id/img_signup_mood_act_dreamy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="#00b6de"
             />
         <TextView
-            android:id="@+id/tv_signup_genre_act_aqustic"
+            android:id="@+id/tv_signup_mood_act_dreamy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="어쿠스틱"
+            android:text="몽환적인"
             android:textSize="16sp"
             android:textColor="#ffffff"
             android:layout_centerInParent="true"
@@ -222,23 +221,23 @@ SOUL"
             />
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/rl_signup_genre_act_eletronic"
+        android:id="@+id/rl_signup_mood_act_groove"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginLeft="231dp"
         android:layout_marginTop="444dp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_signup_genre_act_eletronic"
+            android:id="@+id/img_signup_mood_act_groove"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="#00b6de"
             />
         <TextView
-            android:id="@+id/tv_signup_genre_act_eletronic"
+            android:id="@+id/tv_signup_mood_act_groove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="일레트로닉"
+            android:text="그루브한"
             android:textSize="16sp"
             android:textColor="#ffffff"
             android:layout_centerInParent="true"
@@ -247,23 +246,23 @@ SOUL"
             />
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/rl_signup_genre_act_rock"
+        android:id="@+id/rl_signup아_mood_act_honey"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginLeft="84dp"
         android:layout_marginTop="525dp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_signup_genre_act_rock"
+            android:id="@+id/img_signup_mood_act_honey"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="#00b6de"
             />
         <TextView
-            android:id="@+id/tv_signup_genre_act_rock"
+            android:id="@+id/tv_signup_mood_act_honey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="락"
+            android:text="감미로운"
             android:textSize="16sp"
             android:textColor="#ffffff"
             android:layout_centerInParent="true"
@@ -291,7 +290,7 @@ SOUL"
             android:layout_marginLeft="44dp"
             />
         <Button
-            android:id="@+id/btn_signup_genre_nex"
+            android:id="@+id/btn_signup_mood_next"
             android:layout_width="160dp"
             android:layout_height="44dp"
             android:background="@drawable/btn_login_next_lg"
@@ -301,7 +300,7 @@ SOUL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#00b6de"
-            android:text="2/3"
+            android:text="3/3"
             android:textSize="14sp"
             android:fontFamily="@font/noto_sans_kr_bold_hestia"
             android:includeFontPadding="false"
