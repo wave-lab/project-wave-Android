@@ -16,6 +16,7 @@ import com.song2.wave.R
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity
 import com.song2.wave.UI.Main.Home.Adapter.*
 import com.song2.wave.UI.Main.Home.Top10.Top10Fragment
+import com.song2.wave.UI.MusicTestActivity
 import kotlinx.android.synthetic.main.fragment_home_on.*
 import kotlinx.android.synthetic.main.fragment_home_on.view.*
 
@@ -43,6 +44,12 @@ class HomeOnFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v : View = inflater.inflate(R.layout.fragment_home_on, container, false)
+
+/*
+        v.tv_home_frag_service_test.setOnClickListener {
+            var intent = Intent(context, MusicTestActivity::class.java)
+            startActivity(intent)
+        }*/
 
         v.iv_home_frag_wavelogo.setOnClickListener {
             var intent = Intent(context, MainPlayerActivity::class.java)
