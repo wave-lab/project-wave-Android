@@ -88,6 +88,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/tv_signup_act_passwd_check_pattern"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="8-20글자 사이로 영어 숫자로만 입력해주세요"
@@ -140,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:text="중복확인"
                     android:textSize="16sp"
-                    android:textColor="#00b6de"
+                    android:textColor="#bdbdbd"
                     android:fontFamily="@font/noto_sans_kr_bold_hestia"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
@@ -150,6 +151,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/tv_signup_act_nickname_pattern_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2-8글자 사이로 한글과 영어로 숫자로만 입력해주세요"
@@ -203,7 +205,7 @@
                     android:layout_height="wrap_content"
                     android:text="확인"
                     android:textSize="16sp"
-                    android:textColor="#00b6de"
+                    android:textColor="#bdbdbd"
                     android:fontFamily="@font/noto_sans_kr_bold_hestia"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
@@ -262,7 +264,7 @@
                     android:layout_height="wrap_content"
                     android:text="인증"
                     android:textSize="16sp"
-                    android:textColor="#00b6de"
+                    android:textColor="#bdbdbd"
                     android:fontFamily="@font/noto_sans_kr_bold_hestia"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
@@ -271,6 +273,7 @@
 
             </RelativeLayout>
             <TextView
+                android:id="@+id/tv_signup_act_email_pattern_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="인증가능한 이메일을 입력해주세요"

@@ -56,9 +56,10 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".UI.MusicTestActivity"></activity>
-        <activity android:name=".UI.Main.MainActivity"></activity>
-        <activity android:name=".AudioTest.PlayerActivity"></activity>
+        <activity android:name=".UI.MusicTestActivity" />
+        <activity android:name=".UI.Main.MainActivity" />
+        <activity android:name=".AudioTest.PlayerActivity" />
+        <activity android:name=".UI.Signup.SignupSecondActivity"></activity>
     </application>
 
 </manifest>
