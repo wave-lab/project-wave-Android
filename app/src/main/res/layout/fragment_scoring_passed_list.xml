@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        android:background="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+            android:id="@+id/rl_main_player_act_main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+        <ImageView
+                android:id="@+id/img_scoring_passed_btn_back"
+                android:src="@drawable/btn_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="16dp"/>
+
+        <TextView
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:textSize="18sp"
+                android:layout_centerInParent="true"
+                android:text="심사 통과곡"
+                android:includeFontPadding="false"
+                android:layout_width="86dp"
+                android:layout_height="27dp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="6sp"
+                android:gravity="center_horizontal"/>
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_scoring_passed_list"
+            android:layout_marginTop="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>

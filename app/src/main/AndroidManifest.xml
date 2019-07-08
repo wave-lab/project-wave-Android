@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
+            android:usesCleartextTraffic="true"
             android:name=".Util.Kakao.GlobalApplication"
             android:allowBackup="true"
             android:icon="@drawable/android_app_icon"
@@ -13,6 +14,11 @@
             android:roundIcon="@drawable/android_app_icon"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        <activity android:name=".UI.Artist.ArtistLibraryActivity">
+
+
+        </activity>
 
         <!--로그인-->
         <meta-data

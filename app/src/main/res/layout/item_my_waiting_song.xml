@@ -9,11 +9,13 @@
 
     <ImageView
             android:id="@+id/iv_my_waiting_song_cover_img"
-            android:layout_width="match_parent" android:layout_height="match_parent"
-    android:src="@drawable/img_artwork_1"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img_artwork_1"/>
     <RelativeLayout
             android:background="#66000000"
-            android:layout_width="match_parent" android:layout_height="match_parent"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     <TextView
             android:id="@+id/tv_item_my_waiting_song_d_day"

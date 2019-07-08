@@ -10,6 +10,7 @@ import com.song2.wave.UI.Main.Search.SearchFragment
 import com.song2.wave.R
 import com.song2.wave.UI.Main.MyPage.MyPageFragment
 import android.util.Log
+import com.song2.wave.UI.Main.MyPage.Adapter.MyPageHitSuccessFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import com.song2.wave.Util.Interface.OnBackPressedListener
 
@@ -55,7 +56,7 @@ MainActivity : AppCompatActivity() {
         ll_main_act_scoring_tab!!.setOnClickListener { callFragment("scoring") }
         ll_main_act_search_tab!!.setOnClickListener { callFragment("search") }
         ll_main_act_library_tab!!.setOnClickListener { callFragment("library") }
-        ll_main_act_library_tab!!.setOnClickListener { callFragment("myPage") }
+        ib_main_act_mypage_tab!!.setOnClickListener { callFragment("myPage") }
 
     }
 

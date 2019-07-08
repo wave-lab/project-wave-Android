@@ -2,32 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="50dp"
+              android:layout_marginTop="12dp"
+              android:orientation="horizontal"
+              android:background="#000000"
               android:dividerPadding="1dp">
     <RelativeLayout
             android:id="@+id/rl_scoring_tabbar_frag_waiting"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
+            android:layout_height="match_parent">
         <TextView
-                android:text="평가대기곡"
-                android:textSize="20dp"
+                android:id="@+id/txt_tabbar_scoring_waiting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"/>
-
+                android:textSize="20sp"
+                android:lineSpacingExtra="11sp"
+                android:text="평가 요청곡"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
     </RelativeLayout>
     <RelativeLayout
             android:id="@+id/rl_scoring_tabbar_frag_completed"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
+            android:layout_height="match_parent">
         <TextView
-                android:text="평가한 곡"
-                android:textSize="20dp"
+                android:id="@+id/txt_tabbar_scoring_passed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"/>
-    </RelativeLayout>
+                android:textSize="20sp"
+                android:lineSpacingExtra="11sp"
+                android:text="평가 완료곡"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
+</RelativeLayout>
 </LinearLayout>
