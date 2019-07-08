@@ -1,30 +1,32 @@
 package com.song2.wave.UI.MainPlayer
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.support.v4.view.ViewCompat
-import android.support.v4.view.ViewPager
+import android.support.v4.content.ContextCompat
 import android.util.Log
-import android.view.View
 import android.widget.SeekBar
+import com.song2.wave.AudioTest.AudioApplication
 import com.song2.wave.R
-import com.song2.wave.UI.MainPlayer.Adapter.CoverImgViewPager
+import com.song2.wave.Util.Player.Service.MyForeGroundService
 import kotlinx.android.synthetic.main.activity_main_player.*
 import java.util.*
 
 class MainPlayerActivity : AppCompatActivity() {
 
     lateinit var playTime: String
-    lateinit var mediaPlayer: MediaPlayer
     lateinit var seekbar: SeekBar
-    var prevSongIdx = 0
+    lateinit var myService : MyForeGroundService
+    var selectedFlag : Int = 0
 
     var isPlaying = false
     var playbackPosition = 0
     var currentPosition = 0
+
+    var mPosition : Int = 0
 
     // var n_sbHandler = sbHandler()
     // var seekBarThread = sbThread()
@@ -69,7 +71,8 @@ class MainPlayerActivity : AppCompatActivity() {
         }
     } */
 
-    fun addTimer() {
+    /*
+    fun addTimer(){
         val tt = object : TimerTask() {
             override fun run() {
                 runOnUiThread {
@@ -91,19 +94,24 @@ class MainPlayerActivity : AppCompatActivity() {
         //////////////////////////////////////
 
     }
-
+*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_player)
 
-        mediaPlayer = MediaPlayer()
+        myService = MyForeGroundService()
+        var selectedTitle: String
+        var selectedArtist : String
 
-        addCoverImgViewPager()
+        mPosition = intent.getIntExtra("mPosition", 0)
+
+        //AudioApplication.getInstance().serviceInterface.setPlayList(getAudioIds()) // 재생목록등록
+        AudioApplication.getInstance().serviceInterface.play(mPosition) // 선택한 오디오재생
 
         addSeekBar()
         playerBtn()
-        addTimer()
+       //addTimer()
 
         iv_main_player_like_btn.setOnClickListener {
             iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected
@@ -111,80 +119,9 @@ class MainPlayerActivity : AppCompatActivity() {
 
     }
 
-    fun addCoverImgViewPager() {
-
-
-        var imageList = arrayListOf<String>(
-            "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
-            "https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E",
-            "https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E",
-            "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
-            "https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E",
-            "https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E"
-        )
-
-        var coverImgViewPager: ViewPager = findViewById(R.id.vp_main_player_act_cover_img)
-        coverImgViewPager.setClipToPadding(false)
-
-        val d = resources.displayMetrics.density
-        val margin = (60 * d).toInt()
-        val marginRight = (60 * d).toInt()
-
-
-        coverImgViewPager.setPadding(margin, 0, marginRight, 0)
-        coverImgViewPager.setAdapter(CoverImgViewPager(this, imageList))
-
-        coverImgViewPager.setPageTransformer(false, object : ViewPager.PageTransformer {
-            override fun transformPage(page: View, position: Float) {
-
-                var normalizedposition = Math.abs(Math.abs(position) - 1)
-
-                page.setScaleX(normalizedposition / 2 + 0.65f)
-//                page.setScaleY(normalizedposition / 2 + 0.8f)
-                page.setScaleY(normalizedposition / 2 + 0.65f)
-            }
-
-        })
-
-
-        coverImgViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-
-            override fun onPageScrollStateChanged(state: Int) {
-
-                Log.v("onPageScrollStateChanged", state.toString())
-
-            }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
-                Log.e("onPageScrolled-prev", prevSongIdx.toString() )
-                Log.e("onPageScrolled-position", position.toString()+ positionOffset.toString() + positionOffsetPixels.toString())
-
-                if(position < prevSongIdx)
-                    prevSong()
-                else
-                    nextSong()
-
-                prevSongIdx = position
-
-
-                //이전으로 가면 preview
-            }
-
-            override fun onPageSelected(position: Int) {
-                Log.v("onPageSeleted", position.toString())
-            }
-
-        })
-
-
-    }
-
-
     override fun onDestroy() {
         super.onDestroy()
         //musicThread.killMediaPlayer()
-        killMediaPlayer()
     }
 
     fun addSeekBar() {
@@ -196,7 +133,7 @@ class MainPlayerActivity : AppCompatActivity() {
                 isPlaying = true
 
                 playbackPosition = seekbar.progress
-                mediaPlayer.seekTo(playbackPosition)
+             //   mediaPlayer.seekTo(playbackPosition)
 
                 //if 재생 중이였다면
 /*                if(iv_main_player_act_stop_btn.isSelected){
@@ -204,14 +141,13 @@ class MainPlayerActivity : AppCompatActivity() {
                     seekBarThread.run()
                 }*/
 
-                mediaPlayer.start()
 
             }
 
             //seek바의 값을 변경하기 위해 터치했을 때
             override fun onStartTrackingTouch(seekbar: SeekBar) {
                 isPlaying = false
-                mediaPlayer.pause()
+                //mediaPlayer.pause()
                 //error : mediaplayer에 아 처음에 아무것도 만지지 않은 상태에서 seekbar 건들경우 error
             }
 
@@ -220,7 +156,7 @@ class MainPlayerActivity : AppCompatActivity() {
 
                 if (seekbar!!.getMax() == progress) {
                     isPlaying = false
-                    mediaPlayer.stop()
+                    //mediaPlayer.stop()
                 }
             }
         })
@@ -228,6 +164,7 @@ class MainPlayerActivity : AppCompatActivity() {
 
     fun playerBtn() {
 
+        /*
         //if Looping == False
         mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
             override fun onCompletion(p0: MediaPlayer?) {
@@ -236,12 +173,14 @@ class MainPlayerActivity : AppCompatActivity() {
                 nextSong()
             }
         })
-
+*/
 
 
         iv_main_player_act_stop_btn.setOnClickListener {
-            if (iv_main_player_act_stop_btn.isSelected and (mediaPlayer.getCurrentPosition() == 0)) {
+           // if (iv_main_player_act_stop_btn.isSelected and (myService.currentDuration == 0)) {
+            if (!iv_main_player_act_stop_btn.isSelected && selectedFlag == 0) {
                 try {
+                    startService()
 /*                if (mediaPlayer != null) {
                     mediaPlayer!!.stop()
                     mediaPlayer = null
@@ -251,7 +190,7 @@ class MainPlayerActivity : AppCompatActivity() {
 
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    Log.e("ERROR", mediaPlayer.toString())
+                    //Log.e("ERROR", mediaPlayer.toString())
                 }
 
             } else if (iv_main_player_act_stop_btn.isSelected) {
@@ -261,7 +200,6 @@ class MainPlayerActivity : AppCompatActivity() {
             } else {
                 //musicThread.restart()
                 restart()
-
             }
             iv_main_player_act_stop_btn.isSelected = !iv_main_player_act_stop_btn.isSelected
 
@@ -273,11 +211,9 @@ class MainPlayerActivity : AppCompatActivity() {
     //미디어를 재생하는 사용자 정의 메소드
     fun playAudio(url: String) {
 
-        mediaPlayer.setDataSource(url)
-        mediaPlayer.prepare()
-        mediaPlayer.start()
 
-        var play_duration = mediaPlayer!!.getDuration()
+
+        var play_duration = myService.getDuration()
         var lenthOfSong =
             String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
 
@@ -293,7 +229,7 @@ class MainPlayerActivity : AppCompatActivity() {
     fun prevSong() {
 
         if (currentPosition > 0) {
-            mediaPlayer.reset()
+            //mediaPlayer.reset()
             currentPosition -= 1
             playAudio(sourceMusicArray[currentPosition])
 
@@ -307,7 +243,7 @@ class MainPlayerActivity : AppCompatActivity() {
     fun nextSong() {
 
         if (currentPosition < sourceMusicArray.size) {
-            mediaPlayer.reset()
+           // mediaPlayer.reset()
             currentPosition += 1
             playAudio(sourceMusicArray[currentPosition])
 
@@ -320,9 +256,9 @@ class MainPlayerActivity : AppCompatActivity() {
     fun pauseAudio() {
 
         isPlaying = false
-
-        playbackPosition = mediaPlayer.getCurrentPosition()
-        mediaPlayer!!.pause()
+        //musicPause()
+        playbackPosition = myService.currentDuration
+        musicPause()
 
     }
 
@@ -330,8 +266,9 @@ class MainPlayerActivity : AppCompatActivity() {
 
         isPlaying = true // 재생하도록 flag 변경
 
-        mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
-        mediaPlayer.start() // 시작
+        //mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
+        restartMusic()
+        //mediaPlayer.start() // 시작
 
         // seekBarThread.run()
     }
@@ -340,6 +277,33 @@ class MainPlayerActivity : AppCompatActivity() {
 /*      if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
             mediaPlayer!!.release()
         }*/
-        mediaPlayer!!.release()
+        //mediaPlayer!!.release()
+    }
+
+    fun startService() {
+        val serviceIntent = Intent(this, MyForeGroundService::class.java)
+        serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android")
+        serviceIntent.putExtra("flag", 0)
+        ContextCompat.startForegroundService(this, serviceIntent)
+    }
+
+    fun stopService() {
+        val serviceIntent = Intent(this, MyForeGroundService::class.java)
+        stopService(serviceIntent)
+    }
+
+    fun musicPause(){
+        val pauseIntent = Intent(this, MyForeGroundService::class.java)
+        pauseIntent.putExtra("inputExtra", "중지")
+        pauseIntent.putExtra("flag", 1)
+        stopService(pauseIntent)
+    }
+
+    fun restartMusic(){
+        val restartIntent = Intent(this, MyForeGroundService::class.java)
+        restartIntent.putExtra("inputExtra", "재시작")
+        restartIntent.putExtra("flag", 2)
+        restartIntent.putExtra("playbackPosition", playbackPosition)
+        stopService(restartIntent)
     }
 }
