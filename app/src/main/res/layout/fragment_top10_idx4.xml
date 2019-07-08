@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="547dp"
+                        android:layout_alignParentStart="true" android:layout_alignParentTop="true">
+            <ImageView
+                    android:scaleType="fitXY"
+                    android:layout_width="match_parent" android:layout_height="match_parent"
+                    android:src="@drawable/genre_bg"/>
+            <RelativeLayout
+                    android:background="@drawable/home_dark_gra"
+                    android:layout_width="match_parent" android:layout_height="284.6dp"
+                    android:layout_alignParentBottom="true"
+            ></RelativeLayout>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+
+                <ImageView android:layout_width="36dp" android:layout_height="36dp"
+                           android:layout_centerHorizontal="true"
+                           android:src="@drawable/img_chart_01"
+                           android:layout_marginTop="24dp"/>
+
+                <ImageView
+                        android:id="@+id/iv_top10_idx4_cover_img"
+                        android:layout_width="260dp" android:layout_height="260dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="76dp"
+                        android:src="@drawable/img_artwork_1"
+                        android:background="@drawable/cover_img_border"
+                />
+
+                <TextView
+                        android:id="@+id/tv_top10_idx4_song_info"
+                        android:layout_marginTop="24dp"
+                        android:layout_below="@id/iv_top10_idx4_cover_img"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="10sp"
+                        android:gravity="center_horizontal"
+                        android:text="Song Name - Original Artist"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                />
+
+                <LinearLayout
+                        android:layout_marginTop="2dp"
+                        android:layout_below="@+id/tv_top10_idx4_song_info"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <TextView
+                            android:id="@+id/tv_top10_idx4_cover_artist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:textColor="#616161"
+                            android:lineSpacingExtra="6sp"
+                            android:layout_marginRight="8dp"
+                            android:text="blotto_archyan"/>
+                    <View android:layout_width="1dp" android:layout_height="10dp"
+                          android:layout_gravity="center_vertical"
+                          android:background="#616161"
+                    />
+                    <TextView
+                            android:id="@+id/tv_top10_idx4_genre"
+                            android:layout_marginStart="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:textColor="#616161"
+                            android:lineSpacingExtra="6sp"
+                            android:text="장르  장르  장르"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_top10_idx4_list"
+                    android:layout_marginTop="448dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
