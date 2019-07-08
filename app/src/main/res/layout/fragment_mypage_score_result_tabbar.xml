@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:background="#000000"
+>
+    <RelativeLayout
+            android:id="
+            @+id/rl_mypage_tabbar_score_passed"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+        <TextView
+                android:text="통과"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:includeFontPadding="false"
+        />
+
+    </RelativeLayout>
+    ]
+    <RelativeLayout
+            android:id="@+id/rl_mypage_tabbar_score_waiting"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+        <TextView
+                android:text="진행"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:includeFontPadding="false"
+        />
+    </RelativeLayout>
+    <RelativeLayout
+            android:id="@+id/rl_mypage_tabbar_score_fail"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+        <TextView
+                android:text="탈락"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:includeFontPadding="false"
+        />
+    </RelativeLayout>
+</LinearLayout>

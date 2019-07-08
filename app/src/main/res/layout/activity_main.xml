@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+                android:background="#000000"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
@@ -141,6 +142,7 @@
                 />
         </LinearLayout>
         <LinearLayout
+                android:id="@+id/ll_main_act_mypage_tab"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"

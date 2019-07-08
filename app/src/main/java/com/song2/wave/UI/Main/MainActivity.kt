@@ -3,21 +3,19 @@ package com.song2.wave.UI.Main
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import com.song2.wave.UI.Main.Home.HomeFragment
 import com.song2.wave.UI.Main.Library.LibraryFragment
 import com.song2.wave.UI.Main.Scoring.ScoringFragment
 import com.song2.wave.UI.Main.Search.SearchFragment
 import com.song2.wave.R
 import com.song2.wave.UI.Main.MyPage.MyPageFragment
 import android.util.Log
-import com.song2.wave.UI.Main.MyPage.Adapter.MyPageHitSuccessFragment
+import com.song2.wave.UI.Main.Home.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import com.song2.wave.Util.Interface.OnBackPressedListener
 
 
 
-class
-MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     var TAG = "MainActivity"
     lateinit var nowFrag: Fragment
@@ -56,7 +54,7 @@ MainActivity : AppCompatActivity() {
         ll_main_act_scoring_tab!!.setOnClickListener { callFragment("scoring") }
         ll_main_act_search_tab!!.setOnClickListener { callFragment("search") }
         ll_main_act_library_tab!!.setOnClickListener { callFragment("library") }
-        ib_main_act_mypage_tab!!.setOnClickListener { callFragment("myPage") }
+        ll_main_act_mypage_tab!!.setOnClickListener { callFragment("myPage") }
 
     }
 
