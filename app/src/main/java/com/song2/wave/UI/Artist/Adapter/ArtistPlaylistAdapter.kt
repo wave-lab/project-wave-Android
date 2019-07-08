@@ -55,8 +55,6 @@ class ArtistPlaylistAdapter(val ctx: Context, val datalist: ArrayList<ArtistPlay
         var songFourCoverImg = itemView.findViewById(R.id.img_four) as ImageView
         var playlistName = itemView.findViewById(R.id.tv_artist_playlist_name) as TextView
         var comment = itemView.findViewById(R.id.tv_artist_comment) as TextView
-
-
     }
 
 }
