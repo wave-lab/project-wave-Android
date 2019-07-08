@@ -2,6 +2,7 @@ package com.song2.wave.AudioTest;
 
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -15,14 +16,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.song2.wave.R;
+import com.song2.wave.UI.MainPlayer.MainPlayerActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class AudioAdapter extends CursorRecyclerViewAdapter<RecyclerView.ViewHolder> {
 
+    Context context;
+
+    private String selectedTitle;
+    private Uri selectedImageUri;
+    private String selectedArtist;
+
     public AudioAdapter(Context context, Cursor cursor) {
         super(context, cursor);
+        this.context = context;
     }
 
     @Override
@@ -87,7 +96,11 @@ public class AudioAdapter extends CursorRecyclerViewAdapter<RecyclerView.ViewHol
                 @Override
                 public void onClick(View v) {
                     AudioApplication.getInstance().getServiceInterface().setPlayList(getAudioIds()); // 재생목록등록
-                    AudioApplication.getInstance().getServiceInterface().play(mPosition); // 선택한 오디오재생
+                    //AudioApplication.getInstance().getServiceInterface().play(mPosition); // 선택한 오디오재생
+
+                    Intent intent = new Intent(context, MainPlayerActivity.class);
+                    intent.putExtra("mPosition", mPosition);
+                    context.startActivity(intent);
                 }
             });
         }

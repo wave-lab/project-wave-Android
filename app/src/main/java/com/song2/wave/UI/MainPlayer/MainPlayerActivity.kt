@@ -9,6 +9,7 @@ import android.os.Message
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.widget.SeekBar
+import com.song2.wave.AudioTest.AudioApplication
 import com.song2.wave.R
 import com.song2.wave.Util.Player.Service.MyForeGroundService
 import kotlinx.android.synthetic.main.activity_main_player.*
@@ -24,6 +25,8 @@ class MainPlayerActivity : AppCompatActivity() {
     var isPlaying = false
     var playbackPosition = 0
     var currentPosition = 0
+
+    var mPosition : Int = 0
 
     // var n_sbHandler = sbHandler()
     // var seekBarThread = sbThread()
@@ -67,7 +70,8 @@ class MainPlayerActivity : AppCompatActivity() {
             }
         }
     } */
-/*
+
+    /*
     fun addTimer(){
         val tt = object : TimerTask() {
             override fun run() {
@@ -90,17 +94,24 @@ class MainPlayerActivity : AppCompatActivity() {
         //////////////////////////////////////
 
     }
-
 */
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_player)
 
         myService = MyForeGroundService()
+        var selectedTitle: String
+        var selectedArtist : String
+
+        mPosition = intent.getIntExtra("mPosition", 0)
+
+        //AudioApplication.getInstance().serviceInterface.setPlayList(getAudioIds()) // 재생목록등록
+        AudioApplication.getInstance().serviceInterface.play(mPosition) // 선택한 오디오재생
 
         addSeekBar()
         playerBtn()
-       // addTimer()
+       //addTimer()
 
         iv_main_player_like_btn.setOnClickListener {
             iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected

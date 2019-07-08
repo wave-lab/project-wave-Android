@@ -48,4 +48,10 @@ dependencies {
     // Glide is adapted
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.google.code.gson:gson:2.8.5'
+    compile 'com.squareup.retrofit2:retrofit:2.5.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.5.0'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.9.7'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.9.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
 }
