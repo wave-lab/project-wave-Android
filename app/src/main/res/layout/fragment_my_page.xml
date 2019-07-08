@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<android.support.v4.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -207,7 +207,7 @@
         <LinearLayout
                 android:layout_marginStart="15dp"
                 android:orientation="vertical"
-                android:layout_width="match_parent" android:layout_height="wrap_content">
+                android:layout_width="match_parent" android:layout_height="match_parent">
             <RelativeLayout
                     android:layout_marginTop="63dp"
                     android:layout_width="match_parent" android:layout_height="56dp">
@@ -225,10 +225,11 @@
 
                 <ImageView
                         android:id="@+id/iv_mypage_frag_more_result"
+                        android:padding="6dp"
                         android:layout_toRightOf="@+id/tv_mypage_frag_scoring_result"
                         android:layout_marginStart="1dp"
                         android:src="@drawable/btn_more"
-                        android:layout_width="24dp" android:layout_height="24dp"
+                        android:layout_width="36dp" android:layout_height="36dp"
                         android:layout_centerVertical="true" />
 
             </RelativeLayout>
@@ -240,7 +241,40 @@
             <android.support.v4.view.ViewPager
                     android:id="@+id/vp_mypage_frag_content"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="460dp"/>
+
+            <RelativeLayout
+                    android:layout_marginTop="63dp"
+                    android:layout_width="match_parent" android:layout_height="56dp">
+                <TextView
+                        android:id="@+id/tv_mypage_frag_hit_scoring_result"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="6sp"
+                        android:layout_centerVertical="true"
+                        android:text="평가 적중 결과"/>
+
+
+                <ImageView
+                        android:id="@+id/iv_mypage_frag_more_hit_result"
+                        android:layout_toRightOf="@+id/tv_mypage_frag_hit_scoring_result"
+                        android:padding="6dp"
+                        android:layout_marginStart="1dp"
+                        android:src="@drawable/btn_more"
+                        android:layout_width="36dp" android:layout_height="36dp"
+                        android:layout_centerVertical="true" />
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_mypage_frag_score_hit_result"
+                    android:layout_width="match_parent"
+                                                    android:layout_height="170dp">
+
+            </android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>
