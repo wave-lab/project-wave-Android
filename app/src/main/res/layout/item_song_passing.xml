@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rl_item_my_waiting_song_container"
+        android:layout_height="104dp"
+        android:layout_width="104dp"
+        android:layout_marginStart="12dp">
+
+
+
+    <ImageView
+            android:id="@+id/img_cover_artist_scoring_passing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img_artistprofile"/>
+    <RelativeLayout
+            android:background="#66000000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    <TextView
+            android:id="@+id/txt_cover_songInfo_scoring_passing"
+            android:layout_marginTop="31.2dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:includeFontPadding="false"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="6sp"
+            android:gravity="center_horizontal"
+            android:text="Song2-name"/>
+
+    <TextView
+            android:includeFontPadding="false"
+            android:id="@+id/txt_cover_artistName_scoring_passing"
+            android:layout_below="@+id/txt_cover_songInfo_scoring_passing"
+            android:layout_marginTop="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="5sp"
+            android:gravity="center_horizontal"
+            android:text="Cover Artist"
+            android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>

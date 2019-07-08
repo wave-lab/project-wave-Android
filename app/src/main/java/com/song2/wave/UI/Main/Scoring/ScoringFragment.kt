@@ -16,7 +16,6 @@ class ScoringFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         configureTopNavigation()
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,5 +38,6 @@ class ScoringFragment : Fragment() {
         //탭 하나하나 TabLayout에 연결시켜줍니다.
         tl_scoring_tabbar.getTabAt(0)!!.customView = topNaviLayout.findViewById(R.id.rl_scoring_tabbar_frag_waiting) as RelativeLayout
         tl_scoring_tabbar.getTabAt(1)!!.customView = topNaviLayout.findViewById(R.id.rl_scoring_tabbar_frag_completed) as RelativeLayout
+
     }
 }

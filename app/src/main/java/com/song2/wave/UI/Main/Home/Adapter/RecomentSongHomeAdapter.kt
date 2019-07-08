@@ -21,7 +21,6 @@ class RecomentSongHomeAdapter(private var homeSongData: ArrayList<HomeSongData>,
     override fun onBindViewHolder(holder: HomeSongViewHolder, position: Int) {
         requestManager.load(homeSongData[position].songCoverImg).into(holder.songCoverImg)
         holder.songInfo.text = homeSongData[position].songName +" - "+ homeSongData[position].originArtistName
-        holder.coverArtistname.text =
-                homeSongData[position].coverArtistName
+        holder.coverArtistname.text = homeSongData[position].coverArtistName
     }
 }
