@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:orientation="horizontal"
+    android:background="#121212"
+    >
+    <Button
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/btn_play_sm"
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="16dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/tv_bottom_play_list_song_and_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="center"
+            android:text="Song Name - Original Artist"
+            android:textColor="#ffffff"
+            />
+        <TextView
+            android:id="@+id/tv_bottom_play_list_cover_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_gravity="center"
+            android:text="Cover Artist"
+            android:textColor="#616161"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/btn_playlist_sm"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        />
+</RelativeLayout>
