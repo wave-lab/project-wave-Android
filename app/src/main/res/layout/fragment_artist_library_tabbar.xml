@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/ll_artist_library_tabbar"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_marginTop="12dp"
+              android:orientation="horizontal"
+              android:background="#000000"
+              android:dividerPadding="1dp">
+    <RelativeLayout
+            android:id="@+id/rl_artist_library_tabbar_like"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+        <TextView
+                android:id="@+id/txt_tabbar_artist_library_like_song"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:lineSpacingExtra="11sp"
+                android:text="좋아하는 곡"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
+    </RelativeLayout>
+    <RelativeLayout
+            android:id="@+id/rl_artist_library_tabbar_playlist"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+        <TextView
+                android:id="@+id/txt_tabbar_artist_library_playlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:lineSpacingExtra="11sp"
+                android:text="플레이리스트"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
+    </RelativeLayout>
+</LinearLayout>

@@ -78,7 +78,6 @@
         android:layout_marginTop="2dp"
         android:layout_marginLeft="8dp"
         android:textColor="#979797"
-        android:includeFontPadding="false"
-        />
+        android:includeFontPadding="false"        />
 
 </RelativeLayout>

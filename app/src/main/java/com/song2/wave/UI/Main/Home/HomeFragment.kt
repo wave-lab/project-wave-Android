@@ -21,9 +21,13 @@ class HomeFragment : android.support.v4.app.Fragment(){
 
         addFragment(HomeOnFragment())
 
+/*        v.tv_home_frag_service_test.setOnClickListener {
+            var intent = Intent(context, MusicTestActivity::class.java)
+            startActivity(intent)
+        }*/
+
         return v
     }
-
 
 
     fun addFragment(fragment : android.support.v4.app.Fragment){

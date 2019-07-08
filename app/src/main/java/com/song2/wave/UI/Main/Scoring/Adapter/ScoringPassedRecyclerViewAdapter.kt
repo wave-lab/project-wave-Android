@@ -8,10 +8,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import com.song2.wave.Data.model.Home.HomeSongData
+import com.song2.wave.Data.model.Scoring.PassedCompletedSongData
 import com.song2.wave.Data.model.Scoring.PassedSongData
 import com.song2.wave.R
+import com.song2.wave.UI.Main.Home.Adapter.WaitingSongHomeViewHolder
 
-class ScoringPassedRecyclerViewAdapter(val ctx: Context, val datalist: ArrayList<PassedSongData>): RecyclerView.Adapter<ScoringPassedRecyclerViewAdapter.Holder>() {
+class ScoringPassedRecyclerViewAdapter(val ctx: Context, val datalist: ArrayList<PassedCompletedSongData>): RecyclerView.Adapter<ScoringPassedRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.item_song_passed, parent,false)
         return Holder(view)
@@ -25,6 +29,7 @@ class ScoringPassedRecyclerViewAdapter(val ctx: Context, val datalist: ArrayList
             .into(holder.songCoverImg)
         holder.songName.text= datalist[position].songName
         holder.coverArtistName.text= datalist[position].coverArtistName
+
 
     }
 

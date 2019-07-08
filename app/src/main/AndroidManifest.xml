@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:name=".AudioTest.AudioApplication"
         android:allowBackup="true"
         android:icon="@drawable/android_app_icon"
@@ -15,28 +16,33 @@
         android:roundIcon="@drawable/android_app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+      
+
+        <!-- 로그인 -->
         <activity android:name=".UI.Login.LoginActivity" />
         <activity android:name=".Util.Kakao.service.ScoringPlayerActivity" />
         <activity android:name=".UI.Main.MyPage.UpLoadFileActivity" />
-
-        <!-- 로그인 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key" />
+            android:value="@string/kakao_app_key"/>
 
         <!-- 메인 -->
-        <activity android:name=".UI.Signup.SignupFirstActivity">
+        <activity android:name=".UI.Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".UI.Signup.SignupFirstActivity">
+
+        </activity>
         <activity android:name=".UI.Main2Activity" />
+        <activity android:name=".UI.Artist.ArtistActivity"></activity>
+        <activity android:name=".UI.Artist.ArtistLibraryActivity"></activity>
+
 
         <!-- 음악플레이어 -->
         <activity android:name=".UI.MainPlayer.MainPlayerActivity" />
-
         <service android:name=".Util.Player.Service.MusicService" />
         <service
             android:name=".AudioTest.AudioService"
@@ -57,7 +63,6 @@
             android:exported="true" />
 
         <activity android:name=".UI.MusicTestActivity" />
-        <activity android:name=".UI.Main.MainActivity" />
         <activity android:name=".AudioTest.PlayerActivity" />
         <activity android:name=".UI.Signup.SignupSelectArtistActivity" />
         <activity android:name=".UI.Signup.SignupGenreActivity" />
