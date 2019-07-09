@@ -39,6 +39,8 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
 
+    implementation 'org.jetbrains.anko:anko:0.10.5'
+
     // Circle ImageView is adapted
     implementation 'de.hdodenhof:circleimageview:3.0.0'
 
