@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView android:layout_width="24dp" android:layout_height="24dp"
+               android:src="@drawable/btn_back"
+    />
+    <TextView
+            android:visibility="gone"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="음원/아트워크"
+              android:gravity="center"
+              android:textSize="18dp"
+              android:includeFontPadding="false"
+              android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
+
+</android.support.v7.widget.Toolbar>

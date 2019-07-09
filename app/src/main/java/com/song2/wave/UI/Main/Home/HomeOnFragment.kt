@@ -116,8 +116,6 @@ class HomeOnFragment : Fragment() {
     }
 
     fun insertExampleData() {
-
-
         top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
         top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
         top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))

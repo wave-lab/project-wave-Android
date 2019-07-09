@@ -6,11 +6,13 @@ object SharedPreferenceController{
     private val USER_NAME = "MYKEY"
     private val myAuth = "jwt"
 
-    private  val USER = "MYAUTOKEY"
+    private val USER = "MYAUTOKEY"
     private val myAutoAuth = "myAuth"
 
-    private  val userId ="userId"
+    private val userId ="userId"
     private val  UserId = "UserId"
+
+
 // 유저의 토큰으로 모든 보드 접근
     fun setAuthorization(context: Context, authorization : String){
         val pref = context.getSharedPreferences(USER_NAME, Context.MODE_PRIVATE)

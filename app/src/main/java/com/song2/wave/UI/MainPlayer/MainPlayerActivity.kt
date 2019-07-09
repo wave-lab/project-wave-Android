@@ -168,6 +168,7 @@ class MainPlayerActivity : AppCompatActivity() {
 
     fun playerBtn() {
 
+
         /*
         //if Looping == False
         mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
@@ -178,7 +179,6 @@ class MainPlayerActivity : AppCompatActivity() {
             }
         })
 */
-
 
         iv_main_player_act_stop_btn.setOnClickListener {
            // if (iv_main_player_act_stop_btn.isSelected and (myService.currentDuration == 0)) {
