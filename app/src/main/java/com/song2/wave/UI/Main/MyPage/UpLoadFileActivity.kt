@@ -14,8 +14,6 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.Toast
-import com.bumptech.glide.Glide
 import com.song2.wave.R
 import kotlinx.android.synthetic.main.activity_upload_file.*
 import org.jetbrains.anko.startActivity
@@ -28,6 +26,13 @@ class UpLoadFileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload_file)
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            } else {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE!!), 1)
+            }
+        }
 
         rl_upload_act_upload_music.setOnClickListener {
             uploadMusic()
@@ -59,21 +64,10 @@ class UpLoadFileActivity : AppCompatActivity() {
                     selectedAudioUri = it.data
                     var mediaPlayer = MediaPlayer()
 
-                    Log.e("error selectedAudioUri", selectedAudioUri.toString())
-                    Log.v("UploadActivity", "음악 실제 경로 = " + getRealPathFromURI(applicationContext, it.data))
+                    //Log.e("error selectedAudioUri", selectedAudioUri.toString())
+                    //Log.v("UploadActivity", "음악 실제 경로 = " + getRealPathFromURI(applicationContext, it.data))
 
-                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                            startActivity<SetStartPointActivity>("musicDataURI" to getRealPathFromURI(applicationContext, it.data) )
-
-                        } else {
-                            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE!!), 1)
-                            startActivity<SetStartPointActivity>("musicDataURI" to getRealPathFromURI(applicationContext, it.data) )
-
-                        }
-                    }
                     startActivity<SetStartPointActivity>("musicDataURI" to getRealPathFromURI(applicationContext, it.data) )
-
 
                     //var song = selectedAudioUri.toString() + ".mp3"
                     //mediaPlayer.setDataSource(song)

@@ -4,17 +4,21 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
+import android.media.MediaPlayer
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.SeekBar
 import com.bumptech.glide.Glide
 import com.song2.wave.R
+import kotlinx.android.synthetic.main.activity_set_start_point.*
 import kotlinx.android.synthetic.main.activity_up_load_song_cover.*
+import org.jetbrains.anko.startActivity
 
 class UpLoadSongCoverActivity : AppCompatActivity() {
-
+    var mediaPlayer = MediaPlayer()
 
     val REQUEST_CODE_SELECT_IMAGE: Int = 1004
     lateinit var selectedPicUri: Uri
@@ -24,9 +28,37 @@ class UpLoadSongCoverActivity : AppCompatActivity() {
         setContentView(R
             .layout.activity_up_load_song_cover)
 
+        var upload_song_uri: String = intent.getStringExtra("songURI")
+        var start_point : Int = intent.getStringExtra("StartPoint").toInt()
+
+        mediaPlayer.setDataSource(getApplicationContext(), Uri.parse(upload_song_uri))
+        mediaPlayer.prepare()
+
+        var play_duration = mediaPlayer.getDuration()
+
+        var startPointOfSong = String.format("%02d:%02d", ((start_point / 1000) % 3600 / 60), ((start_point / 1000) % 3600 % 60))
+        var lengthOfSong = String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
+
+
+        //사진업로드
         ll_upload_cover_act_upload_artwork.setOnClickListener {
             uploadImg()
         }
+
+        //하이라이트
+        tv_up_load_cover_act_start_point.setText(startPointOfSong+"초 부터")
+        tv_up_load_cover_act_duration_time.setText(startPointOfSong)
+        tv_up_load_cover_act_length_of_song.setText(lengthOfSong)
+        var seekbar: SeekBar = sb_up_load_cover_act_seekbar
+        //seekbar.
+
+        //음원
+        tv_up_load_cover_act_mp3_name.setText(upload_song_uri)
+
+        iv_up_load_cover_act_confirm_btn.setOnClickListener {
+            startActivity<UploadSongInfoActivity>()
+        }
+
     }
 
     fun uploadImg() {
@@ -49,27 +81,12 @@ class UpLoadSongCoverActivity : AppCompatActivity() {
                     selectedPicUri = it.data
                     Glide.with(this).load(selectedPicUri)
                         .thumbnail(0.1f).into(iv_upload_cover_file_act_thumb)
+
+                    //getRealPathFromURI(applicationContext, it.data)
+
                 }
             }
         }
-
-/*        if (requestCode == REQUEST_CODE_SELECT_AUDIO) {
-            if (resultCode == Activity.RESULT_OK) {
-                data?.let {
-                    selectedAudioUri = it.data
-                    var mediaPlayer = MediaPlayer()
-
-                    Log.e("error selectedAudioUri", selectedAudioUri.toString())
-                    Log.v("UploadActivity", "음악 실제 경로 = " + getRealPathFromURI(applicationContext, it.data).toString())
-
-                    //var song = selectedAudioUri.toString() + ".mp3"
-                    //mediaPlayer.setDataSource(song)
-                    //mediaPlayer.prepare()
-                    //mediaPlayer.start()
-
-                }
-            }
-        }*/
     }
 
     // 이미지 파일을 확장자까지 표시해주는 메소드
