@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -21,7 +22,6 @@ import com.bumptech.glide.Glide
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import org.w3c.dom.Text
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileNotFoundException
@@ -33,6 +33,7 @@ class SignupFirstActivity : AppCompatActivity() {
 
     private val REQ_CODE_SELECT_IMAGE = 100
     lateinit var data : Uri
+    lateinit var imageUri : Uri
     private var image : MultipartBody.Part? = null
     var chkFlag : Boolean = false
     val passwdPattern : String = "^[A-Za-z[0-9]]{8,20}$" // 영문, 숫자
@@ -172,7 +173,14 @@ class SignupFirstActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "프로필 사진을 등록해주세요", Toast.LENGTH_LONG).show()
             }
             else{
+                val pref = applicationContext.getSharedPreferences("auto",Activity.MODE_PRIVATE)
+                pref.edit().putString("email",edit_signup_act_email.text.toString())
+                pref.edit().putString("passwd", edit_signup_act_passwd.text.toString())
+                pref.edit().putString("nickname", edit_signup_act_nickname.text.toString())
+                pref.edit().commit()
+
                 var intent = Intent(applicationContext, SignupSelectArtistActivity::class.java)
+                intent.putExtra("imageUri",imageUri)
                 startActivity(intent)
             }
         }
@@ -277,6 +285,7 @@ class SignupFirstActivity : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 try {
                     this.data = data!!.data
+                    imageUri = data!!.data
                     val options = BitmapFactory.Options()
 
                     var input: InputStream? = null // here, you need to get your context.
