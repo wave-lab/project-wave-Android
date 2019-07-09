@@ -1,29 +1,49 @@
 package com.song2.wave.UI.Main
 
+import android.Manifest
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import com.song2.wave.UI.Main.Home.HomeFragment
 import com.song2.wave.UI.Main.Library.LibraryFragment
 import com.song2.wave.UI.Main.Scoring.ScoringFragment
 import com.song2.wave.UI.Main.Search.SearchFragment
 import com.song2.wave.R
 import com.song2.wave.UI.Main.MyPage.MyPageFragment
 import android.util.Log
+import com.song2.wave.UI.Main.Home.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import com.song2.wave.Util.Interface.OnBackPressedListener
+import android.Manifest.permission
+import android.Manifest.permission.READ_CONTACTS
+import android.content.pm.PackageManager
+import android.support.v4.app.ActivityCompat
 
 
 
-class
-MainActivity : AppCompatActivity() {
 
+
+class MainActivity : AppCompatActivity() {
+
+    val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1
     var TAG = "MainActivity"
     lateinit var nowFrag: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+
+            if (shouldShowRequestPermissionRationale(
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            }
+            requestPermissions(
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
+            )
+
+            return;
+        }
 
 
         mainActivity = this

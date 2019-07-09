@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="12dp">
+    <ImageView
+            android:id="@+id/img_hit_success"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:background="@drawable/kakaostory_icon"/>
+    <RelativeLayout android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:background="#99000000">
+
+
+        <ImageView
+                android:id="@+id/img_hit_success_pass"
+                android:layout_width="38dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="19.5dp"
+                android:src="@drawable/img_pass_sm"/>
+        <ImageView
+                android:id="@+id/img_hit_success_fail"
+                android:layout_width="38dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="19.5dp"
+                android:src="@drawable/img_fail_sm"/>
+    </RelativeLayout>
+
+    <TextView
+            android:id="@+id/tv_hit_success_song_item_song_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Song Name"
+            android:textColor="#616161"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/img_hit_success"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:includeFontPadding="false"
+             android:lineSpacingExtra="14sp"
+            android:textSize="12sp"
+    />
+
+    <TextView
+            android:id="@+id/tv_hit_success_song_item_origin_artist_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="-  Original Arti…"
+            android:textColor="#616161"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/tv_hit_success_song_item_song_name"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:includeFontPadding="false"
+            android:textSize="12sp"
+            android:layout_marginStart="-2dp" android:layout_alignStart="@+id/view_song_item_center"/>
+
+
+
+    <TextView
+            android:id="@+id/tv_hit_success_song_item_corver_artist_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text="blotto_archyan"
+            android:layout_below="@+id/tv_hit_success_song_item_song_name"
+            android:layout_alignLeft="@+id/tv_hit_success_song_item_song_name"
+            android:fontFamily="@font/noto_sans_kr_regular_hestia"
+            android:includeFontPadding="false"
+            android:layout_marginTop="2dp"
+            android:textColor="#616161"
+    />
+
+    <View
+            android:id="@+id/view_song_item_center"
+            android:layout_width="1dp"
+            android:layout_height="10dp"
+            android:layout_toRightOf="@+id/tv_hit_success_song_item_corver_artist_name"
+            android:layout_marginLeft="8dp"
+            android:background="#979797"
+            android:layout_below="@+id/tv_hit_success_song_item_song_name"
+            android:layout_marginTop="7dp"
+    />
+
+    <TextView
+            android:id="@+id/tv_hit_success_song_item_corver_field_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text="힙합  재즈  일렉트로닉"
+            android:layout_below="@+id/tv_hit_success_song_item_song_name"
+            android:layout_toRightOf="@+id/view_song_item_center"
+            android:fontFamily="@font/noto_sans_kr_regular_hestia"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="8dp"
+            android:textColor="#616161"
+            android:includeFontPadding="false"
+    />
+    <TextView
+            android:id="@+id/tv_avg_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="63sp"
+            android:text="4.2"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/noto_sans_kr_regular_hestia"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="81dp"
+            android:layout_marginTop="18dp"
+
+    />
+    <TextView
+            android:id="@+id/tv_my_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="63sp"
+            android:text="4"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/noto_sans_kr_regular_hestia"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="18dp"
+
+    />
+
+</RelativeLayout>

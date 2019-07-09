@@ -1,25 +1,32 @@
 package com.song2.wave.UI.MainPlayer
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.widget.SeekBar
+import com.song2.wave.AudioTest.AudioApplication
 import com.song2.wave.R
+import com.song2.wave.Util.Player.Service.MyForeGroundService
 import kotlinx.android.synthetic.main.activity_main_player.*
 import java.util.*
 
 class MainPlayerActivity : AppCompatActivity() {
 
     lateinit var playTime: String
-    lateinit var mediaPlayer: MediaPlayer
     lateinit var seekbar: SeekBar
+    lateinit var myService : MyForeGroundService
+    var selectedFlag : Int = 0
 
     var isPlaying = false
     var playbackPosition = 0
     var currentPosition = 0
+
+    var mPosition : Int = 0
 
     // var n_sbHandler = sbHandler()
     // var seekBarThread = sbThread()
@@ -64,6 +71,7 @@ class MainPlayerActivity : AppCompatActivity() {
         }
     } */
 
+    /*
     fun addTimer(){
         val tt = object : TimerTask() {
             override fun run() {
@@ -86,17 +94,28 @@ class MainPlayerActivity : AppCompatActivity() {
         //////////////////////////////////////
 
     }
-
+*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_player)
 
-        mediaPlayer = MediaPlayer()
+        myService = MyForeGroundService()
+        var selectedTitle: String
+        var selectedArtist : String
+
+        mPosition = intent.getIntExtra("mPosition", 0)
+        selectedTitle = intent.getStringExtra("selectedTitle")
+        selectedArtist = intent.getStringExtra("selectedArtist")
+        Log.v("ADsf","테스트 받아온 값 = " + mPosition)
+
+        tv_main_player_act_title_sing.setText(selectedTitle + " - " )
+        //AudioApplication.getInstance().serviceInterface.setPlayList(getAudioIds()) // 재생목록등록
+        AudioApplication.getInstance().serviceInterface.play(mPosition) // 선택한 오디오재생
 
         addSeekBar()
         playerBtn()
-        addTimer()
+       //addTimer()
 
         iv_main_player_like_btn.setOnClickListener {
             iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected
@@ -107,7 +126,6 @@ class MainPlayerActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         //musicThread.killMediaPlayer()
-        killMediaPlayer()
     }
 
     fun addSeekBar() {
@@ -119,7 +137,7 @@ class MainPlayerActivity : AppCompatActivity() {
                 isPlaying = true
 
                 playbackPosition = seekbar.progress
-                mediaPlayer.seekTo(playbackPosition)
+             //   mediaPlayer.seekTo(playbackPosition)
 
                 //if 재생 중이였다면
 /*                if(iv_main_player_act_stop_btn.isSelected){
@@ -127,14 +145,13 @@ class MainPlayerActivity : AppCompatActivity() {
                     seekBarThread.run()
                 }*/
 
-                mediaPlayer.start()
 
             }
 
             //seek바의 값을 변경하기 위해 터치했을 때
             override fun onStartTrackingTouch(seekbar: SeekBar) {
                 isPlaying = false
-                mediaPlayer.pause()
+                //mediaPlayer.pause()
                 //error : mediaplayer에 아 처음에 아무것도 만지지 않은 상태에서 seekbar 건들경우 error
             }
 
@@ -143,7 +160,7 @@ class MainPlayerActivity : AppCompatActivity() {
 
                 if (seekbar!!.getMax() == progress) {
                     isPlaying = false
-                    mediaPlayer.stop()
+                    //mediaPlayer.stop()
                 }
             }
         })
@@ -151,6 +168,7 @@ class MainPlayerActivity : AppCompatActivity() {
 
     fun playerBtn() {
 
+        /*
         //if Looping == False
         mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
             override fun onCompletion(p0: MediaPlayer?) {
@@ -159,12 +177,14 @@ class MainPlayerActivity : AppCompatActivity() {
                 nextSong()
             }
         })
-
+*/
 
 
         iv_main_player_act_stop_btn.setOnClickListener {
-            if (iv_main_player_act_stop_btn.isSelected and (mediaPlayer.getCurrentPosition() == 0)) {
+           // if (iv_main_player_act_stop_btn.isSelected and (myService.currentDuration == 0)) {
+            if (!iv_main_player_act_stop_btn.isSelected && selectedFlag == 0) {
                 try {
+                    startService()
 /*                if (mediaPlayer != null) {
                     mediaPlayer!!.stop()
                     mediaPlayer = null
@@ -174,7 +194,7 @@ class MainPlayerActivity : AppCompatActivity() {
 
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    Log.e("ERROR", mediaPlayer.toString())
+                    //Log.e("ERROR", mediaPlayer.toString())
                 }
 
             } else if (iv_main_player_act_stop_btn.isSelected) {
@@ -184,7 +204,6 @@ class MainPlayerActivity : AppCompatActivity() {
             } else {
                 //musicThread.restart()
                 restart()
-
             }
             iv_main_player_act_stop_btn.isSelected = !iv_main_player_act_stop_btn.isSelected
 
@@ -196,11 +215,9 @@ class MainPlayerActivity : AppCompatActivity() {
     //미디어를 재생하는 사용자 정의 메소드
     fun playAudio(url: String) {
 
-        mediaPlayer.setDataSource(url)
-        mediaPlayer.prepare()
-        mediaPlayer.start()
 
-        var play_duration = mediaPlayer!!.getDuration()
+
+        var play_duration = myService.getDuration()
         var lenthOfSong =
             String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
 
@@ -216,7 +233,7 @@ class MainPlayerActivity : AppCompatActivity() {
     fun prevSong() {
 
         if (currentPosition > 0) {
-            mediaPlayer.reset()
+            //mediaPlayer.reset()
             currentPosition -= 1
             playAudio(sourceMusicArray[currentPosition])
 
@@ -230,7 +247,7 @@ class MainPlayerActivity : AppCompatActivity() {
     fun nextSong() {
 
         if (currentPosition < sourceMusicArray.size) {
-            mediaPlayer.reset()
+           // mediaPlayer.reset()
             currentPosition += 1
             playAudio(sourceMusicArray[currentPosition])
 
@@ -243,9 +260,9 @@ class MainPlayerActivity : AppCompatActivity() {
     fun pauseAudio() {
 
         isPlaying = false
-
-        playbackPosition = mediaPlayer.getCurrentPosition()
-        mediaPlayer!!.pause()
+        //musicPause()
+        playbackPosition = myService.currentDuration
+        musicPause()
 
     }
 
@@ -253,8 +270,9 @@ class MainPlayerActivity : AppCompatActivity() {
 
         isPlaying = true // 재생하도록 flag 변경
 
-        mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
-        mediaPlayer.start() // 시작
+        //mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
+        restartMusic()
+        //mediaPlayer.start() // 시작
 
         // seekBarThread.run()
     }
@@ -263,6 +281,33 @@ class MainPlayerActivity : AppCompatActivity() {
 /*      if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
             mediaPlayer!!.release()
         }*/
-        mediaPlayer!!.release()
+        //mediaPlayer!!.release()
+    }
+
+    fun startService() {
+        val serviceIntent = Intent(this, MyForeGroundService::class.java)
+        serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android")
+        serviceIntent.putExtra("flag", 0)
+        ContextCompat.startForegroundService(this, serviceIntent)
+    }
+
+    fun stopService() {
+        val serviceIntent = Intent(this, MyForeGroundService::class.java)
+        stopService(serviceIntent)
+    }
+
+    fun musicPause(){
+        val pauseIntent = Intent(this, MyForeGroundService::class.java)
+        pauseIntent.putExtra("inputExtra", "중지")
+        pauseIntent.putExtra("flag", 1)
+        stopService(pauseIntent)
+    }
+
+    fun restartMusic(){
+        val restartIntent = Intent(this, MyForeGroundService::class.java)
+        restartIntent.putExtra("inputExtra", "재시작")
+        restartIntent.putExtra("flag", 2)
+        restartIntent.putExtra("playbackPosition", playbackPosition)
+        stopService(restartIntent)
     }
 }
