@@ -33,7 +33,7 @@ class SignupFirstActivity : AppCompatActivity() {
 
     private val REQ_CODE_SELECT_IMAGE = 100
     lateinit var data : Uri
-    lateinit var imageUri : Uri
+    var imageUri : Uri? = null
     private var image : MultipartBody.Part? = null
     var chkFlag : Boolean = false
     val passwdPattern : String = "^[A-Za-z[0-9]]{8,20}$" // 영문, 숫자
@@ -169,7 +169,7 @@ class SignupFirstActivity : AppCompatActivity() {
                 edit_signup_act_passwd.requestFocus()
                 Toast.makeText(applicationContext, "비밀번호를 입력해주세요", Toast.LENGTH_LONG).show()
             }
-            else if(image == null){
+            else if(imageUri == null){
                 Toast.makeText(applicationContext, "프로필 사진을 등록해주세요", Toast.LENGTH_LONG).show()
             }
             else{
@@ -286,22 +286,7 @@ class SignupFirstActivity : AppCompatActivity() {
                 try {
                     this.data = data!!.data
                     imageUri = data!!.data
-                    val options = BitmapFactory.Options()
 
-                    var input: InputStream? = null // here, you need to get your context.
-                    try {
-                        input = contentResolver.openInputStream(this.data)
-                    } catch (e: FileNotFoundException) {
-                        e.printStackTrace()
-                    }
-
-                    val bitmap = BitmapFactory.decodeStream(input, null, options) // InputStream 으로부터 Bitmap 을 만들어 준다.
-                    val baos = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
-                    val photoBody = RequestBody.create(MediaType.parse("image/jpg"), baos.toByteArray())
-                    val img = File(getRealPathFromURI(applicationContext,this.data).toString()) // 가져온 파일의 이름을 알아내려고 사용합니다
-
-                    image = MultipartBody.Part.createFormData("image", img.name, photoBody)
 
                     // 선택한 이미지를 해당 이미지뷰에 적용
                     Glide.with(this)
