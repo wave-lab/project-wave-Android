@@ -13,6 +13,7 @@ import com.song2.wave.R
 
 class ArtistPlaylistAdapter(val ctx: Context, val datalist: ArrayList<ArtistPlaylistSongData>) :
     RecyclerView.Adapter<ArtistPlaylistAdapter.Holder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.item_artist_playlist, parent, false)
         return Holder(view)

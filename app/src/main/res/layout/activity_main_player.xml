@@ -64,7 +64,8 @@
 
     <ImageView
             android:visibility="gone"
-            android:id="@+id/iv_main_player_act_cover_img"
+            android:id="
+            @+id/iv_main_player_act_cover_img"
             android:layout_marginTop="106dp"
             android:layout_below="@+id/rl_main_player_act_main_toolbar"
             android:layout_width="300dp" android:layout_height="300dp"

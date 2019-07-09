@@ -179,7 +179,6 @@ class MainPlayerActivity : AppCompatActivity() {
         })
 */
 
-
         iv_main_player_act_stop_btn.setOnClickListener {
            // if (iv_main_player_act_stop_btn.isSelected and (myService.currentDuration == 0)) {
             if (!iv_main_player_act_stop_btn.isSelected && selectedFlag == 0) {
