@@ -11,8 +11,11 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import com.song2.wave.R
+import com.song2.wave.R.id.img_signup_mood_act_funny
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
 import com.song2.wave.Util.Network.POST.PostResponse
@@ -27,25 +30,48 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.io.InputStream
 
-class SignupMoodActivity : AppCompatActivity() {
+class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
+
+
     private var image : MultipartBody.Part? = null
     lateinit var receivedImgUri : Uri
     lateinit var networkService : NetworkService
 
+    lateinit var moodArr : Array<ImageView>
+
+    override fun onClick(v: View?) {
+        for(i in 0..7){
+            if (v!!.id == moodArr[i].getId()) {
+                Toast.makeText(applicationContext, "분위기 = " + v!!.id.toString() +"번 버튼 선택", Toast.LENGTH_LONG).show()
+            }
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup_mood)
+        var funnyImg :ImageView = findViewById(R.id.img_signup_mood_act_funny)
+        var fluttetImg :ImageView = findViewById(R.id.img_signup_mood_act_flutter)
+        var hipImg :ImageView = findViewById(R.id.img_signup_mood_act_hip)
+        var sadImg :ImageView = findViewById(R.id.img_signup_mood_act_sad)
+        var windliessImg :ImageView = findViewById(R.id.img_signup_mood_act_windless)
+        var dreamyImg :ImageView = findViewById(R.id.img_signup_mood_act_dreamy)
+        var groovyImg :ImageView = findViewById(R.id.img_signup_mood_act_windless)
+        var honeyImg :ImageView = findViewById(R.id.img_signup_mood_act_honey)
 
+        for(i in 0..7){
+            moodArr[i].setOnClickListener(this)
+        }
 
+        moodArr = arrayOf<ImageView>(funnyImg, fluttetImg, hipImg, sadImg, windliessImg, dreamyImg, groovyImg, honeyImg)
         receivedImgUri = intent.getParcelableExtra<Parcelable>("imageUri") as Uri
 
         btn_signup_mood_next.setOnClickListener {
             postSignup()
         }
-
-        Log.v("asdf","이미지 = " + receivedImgUri)
-
         handleImage()
+
     }
 
     fun handleImage(){
@@ -90,6 +116,7 @@ class SignupMoodActivity : AppCompatActivity() {
         Log.v("SignupMoodActivity", "회원가입 이메일 = "+emailValue)
         Log.v("SignupMoodActivity", "회원가입 패스워드 = "+passwordValue)
         Log.v("SignupMoodActivity", "회원가입 닉네임 = "+nicknameValue)
+        Log.v("SignupMoodActivity", "회원가입 이미지 파일 " + image)
 
         networkService = ApiClient.getRetrofit().create(NetworkService::class.java)
 
