@@ -23,6 +23,7 @@ class SignupGenreActivity : AppCompatActivity() {
 
         btn_signup_genre_nex.setOnClickListener {
             var intent = Intent(applicationContext, SignupMoodActivity::class.java)
+            intent.putExtra("imageUri",receivedImgUri)
             startActivity(intent)
         }
     }

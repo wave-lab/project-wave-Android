@@ -16,6 +16,7 @@ import com.song2.wave.R
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
 import com.song2.wave.Util.Network.POST.PostResponse
+import kotlinx.android.synthetic.main.activity_signup_mood.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -37,6 +38,10 @@ class SignupMoodActivity : AppCompatActivity() {
 
 
         receivedImgUri = intent.getParcelableExtra<Parcelable>("imageUri") as Uri
+
+        btn_signup_mood_next.setOnClickListener {
+            postSignup()
+        }
 
         Log.v("asdf","이미지 = " + receivedImgUri)
 
@@ -78,9 +83,9 @@ class SignupMoodActivity : AppCompatActivity() {
 
     fun postSignup(){
         val pref = applicationContext.getSharedPreferences("auto", Activity.MODE_PRIVATE)
-        var emailValue : String = pref.getString("email",null)
-        var passwordValue : String = pref.getString("password",null)
-        var nicknameValue : String = pref.getString("nickname",null)
+        var emailValue : String = pref.getString("email","")
+        var passwordValue : String = pref.getString("password","")
+        var nicknameValue : String = pref.getString("nickname","")
 
         Log.v("SignupMoodActivity", "회원가입 이메일 = "+emailValue)
         Log.v("SignupMoodActivity", "회원가입 패스워드 = "+passwordValue)

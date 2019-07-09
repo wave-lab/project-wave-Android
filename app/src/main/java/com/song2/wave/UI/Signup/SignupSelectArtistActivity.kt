@@ -26,6 +26,7 @@ class SignupSelectArtistActivity : AppCompatActivity() {
 
         btn_signup_artist_next.setOnClickListener {
             var intent = Intent(applicationContext, SignupGenreActivity::class.java)
+            intent.putExtra("imageUri",receivedImgUri)
             startActivity(intent)
         }
     }
