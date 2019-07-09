@@ -105,7 +105,11 @@ class MainPlayerActivity : AppCompatActivity() {
         var selectedArtist : String
 
         mPosition = intent.getIntExtra("mPosition", 0)
+        selectedTitle = intent.getStringExtra("selectedTitle")
+        selectedArtist = intent.getStringExtra("selectedArtist")
+        Log.v("ADsf","테스트 받아온 값 = " + mPosition)
 
+        tv_main_player_act_title_sing.setText(selectedTitle + " - " )
         //AudioApplication.getInstance().serviceInterface.setPlayList(getAudioIds()) // 재생목록등록
         AudioApplication.getInstance().serviceInterface.play(mPosition) // 선택한 오디오재생
 

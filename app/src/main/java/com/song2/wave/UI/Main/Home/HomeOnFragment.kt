@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
+import com.song2.wave.AudioTest.PlayerActivity
 import com.song2.wave.Data.model.Home.HomeSongData
 import com.song2.wave.Data.model.Home.MyWaitingSongData
 import com.song2.wave.Data.model.Home.TOP10Data
@@ -16,6 +17,7 @@ import com.song2.wave.R
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity
 import com.song2.wave.UI.Main.Home.Adapter.*
 import com.song2.wave.UI.Main.Home.Top10.Top10Fragment
+import com.song2.wave.UI.Signup.SignupFirstActivity
 import kotlinx.android.synthetic.main.fragment_home_on.*
 import kotlinx.android.synthetic.main.fragment_home_on.view.*
 
@@ -45,7 +47,12 @@ class HomeOnFragment : Fragment() {
         var v : View = inflater.inflate(R.layout.fragment_home_on, container, false)
 
         v.iv_home_frag_wavelogo.setOnClickListener {
-            var intent = Intent(context, MainPlayerActivity::class.java)
+            var intent = Intent(context, PlayerActivity::class.java)
+            startActivity(intent)
+        }
+
+        v.tv_home_frag_test.setOnClickListener {
+            var intent = Intent(context, SignupFirstActivity::class.java)
             startActivity(intent)
         }
 

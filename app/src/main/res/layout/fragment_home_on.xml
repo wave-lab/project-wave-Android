@@ -32,6 +32,7 @@
                                 android:layout_marginTop="174dp"
                                 android:layout_width="match_parent" android:layout_height="match_parent">
                             <TextView
+                                    android:id="@+id/tv_home_frag_test"
                                     android:includeFontPadding="false"
                                     android:layout_marginTop="17dp"
                                     android:fontFamily="@font/noto_sans_kr_bold_hestia"
