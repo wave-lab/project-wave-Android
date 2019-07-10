@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApplicationController : Application() {
 
-    private var BASE_URL = "http://15.164.199.122:8080"
+    private var BASE_URL = "http://wave-studio.ml:8080"
     lateinit var networkService: NetworkService
 
 

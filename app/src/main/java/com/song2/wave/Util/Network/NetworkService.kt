@@ -45,7 +45,8 @@ interface NetworkService {
         @Header("Authorization") authorization: String
     ) : Call<GetPlaylistResponse>
 
-    //적중 성공 곡
+    //적중 결과 곡
+    //적중 결과 곡 status
     @GET("pl/hits")
     fun getHitsResponse(
         @Header("Content-Type") content_type: String,
