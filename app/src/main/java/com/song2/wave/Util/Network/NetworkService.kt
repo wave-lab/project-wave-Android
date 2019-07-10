@@ -7,6 +7,7 @@ import com.song2.wave.Data.GET.GetTop10CategoryResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Query
 
 interface NetworkService {
 
@@ -48,7 +49,8 @@ interface NetworkService {
     @GET("pl/hits")
     fun getHitsResponse(
         @Header("Content-Type") content_type: String,
-        @Header("Authorization") authorization: String
+        @Header("Authorization") authorization: String,
+        @Query("status") status : String?
     ) : Call<GetPlaylistResponse>
 
 
