@@ -65,4 +65,11 @@ interface NetworkService {
         @Header("Content-Type") content_type: String,
         @Header("Authorization") authorization: String
     ): Call<GetPlaylistResponse>
+
+    @GET("pl/rated")
+    fun getRatedResponse(
+        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String,
+        @Query("status") status: String?
+    ): Call<GetRecommendResponse>
 }

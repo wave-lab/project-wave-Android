@@ -47,15 +47,12 @@ class HomeOnFragment : Fragment() {
     lateinit var top10GenreDataList: ArrayList<TOP10Data>
     lateinit var top10MoodDataList: ArrayList<TOP10Data>
 
-
     lateinit var myWaitingSongHomeAdapter: MyWaitingSongHomeAdapter
     lateinit var waitingSongHomeAdapter: WaitingSongHomeAdapter
     lateinit var hitSongHomeAdapter: HitSongHomeAdapter
     lateinit var recommendSongHomeAdapter: RecomentSongHomeAdapter
     lateinit var top10GenreAdapter: Top10GenreAdapter
     lateinit var top10MoodAdapter: Top10GenreAdapter
-
-    //lateinit var top10MoodAdapter: Top10MoodAdapter
 
     lateinit var requestManager: RequestManager
 
