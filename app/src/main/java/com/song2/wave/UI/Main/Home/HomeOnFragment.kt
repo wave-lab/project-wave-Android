@@ -1,15 +1,22 @@
 package com.song2.wave.UI.Main.Home
 
 import android.content.Intent
+import android.database.Cursor
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v4.app.Fragment
+import android.support.v4.app.LoaderManager
+import android.support.v4.content.CursorLoader
+import android.support.v4.content.Loader
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
+import com.song2.wave.AudioTest.AudioAdapter
 import com.song2.wave.AudioTest.PlayerActivity
 import com.song2.wave.Data.GET.GetHomeInfoResponse
 import com.song2.wave.Data.GET.GetPlaylistResponse
@@ -26,6 +33,7 @@ import com.song2.wave.R
 import com.song2.wave.UI.Main.Home.Adapter.*
 import com.song2.wave.UI.Main.Home.Top10.Top10Fragment
 import com.song2.wave.UI.Signup.SignupFirstActivity
+import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.ApplicationController
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_home_on.*
@@ -34,11 +42,16 @@ import retrofit2.Call
 import retrofit2.Response
 
 class HomeOnFragment : Fragment() {
+    private val LOADER_ID = 0x001
 
-    val networkService: NetworkService by lazy { ApplicationController.instance.networkService
+    val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
     }
 
     lateinit var authorization_info : String
+    var mAdapter: AudioAdapter? = null
+    lateinit var projection : Array<String>
+    lateinit var waitSongDataArr : ArrayList<PlaySongData>
+    lateinit var playSongData : PlaySongData
 
     lateinit var myWaitingSongDataList: ArrayList<MyWaitingSongData>
     lateinit var waitingSongDataList: ArrayList<HomeSongData>
@@ -64,8 +77,8 @@ class HomeOnFragment : Fragment() {
 
         //통신
         getHomeInfoResponse()
-        getTop10CategoryResponse()
-        getRecommendResponse()
+       // getTop10CategoryResponse()
+       // getRecommendResponse()
 
         getRateReadyResponse()
         getUploadResponse()
@@ -97,11 +110,11 @@ class HomeOnFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         attachRecyclerView()
+        waitSongDataArr = ArrayList<PlaySongData>()
 
     }
 
     fun attachRecyclerView(){
-
         waitingSongDataList = ArrayList()
         myWaitingSongDataList = ArrayList()
         hitSongHomeDataList = ArrayList()
@@ -114,44 +127,6 @@ class HomeOnFragment : Fragment() {
         //insertExampleData()
     }
 
-    fun insertExampleData() {
-        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
-        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
-        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
-        top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
-
-        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "신나는"))
-        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "힙한"))
-        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "우울한"))
-        top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "우울한"))
-
-        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-
-        hitSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        hitSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        hitSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        hitSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        hitSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        hitSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-
-        waitingSongDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-        waitingSongDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬2", "류지훈", "양승희"))
-        waitingSongDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬3", "류지훈", "양승희"))
-        waitingSongDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬4", "류지훈", "양승희"))
-        waitingSongDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬5", "류지훈", "양승희"))
-
-        myWaitingSongDataList.add(MyWaitingSongData(1, "https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "노래제목1", "가숫1"))
-        myWaitingSongDataList.add(MyWaitingSongData(2, "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "노래제목2", "가숫2"))
-        myWaitingSongDataList.add(MyWaitingSongData(3, "https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "노래제목3", "가숫3"))
-        myWaitingSongDataList.add(MyWaitingSongData(4, "https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "노래제목1", "가숫1"))
-        myWaitingSongDataList.add(MyWaitingSongData(5, "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "노래제목2", "가숫2"))
-        myWaitingSongDataList.add(MyWaitingSongData(6, "https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "노래제목3", "가숫3"))
-    }
 
     //hits
     fun getHitsResponse(){
@@ -166,16 +141,17 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
 
+                    for (i in playlistDataList.songList.indices){
+                        hitSongHomeDataList.add(HomeSongData(playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName, playlistDataList.songList[i].songUrl))
+                    }
                     if(playlistDataList == null)
                         return
-
-                    for(i in playlistDataList.songList.indices)
-                        hitSongHomeDataList.add(HomeSongData(playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
 
                     hitSongHomeAdapter = HitSongHomeAdapter( hitSongHomeDataList, requestManager)
                     rv_home_frag_scoring_hit_list.adapter = hitSongHomeAdapter
                     rv_home_frag_scoring_hit_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 }
+
             }
 
         })
@@ -193,17 +169,15 @@ class HomeOnFragment : Fragment() {
             override fun onResponse(call: Call<GetPlaylistResponse>, response: Response<GetPlaylistResponse>) {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
-
-                    if(playlistDataList == null)
-                        return
-
-                    for(i in playlistDataList.songList.indices)
-                        myWaitingSongDataList.add(MyWaitingSongData(3,playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName))
-
+                    for(i in playlistDataList.songList.indices) {
+                        myWaitingSongDataList.add(MyWaitingSongData(3, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName))
+                    }
                     myWaitingSongHomeAdapter = MyWaitingSongHomeAdapter(myWaitingSongDataList, requestManager)
                     rv_home_frag_scoring_waiting_mine.adapter = myWaitingSongHomeAdapter
-                    rv_home_frag_scoring_waiting_mine.layoutManager =  LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    rv_home_frag_scoring_waiting_mine.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
+
                 }
+
             }
 
         })
@@ -223,22 +197,54 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
 
-                    if(playlistDataList == null)
-                        return
-
-                    for(i in playlistDataList.songList.indices)
-                        waitingSongDataList.add(HomeSongData(playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
-
-                    waitingSongHomeAdapter = WaitingSongHomeAdapter(waitingSongDataList, requestManager)
+                    Log.v("HomeOnFragment", "응답 값 = " + response.body().toString())
+                    for(i in playlistDataList.songList.indices) {
+                        Log.v("Asdf"," 값 = " + playlistDataList.songList[i].songUrl)
+                        waitingSongDataList.add(HomeSongData(playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName, playlistDataList.songList[i].songUrl))
+                    }
+                    waitingSongHomeAdapter = WaitingSongHomeAdapter(context!!,waitingSongDataList, requestManager)
                     rv_home_frag_scoring_waiting.adapter = waitingSongHomeAdapter
                     rv_home_frag_scoring_waiting.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+/*
+
+                    waitSongDataArr = response!!.body()!!.data.songList
+
+                    rv_home_frag_scoring_waiting.setAdapter(mAdapter)
+                    val layoutManager = LinearLayoutManager(context)
+                    layoutManager.orientation = LinearLayoutManager.VERTICAL
+                    rv_home_frag_scoring_waiting.setLayoutManager(layoutManager)
+                    */
+                }
+                else{
+                    Log.v("Asdf","응답값없음")
 
                 }
+
             }
 
         })
     }
 
+    private fun getAudioListFromMediaDatabase() {
+        activity!!.getSupportLoaderManager().initLoader(LOADER_ID, null, object : LoaderManager.LoaderCallbacks<Cursor> {
+            override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
+                val uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                projection = arrayOf(waitSongDataArr.get(0)._id)
+                val projection = arrayOf(MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.ALBUM, MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.DURATION, MediaStore.Audio.Media.DATA)
+                val selection = MediaStore.Audio.Media.IS_MUSIC + " = 1"
+                val sortOrder = MediaStore.Audio.Media.TITLE + " COLLATE LOCALIZED ASC"
+                return CursorLoader(context!!, uri, projection, selection, null, sortOrder)
+            }
+
+            override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
+                mAdapter!!.swapCursor(data)
+            }
+
+            override fun onLoaderReset(loader: Loader<Cursor>) {
+                mAdapter!!.swapCursor(null)
+            }
+        })
+    }
 
     //recommend
     fun getRecommendResponse(){
@@ -262,15 +268,17 @@ class HomeOnFragment : Fragment() {
                                 playSongDataList[i].artwork,
                                 playSongDataList[i].originTitle,
                                 playSongDataList[i].originArtistName,
-                                playSongDataList[i].coverArtistName
+                                playSongDataList[i].coverArtistName,
+                                    playSongDataList[i].songUrl
                             )
                         )
                     }
                     recommendSongHomeAdapter = RecomentSongHomeAdapter( recommendSongHomeDataList, requestManager)
                     rv_home_frag_scoring_recommend_list.adapter = recommendSongHomeAdapter
                     rv_home_frag_scoring_recommend_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
                 }
+
+
             }
 
         })
@@ -321,6 +329,9 @@ class HomeOnFragment : Fragment() {
                     for (i in top10CategoryDataList[0].indices){
                         top10GenreDataList.add(TOP10Data(top10CategoryDataList[0][i].top10Thumbnail, top10CategoryDataList[0][i].top10Name))
                     }
+                    top10GenreAdapter = Top10GenreAdapter(top10GenreDataList, requestManager)
+                    rv_home_frag_top10_genre_list.adapter = top10GenreAdapter
+                    rv_home_frag_top10_genre_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
                     top10GenreAdapter = Top10GenreAdapter(top10GenreDataList, requestManager)
                     rv_home_frag_top10_genre_list.adapter = top10GenreAdapter
@@ -333,7 +344,6 @@ class HomeOnFragment : Fragment() {
                     for (i in top10CategoryDataList[1].indices){
                         top10MoodDataList.add(TOP10Data(top10CategoryDataList[1][i].top10Thumbnail, top10CategoryDataList[1][i].top10Name))
                     }
-
                     top10MoodAdapter = Top10GenreAdapter(top10MoodDataList, requestManager)
                     rv_home_frag_top10_mood_list.adapter = top10MoodAdapter
                     rv_home_frag_top10_mood_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

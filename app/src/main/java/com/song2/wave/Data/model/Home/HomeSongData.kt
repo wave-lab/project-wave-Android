@@ -4,5 +4,6 @@ data class HomeSongData(
     var songCoverImg: String?,
     var songName: String?,
     var originArtistName: String,
-    var coverArtistName : String
+    var coverArtistName : String,
+    var songUrl : String?
 )

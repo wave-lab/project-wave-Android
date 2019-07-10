@@ -1,7 +1,15 @@
 package com.song2.wave.Util.Network
 
-import com.song2.wave.Data.GET.*
+import com.song2.wave.Data.GET.GetHomeInfoResponse
+import com.song2.wave.Data.GET.GetPlaylistResponse
+import com.song2.wave.Data.GET.GetRecommendResponse
+import com.song2.wave.Data.GET.GetTop10CategoryResponse
+import com.song2.wave.Util.Network.POST.PostResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
+import retrofit2.http.*
+import com.song2.wave.Data.GET.*
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -60,6 +68,24 @@ interface NetworkService {
         @Header("Authorization") authorization: String
     ): Call<GetUserInfoResponse>
 
+    ////////////////////* POST *///////////////////////////
+
+    // 회원가입
+    @Multipart
+    @POST("/api/signup")
+    fun postSignup(
+            @Part("email") email : RequestBody,
+            @Part("password") password : RequestBody,
+            @Part("nickname") nickname : RequestBody,
+            @Part profileImg : MultipartBody.Part?,
+            @Part("genre[0]") genre0 : RequestBody,
+            @Part("genre[1]") genre1 : RequestBody,
+            @Part("genre[2]") genre2 : RequestBody,
+            @Part("mood[0]") mood0 : RequestBody,
+            @Part("mood[1]") mood1 : RequestBody,
+            @Part("originArtist[0]") originArtist : RequestBody
+    ) : Call<PostResponse>
+  
     @GET("pl/likes")
     fun getLikesPlaylistResponse(
         @Header("Content-Type") content_type: String,
@@ -72,4 +98,10 @@ interface NetworkService {
         @Header("Authorization") authorization: String,
         @Query("status") status: String?
     ): Call<GetRecommendResponse>
+
+    @GET("pl/custom")
+    fun getCustomPlaylistResponse(
+        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String
+    ): Call<GetCustomPlayListResponse>
 }

@@ -83,6 +83,7 @@
                     android:layout_marginHorizontal="16dp"
                     android:background="@drawable/signup_border_off"
                     android:textColor="#ffffff"
+                    android:inputType="textPassword"
                     />
 
             </RelativeLayout>

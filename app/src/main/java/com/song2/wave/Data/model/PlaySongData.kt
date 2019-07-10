@@ -15,6 +15,7 @@ data class PlaySongData(
     val originArtistIdx: Int,
     val originArtistName: String,
     val enrollTime: String,
+    val songUrl: String,
     val songUri: String,
     val songComment: String,
     val reportCount: Int,

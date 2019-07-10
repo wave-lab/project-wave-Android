@@ -17,6 +17,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import okhttp3.MediaType
@@ -33,7 +34,7 @@ class SignupFirstActivity : AppCompatActivity() {
 
     private val REQ_CODE_SELECT_IMAGE = 100
     lateinit var data : Uri
-    lateinit var imageUri : Uri
+    var imageUri : Uri? = null
     private var image : MultipartBody.Part? = null
     var chkFlag : Boolean = false
     val passwdPattern : String = "^[A-Za-z[0-9]]{8,20}$" // 영문, 숫자
@@ -169,15 +170,18 @@ class SignupFirstActivity : AppCompatActivity() {
                 edit_signup_act_passwd.requestFocus()
                 Toast.makeText(applicationContext, "비밀번호를 입력해주세요", Toast.LENGTH_LONG).show()
             }
-            else if(image == null){
+            else if(imageUri == null){
                 Toast.makeText(applicationContext, "프로필 사진을 등록해주세요", Toast.LENGTH_LONG).show()
             }
-            else{
-                val pref = applicationContext.getSharedPreferences("auto",Activity.MODE_PRIVATE)
-                pref.edit().putString("email",edit_signup_act_email.text.toString())
-                pref.edit().putString("passwd", edit_signup_act_passwd.text.toString())
-                pref.edit().putString("nickname", edit_signup_act_nickname.text.toString())
-                pref.edit().commit()
+            else {
+
+                // 자신의 유저 정보 내부 DB에 저장
+                var pref = applicationContext.getSharedPreferences("auto",Activity.MODE_PRIVATE)
+                var editor : SharedPreferences.Editor = pref.edit()
+                editor.putString("email", edit_signup_act_email.text.toString()) //userID란  key값으로 userID 데이터를 저장한다.
+                editor.putString("password", edit_signup_act_passwd.text.toString()) //userID란  key값으로 userID 데이터를 저장한다.
+                editor.putString("nickname", edit_signup_act_nickname.text.toString()) //userID란  key값으로 userID 데이터를 저장한다.
+                editor.commit()
 
                 var intent = Intent(applicationContext, SignupSelectArtistActivity::class.java)
                 intent.putExtra("imageUri",imageUri)
@@ -193,6 +197,7 @@ class SignupFirstActivity : AppCompatActivity() {
             else{
                 ll_signup_act_verify_num.visibility = View.VISIBLE
                 tv_signup_act_email_confirm.visibility = View.GONE
+                edit_signup_act_verify_num.requestFocus();
             }
 
         }
@@ -205,6 +210,7 @@ class SignupFirstActivity : AppCompatActivity() {
             else{
                 ll_signup_act_nickname.visibility = View.VISIBLE
                 tv_signup_act_verify_num_confirm.visibility =View.GONE
+                edit_signup_act_nickname.requestFocus();
             }
         }
 
@@ -216,6 +222,7 @@ class SignupFirstActivity : AppCompatActivity() {
             else{
                 ll_signup_act_passwd.visibility = View.VISIBLE
                 tv_signup_act_nickname_confirm.visibility = View.GONE
+                edit_signup_act_passwd.requestFocus();
             }
         }
 
@@ -286,22 +293,7 @@ class SignupFirstActivity : AppCompatActivity() {
                 try {
                     this.data = data!!.data
                     imageUri = data!!.data
-                    val options = BitmapFactory.Options()
 
-                    var input: InputStream? = null // here, you need to get your context.
-                    try {
-                        input = contentResolver.openInputStream(this.data)
-                    } catch (e: FileNotFoundException) {
-                        e.printStackTrace()
-                    }
-
-                    val bitmap = BitmapFactory.decodeStream(input, null, options) // InputStream 으로부터 Bitmap 을 만들어 준다.
-                    val baos = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
-                    val photoBody = RequestBody.create(MediaType.parse("image/jpg"), baos.toByteArray())
-                    val img = File(getRealPathFromURI(applicationContext,this.data).toString()) // 가져온 파일의 이름을 알아내려고 사용합니다
-
-                    image = MultipartBody.Part.createFormData("image", img.name, photoBody)
 
                     // 선택한 이미지를 해당 이미지뷰에 적용
                     Glide.with(this)
