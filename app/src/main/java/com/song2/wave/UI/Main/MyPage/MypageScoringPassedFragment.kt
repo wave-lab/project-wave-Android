@@ -16,6 +16,7 @@ import com.song2.wave.Data.model.PlayListData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.MyPage.Adapter.FragmentMypageScoringResultPagerAdapter
 import com.song2.wave.UI.Main.MyPage.Adapter.ScoreResultAdapter
+import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.ApplicationController
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_my_page.*
@@ -25,7 +26,7 @@ import retrofit2.Response
 
 class MypageScoringPassedFragment : Fragment(){
 
-    val networkService: NetworkService by lazy { ApplicationController.instance.networkService
+    val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
     }
     lateinit var authorization_info : String
 

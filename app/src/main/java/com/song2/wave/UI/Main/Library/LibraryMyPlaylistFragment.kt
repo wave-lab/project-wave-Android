@@ -13,6 +13,7 @@ import com.song2.wave.Data.GET.GetPlaylistResponse
 import com.song2.wave.Data.model.CustomPlayListData
 import com.song2.wave.Data.model.PlaylistListData
 import com.song2.wave.UI.Main.Library.Adapter.MyPlaylistAdapter
+import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.ApplicationController
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_library_my_playlist.*
@@ -23,7 +24,7 @@ import javax.security.auth.callback.Callback
 
 class LibraryMyPlaylistFragment : Fragment() {
 
-    val networkService: NetworkService by lazy { ApplicationController.instance.networkService
+    val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
     }
 
     lateinit var authorization_info : String
