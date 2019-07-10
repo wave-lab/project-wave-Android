@@ -9,6 +9,7 @@
 
     <ImageView
             android:id="@+id/iv_top10_item_kinds_img"
+            android:scaleType="centerCrop"
             android:layout_width="104dp" android:layout_height="104dp"
             android:src="@drawable/img_artwork_1"/>
     <TextView

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#000000"
+>
+
+    <include
+            layout="@layout/toolbar_mypage"
+    />
+    <LinearLayout
+            android:id="@+id/ll_set_start_act_info"
+            android:orientation="vertical"
+            android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <TextView
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#fafafa"
+                android:lineSpacingExtra="9sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="평가자들에게\n가장 들려주고 싶은 부분을"/>
+        <View android:layout_width="179dp" android:layout_height="3dp"
+              android:background="@color/colorPrimary"
+              android:layout_marginStart="20dp"
+        />
+        <TextView
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:includeFontPadding="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#fafafa"
+                android:lineSpacingExtra="9sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="지정해주세요!"
+        />
+    </LinearLayout>
+    <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+
+        <TextView
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#9e9e9e"
+                android:lineSpacingExtra="6sp"
+                android:text="지정한 부분부터 평가곡이 재생됩니다."
+        />
+    </RelativeLayout>
+
+
+    <LinearLayout
+            android:layout_marginTop="170dp"
+            android:layout_marginHorizontal="24dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent" android:layout_height="wrap_content">
+
+
+        <SeekBar
+                android:id="@+id/sb_set_start_act_seekbar"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:thumb="@android:color/transparent"
+                android:layout_height="24dp"/>
+        <RelativeLayout
+                android:id="@+id/rl_set_start_act_time"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent" android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/tv_set_start_act_duration_time"
+                    android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                    android:text="00:00"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:layout_alignParentTop="true"/>
+
+            <TextView
+                    android:id="@+id/tv_set_start_act_length_of_song"
+                    android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                    android:text="00:00"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ImageView
+            android:id="@+id/iv_set_start_act_play_btn"
+            android:src="@drawable/play_selector"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+    />
+
+    <ImageView
+            android:id="@+id/iv_set_start_act_upload_btn"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/btn_login_login"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="220dp"
+            android:layout_height="44dp"/>
+
+
+</LinearLayout>

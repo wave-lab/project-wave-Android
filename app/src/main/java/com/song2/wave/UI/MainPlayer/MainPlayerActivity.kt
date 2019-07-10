@@ -14,30 +14,43 @@ import android.view.View
 import android.widget.SeekBar
 import com.bumptech.glide.Glide
 import com.song2.wave.AudioTest.AudioApplication
+import com.song2.wave.AudioTest.AudioService
 import com.song2.wave.AudioTest.BroadcastActions
 import com.song2.wave.R
 import com.song2.wave.UI.MainPlayer.Adapter.CoverImgViewPager
 import com.song2.wave.Util.Player.Service.MyForeGroundService
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main_player.*
+import kotlinx.android.synthetic.main.activity_set_start_point.*
 import java.util.*
 
 class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var playTime: String
+    var playbackPosition : Int = 0
+    var isPlaying : Boolean = false
     lateinit var seekbar: SeekBar
     lateinit var myService : MyForeGroundService
+    lateinit var audioService : AudioService
+    lateinit var songUrl : String
+    var title: String = ""
+    var originArtist : String = ""
+    var coverArtist : String = ""
+    var songImgUrl : String = ""
+    var flag : Int = 0
+
     var selectedFlag : Int = 0
 
-    var isPlaying = false
-    var playbackPosition = 0
+
+
     var currentPosition = 0
     var prevSongIdx = 0
 
     var mPosition : Int = 0
 
+
     // var n_sbHandler = sbHandler()
-    // var seekBarThread = sbThread()
+     //var seekBarThread = sbThread()
 
     override fun onClick(v: View) {
         when (v.id) {
@@ -133,46 +146,21 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
     )
 
 
-    /*
-    inner class sbThread : Thread() {
-        override fun run() {
-            while (isPlaying) {
-                seekbar.setProgress(mediaPlayer.getCurrentPosition())
-                n_sbHandler.sendEmptyMessageDelayed(0, 1000)
-            }
-        }
-    }
-
-    inner class sbHandler : Handler() {
-        override fun handleMessage(msg: Message?) {
-            super.handleMessage(msg)
-            if (msg!!.what == 0) {
-                playTime = String.format(
-                    "%02d:%02d",
-                    ((mediaPlayer.getCurrentPosition() / 1000) % 3600 / 60),
-                    ((mediaPlayer.getCurrentPosition() / 1000) % 3600 % 60)
-                )
-
-                tv_main_player_duration_time.setText(playTime)
-                Log.v("handlerError",(mediaPlayer.getCurrentPosition()/1000).toString())
-                //Log.v("handlerError",(mediaPlayer.getDuration()/1000).toString())
-            }
-        }
-    } */
-
-    /*
     fun addTimer(){
         val tt = object : TimerTask() {
             override fun run() {
                 runOnUiThread {
-                    playTime = String.format(
-                        "%02d:%02d",
-                        ((mediaPlayer.getCurrentPosition() / 1000) % 3600 / 60),
-                        ((mediaPlayer.getCurrentPosition() / 1000) % 3600 % 60)
-                    )
+                    if(seekbar.max > 0){
+                        playTime = String.format(
+                                "%02d:%02d",
+                                audioService.getMpCurrentPosition1(),
+                                audioService.getMpCurrentPosition2()
+                        )
 
-                    tv_main_player_duration_time.setText(playTime)
-                    seekbar.setProgress(mediaPlayer.getCurrentPosition())
+                        tv_main_player_duration_time.setText(playTime)
+                        seekbar.setProgress(audioService.getCurrentPosition())
+                    }
+
                 }
             }
         }
@@ -183,7 +171,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         //////////////////////////////////////
 
     }
-*/
+
     private val mBroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             updateUI()
@@ -203,7 +191,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
             tv_main_player_act_title_sing.setText(audioItem.mTitle)
         } else {
             vp_main_player_act_cover_img.setBackgroundResource(R.drawable.kakao_default_profile_image)
-            tv_main_player_act_title_sing.setText("재생중인 음악이 없습니다.")
+            //tv_main_player_act_title_sing.setText("재생중인 음악이 없습니다.")
         }
     }
 
@@ -211,24 +199,55 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_player)
 
+        mainPlayerActivity = this
         myService = MyForeGroundService()
-        var selectedTitle: String
-        var selectedArtist : String
+        audioService = AudioService()
+
         iv_main_player_act_stop_btn.setOnClickListener(this)
         mPosition = intent.getIntExtra("mPosition", 0)
-        //selectedTitle = intent.getStringExtra("selectedTitle")
-        //selectedArtist = intent.getStringExtra("selectedArtist")
-        Log.v("ADsf","테스트 받아온 값 = " + mPosition)
 
-        //tv_main_player_act_title_sing.setText(selectedTitle + " - " )
-        //AudioApplication.getInstance().serviceInterface.setPlayList(getAudioIds()) // 재생목록등록
-        AudioApplication.getInstance().serviceInterface.play(mPosition) // 선택한 오디오재생
+        flag = intent.getIntExtra("flag", 0)
 
-        addSeekBar()
+        // 노래 선택으로 입장
+
+        val extras = intent.extras
+
+        // 노래 선택으로 입장 시
+        if (extras == null) {
+            title = intent.getStringExtra("title")
+            originArtist = intent.getStringExtra("originArtist")
+            coverArtist = intent.getStringExtra("coverArtist")
+            songImgUrl = intent.getStringExtra("songImgUrl")
+            songUrl = intent.getStringExtra("songUrl")
+            AudioApplication.getInstance().serviceInterface.play(songUrl, originArtist, coverArtist,  title, songImgUrl) // 선택한 오디오재생
+        }
+        // notification으로 입장 시
+        else {
+            title = extras.getString("title")
+            originArtist = extras.getString("originArtist")
+            coverArtist = extras.getString("coverArtist")
+            songImgUrl = extras.getString("songImgUrl")
+        }
+        if(flag == 0){
+            songUrl = intent.getStringExtra("songUrl")
+
+        }
+
+        Log.v("Asdf","플래그 = " + flag)
+
+
+        tv_main_player_act_title_sing.text = title + " - " + originArtist
+        tv_main_player_cover_artist_name.text = "Covered by " + coverArtist
+        img_main_player_act_cover_img.visibility = View.VISIBLE
+        vp_main_player_act_cover_img.visibility = View.INVISIBLE
+
+        Glide.with(this).load(songImgUrl).into(img_main_player_act_cover_img)
+
+        initialSetting()
+
         playerBtn()
         registerBroadcast();
         updateUI();
-       //addTimer()
 
         iv_main_player_like_btn.setOnClickListener {
             iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected
@@ -253,7 +272,21 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         unregisterReceiver(mBroadcastReceiver)
     }
 
+    fun initialSetting(){
 
+        addSeekBar()
+        //addTimer()
+
+//        var play_duration = audioService.getDuration()
+  //      var lengthOfSong =
+    //            String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
+        //tv_set_start_act_length_of_song.setText(lengthOfSong)
+
+      //  seekbar.setMax(play_duration)
+    }
+
+
+    //seekbar touchListener
     fun addSeekBar() {
         seekbar = sb_scoring_player_act_seekbar
         seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -261,38 +294,36 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
             //값을 변경 한 후 터치를 떼었을 때
             override fun onStopTrackingTouch(seekbar: SeekBar) {
                 isPlaying = true
-
                 playbackPosition = seekbar.progress
-             //   mediaPlayer.seekTo(playbackPosition)
+//                mediaPlayer.seekTo(playbackPosition)
 
-                //if 재생 중이였다면
-/*                if(iv_main_player_act_stop_btn.isSelected){
-                    mediaPlayer.start()
-                    seekBarThread.run()
-                }*/
-
-
+                Log.e("onStopTrackingTouch", sb_scoring_player_act_seekbar.isSelected.toString())
+//                if (!sb_scoring_player_act_seekbar.isSelected) {
+//                    mediaPlayer.start()
+//                } else
+//                    mediaPlayer.pause()
             }
 
             //seek바의 값을 변경하기 위해 터치했을 때
             override fun onStartTrackingTouch(seekbar: SeekBar) {
+                Log.e("onStartTrackingTouch", sb_scoring_player_act_seekbar.isSelected.toString())
+
                 isPlaying = false
-                //mediaPlayer.pause()
-                //error : mediaplayer에 아 처음에 아무것도 만지지 않은 상태에서 seekbar 건들경우 error
+//                mediaPlayer.pause()
             }
 
             //seek바의 값이 변경되었을때 + fromUser: Boolean : 터치를 통해 변경했으면 false , 코드를 통하면 true
             override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
-
                 if (seekbar!!.getMax() == progress) {
                     isPlaying = false
-                    //mediaPlayer.stop()
+//                    mediaPlayer.stop()
                 }
             }
         })
     }
 
     fun playerBtn() {
+
 
         /*
         //if Looping == False
@@ -312,6 +343,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
            if (!iv_main_player_act_stop_btn.isSelected && selectedFlag == 0) {
                try {
                    startService()
+
 /*                if (mediaPlayer != null) {
                    mediaPlayer!!.stop()
                    mediaPlayer = null
@@ -344,7 +376,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
 
 
-       var play_duration = myService.getDuration()
+       var play_duration = audioService.getDuration()
        var lenthOfSong =
            String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
 
@@ -437,4 +469,9 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
        restartIntent.putExtra("playbackPosition", playbackPosition)
        stopService(restartIntent)
    }
+
+    public companion object {
+        lateinit var mainPlayerActivity: MainPlayerActivity
+        //일종의 스태틱
+    }
 }

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+    <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000"
+            android:orientation="vertical">
+
+        <include
+                layout="@layout/toolbar_mypage"/>
+
+
+        <LinearLayout
+                android:gravity="center_horizontal"
+                android:id="@+id/ll_upload_cover_act_upload_artwork"
+                android:orientation="vertical"
+                android:layout_width="match_parent" android:layout_height="wrap_content">
+
+            <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <TextView
+                        android:id="@+id/dqd"
+                        android:text="아트워크를 등록 해 주세요"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                        android:textSize="18sp"
+                        android:textColor="#fafafa"
+                        android:lineSpacingExtra="9sp"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <View
+                        android:layout_below="@+id/dqd"
+                        android:layout_width="67dp" android:layout_height="3dp"
+                        android:background="@color/colorPrimary"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                    android:layout_marginTop="82dp"
+                    android:layout_width="300dp" android:layout_height="300dp"
+                    android:background="@drawable/upload_cover_img_border">
+                <RelativeLayout android:layout_width="300dp" android:layout_height="300dp"
+                                android:background="#000000">
+                    <ImageView
+                            android:id="@+id/iv_upload_cover_file_act_thumb"
+                            android:scaleType="fitXY"
+                            android:layout_width="match_parent" android:layout_height="match_parent"/>
+                    <ImageView
+                            android:layout_width="50dp" android:layout_height="50dp"
+                            android:layout_margin="16dp"
+                            android:src="@drawable/btn_camera"
+                            android:layout_alignParentEnd="true" android:layout_alignParentBottom="true"/>
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+                android:id="@+id/ll_upload_cover_act_upload_highlight"
+                android:layout_marginVertical="20dp"
+                android:paddingHorizontal="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent" android:layout_height="68dp">
+
+            <TextView
+                    android:includeFontPadding="false"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#9e9e9e"
+                    android:lineSpacingExtra="6sp"
+                    android:text="하이라이트"/>
+
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView
+
+                        android:id="@+id/tv_up_load_cover_act_start_point"
+                        android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                        android:includeFontPadding="false"
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="8sp"
+                        android:text="3:12초부터"/>
+                <ImageView
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:src="@drawable/btn_more"/>
+            </RelativeLayout>
+
+            <SeekBar
+                    android:layout_marginHorizontal="3dp"
+                    android:id="@+id/sb_up_load_cover_act_seekbar"
+                    android:layout_marginTop="-2dp"
+                    android:layout_width="match_parent"
+                    android:thumb="@android:color/transparent"
+                    android:progressTint="@color/colorPrimary"
+                    android:layout_height="wrap_content"/>
+            <RelativeLayout
+                    android:id="@+id/rl_up_load_cover_act_time"
+                    android:layout_marginTop="-3dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/tv_up_load_cover_act_duration_time"
+                        android:layout_marginHorizontal="20dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                        android:text="00:00"
+                        android:textSize="10dp"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:textColor="#a1a1a1"
+                        android:layout_alignParentTop="true"/>
+                <TextView
+                        android:id="@+id/tv_up_load_cover_act_length_of_song"
+                        android:layout_marginHorizontal="20dp"
+                        android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                        android:textSize="10dp"
+                        android:textColor="#a1a1a1"
+                        android:text="00:00"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/ll_upload_cover_act_upload_music_uri"
+                android:paddingHorizontal="20dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent" android:layout_height="wrap_content">
+            <TextView
+                    android:includeFontPadding="false"
+                    android:layout_marginHorizontal="20dp"
+                    android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#9e9e9e"
+                    android:lineSpacingExtra="6sp"
+                    android:text="음원"/>
+
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView
+                        android:id="@+id/tv_up_load_cover_act_mp3_name"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="8sp"
+                        android:text=".mp3"/>
+                <ImageView
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:src="@drawable/btn_more"/>
+            </RelativeLayout>
+            <View
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_width="match_parent" android:layout_height="1dp"
+                    android:background="@color/colorPrimary"
+            />
+        </LinearLayout>
+
+        <ImageView
+                android:id="@+id/iv_up_load_cover_act_confirm_btn"
+                android:layout_marginTop="63dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:src="@drawable/btn_login_login"/>
+    </LinearLayout>
+</ScrollView>
