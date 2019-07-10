@@ -12,11 +12,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.AudioTest.PlayerActivity
 import com.song2.wave.Data.GET.GetHomeInfoResponse
+import com.song2.wave.Data.GET.GetRecommendResponse
 import com.song2.wave.Data.GET.GetTop10CategoryResponse
 import com.song2.wave.Data.model.Home.HomeSongData
 import com.song2.wave.Data.model.Home.MyWaitingSongData
 import com.song2.wave.Data.model.Home.TOP10Data
 import com.song2.wave.Data.model.HomeUserInfoData
+import com.song2.wave.Data.model.RecommendData
 import com.song2.wave.Data.model.Top10CategoryData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.Home.Adapter.*
@@ -67,6 +69,10 @@ class HomeOnFragment : Fragment() {
         getHomeInfoResponse()
 
         getTop10CategoryResponse()
+
+        getRecommendResponse()
+
+
 
         v.iv_home_frag_wavelogo.setOnClickListener {
             var intent = Intent(context, PlayerActivity::class.java)
@@ -150,12 +156,14 @@ class HomeOnFragment : Fragment() {
         top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "우울한"))
 */
 
+/*
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
+*/
 
         hitSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         hitSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
@@ -178,6 +186,26 @@ class HomeOnFragment : Fragment() {
         myWaitingSongDataList.add(MyWaitingSongData(6, "https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "노래제목3", "가숫3"))
     }
 
+    fun getRecommendResponse(){
+        val getRecommendResponse = networkService.getRecommendResponse("application/json",authorization_info)
+
+        getRecommendResponse.enqueue(object : retrofit2.Callback<GetRecommendResponse>{
+            override fun onFailure(call: Call<GetRecommendResponse>, t: Throwable) {
+                Log.e("home recommend song list fail", t.toString())
+            }
+
+            override fun onResponse(call: Call<GetRecommendResponse>, response: Response<GetRecommendResponse>) {
+                if (response.isSuccessful) {
+                    val recommendDataList: ArrayList<RecommendData> = response.body()!!.data
+
+                    for(i in recommendDataList.indices)
+                    recommendSongHomeDataList.add(HomeSongData(recommendDataList[i].artwork, recommendDataList[i].originTitle, recommendDataList[i].originArtistName, recommendDataList[i].coverArtistName))
+                }
+            }
+
+        })
+    }
+
     //userInfo
     fun getHomeInfoResponse(){
         //xx일 경우
@@ -194,7 +222,7 @@ class HomeOnFragment : Fragment() {
                     if (temp.auth){
                         showUserInfo(temp)
                     }else{
-                        //로그인 안했을 때 뷰
+                        showNonUserInfo()
                     }
                 }
             }
@@ -235,11 +263,27 @@ class HomeOnFragment : Fragment() {
 
 
     fun showUserInfo(temp: HomeUserInfoData){
-        //tv_home_frag_ment.setText(temp.nickname)
+
+        //info
         tv_home_frag_ment.setText(temp.nickname+"님!\n업로드 곡이\n평가를 기다리고 있어요!")
         tv_home_frag_scoring_cnt.setText(temp.rateSongCount.toString())
         tv_home_frag_perfect_cnt.setText(temp.hitSongCount.toString())
         tv_home_frag_total_point.setText(temp.totalPoint.toString() + "P")
+
+        //visible
+        rl_home_frag_goto_login.visibility = View.GONE
+        ll_home_frag_point_layout.visibility = View.VISIBLE
+    }
+
+    fun showNonUserInfo(){
+
+        //info
+        tv_home_frag_ment.setText("로그인 후\n더 많은 정보를 확인해보세요!")
+
+        //visibility
+        rl_home_frag_goto_login.visibility = View.VISIBLE
+        ll_home_frag_point_layout.visibility = View.GONE
+
     }
 }
 

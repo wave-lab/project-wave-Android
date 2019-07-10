@@ -115,6 +115,29 @@
                                         android:layout_centerVertical="true" android:layout_alignParentEnd="true"/>
                             </RelativeLayout>
 
+                            <RelativeLayout
+                                    android:id="@+id/rl_home_frag_goto_login"
+                                    android:visibility="gone"
+                                    android:layout_width="match_parent" android:layout_height="33dp">
+                                <TextView
+                                        android:id="@+id/login"
+                                        android:layout_centerHorizontal="true"
+                                        android:includeFontPadding="false"
+                                        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="22sp"
+                                        android:textColor="#ffffff"
+                                        android:lineSpacingExtra="9sp"
+                                        android:text="로그인 하기"/>
+                                <ImageView
+                                        android:layout_toRightOf="@+id/login"
+                                        android:layout_centerHorizontal="true"
+                                        android:src="@drawable/btn_more"
+                                        android:layout_width="24dp" android:layout_height="24dp"
+                                        android:layout_centerVertical="true" />
+                            </RelativeLayout>
+
                             <ImageView
 
                                     android:layout_gravity="center_horizontal"
