@@ -146,7 +146,7 @@
         <ImageView
                 android:layout_marginStart="49dp"
                 android:id="@+id/iv_main_player_act_stop_btn"
-                android:src="@drawable/play_selector"
+                android:src="@drawable/btn_play_md"
                 android:layout_centerInParent="true"
                 android:layout_width="36dp" android:layout_height="36dp"/>
         <ImageView

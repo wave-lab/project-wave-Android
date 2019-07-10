@@ -13,6 +13,9 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class AudioService extends Service {
     private final IBinder mBinder = new AudioServiceBinder();
     private ArrayList<Long> mAudioIds = new ArrayList<>();
@@ -21,12 +24,17 @@ public class AudioService extends Service {
     private int mCurrentPosition;
     private AudioAdapter.AudioItem mAudioItem;
     private NotificationPlayer mNotificationPlayer;
+    private TimerTask mTask;
+    private Timer mTimer;
+
 
     public class AudioServiceBinder extends Binder {
         AudioService getService() {
             return AudioService.this;
         }
     }
+
+
 
     @Override
     public void onCreate() {
@@ -36,17 +44,27 @@ public class AudioService extends Service {
         mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                Log.v("Asdf","테스트11");
                 isPrepared = true;
                 mp.start();
                 sendBroadcast(new Intent(BroadcastActions.PREPARED)); // prepared 전송
                 updateNotificationPlayer();
             }
         });
+
+        mTask = new TimerTask() {
+            @Override
+            public void run() {
+            }
+        };
+
+        /////////// / Timer 생성 //////////////
+        Timer timer = new Timer();
+        timer.schedule(mTask, 0, 1000);
+        //////////////////////////////////////
+
         mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                Log.v("Asdf","테스트");
 
                 isPrepared = false;
 
@@ -58,7 +76,6 @@ public class AudioService extends Service {
         mMediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Log.v("Asdf","테스트31");
 
                 isPrepared = false;
                 sendBroadcast(new Intent(BroadcastActions.PLAY_STATE_CHANGED)); // 재생상태 변경 전송
@@ -74,6 +91,8 @@ public class AudioService extends Service {
         });
         mNotificationPlayer = new NotificationPlayer(this);
     }
+
+
 
     @Override
     public IBinder onBind(Intent intent) {
