@@ -65,4 +65,10 @@ interface NetworkService {
         @Header("Content-Type") content_type: String,
         @Header("Authorization") authorization: String
     ): Call<GetPlaylistResponse>
+
+    @GET("pl/custom")
+    fun getCustomPlaylistResponse(
+        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String
+    ): Call<GetCustomPlayListResponse>
 }

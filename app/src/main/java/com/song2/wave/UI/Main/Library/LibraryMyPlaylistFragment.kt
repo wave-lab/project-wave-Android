@@ -1,6 +1,5 @@
 package com.song2.wave.UI.Main.Library
 
-
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -9,21 +8,40 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import com.song2.wave.Data.model.SongData
+import com.song2.wave.Data.GET.GetCustomPlayListResponse
+import com.song2.wave.Data.GET.GetPlaylistResponse
+import com.song2.wave.Data.model.CustomPlayListData
+import com.song2.wave.Data.model.PlaylistListData
 import com.song2.wave.UI.Main.Library.Adapter.MyPlaylistAdapter
+import com.song2.wave.Util.Network.ApplicationController
+import com.song2.wave.Util.Network.NetworkService
+import kotlinx.android.synthetic.main.fragment_library_my_playlist.*
 import kotlinx.android.synthetic.main.fragment_library_my_playlist.view.*
+import retrofit2.Call
+import retrofit2.Response
+import javax.security.auth.callback.Callback
 
 class LibraryMyPlaylistFragment : Fragment() {
 
-    lateinit var songDataArr : ArrayList<SongData>
+    val networkService: NetworkService by lazy { ApplicationController.instance.networkService
+    }
+
+    lateinit var authorization_info : String
+
+    lateinit var songDataArr : ArrayList<PlaylistListData>
     lateinit var requestManager : RequestManager
     lateinit var songFieldData : ArrayList<String?>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v: View = inflater.inflate(com.song2.wave.R.layout.fragment_library_my_playlist, container, false)
-        songDataArr = ArrayList<SongData>()
+
+        authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
+
+        songDataArr = ArrayList<PlaylistListData>()
         requestManager = Glide.with(this)
-        insertData(v)
+
+        getCustomPlaylistResponse()
+        //insertData(v)
 
         return v
     }
@@ -33,16 +51,48 @@ class LibraryMyPlaylistFragment : Fragment() {
 
     fun insertData(v : View){
 
-        songFieldData = ArrayList<String?>()
-        songFieldData.add("분야1")
+/*        songFieldData = ArrayList<String?>()
+        songFieldData.add("https://t1.daumcdn.net/cfile/tistory/2442394558BBBD1934")
+        songFieldData.add("https://t1.daumcdn.net/cfile/tistory/2442394558BBBD1934")
+        songFieldData.add("https://t1.daumcdn.net/cfile/tistory/2442394558BBBD1934")
+        songFieldData.add("https://t1.daumcdn.net/cfile/tistory/2442394558BBBD1934")
+        songFieldData.add("https://t1.daumcdn.net/cfile/tistory/2442394558BBBD1934")
 
-        songDataArr.add(SongData("https://t1.daumcdn.net/cfile/tistory/2442394558BBBD1934", "좋은날", "아이유(IU)", "송제민", songFieldData))
-        songDataArr.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "가을아침", "아이유(IU)", "송제민", songFieldData))
-        songDataArr.add(SongData("data:image/jpeg;base64,K9z4dklLE0/DKH3MOorln2gfzjf0p9KUro6h9pllfaVulKVxHMKUpQClKUApSlAf/Z", "Zeze", "아이유(IU)", "송제민", songFieldData))
-        songDataArr.add(SongData("https://cphoto.asiae.co.kr/listimglink/1/2014051608371615808_1.jpg", "꽃갈피", "아이유(IU)", "송제민", songFieldData))
-        songDataArr.add(SongData("https://pgnqdrjultom1827145.cdn.ntruss.com/img/f8/b9/f8b99005f6cc026302a55f0cba36c19ecbf1f2109f36639664a1c4217bbb41cd_v1.jpg", "무릎", "아이유(IU)", "송제민", songFieldData))
+        songDataArr.add(PlaylistListData(songFieldData, "좋은날", "아이유(IU)"))
+        songDataArr.add(PlaylistListData(songFieldData, "가을아침", "아이유(IU)"))
+        songDataArr.add(PlaylistListData(songFieldData, "Zeze", "아이유(IU)"))
+        songDataArr.add(PlaylistListData(songFieldData, "꽃갈피", "아이유(IU)"))
+        songDataArr.add(PlaylistListData(songFieldData,  "무릎", "아이유(IU)"))*/
 
-        v.recycler_library_my_playlist_frag_list.adapter = MyPlaylistAdapter(songDataArr, requestManager)
-        v.recycler_library_my_playlist_frag_list.layoutManager = LinearLayoutManager(v.context)
+
+    }
+
+    fun getCustomPlaylistResponse(){
+        var getCustomPlayListData = networkService.getCustomPlaylistResponse("application/json",authorization_info)
+
+        getCustomPlayListData.enqueue(object : retrofit2.Callback<GetCustomPlayListResponse>{
+            override fun onFailure(call: Call<GetCustomPlayListResponse>, t: Throwable) {
+            }
+
+            override fun onResponse(
+                call: Call<GetCustomPlayListResponse>,
+                response: Response<GetCustomPlayListResponse>
+            ) {
+
+                val playlistDataList: ArrayList<CustomPlayListData> = response.body()!!.data
+
+
+                if(playlistDataList == null)
+                    return
+
+                for(i in playlistDataList.indices){
+                    songDataArr.add(PlaylistListData(playlistDataList[i].thumbnail, playlistDataList[i].playlistName, playlistDataList[i].playlistComment))
+
+                }
+
+                recycler_library_my_playlist_frag_list.adapter = MyPlaylistAdapter(songDataArr, requestManager)
+                recycler_library_my_playlist_frag_list.layoutManager = LinearLayoutManager(context)
+            }
+        })
     }
 }
