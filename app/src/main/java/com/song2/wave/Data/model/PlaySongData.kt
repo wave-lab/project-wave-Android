@@ -1,6 +1,6 @@
 package com.song2.wave.Data.model
 
-data class RecommendData(
+data class PlaySongData(
 
     val genre: List<String>,
     val mood: List<String>,
