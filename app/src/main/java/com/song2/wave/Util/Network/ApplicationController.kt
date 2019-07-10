@@ -14,7 +14,6 @@ class ApplicationController : Application() {
         lateinit var instance: ApplicationController
     }
 
-
     override fun onCreate() {
         super.onCreate()
         instance = this

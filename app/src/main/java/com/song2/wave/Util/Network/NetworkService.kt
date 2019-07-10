@@ -1,13 +1,10 @@
 package com.song2.wave.Util.Network
 
-import com.google.gson.JsonObject
 import com.song2.wave.Data.GET.GetHomeInfoResponse
-import com.song2.wave.Data.GET.GetTop10Response
+import com.song2.wave.Data.GET.GetTop10CategoryResponse
 import retrofit2.Call
-import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.POST
 
 interface NetworkService {
 
@@ -19,9 +16,9 @@ interface NetworkService {
     ): Call<GetHomeInfoResponse>
 
     //home -> top10(장르,무드)
-    @GET("")
-    fun getTop10Resonse(
+    @GET("pl/top10")
+    fun getTop10CategoryResonse(
         @Header("Content-Type") content_type: String
-    ): Call<GetTop10Response>
+    ): Call<GetTop10CategoryResponse>
 
 }

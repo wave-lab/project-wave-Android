@@ -12,10 +12,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.AudioTest.PlayerActivity
 import com.song2.wave.Data.GET.GetHomeInfoResponse
+import com.song2.wave.Data.GET.GetTop10CategoryResponse
 import com.song2.wave.Data.model.Home.HomeSongData
 import com.song2.wave.Data.model.Home.MyWaitingSongData
 import com.song2.wave.Data.model.Home.TOP10Data
 import com.song2.wave.Data.model.HomeUserInfoData
+import com.song2.wave.Data.model.Top10CategoryData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.Home.Adapter.*
 import com.song2.wave.UI.Main.Home.Top10.Top10Fragment
@@ -63,6 +65,8 @@ class HomeOnFragment : Fragment() {
 
         //통신
         getHomeInfoResponse()
+
+        getTop10CategoryResponse()
 
         v.iv_home_frag_wavelogo.setOnClickListener {
             var intent = Intent(context, PlayerActivity::class.java)
@@ -134,6 +138,7 @@ class HomeOnFragment : Fragment() {
     }
 
     fun insertExampleData() {
+/*
         top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
         top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
         top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
@@ -143,6 +148,7 @@ class HomeOnFragment : Fragment() {
         top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "힙한"))
         top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "우울한"))
         top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "우울한"))
+*/
 
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
@@ -172,6 +178,7 @@ class HomeOnFragment : Fragment() {
         myWaitingSongDataList.add(MyWaitingSongData(6, "https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "노래제목3", "가숫3"))
     }
 
+    //userInfo
     fun getHomeInfoResponse(){
         //xx일 경우
         val getHomeInfoResponse = networkService.getHomeInfoResponse("application/json",authorization_info)
@@ -184,15 +191,50 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val temp: HomeUserInfoData = response.body()!!.data
 
-                    if (authorization_info != null){
-                        showInfo(temp)
+                    if (temp.auth){
+                        showUserInfo(temp)
+                    }else{
+                        //로그인 안했을 때 뷰
                     }
                 }
             }
         })
     }
 
-    fun showInfo(temp: HomeUserInfoData){
+    //top10Category
+    fun getTop10CategoryResponse(){
+        val getTop10CategoryResponse = networkService.getTop10CategoryResonse("application/json")
+
+        getTop10CategoryResponse.enqueue(object : retrofit2.Callback<GetTop10CategoryResponse>{
+
+            override fun onFailure(call: Call<GetTop10CategoryResponse>, t: Throwable) {
+                Log.e("top10 category fail", t.toString())
+            }
+
+            override fun onResponse(call: Call<GetTop10CategoryResponse>, response: Response<GetTop10CategoryResponse>) {
+                if (response.isSuccessful) {
+
+                    val top10CategoryDataList: ArrayList<ArrayList<Top10CategoryData>> = response.body()!!.data
+
+                    //장르데이터
+                    for (i in top10CategoryDataList[0].indices){
+                        top10CategoryDataList[0][i]
+                        top10GenreDataList.add(TOP10Data(top10CategoryDataList[0][i].top10Thumbnail, top10CategoryDataList[0][i].top10Name))
+                    }
+
+                    //무드데이터
+                    for (i in top10CategoryDataList[1].indices){
+                        top10CategoryDataList[0][i]
+                        top10MoodDataList.add(TOP10Data(top10CategoryDataList[1][i].top10Thumbnail, top10CategoryDataList[1][i].top10Name))
+                    }
+                }
+            }
+
+        })
+    }
+
+
+    fun showUserInfo(temp: HomeUserInfoData){
         //tv_home_frag_ment.setText(temp.nickname)
         tv_home_frag_ment.setText(temp.nickname+"님!\n업로드 곡이\n평가를 기다리고 있어요!")
         tv_home_frag_scoring_cnt.setText(temp.rateSongCount.toString())
