@@ -115,33 +115,6 @@ class HomeOnFragment : Fragment() {
         requestManager = Glide.with(this)
 
         //insertExampleData()
-
-        top10GenreAdapter = Top10GenreAdapter(top10GenreDataList, requestManager)
-        rv_home_frag_top10_genre_list.adapter = top10GenreAdapter
-        rv_home_frag_top10_genre_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-
-        top10MoodAdapter = Top10GenreAdapter(top10MoodDataList, requestManager)
-        rv_home_frag_top10_mood_list.adapter = top10MoodAdapter
-        rv_home_frag_top10_mood_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-
-        recommendSongHomeAdapter = RecomentSongHomeAdapter( recommendSongHomeDataList, requestManager)
-        rv_home_frag_scoring_recommend_list.adapter = recommendSongHomeAdapter
-        rv_home_frag_scoring_recommend_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-
-        hitSongHomeAdapter = HitSongHomeAdapter( hitSongHomeDataList, requestManager)
-        rv_home_frag_scoring_hit_list.adapter = hitSongHomeAdapter
-        rv_home_frag_scoring_hit_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-        waitingSongHomeAdapter = WaitingSongHomeAdapter(waitingSongDataList, requestManager)
-        rv_home_frag_scoring_waiting.adapter = waitingSongHomeAdapter
-        rv_home_frag_scoring_waiting.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-        myWaitingSongHomeAdapter = MyWaitingSongHomeAdapter(myWaitingSongDataList, requestManager)
-        rv_home_frag_scoring_waiting_mine.adapter = myWaitingSongHomeAdapter
-        rv_home_frag_scoring_waiting_mine.layoutManager =  LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
     fun insertExampleData() {
@@ -198,6 +171,10 @@ class HomeOnFragment : Fragment() {
 
                     for(i in playlistDataList.songList.indices)
                         hitSongHomeDataList.add(HomeSongData(playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
+
+                    hitSongHomeAdapter = HitSongHomeAdapter( hitSongHomeDataList, requestManager)
+                    rv_home_frag_scoring_hit_list.adapter = hitSongHomeAdapter
+                    rv_home_frag_scoring_hit_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 }
             }
 
@@ -206,7 +183,7 @@ class HomeOnFragment : Fragment() {
 
     //upload
     fun getUploadResponse(){
-        val getUploadResponse = networkService.getHitsResponse("application/json",authorization_info)
+        val getUploadResponse = networkService.getUploadResponse("application/json",authorization_info)
 
         getUploadResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
             override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
@@ -219,6 +196,10 @@ class HomeOnFragment : Fragment() {
 
                     for(i in playlistDataList.songList.indices)
                         myWaitingSongDataList.add(MyWaitingSongData(3,playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName))
+
+                    myWaitingSongHomeAdapter = MyWaitingSongHomeAdapter(myWaitingSongDataList, requestManager)
+                    rv_home_frag_scoring_waiting_mine.adapter = myWaitingSongHomeAdapter
+                    rv_home_frag_scoring_waiting_mine.layoutManager =  LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 }
             }
 
@@ -228,7 +209,7 @@ class HomeOnFragment : Fragment() {
 
     //rateReady
     fun getRateReadyResponse(){
-        val getRateReadyResponse = networkService.getHitsResponse("application/json",authorization_info)
+        val getRateReadyResponse = networkService.getRateReadyResponse("application/json",authorization_info)
 
         getRateReadyResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
             override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
@@ -241,6 +222,11 @@ class HomeOnFragment : Fragment() {
 
                     for(i in playlistDataList.songList.indices)
                         waitingSongDataList.add(HomeSongData(playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
+
+                    waitingSongHomeAdapter = WaitingSongHomeAdapter(waitingSongDataList, requestManager)
+                    rv_home_frag_scoring_waiting.adapter = waitingSongHomeAdapter
+                    rv_home_frag_scoring_waiting.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
                 }
             }
 
@@ -260,8 +246,20 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playSongDataList: ArrayList<PlaySongData> = response.body()!!.data
 
-                    for(i in playSongDataList.indices)
-                    recommendSongHomeDataList.add(HomeSongData(playSongDataList[i].artwork, playSongDataList[i].originTitle, playSongDataList[i].originArtistName, playSongDataList[i].coverArtistName))
+                    for(i in playSongDataList.indices) {
+                        recommendSongHomeDataList.add(
+                            HomeSongData(
+                                playSongDataList[i].artwork,
+                                playSongDataList[i].originTitle,
+                                playSongDataList[i].originArtistName,
+                                playSongDataList[i].coverArtistName
+                            )
+                        )
+                    }
+                    recommendSongHomeAdapter = RecomentSongHomeAdapter( recommendSongHomeDataList, requestManager)
+                    rv_home_frag_scoring_recommend_list.adapter = recommendSongHomeAdapter
+                    rv_home_frag_scoring_recommend_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
                 }
             }
 
@@ -312,11 +310,20 @@ class HomeOnFragment : Fragment() {
                         top10GenreDataList.add(TOP10Data(top10CategoryDataList[0][i].top10Thumbnail, top10CategoryDataList[0][i].top10Name))
                     }
 
+                    top10GenreAdapter = Top10GenreAdapter(top10GenreDataList, requestManager)
+                    rv_home_frag_top10_genre_list.adapter = top10GenreAdapter
+                    rv_home_frag_top10_genre_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
                     //무드데이터
                     for (i in top10CategoryDataList[1].indices){
                         top10CategoryDataList[0][i]
                         top10MoodDataList.add(TOP10Data(top10CategoryDataList[1][i].top10Thumbnail, top10CategoryDataList[1][i].top10Name))
                     }
+
+                    top10MoodAdapter = Top10GenreAdapter(top10MoodDataList, requestManager)
+                    rv_home_frag_top10_mood_list.adapter = top10MoodAdapter
+                    rv_home_frag_top10_mood_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
                 }
             }
 
