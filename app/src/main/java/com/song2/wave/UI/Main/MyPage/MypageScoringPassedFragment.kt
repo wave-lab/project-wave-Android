@@ -41,8 +41,8 @@ class MypageScoringPassedFragment : Fragment(){
 
         authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
 
-        getHitsResponse()
         attachRecyclerView()
+        getUploadResponse()
     }
 
     fun attachRecyclerView() {
@@ -62,10 +62,11 @@ class MypageScoringPassedFragment : Fragment(){
 
     }
 
-    fun getHitsResponse(){
-        val getHitsResponse = networkService.getHitsResponse("application/json",authorization_info,null)
+    //upload
+    fun getUploadResponse(){
+        val getUploadResponse = networkService.getUploadResponse("application/json",authorization_info,"pass")
 
-        getHitsResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
+        getUploadResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
             override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
                 Log.e("mypage hits song passed list fail", t.toString())
             }
@@ -74,10 +75,13 @@ class MypageScoringPassedFragment : Fragment(){
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
 
-                    for(i in playlistDataList.songList.indices)
-                    {
-                        passedScoreResultData.add(ScoreResultData(playlistDataList.songList[i].rateScore,playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].genre))
+                    if(playlistDataList == null){
+                        return
                     }
+
+                    for(i in playlistDataList.songList.indices)
+                        passedScoreResultData.add(ScoreResultData(playlistDataList.songList[i].rateScore,playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].genre))
+
                     passedScoreResultAdapter = ScoreResultAdapter(passedScoreResultData, requestManager)
                     rv_mypage_frag_score_passed_list.adapter = passedScoreResultAdapter
                     rv_mypage_frag_score_passed_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -85,21 +89,7 @@ class MypageScoringPassedFragment : Fragment(){
             }
 
         })
+
     }
 
-
-/*    private fun configureTopNavigation() {
-        vp_mypage_frag_content.adapter = FragmentMypageScoringResultPagerAdapter(childFragmentManager, 3)
-        // ViewPager와 Tablayout을 엮어줍니다!
-        tl_mypage_frag_tabbar.setupWithViewPager(vp_mypage_frag_content)
-        //TabLayout에 붙일 layout을 찾아준 다음
-        val topNaviLayout: View = this.layoutInflater.inflate(R.layout.fragment_mypage_score_result_tabbar, null, false)
-        //탭 하나하나 TabLayout에 연결시켜줍니다.
-        tl_mypage_frag_tabbar.getTabAt(0)!!.customView =
-                topNaviLayout.findViewById(R.id.rl_mypage_tabbar_score_passed) as RelativeLayout
-        tl_mypage_frag_tabbar.getTabAt(1)!!.customView =
-                topNaviLayout.findViewById(R.id.rl_mypage_tabbar_score_waiting) as RelativeLayout
-        tl_mypage_frag_tabbar.getTabAt(2)!!.customView =
-                topNaviLayout.findViewById(R.id.rl_mypage_tabbar_score_fail) as RelativeLayout
-    }*/
 }
