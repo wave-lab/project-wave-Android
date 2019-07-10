@@ -242,6 +242,7 @@ class HomeOnFragment : Fragment() {
         })
     }
 
+
     //recommend
     fun getRecommendResponse(){
         val getRecommendResponse = networkService.getRecommendResponse("application/json",authorization_info)

@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_scoring_passed_list.*
 class ScoringPassedFragment : Fragment() {
     lateinit var songDataArr: ArrayList<SongData>
     lateinit var requestManager: RequestManager
-    lateinit var songFieldData: ArrayList<String>
+    lateinit var songFieldData: ArrayList<String?>
 
     lateinit var scoringPassedListRecyclerViewAdapter: ScoringPassedListRecyclerViewAdapter
 

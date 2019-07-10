@@ -5,5 +5,5 @@ data class SongData (
         var songName : String?,
         var originArtistName : String,
         var coverArtistName : String,
-        var songField : ArrayList<String>
+        var songField : ArrayList<String?>
 )

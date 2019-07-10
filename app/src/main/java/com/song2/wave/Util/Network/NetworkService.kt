@@ -26,14 +26,14 @@ interface NetworkService {
     fun getRecommendResponse(
         @Header("Content-Type") content_type: String,
         @Header("Authorization") authorization: String
-    ) : Call<GetRecommendResponse>
+    ): Call<GetRecommendResponse>
 
     //평가 대기곡
     @GET("pl/rateReady")
     fun getRateReadyResponse(
         @Header("Content-Type") content_type: String,
         @Header("Authorization") authorization: String
-    ) : Call<GetPlaylistResponse>
+    ): Call<GetPlaylistResponse>
 
     //내가 올린 곡(d-day)
     //내가 올린 곡 mypage
@@ -41,8 +41,8 @@ interface NetworkService {
     fun getUploadResponse(
         @Header("Content-Type") content_type: String,
         @Header("Authorization") authorization: String,
-        @Query("status") status : String?
-    ) : Call<GetPlaylistResponse>
+        @Query("status") status: String?
+    ): Call<GetPlaylistResponse>
 
     //적중 결과 곡
     //적중 결과 곡 status
@@ -50,15 +50,19 @@ interface NetworkService {
     fun getHitsResponse(
         @Header("Content-Type") content_type: String,
         @Header("Authorization") authorization: String,
-        @Query("status") status : String?
-    ) : Call<GetPlaylistResponse>
+        @Query("status") status: String?
+    ): Call<GetPlaylistResponse>
 
     //마이페이지 - 일반유저
     @GET("/core/users")
     fun getUserInfoResponse(
         @Header("Content-Type") content_type: String,
         @Header("Authorization") authorization: String
-    ) : Call<GetUserInfoResponse>
+    ): Call<GetUserInfoResponse>
 
-
+    @GET("pl/likes")
+    fun getLikesPlaylistResponse(
+        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String
+    ): Call<GetPlaylistResponse>
 }

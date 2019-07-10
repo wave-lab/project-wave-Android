@@ -11,14 +11,17 @@ import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.Data.GET.GetPlaylistResponse
+import com.song2.wave.Data.GET.GetUserInfoResponse
 import com.song2.wave.Data.model.Mypage.ScoreHitResultData
 import com.song2.wave.Data.model.PlayListData
+import com.song2.wave.Data.model.UserInfoData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.MyPage.Adapter.FragmentMypageScoringResultPagerAdapter
 import com.song2.wave.UI.Main.MyPage.Adapter.HitScoreResultAdapter
 import com.song2.wave.Util.Network.ApplicationController
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_my_page.*
+import kotlinx.android.synthetic.main.fragment_my_page.view.*
 import retrofit2.Call
 import retrofit2.Response
 
@@ -27,7 +30,6 @@ class MyPageFragment : Fragment() {
     val networkService: NetworkService by lazy { ApplicationController.instance.networkService
     }
     lateinit var authorization_info : String
-
 
     lateinit var hitScoreResultAdapter: HitScoreResultAdapter
     lateinit var scoreHitResultData: ArrayList<ScoreHitResultData>
@@ -43,9 +45,9 @@ class MyPageFragment : Fragment() {
 
         authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
 
-
         //통신
         getHitsResponse()
+        getUserInfoResponse()
         attachRecyclerView()
 
     }
@@ -85,6 +87,22 @@ class MyPageFragment : Fragment() {
                 topNaviLayout.findViewById(R.id.rl_mypage_tabbar_score_fail) as RelativeLayout
     }
 
+    fun getUserInfoResponse(){
+        val getUserInfoResponse = networkService.getUserInfoResponse("application/json",authorization_info)
+
+        getUserInfoResponse.enqueue(object : retrofit2.Callback<GetUserInfoResponse>{
+            override fun onFailure(call: Call<GetUserInfoResponse>, t: Throwable) {
+                Log.e("mypage userinfo fail", t.toString())
+            }
+
+            override fun onResponse(call: Call<GetUserInfoResponse>, response: Response<GetUserInfoResponse>) {
+                val userInfoData : UserInfoData = response.body()!!.data
+
+                showUserInfo(userInfoData)
+
+            }
+        })
+    }
 
     //hits
     fun getHitsResponse(){
@@ -113,7 +131,6 @@ class MyPageFragment : Fragment() {
                         Log.e("songstatus", songstatus.toString())
 
                         scoreHitResultData.add(ScoreHitResultData(songstatus,playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
-
                     }
 
                     hitScoreResultAdapter = HitScoreResultAdapter(scoreHitResultData, requestManager)
@@ -123,5 +140,21 @@ class MyPageFragment : Fragment() {
             }
 
         })
+    }
+
+    fun showUserInfo(userInfoData : UserInfoData){
+
+        tv_mypage_frag_scoring_cnt.setText(userInfoData.rateSongCount.toString())
+        tv_mypage_frag_perfect_cnt.setText(userInfoData.hitSongCount.toString())
+
+        Glide.with(this).load(userInfoData.profileImg).into(cv_mypage_frag_profile_img)
+        tv_mypage_frag_profile_name.setText(userInfoData.nickName)
+        tv_mypage_frag_my_point.setText(userInfoData.totalPoint.toString()+" P")
+
+        if(userInfoData.isArtist.equals(1))
+            tv_home_frag_isArtist.setText("Artist")
+        else
+            tv_home_frag_isArtist.setText("Listener")
+
     }
 }
