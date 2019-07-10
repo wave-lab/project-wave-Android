@@ -1,6 +1,7 @@
 package com.song2.wave.Util.Network
 
 import com.song2.wave.Data.GET.GetHomeInfoResponse
+import com.song2.wave.Data.GET.GetPlaylistResponse
 import com.song2.wave.Data.GET.GetRecommendResponse
 import com.song2.wave.Data.GET.GetTop10CategoryResponse
 import retrofit2.Call
@@ -28,5 +29,27 @@ interface NetworkService {
         @Header("Content-Type") content_type: String,
         @Header("Authorization") authorization: String
     ) : Call<GetRecommendResponse>
+
+    //평가 대기곡
+    @GET("pl/rateReady")
+    fun getRateReadyResponse(
+        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String
+    ) : Call<GetPlaylistResponse>
+
+    //내가 올린 곡(d-day)
+    @GET("pl/upload")
+    fun getUploadResponse(
+        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String
+    ) : Call<GetPlaylistResponse>
+
+    //적중 성공 곡
+    @GET("pl/hits")
+    fun getHitsResponse(
+        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String
+    ) : Call<GetPlaylistResponse>
+
 
 }

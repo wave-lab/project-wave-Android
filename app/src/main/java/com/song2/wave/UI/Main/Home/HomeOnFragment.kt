@@ -12,13 +12,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.AudioTest.PlayerActivity
 import com.song2.wave.Data.GET.GetHomeInfoResponse
+import com.song2.wave.Data.GET.GetPlaylistResponse
 import com.song2.wave.Data.GET.GetRecommendResponse
 import com.song2.wave.Data.GET.GetTop10CategoryResponse
 import com.song2.wave.Data.model.Home.HomeSongData
 import com.song2.wave.Data.model.Home.MyWaitingSongData
 import com.song2.wave.Data.model.Home.TOP10Data
 import com.song2.wave.Data.model.HomeUserInfoData
-import com.song2.wave.Data.model.RecommendData
+import com.song2.wave.Data.model.PlayListData
+import com.song2.wave.Data.model.PlaySongData
 import com.song2.wave.Data.model.Top10CategoryData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.Home.Adapter.*
@@ -55,23 +57,22 @@ class HomeOnFragment : Fragment() {
 
     //lateinit var top10MoodAdapter: Top10MoodAdapter
 
-
     lateinit var requestManager: RequestManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v : View = inflater.inflate(R.layout.fragment_home_on, container, false)
-
 
         authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
 
 
         //통신
         getHomeInfoResponse()
-
         getTop10CategoryResponse()
-
         getRecommendResponse()
 
+        getRateReadyResponse()
+        getUploadResponse()
+        getHitsResponse()
 
 
         v.iv_home_frag_wavelogo.setOnClickListener {
@@ -113,7 +114,7 @@ class HomeOnFragment : Fragment() {
 
         requestManager = Glide.with(this)
 
-        insertExampleData()
+        //insertExampleData()
 
         top10GenreAdapter = Top10GenreAdapter(top10GenreDataList, requestManager)
         rv_home_frag_top10_genre_list.adapter = top10GenreAdapter
@@ -144,7 +145,6 @@ class HomeOnFragment : Fragment() {
     }
 
     fun insertExampleData() {
-/*
         top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
         top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
         top10MoodDataList.add(TOP10Data("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "힙합"))
@@ -154,16 +154,13 @@ class HomeOnFragment : Fragment() {
         top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "힙한"))
         top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "우울한"))
         top10GenreDataList.add(TOP10Data("https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E", "우울한"))
-*/
 
-/*
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         recommendSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
-*/
 
         hitSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
         hitSongHomeDataList.add(HomeSongData("https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬1", "류지훈", "양승희"))
@@ -186,6 +183,71 @@ class HomeOnFragment : Fragment() {
         myWaitingSongDataList.add(MyWaitingSongData(6, "https://images.otwojob.com/product/E/a/n/EandNVOq2rIbOu0.png/o2j/resize/900%3E", "노래제목3", "가숫3"))
     }
 
+    //hits
+    fun getHitsResponse(){
+        val getHitsResponse = networkService.getHitsResponse("application/json",authorization_info)
+
+        getHitsResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
+            override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
+                Log.e("home hits song list fail", t.toString())
+            }
+
+            override fun onResponse(call: Call<GetPlaylistResponse>, response: Response<GetPlaylistResponse>) {
+                if (response.isSuccessful) {
+                    val playlistDataList: PlayListData = response.body()!!.data
+
+                    for(i in playlistDataList.songList.indices)
+                        hitSongHomeDataList.add(HomeSongData(playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
+                }
+            }
+
+        })
+    }
+
+    //upload
+    fun getUploadResponse(){
+        val getUploadResponse = networkService.getHitsResponse("application/json",authorization_info)
+
+        getUploadResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
+            override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
+                Log.e("home hits song list fail", t.toString())
+            }
+
+            override fun onResponse(call: Call<GetPlaylistResponse>, response: Response<GetPlaylistResponse>) {
+                if (response.isSuccessful) {
+                    val playlistDataList: PlayListData = response.body()!!.data
+
+                    for(i in playlistDataList.songList.indices)
+                        myWaitingSongDataList.add(MyWaitingSongData(3,playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName))
+                }
+            }
+
+        })
+
+    }
+
+    //rateReady
+    fun getRateReadyResponse(){
+        val getRateReadyResponse = networkService.getHitsResponse("application/json",authorization_info)
+
+        getRateReadyResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
+            override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
+                Log.e("home hits song list fail", t.toString())
+            }
+
+            override fun onResponse(call: Call<GetPlaylistResponse>, response: Response<GetPlaylistResponse>) {
+                if (response.isSuccessful) {
+                    val playlistDataList: PlayListData = response.body()!!.data
+
+                    for(i in playlistDataList.songList.indices)
+                        waitingSongDataList.add(HomeSongData(playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
+                }
+            }
+
+        })
+    }
+
+    //recommend
     fun getRecommendResponse(){
         val getRecommendResponse = networkService.getRecommendResponse("application/json",authorization_info)
 
@@ -196,10 +258,10 @@ class HomeOnFragment : Fragment() {
 
             override fun onResponse(call: Call<GetRecommendResponse>, response: Response<GetRecommendResponse>) {
                 if (response.isSuccessful) {
-                    val recommendDataList: ArrayList<RecommendData> = response.body()!!.data
+                    val playSongDataList: ArrayList<PlaySongData> = response.body()!!.data
 
-                    for(i in recommendDataList.indices)
-                    recommendSongHomeDataList.add(HomeSongData(recommendDataList[i].artwork, recommendDataList[i].originTitle, recommendDataList[i].originArtistName, recommendDataList[i].coverArtistName))
+                    for(i in playSongDataList.indices)
+                    recommendSongHomeDataList.add(HomeSongData(playSongDataList[i].artwork, playSongDataList[i].originTitle, playSongDataList[i].originArtistName, playSongDataList[i].coverArtistName))
                 }
             }
 
@@ -283,6 +345,9 @@ class HomeOnFragment : Fragment() {
         //visibility
         rl_home_frag_goto_login.visibility = View.VISIBLE
         ll_home_frag_point_layout.visibility = View.GONE
+    }
+
+    fun waitdata(){
 
     }
 }
