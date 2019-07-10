@@ -2,8 +2,8 @@ package com.song2.wave.Data.model
 
 data class PlaySongData(
 
-    val genre: List<String>,
-    val mood: List<String>,
+    val genre: ArrayList<String?>,
+    val mood: ArrayList<String?>,
 
     val _id: String,
     val originTitle: String,
@@ -16,6 +16,7 @@ data class PlaySongData(
     val originArtistName: String,
     val enrollTime: String,
     val songUrl: String,
+    val songUri: String,
     val songComment: String,
     val reportCount: Int,
     val rateScore: Int,

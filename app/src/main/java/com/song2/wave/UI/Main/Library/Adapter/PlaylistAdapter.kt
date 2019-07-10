@@ -23,9 +23,9 @@ class PlaylistAdapter (private var songData : ArrayList<SongData>, var requestMa
 
     override fun onBindViewHolder(holder: SongSearchViewHolder, position: Int) {
 
-        //requestManager.load(songData[position].songCoverImg).centerCrop().into(holder.songCoverImg)
+        requestManager.load(songData[position].songCoverImg).centerCrop().into(holder.songCoverImg)
         // ex)
-        requestManager.load(EXAMPLE_IMG_URL).into(holder.songCoverImg)
+        //requestManager.load(EXAMPLE_IMG_URL).into(holder.songCoverImg)
         holder.songName.text = songData[position].songName
         holder.originArtistName.text = " - " + songData[position].originArtistName
         holder.coverArtistName.text = songData[position].coverArtistName
