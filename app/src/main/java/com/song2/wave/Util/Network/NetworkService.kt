@@ -2,6 +2,7 @@ package com.song2.wave.Util.Network
 
 import com.google.gson.JsonObject
 import com.song2.wave.Data.GET.GetHomeInfoResponse
+import com.song2.wave.Data.GET.GetTop10Response
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
