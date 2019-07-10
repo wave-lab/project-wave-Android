@@ -85,11 +85,19 @@ interface NetworkService {
             @Part("mood[1]") mood1 : RequestBody,
             @Part("originArtist[0]") originArtist : RequestBody
     ) : Call<PostResponse>
+  
     @GET("pl/likes")
     fun getLikesPlaylistResponse(
         @Header("Content-Type") content_type: String,
         @Header("Authorization") authorization: String
     ): Call<GetPlaylistResponse>
+
+    @GET("pl/rated")
+    fun getRatedResponse(
+        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String,
+        @Query("status") status: String?
+    ): Call<GetRecommendResponse>
 
     @GET("pl/custom")
     fun getCustomPlaylistResponse(
