@@ -306,7 +306,6 @@ class HomeOnFragment : Fragment() {
 
                     //장르데이터
                     for (i in top10CategoryDataList[0].indices){
-                        top10CategoryDataList[0][i]
                         top10GenreDataList.add(TOP10Data(top10CategoryDataList[0][i].top10Thumbnail, top10CategoryDataList[0][i].top10Name))
                     }
 
@@ -316,7 +315,6 @@ class HomeOnFragment : Fragment() {
 
                     //무드데이터
                     for (i in top10CategoryDataList[1].indices){
-                        top10CategoryDataList[0][i]
                         top10MoodDataList.add(TOP10Data(top10CategoryDataList[1][i].top10Thumbnail, top10CategoryDataList[1][i].top10Name))
                     }
 
