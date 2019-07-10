@@ -23,7 +23,7 @@ class SearchArtistFragment : android.support.v4.app.Fragment(), OnBackPressedLis
     lateinit var songDataArr : ArrayList<SongData>
     var searchHomeFragment = SearchHomeFragment()
     lateinit var songSearchAdapter : SongSearchAdapter
-    lateinit var songFieldData : ArrayList<String>
+    lateinit var songFieldData : ArrayList<String?>
     lateinit var requestManager : RequestManager
 
     override fun onBackPressed() {
@@ -56,7 +56,7 @@ class SearchArtistFragment : android.support.v4.app.Fragment(), OnBackPressedLis
     }
 
     fun insertExampleData(){
-        songFieldData = ArrayList<String>()
+        songFieldData = ArrayList<String?>()
         songFieldData.add("분야1")
 
         songDataArr.add(SongData("https://t1.daumcdn.net/cfile/tistory/2442394558BBBD1934", "좋은날", "아이유(IU)", "송제민", songFieldData))

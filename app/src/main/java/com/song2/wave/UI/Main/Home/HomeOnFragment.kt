@@ -169,6 +169,9 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
 
+                    if(playlistDataList == null)
+                        return
+
                     for(i in playlistDataList.songList.indices)
                         hitSongHomeDataList.add(HomeSongData(playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
 
@@ -183,7 +186,7 @@ class HomeOnFragment : Fragment() {
 
     //upload
     fun getUploadResponse(){
-        val getUploadResponse = networkService.getUploadResponse("application/json",authorization_info)
+        val getUploadResponse = networkService.getUploadResponse("application/json",authorization_info,null)
 
         getUploadResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
             override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
@@ -193,6 +196,9 @@ class HomeOnFragment : Fragment() {
             override fun onResponse(call: Call<GetPlaylistResponse>, response: Response<GetPlaylistResponse>) {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
+
+                    if(playlistDataList == null)
+                        return
 
                     for(i in playlistDataList.songList.indices)
                         myWaitingSongDataList.add(MyWaitingSongData(3,playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName))
@@ -220,6 +226,9 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
 
+                    if(playlistDataList == null)
+                        return
+
                     for(i in playlistDataList.songList.indices)
                         waitingSongDataList.add(HomeSongData(playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
 
@@ -233,6 +242,7 @@ class HomeOnFragment : Fragment() {
         })
     }
 
+
     //recommend
     fun getRecommendResponse(){
         val getRecommendResponse = networkService.getRecommendResponse("application/json",authorization_info)
@@ -245,6 +255,9 @@ class HomeOnFragment : Fragment() {
             override fun onResponse(call: Call<GetRecommendResponse>, response: Response<GetRecommendResponse>) {
                 if (response.isSuccessful) {
                     val playSongDataList: ArrayList<PlaySongData> = response.body()!!.data
+
+                    if(playSongDataList == null)
+                        return
 
                     for(i in playSongDataList.indices) {
                         recommendSongHomeDataList.add(
@@ -304,6 +317,9 @@ class HomeOnFragment : Fragment() {
 
                     val top10CategoryDataList: ArrayList<ArrayList<Top10CategoryData>> = response.body()!!.data
 
+                    if(top10CategoryDataList[0] == null)
+                        return
+
                     //장르데이터
                     for (i in top10CategoryDataList[0].indices){
                         top10GenreDataList.add(TOP10Data(top10CategoryDataList[0][i].top10Thumbnail, top10CategoryDataList[0][i].top10Name))
@@ -312,6 +328,9 @@ class HomeOnFragment : Fragment() {
                     top10GenreAdapter = Top10GenreAdapter(top10GenreDataList, requestManager)
                     rv_home_frag_top10_genre_list.adapter = top10GenreAdapter
                     rv_home_frag_top10_genre_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+                    if(top10CategoryDataList[1] == null)
+                        return
 
                     //무드데이터
                     for (i in top10CategoryDataList[1].indices){

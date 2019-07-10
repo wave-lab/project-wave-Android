@@ -7,6 +7,7 @@ import android.widget.TextView
 import com.song2.wave.R
 
 class SongSearchViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+
     var songCoverImg: ImageView = itemView!!.findViewById(R.id.img_song_item_cover)
     var songName : TextView = itemView!!.findViewById(R.id.tv_song_item_song_name)
     var originArtistName: TextView = itemView!!.findViewById(R.id.tv_song_item_origin_artist_name)

@@ -17,7 +17,7 @@ class ScoringWaitingFragment : Fragment() {
 
     lateinit var songDataArr : ArrayList<SongData>
     lateinit var requestManager : RequestManager
-    lateinit var songFieldData : ArrayList<String>
+    lateinit var songFieldData : ArrayList<String?>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v: View = inflater.inflate(com.song2.wave.R.layout.fragment_scoring_wait, container, false)
@@ -33,7 +33,7 @@ class ScoringWaitingFragment : Fragment() {
 
     fun insertData(v : View){
 
-        songFieldData = ArrayList<String>()
+        songFieldData = ArrayList<String?>()
         songFieldData.add("분야1")
 
         songDataArr.add(SongData("https://t1.daumcdn.net/cfile/tistory/2442394558BBBD1934", "좋은날", "아이유(IU)", "송제민", songFieldData))

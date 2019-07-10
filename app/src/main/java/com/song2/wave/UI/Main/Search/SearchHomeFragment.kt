@@ -38,7 +38,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener{
 
     lateinit var songDataArr : ArrayList<SongData>
     lateinit var coverArtistDataArr : ArrayList<CoverArtistData>
-    lateinit var songFieldData : ArrayList<String>
+    lateinit var songFieldData : ArrayList<String?>
 
     lateinit var songSearchAdapter : SongSearchAdapter
     lateinit var coverArtistAdapter: CoverArtistSearchAdapter
@@ -104,7 +104,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener{
     }
 
     fun insertExampleData(){
-        songFieldData = ArrayList<String>()
+        songFieldData = ArrayList<String?>()
         songFieldData.add("분야1")
         songDataArr.add(SongData("https://t1.daumcdn.net/cfile/tistory/2442394558BBBD1934", "좋은날", "아이유(IU)", "송제민", songFieldData))
         songDataArr.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "가을아침", "아이유(IU)", "송제민", songFieldData))
