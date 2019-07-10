@@ -158,4 +158,8 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener{
         (context as MainActivity).setOnBackPressedListener(this, 2)
     }
 
+    fun getSearchResponse(){
+        //var getSearchResponse
+    }
+
 }

@@ -77,8 +77,8 @@ class HomeOnFragment : Fragment() {
 
         //통신
         getHomeInfoResponse()
-       // getTop10CategoryResponse()
-       // getRecommendResponse()
+        getTop10CategoryResponse()
+        getRecommendResponse()
 
         getRateReadyResponse()
         getUploadResponse()
@@ -329,10 +329,6 @@ class HomeOnFragment : Fragment() {
                     for (i in top10CategoryDataList[0].indices){
                         top10GenreDataList.add(TOP10Data(top10CategoryDataList[0][i].top10Thumbnail, top10CategoryDataList[0][i].top10Name))
                     }
-                    top10GenreAdapter = Top10GenreAdapter(top10GenreDataList, requestManager)
-                    rv_home_frag_top10_genre_list.adapter = top10GenreAdapter
-                    rv_home_frag_top10_genre_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
                     top10GenreAdapter = Top10GenreAdapter(top10GenreDataList, requestManager)
                     rv_home_frag_top10_genre_list.adapter = top10GenreAdapter
                     rv_home_frag_top10_genre_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

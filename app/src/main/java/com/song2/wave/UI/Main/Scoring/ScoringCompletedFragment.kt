@@ -22,6 +22,7 @@ import com.song2.wave.UI.Main.Scoring.Adapter.ScoringFailedRecyclerViewAdapter
 import com.song2.wave.UI.Main.Scoring.Adapter.ScoringPassedListRecyclerViewAdapter
 import com.song2.wave.UI.Main.Scoring.Adapter.ScoringPassedRecyclerViewAdapter
 import com.song2.wave.UI.Main.Scoring.Adapter.ScoringPassingRecyclerViewAdapter
+import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.ApplicationController
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_scoring_passed.*
@@ -36,7 +37,7 @@ class ScoringCompletedFragment : Fragment(){
     var dataListPassed: ArrayList<PassedCompletedSongData> = ArrayList()
     var dataListPassing: ArrayList<PassedSongData> = ArrayList()
 
-    val networkService: NetworkService by lazy { ApplicationController.instance.networkService
+    val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
     }
 
     lateinit var authorization_info : String
