@@ -20,7 +20,7 @@ class Top10GenreAdapter(private var top10data: ArrayList<TOP10Data>, var request
     override fun getItemCount(): Int = top10data.size
 
     override fun onBindViewHolder(holder: Top10ViewHolder, position: Int) {
-        requestManager.load(top10data[position].top10Img).into(holder.top10CoverImg)
-        holder.top10Kinds.text = top10data[position].top10Kind
+        requestManager.load(top10data[position].top10Thumbnail).into(holder.top10CoverImg)
+        holder.top10Kinds.text = top10data[position].top10Name
     }
 }
