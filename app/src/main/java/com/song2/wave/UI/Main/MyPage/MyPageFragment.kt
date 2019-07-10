@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.Data.model.Mypage.ScoreHitResultData
 import com.song2.wave.R
-import com.song2.wave.R.id.rv_mypage_frag_score_hit_result
 import com.song2.wave.UI.Main.MyPage.Adapter.FragmentMypageScoringResultPagerAdapter
 import com.song2.wave.UI.Main.MyPage.Adapter.HitScoreResultAdapter
 import kotlinx.android.synthetic.main.fragment_my_page.*
