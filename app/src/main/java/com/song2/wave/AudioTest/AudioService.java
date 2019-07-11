@@ -37,7 +37,7 @@ public class AudioService extends Service {
 
     String playTime;
     long mpCurrentPosition1, mpCurrentPosition2;
-    String songUrl, songName, originArtist, coverArtist, title, songImgUrl;
+    String songUrl, songName, originArtist, coverArtist, title, songImgUrl, _id;
 
 
     public class AudioServiceBinder extends Binder {
@@ -285,8 +285,9 @@ public class AudioService extends Service {
         return ((mMediaPlayer.getCurrentPosition() / 1000) % 3600 % 60);
     }
 
-    public void play(String songUrl, String originArtist, String coverArtist, String songName) {
+    public void play(String _id, String songUrl, String originArtist, String coverArtist, String songName) {
 //        queryAudioItem(position);
+        this._id = _id;
         this.songUrl = songUrl;
         this.originArtist = originArtist;
         this.coverArtist = coverArtist;

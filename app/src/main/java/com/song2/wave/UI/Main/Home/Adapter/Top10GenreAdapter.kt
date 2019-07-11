@@ -1,15 +1,21 @@
 package com.song2.wave.UI.Main.Home.Adapter
 
+import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
+import com.song2.wave.AudioTest.AudioApplication
 import com.song2.wave.Data.model.Home.TOP10Data
 import com.song2.wave.R
+import com.song2.wave.UI.MainPlayer.MainPlayerActivity
 
 
-class Top10GenreAdapter(private var top10data: ArrayList<TOP10Data>, var requestManager : RequestManager) : RecyclerView.Adapter<Top10ViewHolder>(){
+class Top10GenreAdapter(var context : Context, private var top10data: ArrayList<TOP10Data>, var requestManager : RequestManager) : RecyclerView.Adapter<Top10ViewHolder>(){
+
+    var mContext = context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Top10ViewHolder {
         val mainView : View = LayoutInflater.from(parent.context)
@@ -22,5 +28,6 @@ class Top10GenreAdapter(private var top10data: ArrayList<TOP10Data>, var request
     override fun onBindViewHolder(holder: Top10ViewHolder, position: Int) {
         requestManager.load(top10data[position].top10Thumbnail).into(holder.top10CoverImg)
         holder.top10Kinds.text = top10data[position].top10Name
+
     }
 }

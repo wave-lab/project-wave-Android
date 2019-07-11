@@ -234,15 +234,19 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
         // 노래 선택으로 입장 시
         if (extras == null) {
+            Log.v("asdf", "선택 - 노래")
             _id = intent.getStringExtra("_id")
+            Log.v("asdf","받아온 값 = " + _id)
             title = intent.getStringExtra("title")
             originArtist = intent.getStringExtra("originArtist")
             coverArtist = intent.getStringExtra("coverArtist")
             songUrl = intent.getStringExtra("songUrl")
-            AudioApplication.getInstance().serviceInterface.play(songUrl, originArtist, coverArtist,  title) // 선택한 오디오재생
+            AudioApplication.getInstance().serviceInterface.play(_id, songUrl, originArtist, coverArtist,  title) // 선택한 오디오재생
         }
         // notification으로 입장 시
         else {
+            Log.v("asdf", "선택 - 노티피케이션")
+            _id = intent.getStringExtra("_id")
             title = extras.getString("title")
             originArtist = extras.getString("originArtist")
             coverArtist = extras.getString("coverArtist")
@@ -497,7 +501,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
     fun getSongDetail()
     {
-        val getSongDetailResponse = networkService.getSongDetailResonse(authorization_info, "5d25bad614f0f71c24b85134")
+        val getSongDetailResponse = networkService.getSongDetailResonse(authorization_info, _id)
         getSongDetailResponse.enqueue(object : Callback<GetSongDetailResponse> {
 
             override fun onResponse(call: Call<GetSongDetailResponse>, response: Response<GetSongDetailResponse>) {
@@ -513,6 +517,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
                             genreValue += data.genre[i]
                     }
                     tv_main_player_act_genre.text = genreValue
+                    Glide.with(applicationContext).load(data.artwork)
                     Log.v("Asf","테스트 장르 = " + genreValue)
                 }else{
                     Log.v("ASdf", "테스트 에러 = " + response.code())

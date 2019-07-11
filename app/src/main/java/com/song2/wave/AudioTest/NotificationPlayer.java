@@ -28,7 +28,7 @@ public class NotificationPlayer {
     private NotificationManager mNotificationManager;
     private NotificationManagerBuilder mNotificationManagerBuilder;
     private boolean isForeground;
-    String title, originArtist, coverArtist, songImgUrl;
+    String title, originArtist, coverArtist, songImgUrl, _id;
     int flag;
 
     public NotificationPlayer(AudioService service) {
@@ -141,6 +141,7 @@ public class NotificationPlayer {
             notification.priority = Notification.PRIORITY_MAX;
             notification.contentIntent = mMainPendingIntent;
 
+            playActivity.putExtra("_id", MainPlayerActivity.mainPlayerActivity.get_id());
             playActivity.putExtra("title", MainPlayerActivity.mainPlayerActivity.getTitle());
             playActivity.putExtra("originArtist", MainPlayerActivity.mainPlayerActivity.getOriginArtist());
             playActivity.putExtra("coverArtist", MainPlayerActivity.mainPlayerActivity.getCoverArtist());
@@ -212,6 +213,7 @@ public class NotificationPlayer {
             }
 
 //            String title = mService.getAudioItem().mTitle;
+            _id = mService._id;
             title = mService.songName;
             originArtist = mService.originArtist;
             coverArtist = mService.coverArtist;

@@ -147,7 +147,7 @@ class HomeOnFragment : Fragment() {
                     if(playlistDataList == null)
                         return
 
-                    hitSongHomeAdapter = HitSongHomeAdapter( hitSongHomeDataList, requestManager)
+                    hitSongHomeAdapter = HitSongHomeAdapter(context!!, hitSongHomeDataList, requestManager)
                     rv_home_frag_scoring_hit_list.adapter = hitSongHomeAdapter
                     rv_home_frag_scoring_hit_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 }
@@ -274,7 +274,7 @@ class HomeOnFragment : Fragment() {
                             )
                         )
                     }
-                    recommendSongHomeAdapter = RecomentSongHomeAdapter( recommendSongHomeDataList, requestManager)
+                    recommendSongHomeAdapter = RecomentSongHomeAdapter(context!!, recommendSongHomeDataList, requestManager)
                     rv_home_frag_scoring_recommend_list.adapter = recommendSongHomeAdapter
                     rv_home_frag_scoring_recommend_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 }
@@ -330,7 +330,7 @@ class HomeOnFragment : Fragment() {
                     for (i in top10CategoryDataList[0].indices){
                         top10GenreDataList.add(TOP10Data(top10CategoryDataList[0][i].top10Thumbnail, top10CategoryDataList[0][i].top10Name))
                     }
-                    top10GenreAdapter = Top10GenreAdapter(top10GenreDataList, requestManager)
+                    top10GenreAdapter = Top10GenreAdapter(context!!, top10GenreDataList, requestManager)
                     rv_home_frag_top10_genre_list.adapter = top10GenreAdapter
                     rv_home_frag_top10_genre_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
@@ -341,7 +341,7 @@ class HomeOnFragment : Fragment() {
                     for (i in top10CategoryDataList[1].indices){
                         top10MoodDataList.add(TOP10Data(top10CategoryDataList[1][i].top10Thumbnail, top10CategoryDataList[1][i].top10Name))
                     }
-                    top10MoodAdapter = Top10GenreAdapter(top10MoodDataList, requestManager)
+                    top10MoodAdapter = Top10GenreAdapter(context!!, top10MoodDataList, requestManager)
                     rv_home_frag_top10_mood_list.adapter = top10MoodAdapter
                     rv_home_frag_top10_mood_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
