@@ -25,8 +25,7 @@ class UpLoadSongCoverActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R
-            .layout.activity_up_load_song_cover)
+        setContentView(R.layout.activity_up_load_song_cover)
 
         var upload_song_uri: String = intent.getStringExtra("songURI")
         var start_point : Int = intent.getStringExtra("StartPoint").toInt()
@@ -50,13 +49,15 @@ class UpLoadSongCoverActivity : AppCompatActivity() {
         tv_up_load_cover_act_duration_time.setText(startPointOfSong)
         tv_up_load_cover_act_length_of_song.setText(lengthOfSong)
         var seekbar: SeekBar = sb_up_load_cover_act_seekbar
-        //seekbar.
+        seekbar.setMax(play_duration)
+        seekbar.setProgress(start_point)
 
         //음원
         tv_up_load_cover_act_mp3_name.setText(upload_song_uri)
 
         iv_up_load_cover_act_confirm_btn.setOnClickListener {
-            startActivity<UploadSongInfoActivity>()
+            Log.e("er","StartPoint: " + start_point.toString() +"/songURI: " + upload_song_uri +"/picURI: " + selectedPicUri.toString())
+            startActivity<UploadSongInfoActivity>("StartPoint" to start_point.toString(), "songURI" to upload_song_uri , "picURI" to selectedPicUri)
         }
 
     }
@@ -82,6 +83,7 @@ class UpLoadSongCoverActivity : AppCompatActivity() {
                     Glide.with(this).load(selectedPicUri)
                         .thumbnail(0.1f).into(iv_upload_cover_file_act_thumb)
 
+                    Log.e("Imgurl",selectedPicUri.toString())
                     //getRealPathFromURI(applicationContext, it.data)
 
                 }
