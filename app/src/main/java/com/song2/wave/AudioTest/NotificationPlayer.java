@@ -217,7 +217,8 @@ public class NotificationPlayer {
             title = mService.songName;
             originArtist = mService.originArtist;
             coverArtist = mService.coverArtist;
-            remoteViews.setTextViewText(R.id.txt_title, title + " - " + originArtist);
+            remoteViews.setTextViewText(R.id.txt_title, title);
+            remoteViews.setTextViewText(R.id.cover_atist_name, coverArtist);
 //            Uri albumArtUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), mService.getAudioItem().mAlbumId);
             Handler uiHandler = new Handler(Looper.getMainLooper());
             uiHandler.post(new Runnable(){
