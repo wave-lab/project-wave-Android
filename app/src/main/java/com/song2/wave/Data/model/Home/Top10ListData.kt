@@ -6,5 +6,5 @@ data class Top10ListData(
     var topSongName : String?,
     var topOriginArtistName : String,
     var topCoverArtistName : String,
-    var topSongField : ArrayList<String>
+    var topSongField : ArrayList<String?>
 )

@@ -6,14 +6,14 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
-                  android:background="#000000"
-    >
+                  android:background="#000000">
         <RelativeLayout
                 android:id="@+id/rl_top10_frag_idx0"
                 android:layout_width="65dp"
                 android:layout_height="50dp"
                 android:gravity="center">
             <TextView
+                    android:id="@+id/tv_top10_tabbar_idx0"
                     android:text="idx0"
                     android:gravity="center"
                     android:textSize="16sp"
@@ -30,6 +30,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
             <TextView
+                    android:id="@+id/tv_top10_tabbar_idx1"
                     android:text="idx1"
                     android:gravity="center"
                     android:textSize="16sp"
@@ -44,6 +45,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
             <TextView
+                    android:id="@+id/tv_top10_tabbar_idx2"
                     android:text="idx2"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
@@ -58,6 +60,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
             <TextView
+                    android:id="@+id/tv_top10_tabbar_idx3"
                     android:text="idx3"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
@@ -73,6 +76,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
             <TextView
+                    android:id="@+id/tv_top10_tabbar_idx4"
                     android:text="idx4"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
@@ -86,6 +90,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
             <TextView
+                    android:id="@+id/tv_top10_tabbar_idx5"
                     android:text="idx5"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
@@ -100,6 +105,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
             <TextView
+                    android:id="@+id/tv_top10_tabbar_idx6"
                     android:text="idx6"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
@@ -115,6 +121,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
             <TextView
+                    android:id="@+id/tv_top10_tabbar_idx7"
                     android:text="idx7"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
