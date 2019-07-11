@@ -34,8 +34,6 @@ public class AudioService extends Service {
     private int mCurrentPosition;
     private AudioAdapter.AudioItem mAudioItem;
     private NotificationPlayer mNotificationPlayer;
-    private TimerTask mTask;
-    private Timer mTimer;
 
     String playTime;
     long mpCurrentPosition1, mpCurrentPosition2;
@@ -58,10 +56,8 @@ public class AudioService extends Service {
             public void onPrepared(MediaPlayer mp) {
                 isPrepared = true;
                 mp.start();
-                Log.v("asdf","답2 = " + mp.getDuration());
 
                 String lengthOfSong = String.format("%02d:%02d", ((mp.getDuration() / 1000) % 3600 / 60), ((mp.getDuration() / 1000) % 3600 % 60));
-                Log.v("asdf","답3 = " + lengthOfSong);
                 MainPlayerActivity.mainPlayerActivity.lengthTimeTv.setText(lengthOfSong);
                 MainPlayerActivity.mainPlayerActivity.seekbar.setMax(mp.getDuration());
 
@@ -96,7 +92,6 @@ public class AudioService extends Service {
                             if (MainPlayerActivity.mainPlayerActivity.seekbar.getMax() == progress) {
                                 isPlaying = false;
                                 mMediaPlayer.stop();
-// mediaPlayer.stop()
                             }
                         }
 
@@ -126,12 +121,6 @@ public class AudioService extends Service {
         };
 
         mSeekbarUpdateHandler.postDelayed(mUpdateSeekbar, 0);
-
-        if(isPrepared){
-
-
-        }
-
 
         mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -279,14 +268,6 @@ public class AudioService extends Service {
         return mMediaPlayer.isPlaying();
     }
 
-
-
-//    public void play(int position) {
-//        queryAudioItem(position);
-//        stop();
-//        prepare();
-//    }
-
     public int getDuration(){
         return mMediaPlayer.getDuration();
     }
@@ -304,14 +285,12 @@ public class AudioService extends Service {
         return ((mMediaPlayer.getCurrentPosition() / 1000) % 3600 % 60);
     }
 
-    public void play(String songUrl, String originArtist, String coverArtist, String songName, String songImgUrl) {
+    public void play(String songUrl, String originArtist, String coverArtist, String songName) {
 //        queryAudioItem(position);
         this.songUrl = songUrl;
         this.originArtist = originArtist;
         this.coverArtist = coverArtist;
-        this.title = title;
         this.songName = songName;
-        this.songImgUrl = songImgUrl;
         stop();
         prepare(songUrl);
     }

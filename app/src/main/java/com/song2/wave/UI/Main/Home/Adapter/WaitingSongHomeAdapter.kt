@@ -32,18 +32,19 @@ class WaitingSongHomeAdapter (context : Context, private var waitingSongData: Ar
 
         requestManager.load(waitingSongData[position].songCoverImg).into(holder.songCoverImg)
         holder.songInfo.text = waitingSongData[position].songName +" - "+ waitingSongData[position].originArtistName
+        Log.v("ASdf","테스트 = " +  waitingSongData[position].originArtistName)
         holder.artistname.text = waitingSongData[position].coverArtistName
 
 
         holder.itemView.setOnClickListener{
             var intent = Intent(mContext, MainPlayerActivity::class.java)
             //AudioApplication.getInstance().serviceInterface.setPlayList(holder.adapterPosition) // 재생목록등록
-            AudioApplication.getInstance().serviceInterface.play(waitingSongData[holder.adapterPosition].songUrl, waitingSongData[position].originArtistName, waitingSongData[position].coverArtistName, waitingSongData[position].songName, waitingSongData[position].songCoverImg) // 선택한 오디오재생
+            AudioApplication.getInstance().serviceInterface.play(waitingSongData[holder.adapterPosition].songUrl, waitingSongData[position].originArtistName, waitingSongData[position].coverArtistName, waitingSongData[position].songName) // 선택한 오디오재생
+            intent.putExtra("_id", waitingSongData[holder.adapterPosition]._id)
             intent.putExtra("songUrl", waitingSongData[holder.adapterPosition].songUrl)
             intent.putExtra("title", waitingSongData[holder.adapterPosition].songName)
             intent.putExtra("originArtist", waitingSongData[holder.adapterPosition].originArtistName)
             intent.putExtra("coverArtist", waitingSongData[holder.adapterPosition].coverArtistName)
-            intent.putExtra("songImgUrl", waitingSongData[holder.adapterPosition].songCoverImg)
             mContext.startActivity(intent)
         }
 

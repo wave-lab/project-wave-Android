@@ -53,6 +53,13 @@ interface NetworkService {
         @Query("status") status: String?
     ): Call<GetPlaylistResponse>
 
+    // 곡 상세정보 조회
+    @GET("core/songs/{songIdx}")
+    fun getSongDetailResonse(
+        @Header("Authorization") authorization: String,
+        @Path("songIdx") songIdx: String?
+    ): Call<GetSongDetailResponse>
+
     //적중 결과 곡
     //적중 결과 곡 status
     @GET("pl/hits")
