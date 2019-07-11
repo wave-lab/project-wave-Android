@@ -82,7 +82,7 @@ class LibraryLikeFragment : Fragment() {
                         return
 
                     for(i in playlistDataList.songList.indices)
-                        songDataArr.add(SongData(playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName,playlistDataList.songList[i].genre))
+                        songDataArr.add(SongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].songUrl, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName,playlistDataList.songList[i].genre))
 
                     recycler_library_like_frag_list.adapter = PlaylistAdapter(songDataArr, requestManager)
                     recycler_library_like_frag_list.layoutManager = LinearLayoutManager(context)

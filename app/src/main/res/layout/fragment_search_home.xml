@@ -74,7 +74,6 @@
                         android:textColor="#616161"
                         android:layout_marginLeft="24dp"
                         android:fontFamily="@font/noto_sans_kr_regular_hestia"
-                        android:layout_above="@+id/img_search_home_frag_artist"
                         android:layout_marginBottom="25dp"/>
 
                 <TextView
@@ -148,24 +147,13 @@
                 android:layout_height="110dp"
                 android:layout_marginLeft="16dp"
                 >
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/img_search_home_frag_artist"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_search_home_frag_origin_artist"
                     android:layout_width="82dp"
-                    android:layout_height="82dp"
+                    android:layout_height="110dp"
                     android:background="@drawable/img_artistprofile"
                     />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Post Ma…"
-                    android:textSize="16sp"
-                    android:textColor="#ffffff"
-                    android:fontFamily="@font/noto_sans_kr_bold_hestia"
-                    android:layout_below="@+id/img_search_home_frag_artist"
-                    android:layout_centerHorizontal="true"
-                    android:includeFontPadding="false"
-                    android:layout_marginTop="8dp"
-                    />
+
             </RelativeLayout>
 
             <LinearLayout
