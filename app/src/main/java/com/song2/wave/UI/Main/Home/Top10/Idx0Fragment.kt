@@ -19,7 +19,6 @@ class Idx0Fragment : Fragment(){
 
     lateinit var requestManager: RequestManager
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v: View = inflater.inflate(com.song2.wave.R.layout.fragment_top10_idx0, container, false)
 

@@ -93,7 +93,6 @@ interface NetworkService {
         @Query("originArtistName") originartistname : String,
         @Query("artistName") artistname : String,
         @Query("originTitle") origintitle : String
-
     )
 
     ////////////////////* POST *///////////////////////////

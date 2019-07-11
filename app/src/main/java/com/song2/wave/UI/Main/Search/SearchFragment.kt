@@ -15,6 +15,9 @@ class SearchFragment : android.support.v4.app.Fragment(){
 
         addFragment(SearchHomeFragment())
 
+
+
+
         return v
     }
 
