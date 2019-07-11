@@ -36,6 +36,8 @@ public class AudioService extends Service {
     private NotificationPlayer mNotificationPlayer;
     private TimerTask mTask;
     private Timer mTimer;
+
+    String playTime;
     long mpCurrentPosition1, mpCurrentPosition2;
     String songUrl, songName, originArtist, coverArtist, title, songImgUrl;
 
@@ -60,13 +62,11 @@ public class AudioService extends Service {
 
                 String lengthOfSong = String.format("%02d:%02d", ((mp.getDuration() / 1000) % 3600 / 60), ((mp.getDuration() / 1000) % 3600 % 60));
                 Log.v("asdf","답3 = " + lengthOfSong);
+                MainPlayerActivity.mainPlayerActivity.lengthTimeTv.setText(lengthOfSong);
                 MainPlayerActivity.mainPlayerActivity.seekbar.setMax(mp.getDuration());
 
                 //mTimer = new Timer();
-
                 //mTimer.schedule(mTask, 100);
-
-
 
                 sendBroadcast(new Intent(BroadcastActions.PREPARED)); // prepared 전송
                 updateNotificationPlayer();
@@ -80,6 +80,14 @@ public class AudioService extends Service {
                 if(isPrepared){
                     Log.v("Asdf","텟텟 = " + mMediaPlayer.getCurrentPosition());
                     MainPlayerActivity.mainPlayerActivity.seekbar.setProgress(mMediaPlayer.getCurrentPosition());
+                    if(MainPlayerActivity.mainPlayerActivity.seekbar.getMax() > 0) {
+                        playTime = String.format(
+                                "%02d:%02d",
+                                getMpCurrentPosition1(),
+                                getMpCurrentPosition2()
+                        );
+                        MainPlayerActivity.mainPlayerActivity.durationTimeTv.setText(playTime);
+                    }
 
                     MainPlayerActivity.mainPlayerActivity.seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         //seek바의 값이 변경되었을때 + fromUser: Boolean : 터치를 통해 변경했으면 false , 코드를 통하면 true
@@ -88,7 +96,6 @@ public class AudioService extends Service {
                             if (MainPlayerActivity.mainPlayerActivity.seekbar.getMax() == progress) {
                                 isPlaying = false;
                                 mMediaPlayer.stop();
-//
 // mediaPlayer.stop()
                             }
                         }
@@ -187,6 +194,8 @@ public class AudioService extends Service {
         }
         return super.onStartCommand(intent, flags, startId);
     }
+
+
 
     @Override
     public void onDestroy() {

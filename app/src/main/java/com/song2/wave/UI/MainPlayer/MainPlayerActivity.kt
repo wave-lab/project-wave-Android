@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.song2.wave.AudioTest.AudioApplication
 import com.song2.wave.AudioTest.AudioService
@@ -40,7 +41,8 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
     var flag : Int = 0
 
     var selectedFlag : Int = 0
-
+    lateinit var durationTimeTv : TextView
+    lateinit var lengthTimeTv : TextView
 
 
     var currentPosition = 0
@@ -202,6 +204,8 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         mainPlayerActivity = this
         myService = MyForeGroundService()
         audioService = AudioService()
+        durationTimeTv = findViewById(R.id.tv_main_player_duration_time)
+        lengthTimeTv = findViewById(R.id.tv_main_player_length_of_song)
 
         iv_main_player_act_stop_btn.setOnClickListener(this)
         mPosition = intent.getIntExtra("mPosition", 0)
