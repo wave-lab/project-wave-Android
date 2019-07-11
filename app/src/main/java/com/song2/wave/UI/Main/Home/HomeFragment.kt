@@ -26,6 +26,7 @@ class HomeFragment : android.support.v4.app.Fragment(){
             startActivity(intent)
         }*/
 
+
         return v
     }
 

@@ -47,7 +47,13 @@ class HomeOnFragment : Fragment() {
     val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
     }
 
+    var top10fragment = Top10Fragment()
+
     lateinit var authorization_info : String
+
+    var genreRank = ArrayList<String>()
+    var moodRank = ArrayList<String>()
+
     var mAdapter: AudioAdapter? = null
     lateinit var projection : Array<String>
     lateinit var waitSongDataArr : ArrayList<PlaySongData>
@@ -69,8 +75,13 @@ class HomeOnFragment : Fragment() {
 
     lateinit var requestManager: RequestManager
 
+    var bundleGenre = Bundle()
+    var bundleMood = Bundle()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v : View = inflater.inflate(R.layout.fragment_home_on, container, false)
+
+
 
         authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
 
@@ -85,6 +96,7 @@ class HomeOnFragment : Fragment() {
         getHitsResponse()
 
 
+
         v.iv_home_frag_wavelogo.setOnClickListener {
             var intent = Intent(context, PlayerActivity::class.java)
             startActivity(intent)
@@ -96,10 +108,14 @@ class HomeOnFragment : Fragment() {
         }
 
         v.iv_home_frag_top10_genre_more_btn.setOnClickListener {
-            HomeFragment.homeFragment.replaceFragment(Top10Fragment())
+
+
+            HomeFragment.homeFragment.replaceFragment(top10fragment)
         }
 
         v.iv_home_frag_top10_mood_more_btn.setOnClickListener {
+
+
             HomeFragment.homeFragment.replaceFragment(Top10Fragment())
         }
 
@@ -328,7 +344,9 @@ class HomeOnFragment : Fragment() {
 
                     //장르데이터
                     for (i in top10CategoryDataList[0].indices){
-                        top10GenreDataList.add(TOP10Data(top10CategoryDataList[0][i].top10Thumbnail, top10CategoryDataList[0][i].top10Name))
+                        genreRank.add(top10CategoryDataList[0][i].top10Name)
+                        bundleGenre.putStringArrayList("bundleGenre",genreRank)
+                        top10GenreDataList.add(TOP10Data(top10CategoryDataList[0][i]._id,top10CategoryDataList[0][i].top10Thumbnail, top10CategoryDataList[0][i].top10Name))
                     }
                     top10GenreAdapter = Top10GenreAdapter(context!!, top10GenreDataList, requestManager)
                     rv_home_frag_top10_genre_list.adapter = top10GenreAdapter
@@ -339,15 +357,22 @@ class HomeOnFragment : Fragment() {
 
                     //무드데이터
                     for (i in top10CategoryDataList[1].indices){
-                        top10MoodDataList.add(TOP10Data(top10CategoryDataList[1][i].top10Thumbnail, top10CategoryDataList[1][i].top10Name))
+                        moodRank.add(top10CategoryDataList[0][i].top10Name)
+                        bundleMood.putStringArrayList("bundleGenre",moodRank)
+                        top10MoodDataList.add(TOP10Data(top10CategoryDataList[0][i]._id,top10CategoryDataList[1][i].top10Thumbnail, top10CategoryDataList[1][i].top10Name))
                     }
                     top10MoodAdapter = Top10GenreAdapter(context!!, top10MoodDataList, requestManager)
                     rv_home_frag_top10_mood_list.adapter = top10MoodAdapter
                     rv_home_frag_top10_mood_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
+
+                    bundleGenre.putStringArrayList("genreRank",genreRank)
+                    top10fragment.arguments = bundleGenre
+
+                    bundleMood.putStringArrayList("moodRank",moodRank)
+                    top10fragment.arguments = bundleMood
                 }
             }
-
         })
     }
 
