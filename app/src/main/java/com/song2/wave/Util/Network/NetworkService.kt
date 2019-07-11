@@ -97,6 +97,13 @@ interface NetworkService {
 
     ) : Call<GetSearchResponse>
 
+    @GET("/pl/{playlistIdx}")
+    fun getTop10PlaylistResponse(
+        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String,
+        @Path("playlistIdx") playlistIdx : String?
+    ) : Call<GetTop10PlaylistResponse>
+
     ////////////////////* POST *///////////////////////////
 
     // 회원가입

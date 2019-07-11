@@ -47,6 +47,8 @@ class HomeOnFragment : Fragment() {
     val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
     }
 
+    var top10fragment = Top10Fragment()
+
     lateinit var authorization_info : String
 
     var genreRank = ArrayList<String>()
@@ -94,7 +96,6 @@ class HomeOnFragment : Fragment() {
         getHitsResponse()
 
 
-        var top10fragment = Top10Fragment()
 
         v.iv_home_frag_wavelogo.setOnClickListener {
             var intent = Intent(context, PlayerActivity::class.java)
@@ -107,17 +108,13 @@ class HomeOnFragment : Fragment() {
         }
 
         v.iv_home_frag_top10_genre_more_btn.setOnClickListener {
-            bundleGenre.putStringArrayList("top10Rank",genreRank)
 
-            top10fragment.setArguments(bundleGenre)
 
             HomeFragment.homeFragment.replaceFragment(top10fragment)
         }
 
         v.iv_home_frag_top10_mood_more_btn.setOnClickListener {
-            bundleMood.putStringArrayList("top10Rank",moodRank)
 
-            top10fragment.setArguments(bundleMood)
 
             HomeFragment.homeFragment.replaceFragment(Top10Fragment())
         }
@@ -367,9 +364,14 @@ class HomeOnFragment : Fragment() {
                     rv_home_frag_top10_mood_list.adapter = top10MoodAdapter
                     rv_home_frag_top10_mood_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
+
+                    bundleGenre.putStringArrayList("genreRank",genreRank)
+                    top10fragment.arguments = bundleGenre
+
+                    bundleMood.putStringArrayList("moodRank",moodRank)
+                    top10fragment.arguments = bundleMood
                 }
             }
-
         })
     }
 
