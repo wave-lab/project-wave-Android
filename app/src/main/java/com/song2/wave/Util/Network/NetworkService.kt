@@ -123,6 +123,11 @@ interface NetworkService {
         @Path("playlistIdx") playlistIdx : String?
     ) : Call<GetTop10PlaylistResponse>
 
+    //** ds 작업 **//
+    @GET("core/originArtist")
+    fun getOriginArtistResponse(
+        @Header("Content-Type") content_type: String
+    ) : Call<GetOriginArtistResponse>
 
     ////////////////////* POST *///////////////////////////
 
