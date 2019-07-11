@@ -105,6 +105,7 @@ interface NetworkService {
 
     ) : Call<GetSearchResponse>
 
+
     @GET("core/users/emailCheck")
     fun getEmailCheckResponse(
             @Query("email") email : String?
@@ -114,6 +115,14 @@ interface NetworkService {
     fun getNicknameCheckResponse(
             @Query("nickname") nickname : String?
     ) : Call<GetNicknameCheckResponse>
+
+    @GET("/pl/{playlistIdx}")
+    fun getTop10PlaylistResponse(
+        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String,
+        @Path("playlistIdx") playlistIdx : String?
+    ) : Call<GetTop10PlaylistResponse>
+
 
     ////////////////////* POST *///////////////////////////
 
