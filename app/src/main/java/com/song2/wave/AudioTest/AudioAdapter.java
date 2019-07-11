@@ -58,9 +58,19 @@ public class AudioAdapter extends CursorRecyclerViewAdapter<RecyclerView.ViewHol
         public static AudioItem bindCursor(Cursor cursor) {
             AudioItem audioItem = new AudioItem();
             audioItem.mId = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.AudioColumns._ID));
+            Log.v("바인드", "바인드 id = " + MediaStore.Audio.AudioColumns._ID);
+            Log.v("바인드", "바인드 컬럼 ㅍid = " + cursor.getColumnIndex(MediaStore.Audio.AudioColumns._ID));
+            Log.v("바인드", "바인드 전체 id = " + cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns._ID)));
             audioItem.mAlbumId = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.ALBUM_ID));
             audioItem.mTitle = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.TITLE));
+            Log.v("바인드", "바인드 title = " + MediaStore.Audio.AudioColumns.TITLE);
+            Log.v("바인드", "바인드 컬럼 title = " + cursor.getColumnIndex(MediaStore.Audio.AudioColumns.TITLE));
+            Log.v("바인드", "바인드 전체 title = " + cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.TITLE)));
+            Log.v("바인드", "바인드 전체 title2 = " + cursor.getString(1));
             audioItem.mArtist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.ARTIST));
+            Log.v("바인드", "바인드 Artist = " + MediaStore.Audio.AudioColumns.ARTIST);
+            Log.v("바인드", "바인드 컬럼 Artist = " + cursor.getColumnIndex(MediaStore.Audio.AudioColumns.ARTIST));
+            Log.v("바인드", "바인드 전체 Artist = " + cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.ARTIST)));
             audioItem.mAlbum = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.ALBUM));
             audioItem.mDuration = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DURATION));
             audioItem.mDataPath = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DATA));
@@ -95,11 +105,14 @@ public class AudioAdapter extends CursorRecyclerViewAdapter<RecyclerView.ViewHol
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AudioApplication.getInstance().getServiceInterface().setPlayList(getAudioIds()); // 재생목록등록
-                    //AudioApplication.getInstance().getServiceInterface().play(mPosition); // 선택한 오디오재생
-
+//                    AudioApplication.getInstance().getServiceInterface().setPlayList(getAudioIds()); // 재생목록등록
+//                    Log.v("asdf","텟값 = " + getAudioIds());
+//                    AudioApplication.getInstance().getServiceInterface().play(mPosition); // 선택한 오디오재생
+                    AudioApplication.getInstance().getServiceInterface().play(); // 선택한 오디오재생
+                    Log.v("asdf","텟값2 = " + mPosition);
                     Intent intent = new Intent(context, MainPlayerActivity.class);
-                    intent.putExtra("mPosition", mPosition);
+//                    intent.putExtra("mPosition", mPosition);
+                    intent.putExtra("songUrl", "sadf");
                     context.startActivity(intent);
                 }
             });

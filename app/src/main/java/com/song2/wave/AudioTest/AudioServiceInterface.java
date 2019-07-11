@@ -35,12 +35,20 @@ public class AudioServiceInterface {
         }
     }
 
-    public void play(int position) {
+//    public void play(int position) {
+//        if (mService != null) {
+//            Log.v("asdf","테스트1");
+//            mService.play(position);
+//        }
+//    }
+
+    public void play(String _id, String songUrl, String originArtist, String coverArtist, String songName) {
         if (mService != null) {
-            Log.v("asdf","테스트1");
-            mService.play(position);
+            mService.play(_id, songUrl, originArtist, coverArtist, songName);
+            Log.v("Asdf","테스트 플레ㅣ");
         }
     }
+
 
     public void play() {
         if (mService != null) {
@@ -60,6 +68,7 @@ public class AudioServiceInterface {
         if (mService != null) {
             return mService.isPlaying();
         }
+
         return false;
     }
 

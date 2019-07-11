@@ -9,6 +9,7 @@
   
     <ImageView android:layout_width="140dp"
                android:layout_height="140dp"
+               android:scaleType="centerCrop"
                android:id="@+id/img_cover_artist_scoring_passed"
                android:src="@drawable/img_artistprofile"
                />

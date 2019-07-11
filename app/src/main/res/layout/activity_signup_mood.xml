@@ -73,12 +73,14 @@
         android:layout_marginLeft="31dp"
         android:layout_marginTop="213dp"
         >
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_signup_mood_act_funny"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="#00b6de"
-            />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:src="#00b6de" />
         <TextView
             android:id="@+id/tv_signup_mood_act_funny"
             android:layout_width="wrap_content"

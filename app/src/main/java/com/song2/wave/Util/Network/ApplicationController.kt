@@ -6,14 +6,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApplicationController : Application() {
 
-    private var BASE_URL = "http://15.164.70.24:3000"
+    private var BASE_URL = "http://wave-studio.ml:8080"
     lateinit var networkService: NetworkService
 
 
     companion object {
         lateinit var instance: ApplicationController
     }
-
 
     override fun onCreate() {
         super.onCreate()

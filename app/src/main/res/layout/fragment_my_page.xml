@@ -271,8 +271,7 @@
 
             <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_mypage_frag_score_hit_result"
-                    android:layout_width="match_parent"
-                                                    android:layout_height="170dp">
+                    android:layout_width="match_parent" android:layout_height="170dp">
 
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>

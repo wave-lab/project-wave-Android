@@ -7,20 +7,38 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.SeekBar;
+import android.widget.Toast;
 
+import com.song2.wave.UI.Main.MainActivity;
+import com.song2.wave.UI.MainPlayer.MainPlayerActivity;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class AudioService extends Service {
     private final IBinder mBinder = new AudioServiceBinder();
     private ArrayList<Long> mAudioIds = new ArrayList<>();
     private MediaPlayer mMediaPlayer;
-    private boolean isPrepared;
+    boolean isPrepared;
+    int playbackPosition = 0;
+    boolean isPlaying = false;
     private int mCurrentPosition;
     private AudioAdapter.AudioItem mAudioItem;
     private NotificationPlayer mNotificationPlayer;
+
+    String playTime;
+    long mpCurrentPosition1, mpCurrentPosition2;
+    String songUrl, songName, originArtist, coverArtist, title, songImgUrl, _id;
+
 
     public class AudioServiceBinder extends Binder {
         AudioService getService() {
@@ -36,17 +54,77 @@ public class AudioService extends Service {
         mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                Log.v("Asdf","테스트11");
                 isPrepared = true;
                 mp.start();
+
+                String lengthOfSong = String.format("%02d:%02d", ((mp.getDuration() / 1000) % 3600 / 60), ((mp.getDuration() / 1000) % 3600 % 60));
+                MainPlayerActivity.mainPlayerActivity.lengthTimeTv.setText(lengthOfSong);
+                MainPlayerActivity.mainPlayerActivity.seekbar.setMax(mp.getDuration());
+
+                //mTimer = new Timer();
+                //mTimer.schedule(mTask, 100);
+
                 sendBroadcast(new Intent(BroadcastActions.PREPARED)); // prepared 전송
                 updateNotificationPlayer();
             }
         });
+
+        Handler mSeekbarUpdateHandler = new Handler();
+        Runnable mUpdateSeekbar = new Runnable() {
+            @Override
+            public void run() {
+                if(isPrepared){
+                    Log.v("Asdf","텟텟 = " + mMediaPlayer.getCurrentPosition());
+                    MainPlayerActivity.mainPlayerActivity.seekbar.setProgress(mMediaPlayer.getCurrentPosition());
+                    if(MainPlayerActivity.mainPlayerActivity.seekbar.getMax() > 0) {
+                        playTime = String.format(
+                                "%02d:%02d",
+                                getMpCurrentPosition1(),
+                                getMpCurrentPosition2()
+                        );
+                        MainPlayerActivity.mainPlayerActivity.durationTimeTv.setText(playTime);
+                    }
+
+                    MainPlayerActivity.mainPlayerActivity.seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                        //seek바의 값이 변경되었을때 + fromUser: Boolean : 터치를 통해 변경했으면 false , 코드를 통하면 true
+                        @Override
+                        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                            if (MainPlayerActivity.mainPlayerActivity.seekbar.getMax() == progress) {
+                                isPlaying = false;
+                                mMediaPlayer.stop();
+                            }
+                        }
+
+                        //seek바의 값을 변경하기 위해 터치했을 때
+                        @Override
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+                            isPlaying = false;
+                            mMediaPlayer.pause();
+                        }
+
+                        //값을 변경 한 후 터치를 떼었을 때
+                        @Override
+                        public void onStopTrackingTouch(SeekBar SeekBar) {
+                            isPlaying = true;
+                            playbackPosition = MainPlayerActivity.mainPlayerActivity.seekbar.getProgress();
+                            mMediaPlayer.seekTo(playbackPosition);
+
+                            if (!SeekBar.isSelected()) {
+                                mMediaPlayer.start();
+                            } else
+                                mMediaPlayer.pause();
+                        }
+                    });
+                }
+                mSeekbarUpdateHandler.postDelayed(this, 50);
+            }
+        };
+
+        mSeekbarUpdateHandler.postDelayed(mUpdateSeekbar, 0);
+
         mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                Log.v("Asdf","테스트");
 
                 isPrepared = false;
 
@@ -58,7 +136,6 @@ public class AudioService extends Service {
         mMediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Log.v("Asdf","테스트31");
 
                 isPrepared = false;
                 sendBroadcast(new Intent(BroadcastActions.PLAY_STATE_CHANGED)); // 재생상태 변경 전송
@@ -73,7 +150,12 @@ public class AudioService extends Service {
             }
         });
         mNotificationPlayer = new NotificationPlayer(this);
+
+
+
     }
+
+
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -102,6 +184,8 @@ public class AudioService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -112,6 +196,7 @@ public class AudioService extends Service {
         }
         removeNotificationPlayer();
     }
+
 
     private void updateNotificationPlayer() {
         if (mNotificationPlayer != null) {
@@ -150,10 +235,13 @@ public class AudioService extends Service {
         }
     }
 
-    private void prepare() {
+
+
+    private void prepare(String songUrl) {
         try {
-            mMediaPlayer.setDataSource(mAudioItem.mDataPath);
+            mMediaPlayer.setDataSource(songUrl);
             mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            //mMediaPlayer.prepare();
             mMediaPlayer.prepareAsync();
         } catch (Exception e) {
             e.printStackTrace();
@@ -180,14 +268,38 @@ public class AudioService extends Service {
         return mMediaPlayer.isPlaying();
     }
 
-    public void play(int position) {
-        queryAudioItem(position);
-        stop();
-        prepare();
+    public int getDuration(){
+        return mMediaPlayer.getDuration();
     }
+
+    public long getMpCurrentPosition1(){
+        long resultCurrentValue = ((mMediaPlayer.getCurrentPosition() / 1000) % 3600 / 60);
+        return resultCurrentValue;
+    }
+
+    public long getMpCurrentPosition2(){
+        return ((mMediaPlayer.getCurrentPosition() / 1000) % 3600 % 60);
+    }
+
+    public int getCurrentPosition(){
+        return ((mMediaPlayer.getCurrentPosition() / 1000) % 3600 % 60);
+    }
+
+    public void play(String _id, String songUrl, String originArtist, String coverArtist, String songName) {
+//        queryAudioItem(position);
+        this._id = _id;
+        this.songUrl = songUrl;
+        this.originArtist = originArtist;
+        this.coverArtist = coverArtist;
+        this.songName = songName;
+        stop();
+        prepare(songUrl);
+    }
+
 
     public void play() {
         if (isPrepared) {
+
             mMediaPlayer.start();
             sendBroadcast(new Intent(BroadcastActions.PLAY_STATE_CHANGED)); // 재생상태 변경 전송
             updateNotificationPlayer();
@@ -208,7 +320,7 @@ public class AudioService extends Service {
         } else {
             mCurrentPosition = 0; // 처음 포지션으로 이동.
         }
-        play(mCurrentPosition);
+//        play(mCurrentPosition);
     }
 
     public void rewind() {
@@ -217,6 +329,6 @@ public class AudioService extends Service {
         } else {
             mCurrentPosition = mAudioIds.size() - 1; // 마지막 포지션으로 이동.
         }
-        play(mCurrentPosition);
+//        play(mCurrentPosition);
     }
 }

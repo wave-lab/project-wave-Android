@@ -251,5 +251,4 @@ class ScoringPlayerActivity : Activity() {
         }
     }
 
-
 }

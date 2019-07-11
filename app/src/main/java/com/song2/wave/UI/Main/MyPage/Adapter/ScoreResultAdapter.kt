@@ -21,8 +21,7 @@ class ScoreResultAdapter(private var resultSongData: ArrayList<ScoreResultData>,
     override fun onBindViewHolder(holder: ScoreResultViewHolder, position: Int) {
         requestManager.load(resultSongData[position].songCoverImg).into(holder.songCoverImg)
         holder.songOriginInfo.text = resultSongData[position].songName +" - "+ resultSongData[position].songOriginArtist
-        holder.songField.text = "통과점수 : " + resultSongData[position].songFiled[0]
-        holder.songResultScore.text =  resultSongData[position].songScore.toString()
-
+        holder.songField.text = resultSongData[position].songFiled[0]
+        holder.songResultScore.text = "통과점수 : " +  resultSongData[position].songScore.toString()
     }
 }

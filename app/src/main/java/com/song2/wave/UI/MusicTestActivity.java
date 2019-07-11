@@ -1,6 +1,7 @@
 package com.song2.wave.UI;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import com.song2.wave.Util.Player.Service.MyForeGroundService;
 
 public class MusicTestActivity extends AppCompatActivity {
     Button btnStartService, btnStopService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class MusicTestActivity extends AppCompatActivity {
     public void startService() {
         Intent serviceIntent = new Intent(this, MyForeGroundService.class);
         serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android");
+
 
         ContextCompat.startForegroundService(this, serviceIntent);
     }

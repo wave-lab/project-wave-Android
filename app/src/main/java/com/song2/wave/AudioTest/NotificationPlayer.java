@@ -11,11 +11,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 import com.song2.wave.R;
+import com.song2.wave.UI.MainPlayer.MainPlayerActivity;
 import com.squareup.picasso.Picasso;
+
+import static android.app.PendingIntent.FLAG_ONE_SHOT;
 
 public class NotificationPlayer {
     private final static int NOTIFICATION_PLAYER_ID = 0x342;
@@ -23,6 +28,8 @@ public class NotificationPlayer {
     private NotificationManager mNotificationManager;
     private NotificationManagerBuilder mNotificationManagerBuilder;
     private boolean isForeground;
+    String title, originArtist, coverArtist, songImgUrl, _id;
+    int flag;
 
     public NotificationPlayer(AudioService service) {
         mService = service;
@@ -119,8 +126,9 @@ public class NotificationPlayer {
         protected void onPreExecute() {
             super.onPreExecute();
             createNotificationChannel();
-            Intent playActivity = new Intent(mService, PlayerActivity.class);
-            mMainPendingIntent = PendingIntent.getActivity(mService, 0, playActivity, 0);
+
+            Intent playActivity = new Intent(mService, MainPlayerActivity.class);
+
             mRemoteViews = createRemoteView(R.layout.notification_player);
             mNotificationBuilder = new NotificationCompat.Builder(mService, "123");
             mNotificationBuilder.setSmallIcon(R.drawable.img_home_wavelogo)
@@ -132,6 +140,15 @@ public class NotificationPlayer {
             Notification notification = mNotificationBuilder.build();
             notification.priority = Notification.PRIORITY_MAX;
             notification.contentIntent = mMainPendingIntent;
+
+            playActivity.putExtra("_id", MainPlayerActivity.mainPlayerActivity.get_id());
+            playActivity.putExtra("title", MainPlayerActivity.mainPlayerActivity.getTitle());
+            playActivity.putExtra("originArtist", MainPlayerActivity.mainPlayerActivity.getOriginArtist());
+            playActivity.putExtra("coverArtist", MainPlayerActivity.mainPlayerActivity.getCoverArtist());
+            //playActivity.putExtra("songImgUrl", MainPlayerActivity.mainPlayerActivity.getSongImgUrl());
+            playActivity.putExtra("flag", 1);
+            mMainPendingIntent = PendingIntent.getActivity(mService, 0, playActivity, PendingIntent.FLAG_UPDATE_CURRENT);
+
             if (!isForeground) {
                 isForeground = true;
                 // 서비스를 Foreground 상태로 만든다
@@ -195,10 +212,21 @@ public class NotificationPlayer {
                 remoteViews.setImageViewResource(R.id.btn_play_pause, R.drawable.restart_btn);
             }
 
-            String title = mService.getAudioItem().mTitle;
+//            String title = mService.getAudioItem().mTitle;
+            _id = mService._id;
+            title = mService.songName;
+            originArtist = mService.originArtist;
+            coverArtist = mService.coverArtist;
             remoteViews.setTextViewText(R.id.txt_title, title);
-            Uri albumArtUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), mService.getAudioItem().mAlbumId);
-            Picasso.with(mService).load(albumArtUri).error(R.drawable.kakao_default_profile_image).into(remoteViews, R.id.img_albumart, NOTIFICATION_PLAYER_ID, notification);
+            remoteViews.setTextViewText(R.id.cover_atist_name, coverArtist);
+//            Uri albumArtUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), mService.getAudioItem().mAlbumId);
+            Handler uiHandler = new Handler(Looper.getMainLooper());
+            uiHandler.post(new Runnable(){
+                @Override
+                public void run() {
+                  //  Picasso.with(mService).load(songImgUrl).error(R.drawable.kakao_default_profile_image).into(remoteViews, R.id.img_albumart, NOTIFICATION_PLAYER_ID, notification);
+                }
+            });
         }
     }
 }
