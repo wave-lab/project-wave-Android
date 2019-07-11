@@ -45,6 +45,6 @@ class SignupSelectArtistActivity : AppCompatActivity() {
             artistDataArr.add(RealArtistData(i, "아이유"+i))
         }
         recycler_signup_artist_selecct.adapter = SignupArtistAdapter(artistDataArr,requestManager)
-        recycler_signup_artist_selecct.layoutManager = GridLayoutManager(applicationContext, 4)
+        recycler_signup_artist_selecct.layoutManager = GridLayoutManager(applicationContext, 3)
     }
 }

@@ -16,6 +16,7 @@ import com.song2.wave.Data.model.*
 import com.song2.wave.R
 import com.song2.wave.UI.Main.MainActivity
 import com.song2.wave.UI.Main.Search.Adapter.CoverArtistSearchAdapter
+import com.song2.wave.UI.Main.Search.Adapter.OriginArtistSearchAdapter
 import com.song2.wave.UI.Main.Search.Adapter.SearchDataHistoryAdapter
 import com.song2.wave.UI.Main.Search.Adapter.SongSearchAdapter
 import com.song2.wave.Util.Interface.OnBackPressedListener
@@ -44,10 +45,12 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener{
         }
     }
 
+    lateinit var originDataArr : ArrayList<OriginArtistData>
     lateinit var songDataArr : ArrayList<SongData>
     lateinit var coverArtistDataArr : ArrayList<CoverArtistData>
     lateinit var songFieldData : ArrayList<String?>
 
+    lateinit var originArtistSearchAdapter: OriginArtistSearchAdapter
     lateinit var songSearchAdapter : SongSearchAdapter
     lateinit var coverArtistAdapter: CoverArtistSearchAdapter
 
@@ -59,7 +62,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener{
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v : View = inflater.inflate(R.layout.fragment_search_home, container,false)
 
-
+        originDataArr= ArrayList<OriginArtistData>()
 /*        if(getArguments() != null){
             getSearchResponse(getArguments()!!.getString("searchData"))
         }*/
@@ -187,6 +190,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener{
             override fun onResponse(call: Call<GetSearchResponse>, response: Response<GetSearchResponse>) {
 
                 toast("성공")
+                Log.v("Asdf","성공")
                 var originArtistDataList = response.body()!!.data!!.originArtistName
                 var originTitleDataList = response.body()!!.data!!.originTitle
                 var coverArtistDataList = response.body()!!.data!!.artistName
@@ -195,13 +199,19 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener{
                     return
 
                 for ( i in originArtistDataList.indices){
-
+                    originDataArr.add(OriginArtistData(originArtistDataList[i].originArtistIdx, originArtistDataList[i].originArtistName, originArtistDataList[i].originArtistImg))
                 }
+
+                originArtistSearchAdapter = OriginArtistSearchAdapter(originDataArr, requestManager)
+                recycler_search_home_frag_artist.adapter = originArtistSearchAdapter
+                recycler_search_home_frag_song.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                recycler_search_home_frag_song.isNestedScrollingEnabled = false
 
                 if(originTitleDataList.indices.equals(0))
                     return
+                Log.v("Asdf","테스트 값= " + originTitleDataList)
                 for ( i in originTitleDataList.indices){
-                    songDataArr.add(SongData(originTitleDataList[i].artwork, originTitleDataList[i].originTitle, originTitleDataList[i].originArtistName, originTitleDataList[i].coverArtistName, originTitleDataList[i].genre))
+                    songDataArr.add(SongData(originTitleDataList[i].id, originTitleDataList[i].songUrl, originTitleDataList[i].artwork, originTitleDataList[i].originTitle, originTitleDataList[i].originArtistName, originTitleDataList[i].coverArtistName, originTitleDataList[i].genre))
                 }
 
                 songSearchAdapter = SongSearchAdapter(songDataArr, requestManager)

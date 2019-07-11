@@ -24,22 +24,28 @@ class Top10Fragment: Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v = inflater.inflate(R.layout.fragment_top10, container, false)
-
         return v
     }
 
     private fun configureTopNavigation() {
 
         var textViewList : ArrayList<TextView?> = arrayListOf(tv_top10_tabbar_idx0, tv_top10_tabbar_idx1,tv_top10_tabbar_idx2, tv_top10_tabbar_idx3, tv_top10_tabbar_idx4, tv_top10_tabbar_idx5, tv_top10_tabbar_idx6, tv_top10_tabbar_idx7)
-        var data = getArguments()!!.getStringArrayList("top10Rank")
 
+        if (getArguments()!!.getString("genreId") != null){
+
+
+
+        }
+
+        //var data = getArguments()!!.getStringArrayList("genreRank")
+/*
         for(i in data.indices){
             Log.e("data[i]",data[i])
             textViewList[i]?.setText(data[i])
 
             //textViewList[i]!!.text = data[i]
             //tv_top10_tabbar_idx0.setText(data[i])
-        }
+        }*/
 
         vp_top10_frag_content.adapter = FragmentViewPagerAdapter(childFragmentManager,8)
         // ViewPager와 Tablayout을 엮어줍니다!

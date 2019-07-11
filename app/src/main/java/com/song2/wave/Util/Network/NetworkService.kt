@@ -11,6 +11,7 @@ import retrofit2.Call
 import retrofit2.http.*
 import com.song2.wave.Data.GET.*
 import com.song2.wave.Data.GET.GetSearchResponse
+import com.song2.wave.Data.POST.PostEmailData
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -52,6 +53,13 @@ interface NetworkService {
         @Header("Authorization") authorization: String,
         @Query("status") status: String?
     ): Call<GetPlaylistResponse>
+
+    // 곡 상세정보 조회
+    @GET("core/songs/{songIdx}")
+    fun getSongDetailResonse(
+        @Header("Authorization") authorization: String,
+        @Path("songIdx") songIdx: String?
+    ): Call<GetSongDetailResponse>
 
     //적중 결과 곡
     //적중 결과 곡 status
@@ -97,6 +105,25 @@ interface NetworkService {
 
     ) : Call<GetSearchResponse>
 
+
+    @GET("core/users/emailCheck")
+    fun getEmailCheckResponse(
+            @Query("email") email : String?
+    ) : Call<GetEmailCheckResponse>
+
+    @GET("core/users/nicknameCheck")
+    fun getNicknameCheckResponse(
+            @Query("nickname") nickname : String?
+    ) : Call<GetNicknameCheckResponse>
+
+    @GET("/pl/{playlistIdx}")
+    fun getTop10PlaylistResponse(
+        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String,
+        @Path("playlistIdx") playlistIdx : String?
+    ) : Call<GetTop10PlaylistResponse>
+
+
     ////////////////////* POST *///////////////////////////
 
     // 회원가입
@@ -113,6 +140,12 @@ interface NetworkService {
             @Part("mood[0]") mood0 : RequestBody,
             @Part("mood[1]") mood1 : RequestBody,
             @Part("originArtist[0]") originArtist : RequestBody
+    ) : Call<PostResponse>
+
+    // 이메일 중복 확인
+    @POST("")
+    fun postEmailCheck(
+            @Body postEmailData: PostEmailData
     ) : Call<PostResponse>
 
 }

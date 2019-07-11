@@ -29,6 +29,6 @@ class PlaylistAdapter (private var songData : ArrayList<SongData>, var requestMa
         holder.songName.text = songData[position].songName
         holder.originArtistName.text = " - " + songData[position].originArtistName
         holder.coverArtistName.text = songData[position].coverArtistName
-        holder.songField.text = songData[position].songField[0]
+        holder.songField.text = songData[position].songField!![0]
     }
 }
