@@ -158,12 +158,12 @@ class HomeOnFragment : Fragment() {
                     val playlistDataList: PlayListData = response.body()!!.data
 
                     for (i in playlistDataList.songList.indices){
-                        hitSongHomeDataList.add(HomeSongData(playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName, playlistDataList.songList[i].songUrl))
+                        hitSongHomeDataList.add(HomeSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName, playlistDataList.songList[i].songUrl))
                     }
                     if(playlistDataList == null)
                         return
 
-                    hitSongHomeAdapter = HitSongHomeAdapter( hitSongHomeDataList, requestManager)
+                    hitSongHomeAdapter = HitSongHomeAdapter(context!!, hitSongHomeDataList, requestManager)
                     rv_home_frag_scoring_hit_list.adapter = hitSongHomeAdapter
                     rv_home_frag_scoring_hit_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 }
@@ -186,9 +186,9 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
                     for(i in playlistDataList.songList.indices) {
-                        myWaitingSongDataList.add(MyWaitingSongData(3, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName))
+                        myWaitingSongDataList.add(MyWaitingSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].songUrl, 3, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
                     }
-                    myWaitingSongHomeAdapter = MyWaitingSongHomeAdapter(myWaitingSongDataList, requestManager)
+                    myWaitingSongHomeAdapter = MyWaitingSongHomeAdapter(context!!, myWaitingSongDataList, requestManager)
                     rv_home_frag_scoring_waiting_mine.adapter = myWaitingSongHomeAdapter
                     rv_home_frag_scoring_waiting_mine.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
 
@@ -216,7 +216,7 @@ class HomeOnFragment : Fragment() {
                     Log.v("HomeOnFragment", "응답 값 = " + response.body().toString())
                     for(i in playlistDataList.songList.indices) {
                         Log.v("Asdf"," 값 = " + playlistDataList.songList[i].songUrl)
-                        waitingSongDataList.add(HomeSongData(playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName, playlistDataList.songList[i].songUrl))
+                        waitingSongDataList.add(HomeSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName, playlistDataList.songList[i].songUrl))
                     }
                     waitingSongHomeAdapter = WaitingSongHomeAdapter(context!!,waitingSongDataList, requestManager)
                     rv_home_frag_scoring_waiting.adapter = waitingSongHomeAdapter
@@ -281,6 +281,7 @@ class HomeOnFragment : Fragment() {
                     for(i in playSongDataList.indices) {
                         recommendSongHomeDataList.add(
                             HomeSongData(
+                                playSongDataList[i]._id,
                                 playSongDataList[i].artwork,
                                 playSongDataList[i].originTitle,
                                 playSongDataList[i].originArtistName,
@@ -289,7 +290,7 @@ class HomeOnFragment : Fragment() {
                             )
                         )
                     }
-                    recommendSongHomeAdapter = RecomentSongHomeAdapter( recommendSongHomeDataList, requestManager)
+                    recommendSongHomeAdapter = RecomentSongHomeAdapter(context!!, recommendSongHomeDataList, requestManager)
                     rv_home_frag_scoring_recommend_list.adapter = recommendSongHomeAdapter
                     rv_home_frag_scoring_recommend_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 }
@@ -347,7 +348,7 @@ class HomeOnFragment : Fragment() {
                         bundleGenre.putStringArrayList("bundleGenre",genreRank)
                         top10GenreDataList.add(TOP10Data(top10CategoryDataList[0][i]._id,top10CategoryDataList[0][i].top10Thumbnail, top10CategoryDataList[0][i].top10Name))
                     }
-                    top10GenreAdapter = Top10GenreAdapter(top10GenreDataList, requestManager)
+                    top10GenreAdapter = Top10GenreAdapter(context!!, top10GenreDataList, requestManager)
                     rv_home_frag_top10_genre_list.adapter = top10GenreAdapter
                     rv_home_frag_top10_genre_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
@@ -360,7 +361,7 @@ class HomeOnFragment : Fragment() {
                         bundleMood.putStringArrayList("bundleGenre",moodRank)
                         top10MoodDataList.add(TOP10Data(top10CategoryDataList[0][i]._id,top10CategoryDataList[1][i].top10Thumbnail, top10CategoryDataList[1][i].top10Name))
                     }
-                    top10MoodAdapter = Top10GenreAdapter(top10MoodDataList, requestManager)
+                    top10MoodAdapter = Top10GenreAdapter(context!!, top10MoodDataList, requestManager)
                     rv_home_frag_top10_mood_list.adapter = top10MoodAdapter
                     rv_home_frag_top10_mood_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 

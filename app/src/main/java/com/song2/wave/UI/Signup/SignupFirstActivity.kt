@@ -20,13 +20,25 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.song2.wave.Data.GET.GetEmailCheckResponse
+import com.song2.wave.Data.GET.GetNicknameCheckResponse
+import com.song2.wave.Data.GET.GetSongDetailResponse
+import com.song2.wave.Data.POST.PostEmailData
+import com.song2.wave.Data.POST.PostResponse
+import com.song2.wave.Util.Network.ApiClient
+import com.song2.wave.Util.Network.NetworkService
+import kotlinx.android.synthetic.main.activity_main_player.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.InputStream
+import java.net.URLEncoder
 import java.util.regex.Pattern
 
 
@@ -35,11 +47,18 @@ class SignupFirstActivity : AppCompatActivity() {
     private val REQ_CODE_SELECT_IMAGE = 100
     lateinit var data : Uri
     var imageUri : Uri? = null
+    var emailCheckFlag = 0 // 실패
     private var image : MultipartBody.Part? = null
     var chkFlag : Boolean = false
     val passwdPattern : String = "^[A-Za-z[0-9]]{8,20}$" // 영문, 숫자
     val nicknamePattern : String = "^[A-Za-z[0-9]]{2,8}$" // 영문, 숫자
     var emailPattern : String=  "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
+    var emailCheckValue : String = ""
+
+    val authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
+
+    val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -197,7 +216,8 @@ class SignupFirstActivity : AppCompatActivity() {
             else{
                 ll_signup_act_verify_num.visibility = View.VISIBLE
                 tv_signup_act_email_confirm.visibility = View.GONE
-                edit_signup_act_verify_num.requestFocus();
+                edit_signup_act_verify_num.requestFocus()
+
             }
 
         }
@@ -211,6 +231,12 @@ class SignupFirstActivity : AppCompatActivity() {
                 ll_signup_act_nickname.visibility = View.VISIBLE
                 tv_signup_act_verify_num_confirm.visibility =View.GONE
                 edit_signup_act_nickname.requestFocus();
+//                if(emailCheckValue.equals(edit_signup_act_verify_num.toString())){
+//
+//                }
+//                else{
+//                    Toast.makeText(applicationContext, "인증 번호를 다시 입력해주세요", Toast.LENGTH_LONG).show()
+//                }
             }
         }
 
@@ -220,9 +246,8 @@ class SignupFirstActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "닉네임을 입력해주세요", Toast.LENGTH_LONG).show()
             }
             else{
-                ll_signup_act_passwd.visibility = View.VISIBLE
-                tv_signup_act_nickname_confirm.visibility = View.GONE
-                edit_signup_act_passwd.requestFocus();
+                getNicknameCheck()
+
             }
         }
 
@@ -330,6 +355,71 @@ class SignupFirstActivity : AppCompatActivity() {
         intent.type = android.provider.MediaStore.Images.Media.CONTENT_TYPE
         intent.data = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         startActivityForResult(intent, REQ_CODE_SELECT_IMAGE)
+    }
+
+    fun getEmailCheck()
+    {
+        val getEmailCheckResponse = networkService.getEmailCheckResponse(URLEncoder.encode(edit_signup_act_email.text.toString(), "utf-8"))
+        getEmailCheckResponse.enqueue(object : Callback<GetEmailCheckResponse> {
+
+            override fun onResponse(call: Call<GetEmailCheckResponse>, response: Response<GetEmailCheckResponse>) {
+                Log.v("TAG", "이메일 인증 통신 성공 = " + edit_signup_act_email.text.toString())
+
+                if(response.isSuccessful){
+                    Log.v("asdf","이메일 응답 = " + response.body()!!.message)
+
+                    if(response.body()!!.success){
+                        var data = response!!.body()!!.data
+                        Log.v("asdf","이메일 인증 번호 = " + data)
+                        emailCheckValue = data
+
+                    }
+                    else{
+                        Toast.makeText(applicationContext, "중복된 이메일입니다", Toast.LENGTH_LONG).show()
+                    }
+
+                }else{
+                    Log.v("ASdf", "테스트 에러 = " + response.code())
+                }
+            }
+
+            override fun onFailure(call: Call<GetEmailCheckResponse>, t: Throwable?) {
+                Toast.makeText(applicationContext,"서버 연결 실패", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+    }
+
+
+
+    fun getNicknameCheck()
+    {
+        val getNicknameCheckResponse = networkService.getNicknameCheckResponse(edit_signup_act_nickname.text.toString())
+        getNicknameCheckResponse.enqueue(object : Callback<GetNicknameCheckResponse> {
+
+            override fun onResponse(call: Call<GetNicknameCheckResponse>, response: Response<GetNicknameCheckResponse>) {
+                Log.v("TAG", "닉네임 인증 통신 성공")
+                if(response.isSuccessful){
+                    if(response.body()!!.success){
+                        Log.v("asdf","닉네임 중복 X")
+                        ll_signup_act_passwd.visibility = View.VISIBLE
+                        tv_signup_act_nickname_confirm.visibility = View.GONE
+                        edit_signup_act_passwd.requestFocus();
+                    }
+                    else{
+                        Toast.makeText(applicationContext, "중복된 닉네임입니다", Toast.LENGTH_LONG).show()
+                    }
+
+                }else{
+                    Log.v("ASdf", "테스트 에러 = " + response.code())
+                }
+            }
+
+            override fun onFailure(call: Call<GetNicknameCheckResponse>, t: Throwable?) {
+                Toast.makeText(applicationContext,"서버 연결 실패", Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
 }

@@ -34,10 +34,10 @@ public class AudioService extends Service {
     private int mCurrentPosition;
     private AudioAdapter.AudioItem mAudioItem;
     private NotificationPlayer mNotificationPlayer;
-    private TimerTask mTask;
-    private Timer mTimer;
+
+    String playTime;
     long mpCurrentPosition1, mpCurrentPosition2;
-    String songUrl, songName, originArtist, coverArtist, title, songImgUrl;
+    String songUrl, songName, originArtist, coverArtist, title, songImgUrl, _id;
 
 
     public class AudioServiceBinder extends Binder {
@@ -56,17 +56,13 @@ public class AudioService extends Service {
             public void onPrepared(MediaPlayer mp) {
                 isPrepared = true;
                 mp.start();
-                Log.v("asdf","답2 = " + mp.getDuration());
 
                 String lengthOfSong = String.format("%02d:%02d", ((mp.getDuration() / 1000) % 3600 / 60), ((mp.getDuration() / 1000) % 3600 % 60));
-                Log.v("asdf","답3 = " + lengthOfSong);
+                MainPlayerActivity.mainPlayerActivity.lengthTimeTv.setText(lengthOfSong);
                 MainPlayerActivity.mainPlayerActivity.seekbar.setMax(mp.getDuration());
 
                 //mTimer = new Timer();
-
                 //mTimer.schedule(mTask, 100);
-
-
 
                 sendBroadcast(new Intent(BroadcastActions.PREPARED)); // prepared 전송
                 updateNotificationPlayer();
@@ -80,6 +76,14 @@ public class AudioService extends Service {
                 if(isPrepared){
                     Log.v("Asdf","텟텟 = " + mMediaPlayer.getCurrentPosition());
                     MainPlayerActivity.mainPlayerActivity.seekbar.setProgress(mMediaPlayer.getCurrentPosition());
+                    if(MainPlayerActivity.mainPlayerActivity.seekbar.getMax() > 0) {
+                        playTime = String.format(
+                                "%02d:%02d",
+                                getMpCurrentPosition1(),
+                                getMpCurrentPosition2()
+                        );
+                        MainPlayerActivity.mainPlayerActivity.durationTimeTv.setText(playTime);
+                    }
 
                     MainPlayerActivity.mainPlayerActivity.seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         //seek바의 값이 변경되었을때 + fromUser: Boolean : 터치를 통해 변경했으면 false , 코드를 통하면 true
@@ -88,8 +92,6 @@ public class AudioService extends Service {
                             if (MainPlayerActivity.mainPlayerActivity.seekbar.getMax() == progress) {
                                 isPlaying = false;
                                 mMediaPlayer.stop();
-//
-// mediaPlayer.stop()
                             }
                         }
 
@@ -119,12 +121,6 @@ public class AudioService extends Service {
         };
 
         mSeekbarUpdateHandler.postDelayed(mUpdateSeekbar, 0);
-
-        if(isPrepared){
-
-
-        }
-
 
         mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -187,6 +183,8 @@ public class AudioService extends Service {
         }
         return super.onStartCommand(intent, flags, startId);
     }
+
+
 
     @Override
     public void onDestroy() {
@@ -270,14 +268,6 @@ public class AudioService extends Service {
         return mMediaPlayer.isPlaying();
     }
 
-
-
-//    public void play(int position) {
-//        queryAudioItem(position);
-//        stop();
-//        prepare();
-//    }
-
     public int getDuration(){
         return mMediaPlayer.getDuration();
     }
@@ -295,14 +285,13 @@ public class AudioService extends Service {
         return ((mMediaPlayer.getCurrentPosition() / 1000) % 3600 % 60);
     }
 
-    public void play(String songUrl, String originArtist, String coverArtist, String songName, String songImgUrl) {
+    public void play(String _id, String songUrl, String originArtist, String coverArtist, String songName) {
 //        queryAudioItem(position);
+        this._id = _id;
         this.songUrl = songUrl;
         this.originArtist = originArtist;
         this.coverArtist = coverArtist;
-        this.title = title;
         this.songName = songName;
-        this.songImgUrl = songImgUrl;
         stop();
         prepare(songUrl);
     }

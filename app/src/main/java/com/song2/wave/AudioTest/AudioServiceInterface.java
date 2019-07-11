@@ -42,10 +42,10 @@ public class AudioServiceInterface {
 //        }
 //    }
 
-    public void play(String songUrl, String originArtist, String coverArtist, String songName, String songImgUrl) {
+    public void play(String _id, String songUrl, String originArtist, String coverArtist, String songName) {
         if (mService != null) {
-            mService.play(songUrl, originArtist, coverArtist, songName, songImgUrl);
-            Log.v("Asdf","테스트 플레ㅇ;");
+            mService.play(_id, songUrl, originArtist, coverArtist, songName);
+            Log.v("Asdf","테스트 플레ㅣ");
         }
     }
 

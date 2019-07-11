@@ -95,6 +95,7 @@
                    android:src="@drawable/btn_shuffle"/>
 
         <TextView
+                android:id="@+id/tv_main_player_act_genre"
                 android:layout_marginHorizontal="92dp"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/noto_sans_kr_regular_hestia"

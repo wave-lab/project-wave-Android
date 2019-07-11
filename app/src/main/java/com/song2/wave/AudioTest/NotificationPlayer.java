@@ -28,7 +28,7 @@ public class NotificationPlayer {
     private NotificationManager mNotificationManager;
     private NotificationManagerBuilder mNotificationManagerBuilder;
     private boolean isForeground;
-    String title, originArtist, coverArtist, songImgUrl;
+    String title, originArtist, coverArtist, songImgUrl, _id;
     int flag;
 
     public NotificationPlayer(AudioService service) {
@@ -141,10 +141,11 @@ public class NotificationPlayer {
             notification.priority = Notification.PRIORITY_MAX;
             notification.contentIntent = mMainPendingIntent;
 
+            playActivity.putExtra("_id", MainPlayerActivity.mainPlayerActivity.get_id());
             playActivity.putExtra("title", MainPlayerActivity.mainPlayerActivity.getTitle());
             playActivity.putExtra("originArtist", MainPlayerActivity.mainPlayerActivity.getOriginArtist());
             playActivity.putExtra("coverArtist", MainPlayerActivity.mainPlayerActivity.getCoverArtist());
-            playActivity.putExtra("songImgUrl", MainPlayerActivity.mainPlayerActivity.getSongImgUrl());
+            //playActivity.putExtra("songImgUrl", MainPlayerActivity.mainPlayerActivity.getSongImgUrl());
             playActivity.putExtra("flag", 1);
             mMainPendingIntent = PendingIntent.getActivity(mService, 0, playActivity, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -212,17 +213,18 @@ public class NotificationPlayer {
             }
 
 //            String title = mService.getAudioItem().mTitle;
+            _id = mService._id;
             title = mService.songName;
             originArtist = mService.originArtist;
             coverArtist = mService.coverArtist;
-            songImgUrl = mService.songImgUrl;
-            remoteViews.setTextViewText(R.id.txt_title, title + " - " + originArtist);
+            remoteViews.setTextViewText(R.id.txt_title, title);
+            remoteViews.setTextViewText(R.id.cover_atist_name, coverArtist);
 //            Uri albumArtUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), mService.getAudioItem().mAlbumId);
             Handler uiHandler = new Handler(Looper.getMainLooper());
             uiHandler.post(new Runnable(){
                 @Override
                 public void run() {
-                    Picasso.with(mService).load(songImgUrl).error(R.drawable.kakao_default_profile_image).into(remoteViews, R.id.img_albumart, NOTIFICATION_PLAYER_ID, notification);
+                  //  Picasso.with(mService).load(songImgUrl).error(R.drawable.kakao_default_profile_image).into(remoteViews, R.id.img_albumart, NOTIFICATION_PLAYER_ID, notification);
                 }
             });
         }

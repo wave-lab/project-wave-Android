@@ -9,19 +9,29 @@ import android.os.Handler
 import android.os.Message
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
+import android.widget.TextView
+import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.song2.wave.AudioTest.AudioApplication
 import com.song2.wave.AudioTest.AudioService
 import com.song2.wave.AudioTest.BroadcastActions
+import com.song2.wave.Data.GET.GetSongDetailResponse
 import com.song2.wave.R
 import com.song2.wave.UI.MainPlayer.Adapter.CoverImgViewPager
+import com.song2.wave.Util.Network.ApiClient
+import com.song2.wave.Util.Network.NetworkService
 import com.song2.wave.Util.Player.Service.MyForeGroundService
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main_player.*
 import kotlinx.android.synthetic.main.activity_set_start_point.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
@@ -38,9 +48,11 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
     var coverArtist : String = ""
     var songImgUrl : String = ""
     var flag : Int = 0
+    var _id : String = ""
 
     var selectedFlag : Int = 0
-
+    lateinit var durationTimeTv : TextView
+    lateinit var lengthTimeTv : TextView
 
 
     var currentPosition = 0
@@ -48,9 +60,14 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
     var mPosition : Int = 0
 
+    var authorization_info : String = ""
 
     // var n_sbHandler = sbHandler()
      //var seekBarThread = sbThread()
+
+    val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
+    }
+
 
     override fun onClick(v: View) {
         when (v.id) {
@@ -202,6 +219,8 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         mainPlayerActivity = this
         myService = MyForeGroundService()
         audioService = AudioService()
+        durationTimeTv = findViewById(R.id.tv_main_player_duration_time)
+        lengthTimeTv = findViewById(R.id.tv_main_player_length_of_song)
 
         iv_main_player_act_stop_btn.setOnClickListener(this)
         mPosition = intent.getIntExtra("mPosition", 0)
@@ -209,24 +228,28 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         flag = intent.getIntExtra("flag", 0)
 
         // 노래 선택으로 입장
+        authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
 
         val extras = intent.extras
 
         // 노래 선택으로 입장 시
         if (extras == null) {
+            Log.v("asdf", "선택 - 노래")
+            _id = intent.getStringExtra("_id")
+            Log.v("asdf","받아온 값 = " + _id)
             title = intent.getStringExtra("title")
             originArtist = intent.getStringExtra("originArtist")
             coverArtist = intent.getStringExtra("coverArtist")
-            songImgUrl = intent.getStringExtra("songImgUrl")
             songUrl = intent.getStringExtra("songUrl")
-            AudioApplication.getInstance().serviceInterface.play(songUrl, originArtist, coverArtist,  title, songImgUrl) // 선택한 오디오재생
+            AudioApplication.getInstance().serviceInterface.play(_id, songUrl, originArtist, coverArtist,  title) // 선택한 오디오재생
         }
         // notification으로 입장 시
         else {
+            Log.v("asdf", "선택 - 노티피케이션")
+            _id = intent.getStringExtra("_id")
             title = extras.getString("title")
             originArtist = extras.getString("originArtist")
             coverArtist = extras.getString("coverArtist")
-            songImgUrl = extras.getString("songImgUrl")
         }
         if(flag == 0){
             songUrl = intent.getStringExtra("songUrl")
@@ -235,6 +258,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
         Log.v("Asdf","플래그 = " + flag)
 
+        getSongDetail()
 
         tv_main_player_act_title_sing.text = title + " - " + originArtist
         tv_main_player_cover_artist_name.text = "Covered by " + coverArtist
@@ -474,4 +498,37 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         lateinit var mainPlayerActivity: MainPlayerActivity
         //일종의 스태틱
     }
+
+    fun getSongDetail()
+    {
+        val getSongDetailResponse = networkService.getSongDetailResonse(authorization_info, _id)
+        getSongDetailResponse.enqueue(object : Callback<GetSongDetailResponse> {
+
+            override fun onResponse(call: Call<GetSongDetailResponse>, response: Response<GetSongDetailResponse>) {
+                Log.v("TAG", "곡 세부사항 통신 성공")
+                if(response.isSuccessful){
+                    var data = response!!.body()!!.data
+                    Glide.with(applicationContext).load(data.artwork).into(img_main_player_act_cover_img)
+
+                    var genreValue : String = ""
+                    for(i in 0.. data.genre.size-1){
+                        genreValue += data.genre[i] + " "
+                        if(i == data.genre.size-1)
+                            genreValue += data.genre[i]
+                    }
+                    tv_main_player_act_genre.text = genreValue
+                    Glide.with(applicationContext).load(data.artwork)
+                    Log.v("Asf","테스트 장르 = " + genreValue)
+                }else{
+                    Log.v("ASdf", "테스트 에러 = " + response.code())
+                }
+            }
+
+            override fun onFailure(call: Call<GetSongDetailResponse>, t: Throwable?) {
+                Toast.makeText(applicationContext,"서버 연결 실패", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+    }
+
 }
