@@ -10,6 +10,7 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 import com.song2.wave.Data.GET.*
+import com.song2.wave.Data.GET.GetSearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -62,7 +63,7 @@ interface NetworkService {
     ): Call<GetPlaylistResponse>
 
     //마이페이지 - 일반유저
-    @GET("/core/users")
+    @GET("core/users")
     fun getUserInfoResponse(
         @Header("Content-Type") content_type: String,
         @Header("Authorization") authorization: String
@@ -87,14 +88,14 @@ interface NetworkService {
         @Header("Authorization") authorization: String
     ): Call<GetCustomPlayListResponse>
 
-    @GET("/core/search")
+    @GET("core/search")
     fun getSearchResponse(
         @Header("Content-Type") content_type: String,
-        @Query("originArtistName") originartistname : String,
-        @Query("artistName") artistname : String,
-        @Query("originTitle") origintitle : String
+        @Query("originArtistName") originartistname : String?,
+        @Query("artistName") artistname : String?,
+        @Query("originTitle") origintitle : String?
 
-    )
+    ) : Call<GetSearchResponse>
 
     ////////////////////* POST *///////////////////////////
 

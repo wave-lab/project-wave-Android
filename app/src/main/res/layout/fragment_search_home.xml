@@ -112,6 +112,7 @@
     </LinearLayout>
     <ScrollView
         android:id="@+id/ll_search_home_frag_focus_off"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -137,13 +138,6 @@
                     android:textColor="#ffffff"
                     android:textSize="22sp"
                     android:includeFontPadding="false"
-                    />
-                <Button
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/btn_more"
-                    android:layout_marginLeft="8dp"
-                    android:layout_gravity="center"
                     />
 
             </LinearLayout>
@@ -224,13 +218,6 @@
                     android:textSize="22sp"
                     android:fontFamily="@font/noto_sans_kr_bold_hestia"
                     android:includeFontPadding="false"
-                    />
-                <Button
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/btn_more"
-                    android:layout_marginLeft="8dp"
-                    android:layout_gravity="center"
                     />
 
             </LinearLayout>
