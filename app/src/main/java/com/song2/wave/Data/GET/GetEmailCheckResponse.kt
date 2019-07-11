@@ -7,5 +7,4 @@ data class GetEmailCheckResponse (
         val success: Boolean,
         val message: String,
         val data: String
-
 )

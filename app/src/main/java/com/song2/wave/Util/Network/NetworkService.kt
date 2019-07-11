@@ -11,6 +11,7 @@ import retrofit2.Call
 import retrofit2.http.*
 import com.song2.wave.Data.GET.*
 import com.song2.wave.Data.GET.GetSearchResponse
+import com.song2.wave.Data.POST.PostEmailData
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -107,8 +108,12 @@ interface NetworkService {
     @GET("core/users/emailCheck")
     fun getEmailCheckResponse(
             @Query("email") email : String?
-
     ) : Call<GetEmailCheckResponse>
+
+    @GET("core/users/nicknameCheck")
+    fun getNicknameCheckResponse(
+            @Query("nickname") nickname : String?
+    ) : Call<GetNicknameCheckResponse>
 
     ////////////////////* POST *///////////////////////////
 
@@ -126,6 +131,12 @@ interface NetworkService {
             @Part("mood[0]") mood0 : RequestBody,
             @Part("mood[1]") mood1 : RequestBody,
             @Part("originArtist[0]") originArtist : RequestBody
+    ) : Call<PostResponse>
+
+    // 이메일 중복 확인
+    @POST("")
+    fun postEmailCheck(
+            @Body postEmailData: PostEmailData
     ) : Call<PostResponse>
 
 }

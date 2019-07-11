@@ -36,13 +36,15 @@ class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
     private var image : MultipartBody.Part? = null
     lateinit var receivedImgUri : Uri
     lateinit var networkService : NetworkService
+    lateinit var selectedMoodArr :  ArrayList<String>
 
     lateinit var moodArr : Array<ImageView>
 
     override fun onClick(v: View?) {
         for(i in 0..7){
-            if (v!!.id == moodArr[i].getId()) {
-                Toast.makeText(applicationContext, "분위기 = " + v!!.id.toString() +"번 버튼 선택", Toast.LENGTH_LONG).show()
+            if (v!!.id == moodArr[0].getId()) {
+                selectedMoodArr.add("m" + ((i+1).toString()))
+                Toast.makeText(applicationContext, "분위기 " + "m" + (i+1).toString() + "번 버튼 선택", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -51,6 +53,9 @@ class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup_mood)
+
+        selectedMoodArr = ArrayList<String>()
+
         var funnyImg :ImageView = findViewById(R.id.img_signup_mood_act_funny)
         var fluttetImg :ImageView = findViewById(R.id.img_signup_mood_act_flutter)
         var hipImg :ImageView = findViewById(R.id.img_signup_mood_act_hip)
@@ -60,11 +65,13 @@ class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
         var groovyImg :ImageView = findViewById(R.id.img_signup_mood_act_windless)
         var honeyImg :ImageView = findViewById(R.id.img_signup_mood_act_honey)
 
+
+        moodArr = arrayOf<ImageView>(funnyImg, honeyImg, fluttetImg, sadImg, hipImg, windliessImg, groovyImg, dreamyImg)
+
         for(i in 0..7){
             moodArr[i].setOnClickListener(this)
         }
 
-        moodArr = arrayOf<ImageView>(funnyImg, fluttetImg, hipImg, sadImg, windliessImg, dreamyImg, groovyImg, honeyImg)
         receivedImgUri = intent.getParcelableExtra<Parcelable>("imageUri") as Uri
 
         btn_signup_mood_next.setOnClickListener {
