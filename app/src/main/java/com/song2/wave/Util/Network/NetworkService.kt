@@ -104,6 +104,12 @@ interface NetworkService {
 
     ) : Call<GetSearchResponse>
 
+    @GET("core/users/emailCheck")
+    fun getEmailCheckResponse(
+            @Query("email") email : String?
+
+    ) : Call<GetEmailCheckResponse>
+
     ////////////////////* POST *///////////////////////////
 
     // 회원가입
