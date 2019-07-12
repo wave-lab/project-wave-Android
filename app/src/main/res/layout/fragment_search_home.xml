@@ -74,7 +74,6 @@
                         android:textColor="#616161"
                         android:layout_marginLeft="24dp"
                         android:fontFamily="@font/noto_sans_kr_regular_hestia"
-                        android:layout_above="@+id/img_search_home_frag_artist"
                         android:layout_marginBottom="25dp"/>
 
                 <TextView
@@ -112,6 +111,7 @@
     </LinearLayout>
     <ScrollView
         android:id="@+id/ll_search_home_frag_focus_off"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -138,13 +138,6 @@
                     android:textSize="22sp"
                     android:includeFontPadding="false"
                     />
-                <Button
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/btn_more"
-                    android:layout_marginLeft="8dp"
-                    android:layout_gravity="center"
-                    />
 
             </LinearLayout>
 
@@ -154,24 +147,13 @@
                 android:layout_height="110dp"
                 android:layout_marginLeft="16dp"
                 >
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/img_search_home_frag_artist"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_search_home_frag_origin_artist"
                     android:layout_width="82dp"
-                    android:layout_height="82dp"
+                    android:layout_height="110dp"
                     android:background="@drawable/img_artistprofile"
                     />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Post Ma…"
-                    android:textSize="16sp"
-                    android:textColor="#ffffff"
-                    android:fontFamily="@font/noto_sans_kr_bold_hestia"
-                    android:layout_below="@+id/img_search_home_frag_artist"
-                    android:layout_centerHorizontal="true"
-                    android:includeFontPadding="false"
-                    android:layout_marginTop="8dp"
-                    />
+
             </RelativeLayout>
 
             <LinearLayout
@@ -224,13 +206,6 @@
                     android:textSize="22sp"
                     android:fontFamily="@font/noto_sans_kr_bold_hestia"
                     android:includeFontPadding="false"
-                    />
-                <Button
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/btn_more"
-                    android:layout_marginLeft="8dp"
-                    android:layout_gravity="center"
                     />
 
             </LinearLayout>

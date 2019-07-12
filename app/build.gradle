@@ -9,7 +9,6 @@ android {
     defaultConfig {
         applicationId "com.song2.wave"
         minSdkVersion 23
-        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -38,6 +37,10 @@ dependencies {
 
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
+    implementation "org.jetbrains.anko:anko:0.10.5"
+ //   implementation 'org.jetbrains.anko:anko:0.10.4'
+
+
 
     // Circle ImageView is adapted
     implementation 'de.hdodenhof:circleimageview:3.0.0'

@@ -24,7 +24,7 @@ class ArtistSongListViewAdapter(val ctx : Context, val dataList : ArrayList<Song
         holder.songName.text = dataList[position].songName
         holder.originArtistName.text = dataList[position].originArtistName
         holder.coverArtistName.text = dataList[position].coverArtistName
-        holder.songField.text = dataList[position].songField[0] + " " + dataList[position].songField[1] + " " + dataList[position].songField[2]
+        holder.songField.text = dataList[position].songField!![0] + " " + dataList[position].songField!![1] + " " + dataList[position].songField!![2]
 
     }
 

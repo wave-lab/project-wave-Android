@@ -24,7 +24,7 @@ class ArtistSongListFragment : Fragment() {
 
     private fun setRecyclerView() {
         //임시데이터
-        songFieldData = ArrayList<String>()
+        /*songFieldData = ArrayList<String>()
         songFieldData.add("분야1")
         var dataList: ArrayList<SongData> = ArrayList()
         dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선", songFieldData))
@@ -41,6 +41,6 @@ class ArtistSongListFragment : Fragment() {
         dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","선이", songFieldData))
         artist_song_view_adapter = ArtistSongListViewAdapter(activity!!, dataList)
         rv_fragment_artist_song_list.adapter = artist_song_view_adapter
-        rv_fragment_artist_song_list.layoutManager = LinearLayoutManager(activity)
+        rv_fragment_artist_song_list.layoutManager = LinearLayoutManager(activity)*/
     }
 }

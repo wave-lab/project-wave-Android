@@ -12,6 +12,7 @@
         android:id="@+id/img_song_item_cover"
         android:layout_width="82dp"
         android:layout_height="82dp"
+        android:scaleType="centerCrop"
         android:background="@drawable/kakaostory_icon"
         />
 

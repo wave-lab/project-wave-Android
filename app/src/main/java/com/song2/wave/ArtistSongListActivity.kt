@@ -22,25 +22,29 @@ class ArtistSongListActivity : AppCompatActivity() {
         songFieldData.add("힙합")
         songFieldData.add("R&B")
         songFieldData.add("재즈")
-
-        var dataList: ArrayList<SongData> = ArrayList()
-        dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
-        dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","선이",  songFieldData))
-        dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","선이",  songFieldData))
-        dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","선이",  songFieldData))
-        dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","선이",  songFieldData))
-        dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","선이",  songFieldData))
-        dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","선이",  songFieldData))
-        dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","선이",  songFieldData))
-        dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","선이",  songFieldData))
-        dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","선이",  songFieldData))
-        dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","선이",  songFieldData))
-        dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","선이",  songFieldData))
-        dataList.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","선이",  songFieldData))
-
-
-        artist_song_list_view_adapter = ArtistSongListViewAdapter(this!!, dataList)
-        rv_activity_artist_song_list.adapter = artist_song_list_view_adapter
-        rv_activity_artist_song_list.layoutManager = LinearLayoutManager(this)
+//
+//        var dataList: ArrayList<SongData> = ArrayList()11
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData!!))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//        dataList.add(SongData("1","df", "http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "나는야","이선","이선",  songFieldData))
+//
+//
+//        artist_song_list_view_adapter = ArtistSongListViewAdapter(this!!, dataList)
+//        rv_activity_artist_song_list.adapter = artist_song_list_view_adapter
+//        rv_activity_artist_song_list.layoutManager = LinearLayoutManager(this)
     }
 }

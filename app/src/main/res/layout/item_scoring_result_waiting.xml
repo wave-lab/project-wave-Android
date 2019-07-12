@@ -9,6 +9,7 @@
 >
     <ImageView
             android:id="@+id/iv_scoring_waiting_song_item_cover"
+            android:scaleType="centerCrop"
             android:layout_width="82dp"
             android:layout_height="82dp"
             android:background="@drawable/img_artwork_1"

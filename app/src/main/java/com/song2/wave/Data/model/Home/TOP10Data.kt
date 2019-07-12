@@ -1,6 +1,7 @@
 package com.song2.wave.Data.model.Home
 
 data class TOP10Data(
-    var top10Img : String?,
-    var top10Kind : String
+    var _id : String?,
+    var top10Thumbnail : String?,
+    var top10Name : String
 )
