@@ -10,36 +10,49 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
-        android:usesCleartextTraffic="true"
-        android:name=".Util.Audio.AudioApplication"
-        android:allowBackup="true"
-        android:icon="@drawable/android_app_icon"
-        android:label="@string/app_name"
-        android:roundIcon="@drawable/android_app_icon"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        <!-- 로그인 -->
+            android:name=".Util.Audio.AudioApplication"
+            android:allowBackup="true"
+            android:icon="@drawable/android_app_icon"
+            android:label="@string/app_name"
+            android:roundIcon="@drawable/android_app_icon"
+            android:supportsRtl="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:usesCleartextTraffic="true">
+        <activity android:name=".ArtistSongListActivity">
+        </activity>
+        <activity android:name=".StartActivity">
+        </activity> <!-- 로그인 -->
         <activity android:name=".UI.Login.LoginActivity2"/>
         <activity android:name=".Util.Kakao.service.ScoringPlayerActivity"/>
+        <activity android:name=".UI.Main.MyPage.UpLoadFileActivity"/>
 
         <meta-data
                 android:name="com.kakao.sdk.AppKey"
-                android:value="@string/kakao_app_key"/>
-
-        <!-- 메인 -->
-        <activity android:name=".UI.Main.MainActivity">
+                android:value="@string/kakao_app_key"/> <!-- 메인 -->
+        <activity android:name=".SplashActivity"
+                  android:theme="@style/SplashTheme"
+        >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Signup.SignupMoodActivity"></activity>
+        <activity android:name=".UI.Main.MainActivity"
+                  android:theme="@style/Theme.AppCompat"/>
         <activity android:name=".UI.Signup.SignupFirstActivity">
-
-
         </activity>
+        <activity android:name=".UI.Main2Activity"/>
+        <activity android:name=".UI.Artist.ArtistActivity"/>
+        <activity android:name=".UI.Artist.ArtistLibraryActivity"/> <!-- 음악플레이어 -->
+        <activity android:name=".UI.MainPlayer.MainPlayerActivity"/>
+
+        <service android:name=".Util.Player.Service.MusicService"/>
+
+
+
+        <activity android:name=".UI.Signup.SignupMoodActivity"></activity>
+
+
 
         <activity android:name=".UI.NetworkServiceTest.NetworkTestActivity">
 
@@ -47,21 +60,13 @@
         <activity android:name=".UI.Main.MyPage.MyPageProfileSettingActivity">
 
         </activity>
-        <activity android:name=".UI.Main2Activity"/>
-        <activity android:name=".UI.Artist.ArtistActivity"/>
-        <activity android:name=".UI.Artist.ArtistLibraryActivity"/>
 
-        <!-- 음악업로드 -->
-        <activity android:name=".UI.Main.MyPage.UpLoadFileActivity">
 
-        </activity>
         <activity android:name=".UI.Main.MyPage.SetStartPointActivity"/>
         <activity android:name=".UI.Main.MyPage.UploadSongInfoActivity">
 
         </activity>
 
-        <!-- 음악플레이어 -->
-        <activity android:name=".UI.MainPlayer.MainPlayerActivity"/>
 
         <service android:name=".Util.Player.Service.MusicService"/>
         <service
@@ -87,7 +92,6 @@
         <activity android:name=".Util.Audio.PlayerActivity"/>
         <activity android:name=".UI.Signup.SignupSelectArtistActivity"/>
         <activity android:name=".UI.Signup.SignupGenreActivity"/>
-        <activity android:name=".UI.Signup.SignupFirstActivity"/>
         <activity android:name=".UI.Main.MyPage.UpLoadSongCoverActivity">
         </activity>
     </application>
