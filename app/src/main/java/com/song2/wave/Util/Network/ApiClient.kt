@@ -2,6 +2,10 @@ package com.song2.wave.Util.Network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.xml.datatype.DatatypeConstants.SECONDS
+import okhttp3.OkHttpClient
+import java.util.concurrent.TimeUnit
+
 
 object ApiClient {
     // BaseURL

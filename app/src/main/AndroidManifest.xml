@@ -20,7 +20,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
         <!-- 로그인 -->
-        <activity android:name=".UI.Login.LoginActivity"/>
+        <activity android:name=".UI.Login.LoginActivity2"/>
         <activity android:name=".Util.Kakao.service.ScoringPlayerActivity"/>
 
         <meta-data
@@ -35,6 +35,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".UI.Signup.SignupMoodActivity"></activity>
         <activity android:name=".UI.Signup.SignupFirstActivity">
 
 
@@ -86,7 +87,7 @@
         <activity android:name=".Util.Audio.PlayerActivity"/>
         <activity android:name=".UI.Signup.SignupSelectArtistActivity"/>
         <activity android:name=".UI.Signup.SignupGenreActivity"/>
-        <activity android:name=".UI.Signup.SignupMoodActivity"/>
+        <activity android:name=".UI.Signup.SignupFirstActivity"/>
         <activity android:name=".UI.Main.MyPage.UpLoadSongCoverActivity">
         </activity>
     </application>
