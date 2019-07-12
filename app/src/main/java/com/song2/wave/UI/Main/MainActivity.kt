@@ -19,11 +19,21 @@ import android.content.*
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.support.v4.app.ActivityCompat
+import com.song2.wave.Data.GET.GetRecommendResponse
+import com.song2.wave.Data.GET.GetSearchResponse
+import com.song2.wave.Data.model.PlaySongData
+import com.song2.wave.Data.model.Scoring.PassedCompletedSongData
+import com.song2.wave.Data.model.Scoring.PassedSongData
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity
 import com.song2.wave.Util.Audio.AudioApplication
 import com.song2.wave.Util.Audio.BroadcastActions
+import com.song2.wave.Util.Network.ApiClientSec
+import com.song2.wave.Util.Network.SecondNetworkService
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main_player.*
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Retrofit
 
 
 class MainActivity : AppCompatActivity() {
@@ -50,7 +60,8 @@ class MainActivity : AppCompatActivity() {
 
         iv_main_act_bottom_play.setOnClickListener {
             // 재생 또는 일시정지
-            AudioApplication.getInstance().serviceInterface.togglePlay()
+            getSearch()
+            //AudioApplication.getInstance().serviceInterface.togglePlay()
         }
 
         mainActivity = this
@@ -177,4 +188,27 @@ class MainActivity : AppCompatActivity() {
         lateinit var mainActivity : MainActivity
     }
 
+    fun getSearch() {
+
+        var networkService2 = ApiClientSec.getRetrofit().create(SecondNetworkService::class.java)
+        val getRatedResponse = networkService2.getSearch()
+
+
+        getRatedResponse.enqueue(object : retrofit2.Callback<GetSearchResponse> {
+            override fun onFailure(call: Call<GetSearchResponse>, t: Throwable) {
+                Log.v("recommend song list fail", "test")
+            }
+
+            override fun onResponse(call: Call<GetSearchResponse>, response: Response<GetSearchResponse>) {
+                if (response.isSuccessful) {
+                    Log.v("recommend song list fail", "test2")
+
+                }
+                else{
+                    Log.v("recommend song list fail", "test3")
+
+                }
+            }
+        })
+    }
 }

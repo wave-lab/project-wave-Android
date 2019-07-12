@@ -52,7 +52,7 @@ class SignupFirstActivity : AppCompatActivity() {
     lateinit var data: Uri
     var imageUri: Uri? = null
     var emailCheckFlag = 0 // 실패
-    private var image: MultipartBody.Part? = null
+    private var profileImg: MultipartBody.Part? = null
     var chkFlag: Boolean = false
     val passwdPattern: String = "^[A-Za-z[0-9]]{8,20}$" // 영문, 숫자
     val nicknamePattern: String = "^[A-Za-z[0-9]]{2,8}$" // 영문, 숫자
@@ -140,7 +140,6 @@ class SignupFirstActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 btn_signup_act_next.visibility = View.VISIBLE
                 if (emailCheckPattern(edit_signup_act_email.text.toString())) {
-                    postEmailCheckResponse(edit_signup_act_email.text.toString())
                     tv_signup_act_email_pattern_check.setText("검사 완료")
                     tv_signup_act_email_confirm.setTextColor(Color.parseColor("#00b6de"))
                 } else {
@@ -221,10 +220,7 @@ class SignupFirstActivity : AppCompatActivity() {
                 edit_signup_act_email.requestFocus()
                 Toast.makeText(applicationContext, "이메일을 입력해주세요", Toast.LENGTH_LONG).show()
             } else {
-                ll_signup_act_verify_num.visibility = View.VISIBLE
-                tv_signup_act_email_confirm.visibility = View.GONE
-                edit_signup_act_verify_num.requestFocus()
-
+                postEmailCheckResponse(edit_signup_act_email.text.toString())
             }
 
         }
@@ -235,11 +231,13 @@ class SignupFirstActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "인증번호를 입력해주세요", Toast.LENGTH_LONG).show()
             } else {
 
-                ll_signup_act_nickname.visibility = View.VISIBLE
-                tv_signup_act_verify_num_confirm.visibility = View.GONE
-                edit_signup_act_nickname.requestFocus()
-                if (emailCheckValue.equals(edit_signup_act_verify_num.toString())) {
 
+                if (emailCheckValue.equals(edit_signup_act_verify_num.text.toString())) {
+                    ll_signup_act_nickname.visibility = View.VISIBLE
+                    tv_signup_act_verify_num_confirm.visibility = View.GONE
+                    edit_signup_act_verify_num.setFocusable(false)
+                    edit_signup_act_verify_num.setClickable(false)
+                    edit_signup_act_nickname.requestFocus()
                     //통신
 
                 } else {
@@ -254,7 +252,6 @@ class SignupFirstActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "닉네임을 입력해주세요", Toast.LENGTH_LONG).show()
             } else {
                 getNicknameCheck()
-
             }
         }
 
@@ -324,7 +321,6 @@ class SignupFirstActivity : AppCompatActivity() {
                     this.data = data!!.data
                     imageUri = data!!.data
 
-
                     // 선택한 이미지를 해당 이미지뷰에 적용
                     Glide.with(this)
                         .load(data.data)
@@ -339,20 +335,6 @@ class SignupFirstActivity : AppCompatActivity() {
         }
     }
 
-
-    // 이미지 파일을 확장자까지 표시해주는 메소드
-    fun getRealPathFromURI(context: Context, contentUri: Uri): String {
-        var cursor: Cursor? = null
-        try {
-            val proj = arrayOf(MediaStore.Images.Media.DATA)
-            cursor = context.contentResolver.query(contentUri, proj, null, null, null)
-            val column_index = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-            cursor.moveToFirst()
-            return cursor.getString(column_index)
-        } finally {
-            cursor?.close()
-        }
-    }
 
     // 방 배경 이미지 변경
     fun changeImage() {
@@ -379,8 +361,14 @@ class SignupFirstActivity : AppCompatActivity() {
                         Log.v("asdf", "이메일 응답 = " + response.body()!!.message)
 
                         if (response.body()!!.success) {
-                            var data = response!!.body()!!.message
+                            var data = response!!.body()!!.data
+                            emailCheckValue = data!!
                             Log.v("asdf", "이메일 인증 번호 = " + data)
+                            ll_signup_act_verify_num.visibility = View.VISIBLE
+                            tv_signup_act_email_confirm.visibility = View.GONE
+                            edit_signup_act_verify_num.requestFocus()
+                            edit_signup_act_email.setFocusable(false)
+                            edit_signup_act_email.setClickable(false)
 
                         } else {
                             Toast.makeText(applicationContext, "중복된 이메일입니다", Toast.LENGTH_LONG).show()
@@ -449,6 +437,8 @@ class SignupFirstActivity : AppCompatActivity() {
                         Log.v("asdf", "닉네임 중복 X")
                         ll_signup_act_passwd.visibility = View.VISIBLE
                         tv_signup_act_nickname_confirm.visibility = View.GONE
+                        edit_signup_act_nickname.setFocusable(false)
+                        edit_signup_act_nickname.setClickable(false)
                         edit_signup_act_passwd.requestFocus();
                     } else {
                         Toast.makeText(applicationContext, "중복된 닉네임입니다", Toast.LENGTH_LONG).show()

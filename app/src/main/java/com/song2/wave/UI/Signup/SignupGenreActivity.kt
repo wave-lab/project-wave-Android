@@ -17,19 +17,20 @@ import org.jetbrains.anko.startActivity
 
 class SignupGenreActivity : AppCompatActivity(), View.OnClickListener {
 
-    val genre = ArrayList<String>()
 
-    lateinit var receivedImgUri: Uri
-    lateinit var genreArr: Array<ImageView>
-    lateinit var selectedGenreArr: ArrayList<String>
+    lateinit var receivedImgUri : Uri
+    lateinit var genreArr : Array<ImageView>
+    lateinit var selectedGenreArr : ArrayList<String>
+    lateinit var selectedArtistArr : ArrayList<String>
+
 
     override fun onClick(v: View?) {
         for (i in 0..7) {
             if (v!!.id == genreArr[i].getId()) {
-                selectedGenreArr.add("m" + ((i + 1).toString()))
-                genre.add("m" + (i+1).toString())
-                Toast.makeText(applicationContext, "장르 " + "m" + (i + 1).toString() + "번 버튼 선택", Toast.LENGTH_LONG)
-                    .show()
+
+                selectedGenreArr.add("g" + ((i+1).toString()))
+                Toast.makeText(applicationContext, "장르 " +"m" + (i+1).toString() + "번 버튼 선택", Toast.LENGTH_LONG).show()
+
             }
         }
         for (i in 0..selectedGenreArr.size - 1)
@@ -46,6 +47,7 @@ class SignupGenreActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         selectedGenreArr = ArrayList<String>()
+        selectedArtistArr = intent.getStringArrayListExtra("selectedArtistArr")
 
         var popImg: ImageView = findViewById(R.id.img_signup_genre_act_pop)
         var balladImg: ImageView = findViewById(R.id.img_signup_genre_act_ballad)
@@ -64,6 +66,13 @@ class SignupGenreActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         btn_signup_genre_nex.setOnClickListener {
+
+            var intent = Intent(applicationContext, SignupMoodActivity::class.java)
+            intent.putExtra("imageUri",receivedImgUri)
+            intent.putExtra("selectedArtistArr", selectedArtistArr)
+            intent.putExtra("selectedGenreArr",selectedGenreArr)
+            startActivity(intent)
+
             if (intent.getStringExtra("Confirm").equals("upload")) {
                 //음악 Upload
                 Log.e("picURI:::::::::::::::::::",intent.getStringExtra("picURI"))
@@ -84,6 +93,7 @@ class SignupGenreActivity : AppCompatActivity(), View.OnClickListener {
                 intent.putExtra("Confirm","signup")
                 startActivity(intent)
             }
+
         }
     }
 }
