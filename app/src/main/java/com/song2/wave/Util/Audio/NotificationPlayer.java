@@ -99,7 +99,6 @@ public class NotificationPlayer {
         */
     }
 
-
     public void removeNotificationPlayer() {
         cancel();
         mService.stopForeground(true);

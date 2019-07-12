@@ -33,7 +33,6 @@ import java.io.InputStream
 
 class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
 
-
     val authorization_info =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
 
@@ -88,7 +87,7 @@ class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
         handleImage()
 
         btn_signup_mood_next.setOnClickListener {
-            postSignup()
+            //postSignup()
         }
 
     }
@@ -125,6 +124,51 @@ class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
             cursor?.close()
         }
     }
+
+//    fun postSignup(){
+//        val pref = applicationContext.getSharedPreferences("auto", Activity.MODE_PRIVATE)
+//        var emailValue : String = pref.getString("email","")
+//        var passwordValue : String = pref.getString("password","")
+//        var nicknameValue : String = pref.getString("nickname","")
+//
+//        Log.v("SignupMoodActivity", "회원가입 이메일 = "+emailValue)
+//        Log.v("SignupMoodActivity", "회원가입 패스워드 = "+passwordValue)
+//        Log.v("SignupMoodActivity", "회원가입 닉네임 = "+nicknameValue)
+//        Log.v("SignupMoodActivity", "회원가입 이미지 파일 " + image)
+//
+//        networkService = ApiClient.getRetrofit().create(NetworkService::class.java)
+//
+//        val email = RequestBody.create(MediaType.parse("text.plain"), emailValue)
+//        val password = RequestBody.create(MediaType.parse("text.plain"), passwordValue)
+//        val nickname = RequestBody.create(MediaType.parse("text.plain"),nicknameValue )
+//        val genre0 = RequestBody.create(MediaType.parse("text.plain"),"g2" )
+//        val genre1 = RequestBody.create(MediaType.parse("text.plain"),"g3" )
+//        val genre2 = RequestBody.create(MediaType.parse("text.plain"),"g3" )
+//        val mood0 = RequestBody.create(MediaType.parse("text.plain"),"m1" )
+//        val mood1 = RequestBody.create(MediaType.parse("text.plain"),"m2" )
+//        val originArtist = RequestBody.create(MediaType.parse("text.plain"), "3")
+//
+//        val postRoomTestResponse = networkService.postSignUp(email, password,nickname,image,genre0,genre1, genre2,mood0,mood1,originArtist)
+//        postRoomTestResponse.enqueue(object : retrofit2.Callback<PostResponse>{
+//
+//            override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {
+//                if(response.isSuccessful){
+//                    if(response.body()!!.success == true){
+//                        Toast.makeText(applicationContext, "회원가입 완료", Toast.LENGTH_SHORT).show()
+//                        Log.v("SignupMoodActivity","값 전달 성공")
+//                    }
+//                    else{
+//                        Log.v("SignupMoodActivity","값 전달 실패")
+//                    }
+//                }
+//                else{
+//                }
+//            }
+//            override fun onFailure(call: Call<PostResponse>, t: Throwable?) {
+//            }
+//        })
+//
+//    }
 
     fun postSignup(){
         val pref = applicationContext.getSharedPreferences("auto", Activity.MODE_PRIVATE)
@@ -183,5 +227,6 @@ class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
         })
 
     }
+
 
 }
