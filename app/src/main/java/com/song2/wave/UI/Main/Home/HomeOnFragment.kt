@@ -33,6 +33,7 @@ import com.song2.wave.Data.model.Top10CategoryData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.Home.Adapter.*
 import com.song2.wave.UI.Main.Home.Top10.Top10Fragment
+import com.song2.wave.UI.Main.MyPage.PointHistoryFragment
 import com.song2.wave.UI.Signup.SignupFirstActivity
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
@@ -116,9 +117,12 @@ class HomeOnFragment : Fragment() {
         }
 
         v.iv_home_frag_top10_mood_more_btn.setOnClickListener {
-
-
             HomeFragment.homeFragment.replaceFragment(Top10Fragment())
+        }
+
+        v.ll_home_frag_goto_point.setOnClickListener {
+            HomeFragment.homeFragment.replaceFragment(PointHistoryFragment())
+
         }
 
         return v
@@ -391,6 +395,10 @@ class HomeOnFragment : Fragment() {
         tv_home_frag_perfect_cnt.setText(temp.hitSongCount.toString())
         tv_home_frag_total_point.setText(temp.totalPoint.toString() + "P")
 
+
+        tv_home_frag_waiting_scoring_mine.setText(temp.nickname + "이 평가를 기다리고 있는 곡")
+        tv_home_frag_waiting_scoring.setText(temp.nickname + "의 평가를 기다리고 있는 곡")
+        //tv_home_frag_recommend_song.(temp.nickname + "님을 위한 추천곡")
         //visible
         rl_home_frag_goto_login.visibility = View.GONE
         ll_home_frag_point_layout.visibility = View.VISIBLE

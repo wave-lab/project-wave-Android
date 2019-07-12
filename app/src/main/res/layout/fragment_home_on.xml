@@ -96,23 +96,31 @@
                                         android:src="@drawable/btn_scroll"
                                         android:layout_width="52dp" android:layout_height="52dp"/>
 
-                                <TextView
-                                        android:id="@+id/tv_home_frag_total_point"
-                                        android:layout_toLeftOf="@+id/iv_home_frag_more_info"
-                                        android:includeFontPadding="false"
-                                        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                                <LinearLayout
+                                        android:id="@+id/ll_home_frag_goto_point"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="22sp"
-                                        android:textColor="#ffffff"
-                                        android:lineSpacingExtra="9sp"
-                                        android:text="2,000P"/>
-                                <ImageView
-                                        android:layout_marginStart="1dp"
-                                        android:id="@+id/iv_home_frag_more_info"
-                                        android:src="@drawable/btn_more"
-                                        android:layout_width="24dp" android:layout_height="24dp"
-                                        android:layout_centerVertical="true" android:layout_alignParentEnd="true"/>
+                                              android:layout_height="match_parent"
+                                              android:layout_centerVertical="true" android:layout_alignParentEnd="true">
+
+                                    <TextView
+                                            android:id="@+id/tv_home_frag_total_point"
+                                            android:layout_toLeftOf="@+id/iv_home_frag_more_info"
+                                            android:includeFontPadding="false"
+                                            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="22sp"
+                                            android:textColor="#ffffff"
+                                            android:lineSpacingExtra="9sp"
+                                            android:text="2,000P"/>
+                                    <ImageView
+                                            android:layout_marginStart="2dp"
+                                            android:id="@+id/iv_home_frag_more_info"
+                                            android:layout_gravity="center_vertical"
+                                            android:src="@drawable/btn_more"
+                                            android:layout_width="24dp" android:layout_height="24dp"/>
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <RelativeLayout
@@ -160,7 +168,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="지훈님이 평가를 기다리고 있는 곡"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textColor="#ffffff"
                         android:lineSpacingExtra="11sp"
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
@@ -183,7 +191,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="지훈님의 평가를 기다리고 있는 곡"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textColor="#ffffff"
                         android:lineSpacingExtra="11sp"
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
@@ -207,7 +215,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="적중 성공 곡"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textColor="#ffffff"
                         android:lineSpacingExtra="11sp"
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
@@ -232,7 +240,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="지훈님을 위한 추천곡"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textColor="#ffffff"
                         android:lineSpacingExtra="11sp"
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
@@ -256,7 +264,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="위클리 챌린지"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textColor="#ffffff"
                         android:lineSpacingExtra="11sp"
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
@@ -280,7 +288,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="TOP 10: 장르"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textColor="#ffffff"
                         android:lineSpacingExtra="11sp"
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
@@ -314,7 +322,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="TOP 10: 무드"
-                        android:textSize="20sp"
+                        android:textSize="20dp"
                         android:textColor="#ffffff"
                         android:lineSpacingExtra="11sp"
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
