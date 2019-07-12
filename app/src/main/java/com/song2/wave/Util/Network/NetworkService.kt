@@ -133,26 +133,33 @@ interface NetworkService {
     ////////////////////* POST *///////////////////////////
 
     // 회원가입
-    @Multipart
-    @POST("/api/signup")
-    fun postSignup(
-            @Part("email") email : RequestBody,
-            @Part("password") password : RequestBody,
-            @Part("nickname") nickname : RequestBody,
-            @Part profileImg : MultipartBody.Part?,
-            @Part("genre[0]") genre0 : RequestBody,
-            @Part("genre[1]") genre1 : RequestBody,
-            @Part("genre[2]") genre2 : RequestBody,
-            @Part("mood[0]") mood0 : RequestBody,
-            @Part("mood[1]") mood1 : RequestBody,
-            @Part("originArtist[0]") originArtist : RequestBody
-    ) : Call<PostResponse>
+//    @Multipart
+//    @POST("core/signup")
+//    fun postSignup(
+//            @Part("email") email : RequestBody,
+//            @Part("password") password : RequestBody,
+//            @Part("nickname") nickname : RequestBody,
+//            @Part profileImg : MultipartBody.Part?,
+//            @Part("genre[0]") genre0 : RequestBody,
+//            @Part("genre[1]") genre1 : RequestBody,
+//            @Part("genre[2]") genre2 : RequestBody,
+//            @Part("mood[0]") mood0 : RequestBody,
+//            @Part("mood[1]") mood1 : RequestBody,
+//            @Part("originArtist[0]") originArtist : RequestBody
+//    ) : Call<PostResponse>
 
     // 이메일 중복 확인
     @POST("/core/users/emailCheck")
     fun postEmailCheckResponse(
         @Header("Content-Type") content_type: String,
         @Body() body: JsonObject
+    ) : Call<PostResponse>
+
+    //** ds 작업 **//
+    @Multipart
+    @POST("core/signup")
+    fun postSignUp(
+            @Body postSignUpData: PostSignUpData
     ) : Call<PostResponse>
 
 }
