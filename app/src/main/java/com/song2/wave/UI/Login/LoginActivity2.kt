@@ -10,7 +10,7 @@ import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.log.Logger
 import com.song2.wave.R
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity2 : AppCompatActivity() {
 
     private var callback: SessionCallback? = null
 
@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_login2)
 
         callback = SessionCallback()
         Session.getCurrentSession().addCallback(callback)
@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     protected fun redirectSignupActivity() {
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, LoginActivity2::class.java)
         startActivity(intent)
         finish()
     }

@@ -7,11 +7,13 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.support.v7.widget.GridLayoutManager
 import android.util.Log
+import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.Data.GET.GetOriginArtistResponse
 import com.song2.wave.Data.model.RealArtistData
 import com.song2.wave.R
+import com.song2.wave.UI.MainPlayer.MainPlayerActivity
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.activity_signup_select_artist.*
@@ -26,21 +28,26 @@ class SignupSelectArtistActivity : AppCompatActivity() {
     lateinit var artistDataArr : ArrayList<RealArtistData>
     lateinit var receivedImgUri : Uri
     lateinit var requestManager : RequestManager
+    lateinit var selectedArtistArr : ArrayList<String>
+    lateinit var artistFlag : Array<Int>
+    lateinit var signArtistAdapter : SignupArtistAdapter
+    lateinit var realArtistData : ArrayList<RealArtistData>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup_select_artist)
 
+        selectedArtistArr = ArrayList<String>()
         receivedImgUri = intent.getParcelableExtra<Parcelable>("imageUri") as Uri
         requestManager = Glide.with(this)
-
-        Log.v("asdf","이미지 = " + receivedImgUri)
-
+        signupSelectArtistActivity = this
         registerImage()
 
         btn_signup_artist_next.setOnClickListener {
             var intent = Intent(applicationContext, SignupGenreActivity::class.java)
             intent.putExtra("imageUri",receivedImgUri)
+            intent.putExtra("selectedArtistArr",selectedArtistArr)
             startActivity(intent)
         }
     }
@@ -48,7 +55,6 @@ class SignupSelectArtistActivity : AppCompatActivity() {
     fun registerImage(){
 
         artistDataArr = ArrayList<RealArtistData>()
-
         getOriginArtistResponse()
     }
 
@@ -66,7 +72,8 @@ class SignupSelectArtistActivity : AppCompatActivity() {
                         artistDataArr.add(RealArtistData(originArtistData[i].originArtistIdx.toInt(), originArtistData[i].originArtistImg, originArtistData[i].originArtistName))
                     }
 
-                    recycler_signup_artist_selecct.adapter = SignupArtistAdapter(artistDataArr,requestManager)
+                    signArtistAdapter = SignupArtistAdapter(artistDataArr,requestManager)
+                    recycler_signup_artist_selecct.adapter = signArtistAdapter
                     recycler_signup_artist_selecct.layoutManager = GridLayoutManager(applicationContext, 3)
 
                 }
@@ -78,7 +85,12 @@ class SignupSelectArtistActivity : AppCompatActivity() {
 
         })
 
-
     }
+
+    public companion object {
+        lateinit var signupSelectArtistActivity: SignupSelectArtistActivity
+        //일종의 스태틱
+    }
+
 
 }
