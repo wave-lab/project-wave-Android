@@ -101,6 +101,8 @@
                 android:layout_marginTop="131dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginHorizontal="34dp"
+                android:max="5"
+                android:stepSize="1"
                 android:theme="@style/RatingBar"
                 />
             <Button
@@ -165,6 +167,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_main_player_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_main_player_act_introduce_short"

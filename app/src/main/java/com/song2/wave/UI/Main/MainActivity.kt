@@ -65,8 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         iv_main_act_bottom_play.setOnClickListener {
             // 재생 또는 일시정지
-            getSearch()
-            //AudioApplication.getInstance().serviceInterface.togglePlay()
+            AudioApplication.getInstance().serviceInterface.togglePlay()
         }
 
         mainActivity = this

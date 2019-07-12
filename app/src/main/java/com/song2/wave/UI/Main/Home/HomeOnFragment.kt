@@ -189,7 +189,7 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
                     for(i in playlistDataList.songList.indices) {
-                        myWaitingSongDataList.add(MyWaitingSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].songUrl, 3, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
+                        myWaitingSongDataList.add(MyWaitingSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].songUrl, playlistDataList.songList[i].deleteTime.substring(8,10), playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
                     }
                     myWaitingSongHomeAdapter = MyWaitingSongHomeAdapter(context!!, myWaitingSongDataList, requestManager)
                     rv_home_frag_scoring_waiting_mine.adapter = myWaitingSongHomeAdapter

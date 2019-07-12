@@ -32,18 +32,17 @@
 
         <activity android:name=".UI.Signup.SignupFirstActivity"></activity>
         <activity android:name=".UI.Signup.SignupMoodActivity" />
-        android:value="@string/kakao_app_key"/>
         <!-- 메인 -->
         <activity
-            android:name=".SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Main.MainActivity" />
+        <activity android:name=".UI.Main.MainActivity"
+            android:theme="@style/SplashTheme" />
         <activity android:name=".UI.Main2Activity" />
         <activity android:name=".UI.Artist.ArtistActivity" />
         <activity android:name=".UI.Artist.ArtistLibraryActivity" /> <!-- 음악플레이어 -->
