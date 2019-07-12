@@ -435,7 +435,7 @@ class SignupFirstActivity : AppCompatActivity() {
     }
 
 
-    fun getNicknameCheck() {
+    fun getNicknameCheck(){
         val getNicknameCheckResponse = networkService.getNicknameCheckResponse(edit_signup_act_nickname.text.toString())
         getNicknameCheckResponse.enqueue(object : Callback<GetNicknameCheckResponse> {
 

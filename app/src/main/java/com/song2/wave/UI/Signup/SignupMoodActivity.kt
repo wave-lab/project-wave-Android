@@ -43,18 +43,21 @@ class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
     var mood = ArrayList<RequestBody?>()
     var genre = ArrayList<RequestBody?>()
 
-    private var image : MultipartBody.Part? = null
-    lateinit var receivedImgUri : Uri
-    lateinit var selectedMoodArr :  ArrayList<String>
+    private var image: MultipartBody.Part? = null
+    private var audioFile: MultipartBody.Part? = null
+    lateinit var receivedImgUri: Uri
+    lateinit var receivedAudioUri: Uri
+    lateinit var selectedMoodArr: ArrayList<String>
 
-    lateinit var moodArr : Array<ImageView>
+    lateinit var moodArr: Array<ImageView>
 
     override fun onClick(v: View?) {
-        for(i in 0..7){
+        for (i in 0..7) {
             if (v!!.id == moodArr[0].getId()) {
-                selectedMoodArr.add("m" + ((i+1).toString()))
-                mood.add(RequestBody.create(MediaType.parse("text.plain"), "m"+i.toString()))
-                Toast.makeText(applicationContext, "분위기 " + "m" + (i+1).toString() + "번 버튼 선택", Toast.LENGTH_LONG).show()
+                selectedMoodArr.add("m" + ((i + 1).toString()))
+                mood.add(RequestBody.create(MediaType.parse("text.plain"), "m" + i.toString()))
+                Toast.makeText(applicationContext, "분위기 " + "m" + (i + 1).toString() + "번 버튼 선택", Toast.LENGTH_LONG)
+                    .show()
             }
         }
 
@@ -66,33 +69,41 @@ class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
 
         selectedMoodArr = ArrayList<String>()
 
-        var funnyImg :ImageView = findViewById(R.id.img_signup_mood_act_funny)
-        var fluttetImg :ImageView = findViewById(R.id.img_signup_mood_act_flutter)
-        var hipImg :ImageView = findViewById(R.id.img_signup_mood_act_hip)
-        var sadImg :ImageView = findViewById(R.id.img_signup_mood_act_sad)
-        var windliessImg :ImageView = findViewById(R.id.img_signup_mood_act_windless)
-        var dreamyImg :ImageView = findViewById(R.id.img_signup_mood_act_dreamy)
-        var groovyImg :ImageView = findViewById(R.id.img_signup_mood_act_windless)
-        var honeyImg :ImageView = findViewById(R.id.img_signup_mood_act_honey)
+        var funnyImg: ImageView = findViewById(R.id.img_signup_mood_act_funny)
+        var fluttetImg: ImageView = findViewById(R.id.img_signup_mood_act_flutter)
+        var hipImg: ImageView = findViewById(R.id.img_signup_mood_act_hip)
+        var sadImg: ImageView = findViewById(R.id.img_signup_mood_act_sad)
+        var windliessImg: ImageView = findViewById(R.id.img_signup_mood_act_windless)
+        var dreamyImg: ImageView = findViewById(R.id.img_signup_mood_act_dreamy)
+        var groovyImg: ImageView = findViewById(R.id.img_signup_mood_act_windless)
+        var honeyImg: ImageView = findViewById(R.id.img_signup_mood_act_honey)
 
 
         moodArr = arrayOf<ImageView>(funnyImg, honeyImg, fluttetImg, sadImg, hipImg, windliessImg, groovyImg, dreamyImg)
 
-        for(i in 0..7){
+        for (i in 0..7) {
             moodArr[i].setOnClickListener(this)
         }
 
-        receivedImgUri = intent.getParcelableExtra<Parcelable>("imageUri") as Uri
 
-        handleImage()
 
-        btn_signup_mood_next.setOnClickListener {
-            //postSignup()
+        if (intent.getStringExtra("Confirm").equals("upload")) {
+            btn_signup_mood_next.setOnClickListener {
+                postSongUploadResponse()
+            }
+        } else {
+            btn_signup_mood_next.setOnClickListener {
+                receivedImgUri = intent.getParcelableExtra<Parcelable>("imageUri") as Uri
+                handleImage()
+                postSignup()
+            }
         }
+
+
 
     }
 
-    fun handleImage(){
+    fun handleImage() {
         val options = BitmapFactory.Options()
 
         var input: InputStream? = null // here, you need to get your context.
@@ -106,7 +117,7 @@ class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
         val photoBody = RequestBody.create(MediaType.parse("image/jpg"), baos.toByteArray())
-        val img = File(getRealPathFromURI(applicationContext,receivedImgUri).toString()) // 가져온 파일의 이름을 알아내려고 사용합니다
+        val img = File(getRealPathFromURI(applicationContext, receivedImgUri).toString()) // 가져온 파일의 이름을 알아내려고 사용합니다
 
         image = MultipartBody.Part.createFormData("image", img.name, photoBody)
     }
@@ -170,56 +181,154 @@ class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
 //
 //    }
 
-    fun postSignup(){
+
+    fun postSongUploadResponse(){
+
+        genre.clear()
+        mood.clear()
+
+        var originTitleValue : String = intent.getStringExtra("Title")
+        //아트워크
+        var originArtistNameValue : String = intent.getStringExtra("Artist")
+        //음악url
+        var songCommentValue : String = intent.getStringExtra("Comment")
+        var highlightTimeValue : String = intent.getStringExtra("StartPoint")
+
+        var genreValue : ArrayList<String> = intent.getStringArrayListExtra("genre")
+        var moodValue : ArrayList<String> = intent.getStringArrayListExtra("mood")
+
+
+        Log.v("UploadActivity", "originTitle = " + originTitleValue)
+        Log.v("UploadActivity", "originArtistName = " + originArtistNameValue)
+        Log.v("UploadActivity", "songComment " + songCommentValue)
+        Log.v("UploadActivity", "songComment " + highlightTimeValue)
+
+        for(i in genreValue.indices){
+            genre.add(RequestBody.create(MediaType.parse("text.plain"), genreValue[i]))
+        }
+
+        for(i in moodValue.indices){
+            mood.add(RequestBody.create(MediaType.parse("text.plain"), moodValue[i]))
+        }
+
+        val title = RequestBody.create(MediaType.parse("text.plain"), originTitleValue)
+        val originArtistName = RequestBody.create(MediaType.parse("text.plain"), originArtistNameValue)
+        val songComment = RequestBody.create(MediaType.parse("text.plain"), songCommentValue)
+        val highlightTime = RequestBody.create(MediaType.parse("text.plain"), highlightTimeValue)
+
+
+        /// 이미지 파일변환
+        receivedImgUri = Uri.parse(intent.getStringExtra("picURI"))
+        val options = BitmapFactory.Options()
+        var input: InputStream? = null // here, you need to get your context.
+        try {
+            input = contentResolver.openInputStream(receivedImgUri)
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+
+        val bitmap = BitmapFactory.decodeStream(input, null, options) // InputStream 으로부터 Bitmap 을 만들어 준다.
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
+        val photoBody = RequestBody.create(MediaType.parse("image/jpg"), baos.toByteArray())
+        val img = File(getRealPathFromURI(applicationContext, receivedImgUri).toString()) // 가져온 파일의 이름을 알아내려고 사용합니다
+
+        image = MultipartBody.Part.createFormData("artwork", img.name, photoBody)
+        ///
+
+
+        /// mp3 파일변환
+        receivedAudioUri= Uri.parse(intent.getStringExtra("songURI"))
+
+        val optionsAudio = BitmapFactory.Options()
+        var inputAudio: InputStream? = null // here, you need to get your context.
+
+        try {
+            inputAudio = contentResolver.openInputStream(receivedAudioUri)
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+
+
+        val audioBitmap = BitmapFactory.decodeStream(inputAudio, null, optionsAudio) // InputStream 으로부터 Bitmap 을 만들어 준다.
+        audioBitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
+        val audioBody = RequestBody.create(MediaType.parse("Audio/*"), baos.toByteArray())
+        val audio = File(getRealPathFromURI(applicationContext, receivedImgUri)) // 가져온 파일의 이름을 알아내려고 사용합니다
+
+        audioFile = MultipartBody.Part.createFormData("profileImg", audio.name, audioBody)
+        ///
+
+        val postSongUploadResponse = networkService.postSongUploadResponse(title,image,originArtistName,audioFile,genre,mood,songComment,highlightTime)
+
+        postSongUploadResponse.enqueue(object : retrofit2.Callback<PostResponse> {
+            override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {
+                if (response.isSuccessful) {
+                    if (response.body()!!.success == true) {
+                        Toast.makeText(applicationContext, "곡업로드 완료", Toast.LENGTH_SHORT).show()
+                        Log.v("UploadMoodActivity", "곡업로드 성공")
+                    } else {
+                        Log.v("UploadMoodActivity", "회원가입 실패")
+                    }
+                } else {
+                    Log.e("response", response.body().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<PostResponse>, t: Throwable) {
+            }
+
+        })
+
+    }
+
+    fun postSignup() {
         val pref = applicationContext.getSharedPreferences("auto", Activity.MODE_PRIVATE)
-        var emailValue : String = pref.getString("email","")
-        var passwordValue : String = pref.getString("password","")
-        var nicknameValue : String = pref.getString("nickname","")
+        var emailValue: String = pref.getString("email", "")
+        var passwordValue: String = pref.getString("password", "")
+        var nicknameValue: String = pref.getString("nickname", "")
 
-
-        Log.v("SignupMoodActivity", "회원가입 이메일 = "+ emailValue)
-        Log.v("SignupMoodActivity", "회원가입 패스워드 = "+ passwordValue)
-        Log.v("SignupMoodActivity", "회원가입 닉네임 = "+ nicknameValue)
+        Log.v("SignupMoodActivity", "회원가입 이메일 = " + emailValue)
+        Log.v("SignupMoodActivity", "회원가입 패스워드 = " + passwordValue)
+        Log.v("SignupMoodActivity", "회원가입 닉네임 = " + nicknameValue)
         Log.v("SignupMoodActivity", "회원가입 이미지 파일 " + image)
 
         val email = RequestBody.create(MediaType.parse("text.plain"), emailValue)
         val password = RequestBody.create(MediaType.parse("text.plain"), passwordValue)
-        val nickname = RequestBody.create(MediaType.parse("text.plain"),nicknameValue )
+        val nickname = RequestBody.create(MediaType.parse("text.plain"), nicknameValue)
 
-        try{
-            Log.e("genre data" , "제발"+intent.getStringArrayListExtra("genreList"))
-        }catch (e : Exception){
+        try {
+            Log.e("genre data", "제발" + intent.getStringArrayListExtra("genreList"))
+        } catch (e: Exception) {
 
         }
         var requestList = intent.getStringArrayListExtra("genreList")
 
-        for (i in requestList.indices){
+        for (i in requestList.indices) {
             genre.add(RequestBody.create(MediaType.parse("text.plain"), requestList[i]))
         }
 
-        val originArtist = arrayListOf<Int?>(1,2,3)
+        val originArtist = arrayListOf<Int?>(1, 2, 3)
 
-        val postSignupResponse = networkService.postSignupResponse(email,password,nickname,image,genre,mood,originArtist)
-        postSignupResponse.enqueue(object : retrofit2.Callback<PostResponse>{
+        val postSignupResponse =
+            networkService.postSignupResponse(email, password, nickname, image, genre, mood, originArtist)
+        postSignupResponse.enqueue(object : retrofit2.Callback<PostResponse> {
 
             override fun onFailure(call: Call<PostResponse>, t: Throwable?) {
-                Log.v("SignupMoodActivity",t.toString())
+                Log.v("SignupMoodActivity", t.toString())
                 startActivity<MainActivity>()
 
             }
 
             override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {
-                if(response.isSuccessful){
-                    if(response.body()!!.success == true){
+                if (response.isSuccessful) {
+                    if (response.body()!!.success == true) {
                         Toast.makeText(applicationContext, "회원가입 완료", Toast.LENGTH_SHORT).show()
-                        Log.v("SignupMoodActivity","회원 성공")
+                        Log.v("SignupMoodActivity", "회원 성공")
+                    } else {
+                        Log.v("SignupMoodActivity", "회원가입 실패")
                     }
-                    else{
-                        Log.v("SignupMoodActivity","회원가입 실패")
-                    }
-                }
-                else{
-                    Log.e("response",response.body().toString())
+                } else {
+                    Log.e("response", response.body().toString())
 
                 }
             }

@@ -154,19 +154,24 @@ interface NetworkService {
             @Part("originArtist]") originArtist : ArrayList<Int?>
     ) : Call<PostResponse>
 
+    @Multipart
+    @POST("/songs")
+    fun postSongUploadResponse(
+        @Part("originTitle") originTitle : RequestBody,
+        @Part artwork : MultipartBody.Part?,
+        @Part("originArtistName") originArtistName : RequestBody,
+        @Part profileImg : MultipartBody.Part?,
+        @Part("genre") genre : ArrayList<RequestBody?>,
+        @Part("mood") mood : ArrayList<RequestBody?>,
+        @Part("songComment") songComment : RequestBody,
+        @Part("highlightTime") highlightTime : RequestBody
+    ) : Call<PostResponse>
 
     // 이메일 중복 확인
     @POST("/core/users/emailCheck")
     fun postEmailCheckResponse(
-        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String,
         @Body() body: JsonObject
     ): Call<PostResponse>
-
-    //** ds 작업 **//
-    @Multipart
-    @POST("core/signup")
-    fun postSignUp(
-            @Body postSignUpData: PostSignUpData
-    ) : Call<PostResponse>
 
 }
