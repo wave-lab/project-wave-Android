@@ -130,11 +130,13 @@ interface NetworkService {
         @Header("Content-Type") content_type: String
     ): Call<GetOriginArtistResponse>
 
+/*
     @GET("/core/users/{userIdx}")
     fun getArtistInfoRespnose(
         @Header("Content-Type") content_type: String
         @Path("userIdx") userIdx
     ) : Call<GetArtistInfoRespnose>
+*/
 
     ////////////////////* POST *///////////////////////////
 
