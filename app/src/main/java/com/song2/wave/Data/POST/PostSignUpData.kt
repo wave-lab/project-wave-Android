@@ -1,5 +1,7 @@
 package com.song2.wave.Data.POST
 
+import okhttp3.MultipartBody
+
 data class PostSignUpData (
     var email : String,
     var password : String,

@@ -1,4 +1,4 @@
-package com.song2.wave.AudioTest;
+package com.song2.wave.Util.Audio;
 
 import android.app.*;
 import android.content.Intent;
@@ -9,20 +9,14 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
-import com.song2.wave.UI.Main.MainActivity;
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class AudioService extends Service {
     private final IBinder mBinder = new AudioServiceBinder();

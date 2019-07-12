@@ -18,7 +18,7 @@
 
                 <RelativeLayout android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/bg_mypage_setting_blackgradient"/>
+                                android:background="#000000"/>
 
             </RelativeLayout>
 

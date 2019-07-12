@@ -3,12 +3,11 @@ package com.song2.wave.UI.Main.Home.Adapter
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
-import com.song2.wave.AudioTest.AudioApplication
+import com.song2.wave.Util.Audio.AudioApplication
 import com.song2.wave.Data.model.Home.HomeSongData
 import com.song2.wave.R
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity

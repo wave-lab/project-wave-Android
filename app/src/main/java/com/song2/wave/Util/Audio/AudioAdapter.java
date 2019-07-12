@@ -1,4 +1,4 @@
-package com.song2.wave.AudioTest;
+package com.song2.wave.Util.Audio;
 
 import android.content.ContentUris;
 import android.content.Context;
@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
+
 import com.song2.wave.R;
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity;
 import com.squareup.picasso.Picasso;

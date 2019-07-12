@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.Data.GET.GetSearchResponse
 import com.song2.wave.Data.model.*
+import com.song2.wave.Data.model.SignUp.OriginArtistData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.MainActivity
 import com.song2.wave.UI.Main.Search.Adapter.CoverArtistSearchAdapter
@@ -29,10 +30,9 @@ import retrofit2.Response
 
 class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
-    val networkServicenetworkService: NetworkService by lazy {
-        ApiClient.getRetrofit().create(NetworkService::class.java)
-    }
 
+    val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
+    }
     var TAG = "SearchFragment"
 
     override fun onBackPressed() {

@@ -11,7 +11,6 @@ import com.song2.wave.UI.Main.Search.Adapter.CoverArtistSearchViewHolder
 
 class SignupArtistAdapter (private var realArtistData : ArrayList<RealArtistData>, var requestManager: RequestManager) : RecyclerView.Adapter<SignupArtistViewHolder>(){
 
-    var EXAMPLE_IMG_URL : String = "https://t1.daumcdn.net/cfile/tistory/2641FF4C5900DDDE1E"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SignupArtistViewHolder {
         val mainView : View = LayoutInflater.from(parent.context)
@@ -23,10 +22,12 @@ class SignupArtistAdapter (private var realArtistData : ArrayList<RealArtistData
 
     override fun onBindViewHolder(holder: SignupArtistViewHolder, position: Int) {
 
+        var cnt =0
         //requestManager.load(EXAMPLE_IMG_URL).into(holder.realArtistImg)
         holder.realArtistImg.setOnClickListener {
-            requestManager.load(EXAMPLE_IMG_URL).into(holder.realArtistImg)
+            requestManager.load(realArtistData[position].realArtistImgUrl).into(holder.realArtistImg)
         }
         holder.realArtistName.text = realArtistData[position].realArtistName
+
     }
 }

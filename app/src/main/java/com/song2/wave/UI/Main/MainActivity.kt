@@ -15,11 +15,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.song2.wave.Util.Interface.OnBackPressedListener
 import android.Manifest.permission
 import android.Manifest.permission.READ_CONTACTS
+import android.content.*
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.support.v4.app.ActivityCompat
-
-
-
+import com.song2.wave.UI.MainPlayer.MainPlayerActivity
+import com.song2.wave.Util.Audio.AudioApplication
+import com.song2.wave.Util.Audio.BroadcastActions
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main_player.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -41,18 +45,26 @@ class MainActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                 MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
             )
-
             return;
         }
 
+        iv_main_act_bottom_play.setOnClickListener {
+            // 재생 또는 일시정지
+            AudioApplication.getInstance().serviceInterface.togglePlay()
+        }
 
         mainActivity = this
         callFragment("home")
-
         addBottomTab()
-
         backPressInFragment()
+        registerBroadcast()
+        updateUI()
+    }
 
+    private val mBroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            updateUI()
+        }
     }
 
     // 리스너 객체 생성
@@ -128,20 +140,39 @@ class MainActivity : AppCompatActivity() {
         else {
             Log.v(TAG, "MainActivity onBackPressed")
         }
-/*
-        val fragmentList = supportFragmentManager.fragments
 
-        if (fragmentList != null) {
-            //TODO: Perform your logic to pass back press here
-            for (fragment in fragmentList) {
-                if (fragment is OnBackPressedListener) {
-                    (fragment as OnBackPressedListener).onBackPressed()
-                }
-            }
-        }
-        */
     }
 
+    private fun registerBroadcast() {
+        val filter = IntentFilter()
+        filter.addAction(BroadcastActions.PREPARED)
+        filter.addAction(BroadcastActions.PLAY_STATE_CHANGED)
+        registerReceiver(mBroadcastReceiver, filter)
+    }
+
+    private fun unregisterBroadcast() {
+        unregisterReceiver(mBroadcastReceiver)
+    }
+
+
+    private fun updateUI() {
+        if (AudioApplication.getInstance().serviceInterface.isPlaying) {
+            iv_main_act_bottom_play.setImageResource(R.drawable.btn_stop_md)
+        } else {
+            iv_main_act_bottom_play.setImageResource(R.drawable.btn_play_md)
+        }
+
+       // var coverArtistName : String = AudioApplication.getInstance().serviceInterface.coverartistName
+
+        if (AudioApplication.getInstance().serviceInterface.originArtistName != null) {
+//            val albumArtUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), audioItem.mAlbumId)
+            //Glide.with(applicationContext).load(albumArtUri).into(vp_main_player_act_cover_img)
+            tv_main_act_bottom_title_origin_artist.setText(AudioApplication.getInstance().serviceInterface.songTitle + " - " + AudioApplication.getInstance().serviceInterface.originArtistName)
+            tv_main_act_bottom_cover_artist.setText(AudioApplication.getInstance().serviceInterface.coverartistName)
+        } else {
+            tv_main_act_bottom_title_origin_artist.setText("재생중인 음악이 없습니다.")
+        }
+    }
     companion object {
         lateinit var mainActivity : MainActivity
     }
