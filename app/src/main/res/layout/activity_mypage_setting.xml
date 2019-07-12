@@ -9,16 +9,12 @@
                   android:orientation="vertical"
     >
 
-        <RelativeLayout
-                android:layout_height="match_parent"
-                android:layout_width="match_parent">
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="206dp">
 
                 <RelativeLayout android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/bg_mypage_setting_blackgradient"/>
+                                android:layout_height="match_parent">
 
             </RelativeLayout>
 
@@ -55,15 +51,16 @@
                         android:id="@+id/cv_edit_frag_profile_img"
                         android:src="@drawable/b_101"
                         android:layout_centerVertical="true"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                 />
                 <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cv_edit_frag_profile_photo"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/btn_login_edit_photo"
                         android:layout_marginTop="73dp"
-                        android:layout_marginRight="2.5dp"
+                        android:layout_marginRight="2.4dp"
                         android:layout_alignParentRight="true"
                 />
 
@@ -137,57 +134,7 @@
 
             </LinearLayout>
 
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          android:layout_marginTop="32dp"
-                          android:orientation="vertical">
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textColor="#ffffff"
-                        android:lineSpacingExtra="11sp"
-                        android:fontFamily="@font/noto_sans_kr_bold_hestia"
-                        android:text="아티스트 코멘트"
-                        android:layout_marginLeft="16dp"
-                />
 
-                <LinearLayout
-                        android:id="@+id/ll_edit_profile_comment"
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="16dp"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                >
-
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:textColor="#9e9e9e"
-                            android:lineSpacingExtra="6sp"
-                            android:text="당신의 음악 스타일을 소개해주세요. (24/30자)"
-                            android:layout_marginLeft="16dp"
-                    />
-
-                    <EditText
-                            android:id="@+id/edit_profile_comment_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
-                            android:layout_marginHorizontal="16dp"
-                            android:background="@drawable/signup_border_off"
-                            android:textColor="#ffffff"
-                            android:lineSpacingExtra="8sp"
-                            android:layout_marginTop="3dp"
-                            android:textSize="16sp"
-                    />
-
-
-                </LinearLayout>
-
-            </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="match_parent"
                           android:layout_marginTop="32dp"
@@ -206,17 +153,21 @@
             </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="11dp"
                     android:orientation="horizontal"
             >
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_ballade"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:scaleType="fitXY"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -224,24 +175,26 @@
                             android:id="@+id/txt_profile_edit_ballade"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="31dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
                             android:gravity="center_horizontal"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                             android:text="발라드"
 
                     />
                 </RelativeLayout>
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_pop"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:scaleType="fitXY"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -249,23 +202,25 @@
                             android:id="@+id/txt_profile_edit_pop"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="36dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
                             android:gravity="center_horizontal"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                             android:text="POP"
                     />
                 </RelativeLayout>
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_acoustic"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:scaleType="fitXY"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -273,14 +228,13 @@
                             android:id="@+id/txt_profile_edit_acoustic"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="24dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
                             android:gravity="center_horizontal"
                             android:text="어쿠스틱"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                     />
                 </RelativeLayout>
 
@@ -288,16 +242,19 @@
             </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="11dp">
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_dance"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -305,23 +262,24 @@
                             android:id="@+id/txt_profile_edit_dance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="37dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
                             android:gravity="center_horizontal"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                             android:text="댄스"
                     />
                 </RelativeLayout>
-                <RelativeLayout android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                <RelativeLayout android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_hiphop"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -329,23 +287,24 @@
                             android:id="@+id/txt_profile_edit_hiphop"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="37dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
                             android:gravity="center_horizontal"
                             android:text="힙합"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                     />
                 </RelativeLayout>
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_randbsoul"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -353,31 +312,34 @@
                             android:id="@+id/txt_profile_edit_randbsoul"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="19dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
                             android:gravity="center_horizontal"
                             android:text="R\u0026B/Soul"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                     />
                 </RelativeLayout>
             </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal"
+                    android:layout_marginHorizontal="11dp"
             >
 
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_rock"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:scaleType="fitXY"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -385,23 +347,24 @@
                             android:id="@+id/txt_profile_edit_rock"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="44dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
-                            android:gravity="center_horizontal"
                             android:text="락"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                     />
                 </RelativeLayout>
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_etc"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:scaleType="fitXY"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -409,8 +372,34 @@
                             android:id="@+id/txt_profile_edit_etc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="37dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
+                            android:textSize="14sp"
+                            android:textColor="#ffffff"
+                            android:lineSpacingExtra="6sp"
+                            android:text="기타"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
+                    />
+                </RelativeLayout>
+                <RelativeLayout android:visibility="invisible"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
+
+                    <ImageView android:id="@+id/btn_profile_edit_etcc"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:scaleType="fitXY"
+
+                               android:src="@drawable/action_selector_btn_genre"
+                    />
+
+                    <TextView
+                            android:id="@+id/txt_profile_edit_etcc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
@@ -438,17 +427,21 @@
             </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="11dp"
                     android:orientation="horizontal"
             >
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_exciting"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:scaleType="fitXY"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -456,23 +449,26 @@
                             android:id="@+id/txt_profile_edit_exciting"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="29dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
                             android:gravity="center_horizontal"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                             android:text="신나는"
+
                     />
                 </RelativeLayout>
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_mournful"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:scaleType="fitXY"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -480,23 +476,25 @@
                             android:id="@+id/txt_profile_edit_mournful"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="29dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
                             android:gravity="center_horizontal"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                             android:text="애절한"
                     />
                 </RelativeLayout>
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_romanic"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:scaleType="fitXY"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -504,14 +502,13 @@
                             android:id="@+id/txt_profile_edit_romantic"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="22dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
                             android:gravity="center_horizontal"
                             android:text="로맨틱한"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                     />
                 </RelativeLayout>
 
@@ -519,16 +516,19 @@
             </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="11dp">
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_sad"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -536,23 +536,24 @@
                             android:id="@+id/txt_profile_edit_sad"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="36dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
                             android:gravity="center_horizontal"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                             android:text="슬픈"
                     />
                 </RelativeLayout>
-                <RelativeLayout android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                <RelativeLayout android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_hip"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -560,23 +561,24 @@
                             android:id="@+id/txt_profile_edit_hip"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="36dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
                             android:gravity="center_horizontal"
                             android:text="힙한"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                     />
                 </RelativeLayout>
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_calm"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -584,31 +586,34 @@
                             android:id="@+id/txt_profile_edit_calm"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="29dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
                             android:gravity="center_horizontal"
                             android:text="잔잔한"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                     />
                 </RelativeLayout>
             </LinearLayout>
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal"
+                    android:layout_marginHorizontal="11dp"
             >
 
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_groovy"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:scaleType="fitXY"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -616,24 +621,24 @@
                             android:id="@+id/txt_profile_edit_groovy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="22dp"
-                            android:layout_marginBottom="7dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
-                            android:gravity="center_horizontal"
                             android:text="그루비한"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
                     />
                 </RelativeLayout>
                 <RelativeLayout android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="16dp">
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
 
                     <ImageView android:id="@+id/btn_profile_edit_dreamy"
-
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:scaleType="fitXY"
                                android:src="@drawable/action_selector_btn_genre"
                     />
 
@@ -641,30 +646,58 @@
                             android:id="@+id/txt_profile_edit_dreamy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="22dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_centerInParent="true"
+                            android:textSize="14sp"
+                            android:textColor="#ffffff"
+                            android:lineSpacingExtra="6sp"
+                            android:text="몽환적인"
+                            android:fontFamily="@font/noto_sans_kr_medium_hestia"
+                    />
+                </RelativeLayout>
+                <RelativeLayout android:visibility="invisible"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginHorizontal="9dp"
+                                android:layout_weight="1">
+
+                    <ImageView android:id="@+id/btn_profile_edit_etccc"
+                               android:layout_width="match_parent"
+                               android:layout_height="match_parent"
+                               android:scaleType="fitXY"
+
+                               android:src="@drawable/action_selector_btn_genre"
+                    />
+
+                    <TextView
+                            android:id="@+id/txt_profile_edit_etccc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
                             android:textSize="14sp"
                             android:textColor="#ffffff"
                             android:lineSpacingExtra="6sp"
                             android:gravity="center_horizontal"
-                            android:text="몽환적인"
-                   />
+                            android:text="기타"
+                    />
                 </RelativeLayout>
 
             </LinearLayout>
-            <LinearLayout android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_marginBottom="36dp"
-                          android:layout_marginTop="80dp"
-                          android:layout_gravity="center">
-
-
-                <ImageView
-                        android:layout_width="220dp"
-                        android:layout_height="44dp"
-                        android:src="@drawable/btn_login_next_lg"/>
-            </LinearLayout>
         </LinearLayout>
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:layout_marginBottom="36dp"
+                      android:layout_marginTop="80dp"
 
+                      android:layout_gravity="center">
+
+
+            <ImageView
+                    android:scaleType="fitXY"
+                    android:layout_width="220dp"
+                    android:layout_height="46dp"
+                    android:src="@drawable/btn_login_next_lg"/>
+        </LinearLayout>
     </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+
+        </android.support.v4.widget.NestedScrollView>

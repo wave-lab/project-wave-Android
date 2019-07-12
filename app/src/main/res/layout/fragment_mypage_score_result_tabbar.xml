@@ -5,8 +5,7 @@
               android:background="#000000"
 >
     <RelativeLayout
-            android:id="
-            @+id/rl_mypage_tabbar_score_passed"
+            android:id="@+id/rl_mypage_tabbar_score_passed"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
