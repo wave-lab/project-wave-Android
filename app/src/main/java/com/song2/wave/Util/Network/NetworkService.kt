@@ -1,5 +1,6 @@
 package com.song2.wave.Util.Network
 
+import com.google.gson.JsonObject
 import com.song2.wave.Data.GET.GetHomeInfoResponse
 import com.song2.wave.Data.GET.GetPlaylistResponse
 import com.song2.wave.Data.GET.GetRecommendResponse
@@ -148,9 +149,10 @@ interface NetworkService {
 //    ) : Call<PostResponse>
 
     // 이메일 중복 확인
-    @POST("")
-    fun postEmailCheck(
-            @Body postEmailData: PostEmailData
+    @POST("/core/users/emailCheck")
+    fun postEmailCheckResponse(
+        @Header("Content-Type") content_type: String,
+        @Body() body: JsonObject
     ) : Call<PostResponse>
 
     //** ds 작업 **//
