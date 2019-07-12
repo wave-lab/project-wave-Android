@@ -15,14 +15,15 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.song2.wave.R
-import com.song2.wave.R.id.img_signup_mood_act_funny
-import com.song2.wave.Util.Network.ApiClient
+import com.song2.wave.UI.Main.MainActivity
+import com.song2.wave.Util.Network.ApiClientSec
 import com.song2.wave.Util.Network.NetworkService
 import com.song2.wave.Util.Network.POST.PostResponse
 import kotlinx.android.synthetic.main.activity_signup_mood.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.jetbrains.anko.startActivity
 import retrofit2.Call
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
@@ -32,10 +33,18 @@ import java.io.InputStream
 
 class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
 
+    val authorization_info =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
+
+    val networkService: NetworkService by lazy {
+        ApiClientSec.getRetrofit().create(NetworkService::class.java)
+    }
+
+    var mood = ArrayList<RequestBody?>()
+    var genre = ArrayList<RequestBody?>()
 
     private var image : MultipartBody.Part? = null
     lateinit var receivedImgUri : Uri
-    lateinit var networkService : NetworkService
     lateinit var selectedMoodArr :  ArrayList<String>
 
     lateinit var moodArr : Array<ImageView>
@@ -44,6 +53,7 @@ class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
         for(i in 0..7){
             if (v!!.id == moodArr[0].getId()) {
                 selectedMoodArr.add("m" + ((i+1).toString()))
+                mood.add(RequestBody.create(MediaType.parse("text.plain"), "m"+i.toString()))
                 Toast.makeText(applicationContext, "분위기 " + "m" + (i+1).toString() + "번 버튼 선택", Toast.LENGTH_LONG).show()
             }
         }
@@ -74,10 +84,11 @@ class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
 
         receivedImgUri = intent.getParcelableExtra<Parcelable>("imageUri") as Uri
 
+        handleImage()
+
         btn_signup_mood_next.setOnClickListener {
             //postSignup()
         }
-        handleImage()
 
     }
 
@@ -158,5 +169,64 @@ class SignupMoodActivity : AppCompatActivity(), View.OnClickListener {
 //        })
 //
 //    }
+
+    fun postSignup(){
+        val pref = applicationContext.getSharedPreferences("auto", Activity.MODE_PRIVATE)
+        var emailValue : String = pref.getString("email","")
+        var passwordValue : String = pref.getString("password","")
+        var nicknameValue : String = pref.getString("nickname","")
+
+
+        Log.v("SignupMoodActivity", "회원가입 이메일 = "+ emailValue)
+        Log.v("SignupMoodActivity", "회원가입 패스워드 = "+ passwordValue)
+        Log.v("SignupMoodActivity", "회원가입 닉네임 = "+ nicknameValue)
+        Log.v("SignupMoodActivity", "회원가입 이미지 파일 " + image)
+
+        val email = RequestBody.create(MediaType.parse("text.plain"), emailValue)
+        val password = RequestBody.create(MediaType.parse("text.plain"), passwordValue)
+        val nickname = RequestBody.create(MediaType.parse("text.plain"),nicknameValue )
+
+        try{
+            Log.e("genre data" , "제발"+intent.getStringArrayListExtra("genreList"))
+        }catch (e : Exception){
+
+        }
+        var requestList = intent.getStringArrayListExtra("genreList")
+
+        for (i in requestList.indices){
+            genre.add(RequestBody.create(MediaType.parse("text.plain"), requestList[i]))
+        }
+
+        val originArtist = arrayListOf<Int?>(1,2,3)
+
+        val postSignupResponse = networkService.postSignupResponse(email,password,nickname,image,genre,mood,originArtist)
+        postSignupResponse.enqueue(object : retrofit2.Callback<PostResponse>{
+
+            override fun onFailure(call: Call<PostResponse>, t: Throwable?) {
+                Log.v("SignupMoodActivity",t.toString())
+                startActivity<MainActivity>()
+
+            }
+
+            override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {
+                if(response.isSuccessful){
+                    if(response.body()!!.success == true){
+                        Toast.makeText(applicationContext, "회원가입 완료", Toast.LENGTH_SHORT).show()
+                        Log.v("SignupMoodActivity","회원 성공")
+                    }
+                    else{
+                        Log.v("SignupMoodActivity","회원가입 실패")
+                    }
+                }
+                else{
+                    Log.e("response",response.body().toString())
+
+                }
+            }
+
+        })
+
+    }
+
 
 }
