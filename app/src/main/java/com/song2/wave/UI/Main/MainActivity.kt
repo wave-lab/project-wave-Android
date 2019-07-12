@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment
 import com.song2.wave.UI.Main.Library.LibraryFragment
 import com.song2.wave.UI.Main.Scoring.ScoringFragment
 import com.song2.wave.UI.Main.Search.SearchFragment
-import com.song2.wave.UI.Main.MyPage.MyPageFragment
 import android.util.Log
 import com.song2.wave.UI.Main.Home.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,6 +16,7 @@ import android.content.pm.PackageManager
 
 import android.graphics.Color
 import com.song2.wave.R
+import com.song2.wave.UI.Main.MyPage.Adapter.MyPageHitSuccessFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -158,7 +158,7 @@ class MainActivity : AppCompatActivity() {
                 nowFrag = LibraryFragment()
             }
             "myPage" ->{
-                nowFrag = MyPageFragment()
+                nowFrag = MyPageHitSuccessFragment()
             }
         }
 
