@@ -22,7 +22,7 @@ class UploadSongInfoActivity : AppCompatActivity() {
         et_upload_song_info_origin_title.onFocusChangeListener = object : View.OnFocusChangeListener {
             override fun onFocusChange(p0: View?, p1: Boolean) {
                 if (!p1){
-                    iv_upload_song_info_act_confirm_btn.visibility = View.INVISIBLE
+                    //iv_upload_song_info_act_confirm_btn.visibility = View.INVISIBLE
                 }
             }
         }
@@ -47,8 +47,10 @@ class UploadSongInfoActivity : AppCompatActivity() {
 
 
         iv_upload_song_info_act_confirm_btn.setOnClickListener {
-            //
-            startActivity<SignupGenreActivity>("StartPoint" to start_point.toString(), "songURI" to upload_song_uri , "picURI" to selectedPicUri)
+            startActivity<SignupGenreActivity>(
+                "Confirm" to "upload",
+                "Title" to et_upload_song_info_origin_title.text.toString(), "Artist" to et_upload_song_info_origin_singer.text.toString(), "Comment" to et_upload_song_info_comment.text.toString()
+                ,"StartPoint" to start_point.toString(), "songURI" to upload_song_uri, "picURI" to selectedPicUri)
         }
 
     }
