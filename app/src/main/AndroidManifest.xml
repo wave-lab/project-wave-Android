@@ -11,7 +11,7 @@
 
     <application
         android:usesCleartextTraffic="true"
-        android:name=".AudioTest.AudioApplication"
+        android:name=".Util.Audio.AudioApplication"
         android:allowBackup="true"
         android:icon="@drawable/android_app_icon"
         android:label="@string/app_name"
@@ -29,16 +29,13 @@
 
         <!-- 메인 -->
         <activity android:name=".UI.Main.MainActivity">
-
-        </activity>
-        <activity android:name=".UI.Signup.SignupFirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
+        <activity android:name=".UI.Signup.SignupFirstActivity"></activity>
         <activity android:name=".UI.Main2Activity"/>
         <activity android:name=".UI.Artist.ArtistActivity"/>
         <activity android:name=".UI.Artist.ArtistLibraryActivity"/>
@@ -57,7 +54,7 @@
 
         <service android:name=".Util.Player.Service.MusicService"/>
         <service
-                android:name=".AudioTest.AudioService"
+                android:name=".Util.Audio.AudioService"
                 android:enabled="true"
                 android:exported="true">
             <intent-filter>
@@ -76,7 +73,7 @@
                 android:exported="true"/>
 
         <activity android:name=".UI.MusicTestActivity"/>
-        <activity android:name=".AudioTest.PlayerActivity"/>
+        <activity android:name=".Util.Audio.PlayerActivity"/>
         <activity android:name=".UI.Signup.SignupSelectArtistActivity"/>
         <activity android:name=".UI.Signup.SignupGenreActivity"/>
         <activity android:name=".UI.Signup.SignupMoodActivity"/>
