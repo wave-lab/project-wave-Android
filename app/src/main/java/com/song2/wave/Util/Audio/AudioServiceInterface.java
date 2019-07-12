@@ -52,7 +52,7 @@ public class AudioServiceInterface {
         }
     }
 
-
+// add
     public void play() {
         if (mService != null) {
             mService.play();
