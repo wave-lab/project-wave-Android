@@ -7,7 +7,7 @@
     />
     <item
             android:state_selected="true"
-            android:drawable="@drawable/"
+            android:drawable="@drawable/tab_btn_scoring_active"
     />
 
 
