@@ -35,7 +35,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@null"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="35dp"

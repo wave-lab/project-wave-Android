@@ -13,6 +13,7 @@ import retrofit2.http.*
 import com.song2.wave.Data.GET.*
 import com.song2.wave.Data.GET.GetSearchResponse
 import com.song2.wave.Data.POST.PostEmailData
+import com.song2.wave.Data.POST.PostSignUpData
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -145,11 +146,19 @@ interface NetworkService {
             @Part("originArtist]") originArtist : ArrayList<Int?>
     ) : Call<PostResponse>
 
+
     // 이메일 중복 확인
     @POST("/core/users/emailCheck")
     fun postEmailCheckResponse(
         @Header("Content-Type") content_type: String,
         @Body() body: JsonObject
+    ) : Call<PostResponse>
+
+    //** ds 작업 **//
+    @Multipart
+    @POST("core/signup")
+    fun postSignUp(
+            @Body postSignUpData: PostSignUpData
     ) : Call<PostResponse>
 
 }

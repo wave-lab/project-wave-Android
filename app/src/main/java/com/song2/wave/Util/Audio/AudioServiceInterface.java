@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class AudioServiceInterface {
     private ServiceConnection mServiceConnection;
     private AudioService mService;
+    public String songTitle, originArtistName, coverartistName;
 
     public AudioServiceInterface(Context context) {
         mServiceConnection = new ServiceConnection() {
@@ -44,8 +45,10 @@ public class AudioServiceInterface {
 
     public void play(String _id, String songUrl, String originArtist, String coverArtist, String songName) {
         if (mService != null) {
+            songTitle = songName;
+            originArtistName = originArtist;
+            coverartistName = coverArtist;
             mService.play(_id, songUrl, originArtist, coverArtist, songName);
-            Log.v("Asdf","테스트 플레ㅣ");
         }
     }
 

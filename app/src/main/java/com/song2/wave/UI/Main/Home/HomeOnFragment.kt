@@ -93,8 +93,6 @@ class HomeOnFragment : Fragment() {
         getUploadResponse()
         getHitsResponse()
 
-
-
         v.iv_home_frag_wavelogo.setOnClickListener {
             var intent = Intent(context, PlayerActivity::class.java)
             startActivity(intent)

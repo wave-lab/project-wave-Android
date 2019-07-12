@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
 import com.song2.wave.Data.model.CoverArtistData
-import com.song2.wave.Data.model.OriginArtistData
+import com.song2.wave.Data.model.SignUp.OriginArtistData
 import com.song2.wave.R
 
 class OriginArtistSearchAdapter (private var originArtistData: ArrayList<OriginArtistData>, var requestManager : RequestManager) : RecyclerView.Adapter<OriginArtistSearchViewHolder>(){

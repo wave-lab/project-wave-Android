@@ -118,7 +118,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
                 Log.v("onPageScrollStateChanged", state.toString())
 
             }
-
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
                 Log.e("onPageScrolled-position", position.toString()+ positionOffset.toString() + positionOffsetPixels.toString())
