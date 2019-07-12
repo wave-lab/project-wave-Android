@@ -12,6 +12,7 @@
             android:gravity="center">
         <TextView
                 android:text="통과"
+                android:textColor="#ffffff"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -29,6 +30,7 @@
             android:gravity="center">
         <TextView
                 android:text="진행"
+                android:textColor="#ffffff"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans_kr_bold_hestia"
                 android:includeFontPadding="false"
+                android:textColor="#ffffff"
         />
     </RelativeLayout>
 </LinearLayout>

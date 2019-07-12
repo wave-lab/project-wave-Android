@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_mypage_artist_setting.btn_profile
 import kotlinx.android.synthetic.main.activity_mypage_artist_setting.btn_profile_edit_romanic
 import kotlinx.android.synthetic.main.activity_mypage_artist_setting.btn_profile_edit_sad
 import kotlinx.android.synthetic.main.activity_mypage_setting.*
+import kotlinx.android.synthetic.main.activity_signup_first.*
 
 class MyPageProfileSettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,6 +80,7 @@ class MyPageProfileSettingActivity : AppCompatActivity() {
         btn_profile_edit_dreamy.setOnClickListener {
             btn_profile_edit_dreamy.isSelected= !btn_profile_edit_dreamy.isSelected
         }
+
 //카메라 버튼 갤러리 불러오기
         val REQUEST_CODE_SELECT_IMAGE : Int = 1004
 
@@ -88,6 +90,11 @@ class MyPageProfileSettingActivity : AppCompatActivity() {
             intent.data = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             startActivityForResult(intent,REQUEST_CODE_SELECT_IMAGE)
         }
+        /*edit_signup_act_nickname.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) v.setBackgrounodResource(R.drawable.signup_focus_on)
+            else v.setBackgroundResource(R.drawable.signup_border_off)
+        }*/
+
 
     }
 }
