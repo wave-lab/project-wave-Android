@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                 MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
             )
-
             return;
         }
 
@@ -56,9 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         mainActivity = this
         callFragment("home")
-
         addBottomTab()
-
         backPressInFragment()
         registerBroadcast()
         updateUI()
@@ -143,18 +140,7 @@ class MainActivity : AppCompatActivity() {
         else {
             Log.v(TAG, "MainActivity onBackPressed")
         }
-/*
-        val fragmentList = supportFragmentManager.fragments
 
-        if (fragmentList != null) {
-            //TODO: Perform your logic to pass back press here
-            for (fragment in fragmentList) {
-                if (fragment is OnBackPressedListener) {
-                    (fragment as OnBackPressedListener).onBackPressed()
-                }
-            }
-        }
-        */
     }
 
     private fun registerBroadcast() {
@@ -175,12 +161,14 @@ class MainActivity : AppCompatActivity() {
         } else {
             iv_main_act_bottom_play.setImageResource(R.drawable.btn_play_md)
         }
-        val audioItem = AudioApplication.getInstance().serviceInterface.audioItem
-        if (audioItem != null) {
-            val albumArtUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), audioItem.mAlbumId)
+
+       // var coverArtistName : String = AudioApplication.getInstance().serviceInterface.coverartistName
+
+        if (AudioApplication.getInstance().serviceInterface.originArtistName != null) {
+//            val albumArtUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), audioItem.mAlbumId)
             //Glide.with(applicationContext).load(albumArtUri).into(vp_main_player_act_cover_img)
-            tv_main_act_bottom_title_origin_artist.setText(audioItem.mTitle)
-            Log.v("asdf", "텟 값 = " + audioItem.mTitle)
+            tv_main_act_bottom_title_origin_artist.setText(AudioApplication.getInstance().serviceInterface.songTitle + " - " + AudioApplication.getInstance().serviceInterface.originArtistName)
+            tv_main_act_bottom_cover_artist.setText(AudioApplication.getInstance().serviceInterface.coverartistName)
         } else {
             tv_main_act_bottom_title_origin_artist.setText("재생중인 음악이 없습니다.")
         }

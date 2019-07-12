@@ -206,7 +206,7 @@
                 android:textColor="#ffffff"/>
 
             <TextView
-                android:id="@+id/iv_main_act_bottom_cover_artist"
+                android:id="@+id/tv_main_act_bottom_cover_artist"
                 android:layout_width="245dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
