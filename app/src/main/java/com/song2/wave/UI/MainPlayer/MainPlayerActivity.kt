@@ -1,34 +1,27 @@
 package com.song2.wave.UI.MainPlayer
 
 import android.content.*
-import android.media.MediaPlayer
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
-import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestManager
-import com.song2.wave.AudioTest.AudioApplication
-import com.song2.wave.AudioTest.AudioService
-import com.song2.wave.AudioTest.BroadcastActions
+import com.song2.wave.Util.Audio.AudioApplication
+import com.song2.wave.Util.Audio.AudioService
+import com.song2.wave.Util.Audio.BroadcastActions
 import com.song2.wave.Data.GET.GetSongDetailResponse
 import com.song2.wave.R
 import com.song2.wave.UI.MainPlayer.Adapter.CoverImgViewPager
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
 import com.song2.wave.Util.Player.Service.MyForeGroundService
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main_player.*
-import kotlinx.android.synthetic.main.activity_set_start_point.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -272,6 +265,13 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         playerBtn()
         registerBroadcast();
         updateUI();
+
+        img_main_player_act_cover_img.setOnClickListener {
+            rl_main_player_act_rating.visibility = View.VISIBLE
+        }
+        rl_main_player_act_all.setOnClickListener {
+            rl_main_player_act_rating.visibility = View.INVISIBLE
+        }
 
         iv_main_player_like_btn.setOnClickListener {
             iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected

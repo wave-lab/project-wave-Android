@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/rl_main_player_act_all"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="#000000"
         android:layout_width="match_parent"
@@ -60,10 +61,56 @@
         android:layout_centerInParent="true"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:visibility="invisible"
         android:src="@drawable/kakao_default_profile_image"
         android:scaleType="fitXY"
         />
+    <RelativeLayout
+        android:id="@+id/rl_main_player_act_rating"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="106dp"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:layout_below="@+id/rl_main_player_act_main_toolbar"
+        >
+        <View
+            android:id="@+id/view_player_act_img_trans"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WAVE에 어울리는 노래인가요?"
+            android:textSize="18sp"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:includeFontPadding="false"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="72dp"
+            android:textColor="#ffffff"
+            />
+        <RatingBar
+            android:id="@+id/rb_main_player_act_rating"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:layout_marginTop="131dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="34dp"
+            android:theme="@style/RatingBar"
+            />
+        <Button
+            android:id="@+id/btn_main_player_act_comment"
+            android:layout_width="139dp"
+            android:layout_height="32dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="56.7dp"
+            android:layout_below="@+id/rb_main_player_act_rating"
+            android:background="@drawable/btn_mypage_upload"
+            />
+
+    </RelativeLayout>
+
 
     <android.support.v4.view.ViewPager
             android:id="@+id/vp_main_player_act_cover_img"
@@ -71,6 +118,7 @@
             android:layout_below="@+id/rl_main_player_act_main_toolbar"
             android:layout_centerInParent="true"
             android:layout_width="match_parent"
+        android:visibility="invisible"
             android:layout_height="300dp">
     </android.support.v4.view.ViewPager>
 
