@@ -13,6 +13,7 @@ import retrofit2.http.*
 import com.song2.wave.Data.GET.*
 import com.song2.wave.Data.GET.GetSearchResponse
 import com.song2.wave.Data.POST.PostEmailData
+import com.song2.wave.Data.POST.PostLogin
 import com.song2.wave.Data.POST.PostSignUpData
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -130,6 +131,12 @@ interface NetworkService {
     fun getOriginArtistResponse(
         @Header("Content-Type") content_type: String
     ): Call<GetOriginArtistResponse>
+
+    // 로그인
+    @POST("/core/signin")
+    fun postLogin(
+            @Body postLogin : PostLogin
+    ) : Call<PostResponse>
 
 /*
     @GET("/core/users/{userIdx}")

@@ -13,6 +13,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ScrollView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.Util.Audio.AudioAdapter
@@ -71,6 +73,10 @@ class HomeOnFragment : Fragment() {
     lateinit var top10GenreAdapter: Top10GenreAdapter
     lateinit var top10MoodAdapter: Top10GenreAdapter
 
+
+    //lateinit var top10MoodAdapter: Top10MoodAdapter
+
+
     lateinit var requestManager: RequestManager
 
     var bundleGenre = Bundle()
@@ -121,6 +127,10 @@ class HomeOnFragment : Fragment() {
         attachRecyclerView()
         waitSongDataArr = ArrayList<PlaySongData>()
 
+        //성은이 기기 기준 1500
+        home_on_scroll_btn.setOnClickListener {
+            home_on_scroll.smoothScrollTo(0,1500)
+        }
     }
 
     fun attachRecyclerView(){

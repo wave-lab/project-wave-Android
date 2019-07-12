@@ -1,6 +1,5 @@
 package com.song2.wave.UI;
 
-
 import android.Manifest;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
