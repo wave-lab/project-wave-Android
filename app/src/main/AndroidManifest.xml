@@ -29,17 +29,9 @@
 
         <!-- 메인 -->
         <activity android:name=".UI.Main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".UI.Signup.SignupMoodActivity"></activity>
-        <activity android:name=".UI.Signup.SignupFirstActivity">
-
-
-        </activity>
+        <activity android:name=".UI.Signup.SignupFirstActivity"></activity>
 
         <activity android:name=".UI.NetworkServiceTest.NetworkTestActivity">
 
@@ -54,11 +46,16 @@
         <!-- 음악업로드 -->
         <activity android:name=".UI.Main.MyPage.UpLoadFileActivity">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".UI.Main.MyPage.SetStartPointActivity"/>
-        <activity android:name=".UI.Main.MyPage.UploadSongInfoActivity">
-
-        </activity>
+        <activity android:name=".UI.Main.MyPage.UploadSongInfoActivity"/>
+        <activity android:name=".UI.Main.MyPage.UpLoadMoodActivity"/>
+        <activity android:name=".UI.Main.MyPage.UpLoadGenreActivity"/>
 
         <!-- 음악플레이어 -->
         <activity android:name=".UI.MainPlayer.MainPlayerActivity"/>

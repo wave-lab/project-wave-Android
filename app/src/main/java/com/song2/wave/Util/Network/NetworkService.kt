@@ -154,6 +154,20 @@ interface NetworkService {
             @Part("originArtist") originArtist : ArrayList<RequestBody?>
     ) : Call<PostResponse>
 
+    //곡업로드
+    @Multipart
+    @POST("/songs")
+    fun postSongUploadResponse(
+        @Header("Authorization") authorization: String,
+        @Part("originTitle") originTitle : RequestBody,
+        @Part artwork : MultipartBody.Part?,
+        @Part("originArtistName") originArtistName : RequestBody,
+        @Part profileImg : MultipartBody.Part?,
+        @Part("genre") genre : ArrayList<RequestBody?>,
+        @Part("mood") mood : ArrayList<RequestBody?>,
+        @Part("songComment") songComment : RequestBody,
+        @Part("highlightTime") highlightTime : RequestBody
+    ) : Call<PostResponse>
 
     // 이메일 중복 확인
     @POST("/core/users/emailCheck")
@@ -161,12 +175,4 @@ interface NetworkService {
         @Header("Content-Type") content_type: String,
         @Body() body: JsonObject
     ): Call<PostResponse>
-
-    //** ds 작업 **//
-    @Multipart
-    @POST("core/signup")
-    fun postSignUp(
-            @Body postSignUpData: PostSignUpData
-    ) : Call<PostResponse>
-
 }
