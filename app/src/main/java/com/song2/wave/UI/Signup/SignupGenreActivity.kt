@@ -11,8 +11,12 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.song2.wave.R
 import kotlinx.android.synthetic.main.activity_signup_genre.*
+import okhttp3.MediaType
+import okhttp3.RequestBody
 
 class SignupGenreActivity : AppCompatActivity(), View.OnClickListener {
+
+    val genre = ArrayList<String>()
 
     lateinit var receivedImgUri : Uri
     lateinit var genreArr : Array<ImageView>
@@ -22,6 +26,7 @@ class SignupGenreActivity : AppCompatActivity(), View.OnClickListener {
         for(i in 0..7){
             if (v!!.id == genreArr[i].getId()) {
                 selectedGenreArr.add("m" + ((i+1).toString()))
+                genre.add("m" + (i.toString()))
                 Toast.makeText(applicationContext, "장르 " +"m" + (i+1).toString() + "번 버튼 선택", Toast.LENGTH_LONG).show()
             }
         }
@@ -55,6 +60,7 @@ class SignupGenreActivity : AppCompatActivity(), View.OnClickListener {
         btn_signup_genre_nex.setOnClickListener {
             var intent = Intent(applicationContext, SignupMoodActivity::class.java)
             intent.putExtra("imageUri",receivedImgUri)
+            intent.putExtra("genreList",genre)
             startActivity(intent)
         }
     }

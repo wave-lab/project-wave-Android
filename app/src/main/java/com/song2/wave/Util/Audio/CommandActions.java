@@ -1,4 +1,4 @@
-package com.song2.wave.AudioTest;
+package com.song2.wave.Util.Audio;
 
 public class CommandActions {
     public final static String REWIND = "REWIND";
