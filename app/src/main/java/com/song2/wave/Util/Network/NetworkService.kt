@@ -13,6 +13,7 @@ import retrofit2.http.*
 import com.song2.wave.Data.GET.*
 import com.song2.wave.Data.GET.GetSearchResponse
 import com.song2.wave.Data.POST.PostEmailData
+import com.song2.wave.Data.POST.PostSignUpData
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query

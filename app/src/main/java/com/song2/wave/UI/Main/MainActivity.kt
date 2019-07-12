@@ -15,11 +15,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.song2.wave.Util.Interface.OnBackPressedListener
 import android.Manifest.permission
 import android.Manifest.permission.READ_CONTACTS
+import android.content.*
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.support.v4.app.ActivityCompat
-
-
-
+import com.song2.wave.UI.MainPlayer.MainPlayerActivity
+import com.song2.wave.Util.Audio.AudioApplication
+import com.song2.wave.Util.Audio.BroadcastActions
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main_player.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +49,10 @@ class MainActivity : AppCompatActivity() {
             return;
         }
 
+        iv_main_act_bottom_play.setOnClickListener {
+            // 재생 또는 일시정지
+            AudioApplication.getInstance().serviceInterface.togglePlay()
+        }
 
         mainActivity = this
         callFragment("home")
@@ -52,7 +60,14 @@ class MainActivity : AppCompatActivity() {
         addBottomTab()
 
         backPressInFragment()
+        registerBroadcast()
+        updateUI()
+    }
 
+    private val mBroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            updateUI()
+        }
     }
 
     // 리스너 객체 생성
@@ -142,6 +157,34 @@ class MainActivity : AppCompatActivity() {
         */
     }
 
+    private fun registerBroadcast() {
+        val filter = IntentFilter()
+        filter.addAction(BroadcastActions.PREPARED)
+        filter.addAction(BroadcastActions.PLAY_STATE_CHANGED)
+        registerReceiver(mBroadcastReceiver, filter)
+    }
+
+    private fun unregisterBroadcast() {
+        unregisterReceiver(mBroadcastReceiver)
+    }
+
+
+    private fun updateUI() {
+        if (AudioApplication.getInstance().serviceInterface.isPlaying) {
+            iv_main_act_bottom_play.setImageResource(R.drawable.btn_stop_md)
+        } else {
+            iv_main_act_bottom_play.setImageResource(R.drawable.btn_play_md)
+        }
+        val audioItem = AudioApplication.getInstance().serviceInterface.audioItem
+        if (audioItem != null) {
+            val albumArtUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), audioItem.mAlbumId)
+            //Glide.with(applicationContext).load(albumArtUri).into(vp_main_player_act_cover_img)
+            tv_main_act_bottom_title_origin_artist.setText(audioItem.mTitle)
+            Log.v("asdf", "텟 값 = " + audioItem.mTitle)
+        } else {
+            tv_main_act_bottom_title_origin_artist.setText("재생중인 음악이 없습니다.")
+        }
+    }
     companion object {
         lateinit var mainActivity : MainActivity
     }
