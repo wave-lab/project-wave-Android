@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        android:id="@+id/bt_rv_point_history_item"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="#000000"
+        android:layout_marginBottom="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="42dp">
+    <ImageView
+            android:id="@+id/iv_point_history_item_image_100"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/img_point"
+            android:layout_width="42dp"
+            android:visibility="visible"
+            android:layout_height="42dp" />
+    <ImageView
+            android:id="@+id/iv_point_history_item_image_500"
+            android:layout_centerVertical="true"
+            android:src="@drawable/img_dart"
+            android:layout_marginLeft="16dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:visibility="visible"/>
+    <RelativeLayout
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="84dp"
+            android:layout_marginStart="74dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                        android:id="@+id/tv_point_history_item_title"
+                        android:textSize="12sp"
+                        android:textColor="#FFFFFF"
+                        android:lineSpacingExtra="14sp"
+                        android:text="Song Name - Original Artist Nam..."
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp" />
+            </LinearLayout>
+            <TextView
+                    android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                    android:id="@+id/tv_point_history_item_artist"
+                    android:textColor="#616161"
+                    android:text="Cover Artist Name"
+                    android:textSize="10sp"
+                    android:lineSpacingExtra="16sp"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+    <TextView
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:id="@+id/tv_point_history_item_cnt"
+            android:text="500"
+            android:layout_marginRight="24dp"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:lineSpacingExtra="59sp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <View
+            android:layout_width="28dp"
+            android:layout_height="2dp"
+            android:background="#00b6de"
+            android:layout_below="@+id/tv_point_history_item_cnt"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="24dp"
+            android:paddingBottom="16dp"/>
+</RelativeLayout>

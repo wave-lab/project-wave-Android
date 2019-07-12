@@ -1,72 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.song2.wave">
+          package="com.song2.wave">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
-        android:usesCleartextTraffic="true"
-        android:name=".AudioTest.AudioApplication"
-        android:allowBackup="true"
-        android:icon="@drawable/android_app_icon"
-        android:label="@string/app_name"
-        android:roundIcon="@drawable/android_app_icon"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
-      
+            android:name=".AudioTest.AudioApplication"
+            android:allowBackup="true"
+            android:icon="@drawable/android_app_icon"
+            android:label="@string/app_name"
+            android:roundIcon="@drawable/android_app_icon"
+            android:supportsRtl="true"
+            android:usesCleartextTraffic="true">
+        <activity android:name=".ArtistSongListActivity">
+        </activity>
+        <activity android:name=".StartActivity">
+        </activity> <!-- 로그인 -->
+        <activity android:name=".UI.Login.LoginActivity"/>
+        <activity android:name=".Util.Kakao.service.ScoringPlayerActivity"/>
+        <activity android:name=".UI.Main.MyPage.UpLoadFileActivity"/>
 
-        <!-- 로그인 -->
-        <activity android:name=".UI.Login.LoginActivity" />
-        <activity android:name=".Util.Kakao.service.ScoringPlayerActivity" />
-        <activity android:name=".UI.Main.MyPage.UpLoadFileActivity" />
         <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key"/>
-
-        <!-- 메인 -->
-        <activity android:name=".UI.Main.MainActivity">
+                android:name="com.kakao.sdk.AppKey"
+                android:value="@string/kakao_app_key"/> <!-- 메인 -->
+        <activity android:name=".SplashActivity"
+                  android:theme="@style/SplashTheme"
+        >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".UI.Main.MainActivity"
+                  android:theme="@style/Theme.AppCompat"/>
         <activity android:name=".UI.Signup.SignupFirstActivity">
-
         </activity>
-        <activity android:name=".UI.Main2Activity" />
-        <activity android:name=".UI.Artist.ArtistActivity"></activity>
-        <activity android:name=".UI.Artist.ArtistLibraryActivity"></activity>
+        <activity android:name=".UI.Main2Activity"/>
+        <activity android:name=".UI.Artist.ArtistActivity"/>
+        <activity android:name=".UI.Artist.ArtistLibraryActivity"/> <!-- 음악플레이어 -->
+        <activity android:name=".UI.MainPlayer.MainPlayerActivity"/>
 
-
-        <!-- 음악플레이어 -->
-        <activity android:name=".UI.MainPlayer.MainPlayerActivity" />
-        <service android:name=".Util.Player.Service.MusicService" />
+        <service android:name=".Util.Player.Service.MusicService"/>
         <service
-            android:name=".AudioTest.AudioService"
-            android:enabled="true"
-            android:exported="true">
+                android:name=".AudioTest.AudioService"
+                android:enabled="true"
+                android:exported="true">
             <intent-filter>
-                <action android:name="REWIND" />
-                <action android:name="TOGGLE_PLAY" />
-                <action android:name="FORWARD" />
-                <action android:name="CLOSE" />
+                <action android:name="REWIND"/>
+                <action android:name="TOGGLE_PLAY"/>
+                <action android:name="FORWARD"/>
+                <action android:name="CLOSE"/>
             </intent-filter>
-        </service>
-
-        <!-- Declare foreground service -->
+        </service> <!-- Declare foreground service -->
         <service
-            android:name=".Util.Player.Service.MyForeGroundService"
-            android:enabled="true"
-            android:exported="true" />
+                android:name=".Util.Player.Service.MyForeGroundService"
+                android:enabled="true"
+                android:exported="true"/>
 
-        <activity android:name=".UI.MusicTestActivity" />
-        <activity android:name=".AudioTest.PlayerActivity" />
-        <activity android:name=".UI.Signup.SignupSelectArtistActivity" />
-        <activity android:name=".UI.Signup.SignupGenreActivity" />
-        <activity android:name=".UI.Signup.SignupMoodActivity"></activity>
+        <activity android:name=".UI.MusicTestActivity"/>
+        <activity android:name=".AudioTest.PlayerActivity"/>
+        <activity android:name=".UI.Signup.SignupSelectArtistActivity"/>
+        <activity android:name=".UI.Signup.SignupGenreActivity"/>
+        <activity android:name=".UI.Signup.SignupMoodActivity"/>
     </application>
 
 </manifest>

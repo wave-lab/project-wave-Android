@@ -5,9 +5,6 @@
         android:layout_height="104dp"
         android:layout_width="104dp"
         android:layout_marginStart="12dp">
-
-
-
     <ImageView
             android:id="@+id/img_cover_artist_scoring_failed"
             android:layout_width="match_parent"
@@ -31,7 +28,6 @@
             android:lineSpacingExtra="6sp"
             android:gravity="center_horizontal"
             android:text="Song2-name"/>
-
     <TextView
             android:includeFontPadding="false"
             android:id="@+id/txt_cover_artistName_scoring_failed"
@@ -45,6 +41,4 @@
             android:gravity="center_horizontal"
             android:text="Cover Artist"
             android:layout_centerHorizontal="true"/>
-
-
 </RelativeLayout>

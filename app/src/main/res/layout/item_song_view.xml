@@ -79,5 +79,13 @@
         android:layout_marginLeft="8dp"
         android:textColor="#979797"
         android:includeFontPadding="false"        />
+    <ImageView
+            android:id="@+id/iv_song_item_more_btn"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/btn_threedot"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
 
 </RelativeLayout>

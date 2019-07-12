@@ -10,6 +10,7 @@ import com.song2.wave.R
 import com.song2.wave.UI.Main.MyPage.MyPageFragment
 import android.util.Log
 import com.song2.wave.UI.Main.Home.HomeFragment
+import com.song2.wave.UI.Main.MyPage.PointHistoryFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import com.song2.wave.Util.Interface.OnBackPressedListener
 
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                 nowFrag = LibraryFragment()
             }
             "myPage" ->{
-                nowFrag = MyPageFragment()
+                nowFrag = PointHistoryFragment()
             }
         }
 

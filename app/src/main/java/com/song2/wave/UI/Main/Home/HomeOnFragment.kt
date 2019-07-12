@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ScrollView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.Data.model.Home.HomeSongData
@@ -20,7 +22,6 @@ import kotlinx.android.synthetic.main.fragment_home_on.*
 import kotlinx.android.synthetic.main.fragment_home_on.view.*
 
 class HomeOnFragment : Fragment() {
-
     lateinit var myWaitingSongDataList: ArrayList<MyWaitingSongData>
     lateinit var waitingSongDataList: ArrayList<HomeSongData>
     lateinit var hitSongHomeDataList: ArrayList<HomeSongData>
@@ -36,6 +37,7 @@ class HomeOnFragment : Fragment() {
     lateinit var top10GenreAdapter: Top10GenreAdapter
     lateinit var top10MoodAdapter: Top10GenreAdapter
 
+
     //lateinit var top10MoodAdapter: Top10MoodAdapter
 
 
@@ -43,6 +45,8 @@ class HomeOnFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v : View = inflater.inflate(R.layout.fragment_home_on, container, false)
+
+
 
         v.iv_home_frag_wavelogo.setOnClickListener {
             var intent = Intent(context, MainPlayerActivity::class.java)
@@ -65,6 +69,10 @@ class HomeOnFragment : Fragment() {
 
         attachRecyclerView()
 
+        //성은이 기기 기준 1500
+        home_on_scroll_btn.setOnClickListener {
+            home_on_scroll.smoothScrollTo(0,1500)
+        }
     }
 
     fun attachRecyclerView(){
