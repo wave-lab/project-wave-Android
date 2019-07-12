@@ -1,8 +1,12 @@
 package com.song2.wave.UI.Main.MyPage
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
 
 import com.song2.wave.R
 import kotlinx.android.synthetic.main.activity_mypage_artist_setting.btn_profile_edit_acoustic
@@ -90,10 +94,13 @@ class MyPageProfileSettingActivity : AppCompatActivity() {
             intent.data = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             startActivityForResult(intent,REQUEST_CODE_SELECT_IMAGE)
         }
-        /*edit_signup_act_nickname.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) v.setBackgrounodResource(R.drawable.signup_focus_on)
+        edit_mypage_act_nickname.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) v.setBackgroundResource(R.drawable.signup_focus_on)
             else v.setBackgroundResource(R.drawable.signup_border_off)
-        }*/
+        }
+
+
+
 
 
     }

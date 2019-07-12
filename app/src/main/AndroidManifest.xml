@@ -39,6 +39,7 @@
 
 
         </activity>
+
         <activity android:name=".UI.NetworkServiceTest.NetworkTestActivity">
 
         </activity>

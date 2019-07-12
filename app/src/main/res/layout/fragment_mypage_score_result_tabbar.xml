@@ -13,7 +13,7 @@
         <TextView
                 android:text="통과"
                 android:textColor="#ffffff"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans_kr_bold_hestia"
@@ -31,7 +31,7 @@
         <TextView
                 android:text="진행"
                 android:textColor="#ffffff"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans_kr_bold_hestia"
@@ -46,7 +46,7 @@
             android:gravity="center">
         <TextView
                 android:text="탈락"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans_kr_bold_hestia"
