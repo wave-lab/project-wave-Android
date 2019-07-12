@@ -1,6 +1,7 @@
 package com.song2.wave.Data.model.MyPage
 
 data class HitSuccessSongData (
+    var isPassed : Boolean,
     var songCoverImg : String?,
     var songName : String?,
     var originArtistName : String,

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.song2.wave.Data.model.MyPage.HitSuccessSongData
@@ -23,6 +24,7 @@ class MyPageHitSuccessAdapter(val ctx: Context, val datalist: ArrayList<HitSucce
         Glide.with(ctx)
             .load(datalist[position].songCoverImg)
             .into(holder.songCoverImg)
+
         holder.songName.text = datalist[position].songName
         holder.songOriginArtist.text = "- "+datalist[position].originArtistName
         holder.coverArtistName.text = datalist[position].coverArtistName
@@ -30,10 +32,20 @@ class MyPageHitSuccessAdapter(val ctx: Context, val datalist: ArrayList<HitSucce
         holder.avgScore.text = datalist[position].avgScore.toString()
         holder.myScore.text = datalist[position].myScore.toString()
 
+        if(datalist[position].isPassed){
+            holder.failFilter.visibility = View.GONE
+            holder.passFilter.visibility = View.VISIBLE
+        }else if(!datalist[position].isPassed)
+        {
+            holder.failFilter.visibility = View.VISIBLE
+            holder.passFilter.visibility = View.GONE
+        }
 
     }
 
     inner class Holder(ItemView : View): RecyclerView.ViewHolder(ItemView){
+        var failFilter : RelativeLayout = itemView!!.findViewById(R.id.rl_hit_success_pass)
+        var passFilter : RelativeLayout = itemView!!.findViewById(R.id.rl_hit_success_fail)
 
         var songCoverImg = itemView.findViewById(R.id.img_hit_success) as ImageView
         var songName = itemView.findViewById(R.id.tv_hit_success_song_item_song_name) as TextView
