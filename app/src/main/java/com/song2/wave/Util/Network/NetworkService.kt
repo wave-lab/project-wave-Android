@@ -143,7 +143,7 @@ interface NetworkService {
 
     // 회원가입
     @Multipart
-    @POST("/user/signup")
+    @POST("/signup")
     fun postSignupResponse(
             @Part("email") email : RequestBody,
             @Part("password") password : RequestBody,
@@ -151,7 +151,7 @@ interface NetworkService {
             @Part profileImg : MultipartBody.Part?,
             @Part("genre") genre : ArrayList<RequestBody?>,
             @Part("mood") mood : ArrayList<RequestBody?>,
-            @Part("originArtist]") originArtist : ArrayList<Int?>
+            @Part("originArtist") originArtist : ArrayList<RequestBody?>
     ) : Call<PostResponse>
 
 

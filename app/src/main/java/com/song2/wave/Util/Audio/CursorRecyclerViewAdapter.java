@@ -57,6 +57,7 @@ abstract class CursorRecyclerViewAdapter<VH extends RecyclerView.ViewHolder> ext
         if (mDataValid && mCursor != null) {
             return mCursor.getCount();
         }
+
         return 0;
     }
 
