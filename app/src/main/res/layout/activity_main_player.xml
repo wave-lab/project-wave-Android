@@ -38,6 +38,8 @@
             android:fontFamily="@font/noto_sans_kr_bold_hestia"
             android:layout_marginLeft="16dp"
             android:textColor="#e5e5e5"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="22sp"
             android:includeFontPadding="false"/>
 
@@ -53,6 +55,8 @@
             android:lineSpacingExtra="8sp"
             android:gravity="center_horizontal"
             android:text="Covered by Blotto"
+        android:maxLines="1"
+        android:ellipsize="end"
     />
     <ImageView
         android:id="@+id/img_main_player_act_cover_img"
@@ -223,7 +227,9 @@
                 android:textColor="#ffffff"
                 android:lineSpacingExtra="6sp"
                 android:gravity="center_horizontal"
-                android:text="록  메탈  POP"/>
+                android:text="록  메탈  POP"
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
         <ImageView
                 android:layout_gravity="right"

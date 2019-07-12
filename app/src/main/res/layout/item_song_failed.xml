@@ -31,6 +31,8 @@
             android:textColor="#ffffff"
             android:lineSpacingExtra="6sp"
             android:gravity="center_horizontal"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="Song2-name"/>
 
     <TextView
@@ -45,6 +47,8 @@
             android:lineSpacingExtra="5sp"
             android:gravity="center_horizontal"
             android:text="Cover Artist"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_centerHorizontal="true"/>
 
 

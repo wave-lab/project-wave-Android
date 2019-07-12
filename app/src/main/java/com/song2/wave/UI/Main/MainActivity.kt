@@ -177,7 +177,7 @@ class MainActivity : AppCompatActivity() {
                 nowFrag = LibraryFragment()
             }
             "myPage" ->{
-                nowFrag = MyPageFragment()
+                nowFrag = MyPageHitSuccessFragment()
             }
         }
 
