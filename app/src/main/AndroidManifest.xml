@@ -18,6 +18,8 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:usesCleartextTraffic="true">
+        <activity android:name=".LikeAnimationActivity">
+        </activity>
         <activity android:name=".ArtistSongListActivity">
         </activity>
         <activity android:name=".StartActivity">
@@ -29,16 +31,18 @@
         <meta-data
                 android:name="com.kakao.sdk.AppKey"
                 android:value="@string/kakao_app_key"/> <!-- 메인 -->
-        <activity android:name=".SplashActivity"
-                  android:theme="@style/SplashTheme"
-        >
+        <activity
+                android:name=".SplashActivity"
+                android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Main.MainActivity"
-                  android:theme="@style/Theme.AppCompat"/>
+        <activity
+                android:name=".UI.Main.MainActivity"
+                android:theme="@style/Theme.AppCompat"/>
         <activity android:name=".UI.Signup.SignupFirstActivity">
         </activity>
         <activity android:name=".UI.Main2Activity"/>
@@ -48,25 +52,14 @@
 
         <service android:name=".Util.Player.Service.MusicService"/>
 
-
-
-        <activity android:name=".UI.Signup.SignupMoodActivity"></activity>
-
-
-
+        <activity android:name=".UI.Signup.SignupMoodActivity"/>
         <activity android:name=".UI.NetworkServiceTest.NetworkTestActivity">
-
         </activity>
         <activity android:name=".UI.Main.MyPage.MyPageProfileSettingActivity">
-
         </activity>
-
-
         <activity android:name=".UI.Main.MyPage.SetStartPointActivity"/>
         <activity android:name=".UI.Main.MyPage.UploadSongInfoActivity">
-
         </activity>
-
 
         <service android:name=".Util.Player.Service.MusicService"/>
         <service
@@ -79,10 +72,7 @@
                 <action android:name="FORWARD"/>
                 <action android:name="CLOSE"/>
             </intent-filter>
-        </service>
-
-        <!-- Declare foreground service -->
-
+        </service> <!-- Declare foreground service -->
         <service
                 android:name=".Util.Player.Service.MyForeGroundService"
                 android:enabled="true"
