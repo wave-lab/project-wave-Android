@@ -29,20 +29,22 @@
 
         <!-- 메인 -->
         <activity android:name=".UI.Main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
-        <activity android:name=".UI.Signup.SignupFirstActivity"></activity>
+
+        <activity android:name=".UI.Signup.SignupFirstActivity">
+        </activity>
+
         <activity android:name=".UI.Main2Activity"/>
         <activity android:name=".UI.Artist.ArtistActivity"/>
         <activity android:name=".UI.Artist.ArtistLibraryActivity"/>
 
         <!-- 음악업로드 -->
         <activity android:name=".UI.Main.MyPage.UpLoadFileActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".UI.Main.MyPage.SetStartPointActivity"/>
         <activity android:name=".UI.Main.MyPage.UploadSongInfoActivity">

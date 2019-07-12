@@ -101,35 +101,43 @@ interface NetworkService {
     @GET("/core/search")
     fun getSearchResponse(
         @Header("Content-Type") content_type: String,
-        @Query("originArtistName") originartistname : String?,
-        @Query("artistName") artistname : String?,
-        @Query("originTitle") origintitle : String?
+        @Query("originArtistName") originartistname: String?,
+        @Query("artistName") artistname: String?,
+        @Query("originTitle") origintitle: String?
 
-    ) : Call<GetSearchResponse>
+    ): Call<GetSearchResponse>
 
 
     @GET("/core/users/emailCheck")
     fun getEmailCheckResponse(
-            @Query("email") email : String?
-    ) : Call<GetEmailCheckResponse>
+        @Query("email") email: String?
+    ): Call<GetEmailCheckResponse>
 
     @GET("/core/users/nicknameCheck")
     fun getNicknameCheckResponse(
-            @Query("nickname") nickname : String?
-    ) : Call<GetNicknameCheckResponse>
+        @Query("nickname") nickname: String?
+    ): Call<GetNicknameCheckResponse>
 
     @GET("/pl/{playlistIdx}")
     fun getTop10PlaylistResponse(
         @Header("Content-Type") content_type: String,
         @Header("Authorization") authorization: String,
-        @Path("playlistIdx") playlistIdx : String?
-    ) : Call<GetTop10PlaylistResponse>
+        @Path("playlistIdx") playlistIdx: String?
+    ): Call<GetTop10PlaylistResponse>
 
     //** ds 작업 **//
     @GET("/core/originArtist")
     fun getOriginArtistResponse(
         @Header("Content-Type") content_type: String
-    ) : Call<GetOriginArtistResponse>
+    ): Call<GetOriginArtistResponse>
+
+/*
+    @GET("/core/users/{userIdx}")
+    fun getArtistInfoRespnose(
+        @Header("Content-Type") content_type: String
+        @Path("userIdx") userIdx
+    ) : Call<GetArtistInfoRespnose>
+*/
 
     ////////////////////* POST *///////////////////////////
 
@@ -146,19 +154,24 @@ interface NetworkService {
             @Part("originArtist]") originArtist : ArrayList<Int?>
     ) : Call<PostResponse>
 
+    @Multipart
+    @POST("/songs")
+    fun postSongUploadResponse(
+        @Part("originTitle") originTitle : RequestBody,
+        @Part artwork : MultipartBody.Part?,
+        @Part("originArtistName") originArtistName : RequestBody,
+        @Part profileImg : MultipartBody.Part?,
+        @Part("genre") genre : ArrayList<RequestBody?>,
+        @Part("mood") mood : ArrayList<RequestBody?>,
+        @Part("songComment") songComment : RequestBody,
+        @Part("highlightTime") highlightTime : RequestBody
+    ) : Call<PostResponse>
 
     // 이메일 중복 확인
     @POST("/core/users/emailCheck")
     fun postEmailCheckResponse(
-        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String,
         @Body() body: JsonObject
-    ) : Call<PostResponse>
-
-    //** ds 작업 **//
-    @Multipart
-    @POST("core/signup")
-    fun postSignUp(
-            @Body postSignUpData: PostSignUpData
-    ) : Call<PostResponse>
+    ): Call<PostResponse>
 
 }
