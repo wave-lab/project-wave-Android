@@ -1,12 +1,8 @@
 package com.song2.wave.UI.Main.MyPage
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.View
 
 import com.song2.wave.R
 import kotlinx.android.synthetic.main.activity_mypage_artist_setting.btn_profile_edit_acoustic
@@ -26,7 +22,6 @@ import kotlinx.android.synthetic.main.activity_mypage_artist_setting.btn_profile
 import kotlinx.android.synthetic.main.activity_mypage_artist_setting.btn_profile_edit_romanic
 import kotlinx.android.synthetic.main.activity_mypage_artist_setting.btn_profile_edit_sad
 import kotlinx.android.synthetic.main.activity_mypage_setting.*
-import kotlinx.android.synthetic.main.activity_signup_first.*
 
 class MyPageProfileSettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
