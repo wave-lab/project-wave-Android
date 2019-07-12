@@ -65,7 +65,7 @@
         android:scaleType="fitXY"
         />
     <RelativeLayout
-        android:id="@+id/rl_main_player_act_rating"
+        android:id="@+id/rl_main_player_act_trans"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginTop="106dp"
@@ -79,35 +79,105 @@
             android:layout_height="match_parent"
             android:background="#99000000"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="WAVE에 어울리는 노래인가요?"
-            android:textSize="18sp"
-            android:fontFamily="@font/noto_sans_kr_bold_hestia"
-            android:includeFontPadding="false"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="72dp"
-            android:textColor="#ffffff"
-            />
-        <RatingBar
-            android:id="@+id/rb_main_player_act_rating"
+        <RelativeLayout
+            android:id="@+id/rl_main_player_act_rating"
             android:layout_width="match_parent"
-            android:layout_height="41dp"
-            android:layout_marginTop="131dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="34dp"
-            android:theme="@style/RatingBar"
-            />
-        <Button
-            android:id="@+id/btn_main_player_act_comment"
-            android:layout_width="139dp"
-            android:layout_height="32dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="56.7dp"
-            android:layout_below="@+id/rb_main_player_act_rating"
-            android:background="@drawable/btn_mypage_upload"
-            />
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WAVE에 어울리는 노래인가요?"
+                android:textSize="18sp"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:includeFontPadding="false"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="72dp"
+                android:textColor="#ffffff"
+                />
+            <RatingBar
+                android:id="@+id/rb_main_player_act_rating"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:layout_marginTop="131dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="34dp"
+                android:theme="@style/RatingBar"
+                />
+            <Button
+                android:id="@+id/btn_main_player_act_comment"
+                android:layout_width="139dp"
+                android:layout_height="32dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="56.7dp"
+                android:layout_below="@+id/rb_main_player_act_rating"
+                android:background="@drawable/btn_mypage_upload"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/ll_main_player_act_commnet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_main_player_artist_comment"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/kakao_default_profile_image"
+                />
+            <TextView
+                android:id="@+id/tv_main_player_artist_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아티스트 닉네임"
+                android:textSize="14sp"
+                android:layout_below="@+id/img_main_player_artist_comment"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:includeFontPadding="false"
+                android:layout_centerHorizontal="true"
+                android:textColor="#ffffff"
+                android:layout_marginTop="8dp"
+                />
+            <View
+                android:id="@+id/view_main_player_act_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:background="#00b6de"
+                android:layout_alignLeft="@+id/tv_main_player_artist_name"
+                android:layout_alignRight="@+id/tv_main_player_artist_name"
+                android:layout_below="@+id/tv_main_player_artist_name"
+                />
+
+            <TextView
+                android:id="@+id/tv_main_player_act_introduce_short"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:text="한줄소개입니다. 여기 마진은 양 옆 22로 합시다아아"
+                android:layout_below="@+id/view_main_player_act_comment"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
+                android:layout_marginHorizontal="22dp"
+                android:textSize="12sp"
+                android:layout_marginTop="16dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_main_player_act_introduce_short"
+                android:text="나는 이승수다. 나는 승수 아요다. 내가 바로 이집의
+집사다. 나는 못하는게 없다. 나는 최고의 아요개발자이다. 나는 돈을 많이 주는 곳에 취직할 것이다. 나는 할 수 있다. 나를 놓치면 후회할 것이다. 내가 최고다. 나는 짱이다. 어디까지 써야하나 여기까지?"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
+                android:layout_marginHorizontal="22dp"
+                android:textSize="12sp"
+                android:layout_marginTop="16dp"
+                />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

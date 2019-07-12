@@ -267,14 +267,21 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         updateUI();
 
         img_main_player_act_cover_img.setOnClickListener {
+            rl_main_player_act_trans.visibility = View.VISIBLE
             rl_main_player_act_rating.visibility = View.VISIBLE
+            ll_main_player_act_commnet.visibility = View.INVISIBLE
         }
         rl_main_player_act_all.setOnClickListener {
-            rl_main_player_act_rating.visibility = View.INVISIBLE
+            rl_main_player_act_trans.visibility = View.INVISIBLE
         }
 
         iv_main_player_like_btn.setOnClickListener {
             iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected
+        }
+
+        btn_main_player_act_comment.setOnClickListener {
+            ll_main_player_act_commnet.visibility = View.VISIBLE
+            rl_main_player_act_rating.visibility = View.INVISIBLE
         }
 
     }
