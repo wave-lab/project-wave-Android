@@ -169,5 +169,63 @@
         </LinearLayout>
 
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_main_act_bottom_main_player"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#121212"
+        android:orientation="horizontal"
+        android:layout_above="@+id/ll_main_act_tab_bar"
+        >
+
+        <ImageView
+            android:id="@+id/iv_main_act_bottom_play"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="16dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_play_sm"/>
+
+        <LinearLayout
+            android:layout_width="186dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="35.5dp"
+            android:gravity="center_horizontal"
+            >
+            <TextView
+                android:id="@+id/iv_main_act_bottom_title_origin_artist"
+                android:layout_width="245dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_horizontal"
+                android:text="Song Name - Original Artist"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:includeFontPadding="false"
+                android:textColor="#ffffff"/>
+
+            <TextView
+                android:id="@+id/iv_main_act_bottom_cover_artist"
+                android:layout_width="245dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Cover Artist"
+                android:textSize="12sp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
+                />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/iv_main_act_bottom_play_list"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/btn_playlist_sm"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="34.5dp"
+            />
+
+    </LinearLayout>
 
 </RelativeLayout>

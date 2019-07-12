@@ -1,14 +1,12 @@
-package com.song2.wave.AudioTest;
+package com.song2.wave.Util.Audio;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -19,8 +17,6 @@ import android.widget.RemoteViews;
 import com.song2.wave.R;
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity;
 import com.squareup.picasso.Picasso;
-
-import static android.app.PendingIntent.FLAG_ONE_SHOT;
 
 public class NotificationPlayer {
     private final static int NOTIFICATION_PLAYER_ID = 0x342;
@@ -224,7 +220,7 @@ public class NotificationPlayer {
             uiHandler.post(new Runnable(){
                 @Override
                 public void run() {
-                  //  Picasso.with(mService).load(songImgUrl).error(R.drawable.kakao_default_profile_image).into(remoteViews, R.id.img_albumart, NOTIFICATION_PLAYER_ID, notification);
+                    Picasso.with(mService).load("SAdf").error(R.drawable.kakao_default_profile_image).into(remoteViews, R.id.img_albumart, NOTIFICATION_PLAYER_ID, notification);
                 }
             });
         }

@@ -1,7 +1,6 @@
 package com.song2.wave.UI.Main.Home.Adapter
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -9,10 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
-import com.song2.wave.AudioTest.AudioApplication
 import com.song2.wave.Data.model.Home.TOP10Data
 import com.song2.wave.R
-import com.song2.wave.UI.MainPlayer.MainPlayerActivity
 import com.song2.wave.UI.Main.Home.HomeFragment
 import com.song2.wave.UI.Main.Home.Top10.Top10Fragment
 

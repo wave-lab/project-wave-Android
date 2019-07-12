@@ -9,15 +9,14 @@ import android.support.v4.app.LoaderManager
 import android.support.v4.content.CursorLoader
 import android.support.v4.content.Loader
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import com.song2.wave.AudioTest.AudioAdapter
-import com.song2.wave.AudioTest.PlayerActivity
+import com.song2.wave.Util.Audio.AudioAdapter
+import com.song2.wave.Util.Audio.PlayerActivity
 import com.song2.wave.Data.GET.GetHomeInfoResponse
 import com.song2.wave.Data.GET.GetPlaylistResponse
 import com.song2.wave.Data.GET.GetRecommendResponse
@@ -34,7 +33,6 @@ import com.song2.wave.UI.Main.Home.Adapter.*
 import com.song2.wave.UI.Main.Home.Top10.Top10Fragment
 import com.song2.wave.UI.Signup.SignupFirstActivity
 import com.song2.wave.Util.Network.ApiClient
-import com.song2.wave.Util.Network.ApplicationController
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_home_on.*
 import kotlinx.android.synthetic.main.fragment_home_on.view.*

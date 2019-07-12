@@ -7,10 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.bumptech.glide.RequestManager
-import com.song2.wave.AudioTest.AudioApplication
+import com.song2.wave.Util.Audio.AudioApplication
 import com.song2.wave.Data.model.SongData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.Search.Adapter.SongSearchViewHolder

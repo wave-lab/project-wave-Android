@@ -3,7 +3,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="#000000"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+    >
 
     <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
         <LinearLayout
@@ -343,4 +344,5 @@
 
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
