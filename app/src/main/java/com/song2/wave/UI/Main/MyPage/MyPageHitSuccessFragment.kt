@@ -31,30 +31,37 @@ class MyPageHitSuccessFragment  :  Fragment(){
         songFieldData.add("장르")
 
         hitsuccess.add(HitSuccessSongData(
+            true,
             "https://upload.wikimedia.org/wikipedia/ko/thumb/f/fe/방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png/220px-방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png",
             "WAVE","이성은","떵으니",songFieldData,
             4.2,4))
         hitsuccess.add(HitSuccessSongData(
+            true,
             "https://upload.wikimedia.org/wikipedia/ko/thumb/f/fe/방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png/220px-방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png",
             "WAVE","이성은","떵으니",songFieldData,
             3.3,3))
         hitsuccess.add(HitSuccessSongData(
+            false,
             "https://upload.wikimedia.org/wikipedia/ko/thumb/f/fe/방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png/220px-방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png",
             "WAVE","이성은","떵으니",songFieldData,
             1.2,1))
         hitsuccess.add(HitSuccessSongData(
+            true,
             "https://upload.wikimedia.org/wikipedia/ko/thumb/f/fe/방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png/220px-방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png",
             "WAVE","이성은","떵으니",songFieldData,
             5.0,5))
         hitsuccess.add(HitSuccessSongData(
+            false,
             "https://upload.wikimedia.org/wikipedia/ko/thumb/f/fe/방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png/220px-방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png",
             "WAVE","이성은","떵으니",songFieldData,
             2.3,2))
         hitsuccess.add(HitSuccessSongData(
+            true,
             "https://upload.wikimedia.org/wikipedia/ko/thumb/f/fe/방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png/220px-방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png",
             "WAVE","이성은","떵으니",songFieldData,
             4.1,4))
         hitsuccess.add(HitSuccessSongData(
+            true,
             "https://upload.wikimedia.org/wikipedia/ko/thumb/f/fe/방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png/220px-방탄소년단_MAP_OF_THE_SOUL_-_PERSONA.png",
             "WAVE","이성은","떵으니",songFieldData,
             3.0,3))

@@ -9,7 +9,8 @@
     <RelativeLayout
             android:id="@+id/rl_scoring_tabbar_frag_waiting"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+    android:layout_weight="1">
         <TextView
                 android:id="@+id/txt_tabbar_scoring_waiting"
                 android:layout_width="wrap_content"
@@ -17,14 +18,15 @@
                 android:textSize="20sp"
                 android:lineSpacingExtra="11sp"
                 android:text="평가 요청곡"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+                android:textColor="#ffffff"
+                android:layout_centerInParent="true"
                 android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
     </RelativeLayout>
     <RelativeLayout
             android:id="@+id/rl_scoring_tabbar_frag_completed"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+    android:layout_weight="1">
         <TextView
                 android:id="@+id/txt_tabbar_scoring_passed"
                 android:layout_width="wrap_content"
@@ -32,8 +34,8 @@
                 android:textSize="20sp"
                 android:lineSpacingExtra="11sp"
                 android:text="평가 완료곡"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_centerInParent="true"
+                android:textColor="#ffffff"
                 android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
 </RelativeLayout>
 </LinearLayout>

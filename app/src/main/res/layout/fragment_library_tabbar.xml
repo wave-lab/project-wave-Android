@@ -12,7 +12,8 @@
         android:gravity="center">
         <TextView
             android:text="재생목록"
-            android:textSize="16sp"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans_kr_bold_hestia"
@@ -28,7 +29,8 @@
         android:gravity="center">
         <TextView
             android:text="좋아요"
-            android:textSize="16sp"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans_kr_bold_hestia"
@@ -41,8 +43,9 @@
         android:layout_weight="1"
         android:gravity="center">
         <TextView
-            android:text="플레이리스트"
-            android:textSize="16sp"
+            android:text="리스트"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans_kr_bold_hestia"
