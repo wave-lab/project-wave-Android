@@ -30,7 +30,7 @@
                                 android:layout_marginStart="22dp"
                                 android:orientation="vertical"
                                 android:layout_marginTop="174dp"
-                                android:layout_width="match_parent" android:layout_height="match_parent">
+                                android:layout_width="match_parent" android:layout_height="397dp">
                             <TextView
                                     android:id="@+id/tv_home_frag_ment"
                                     android:includeFontPadding="false"
@@ -135,7 +135,7 @@
                                         android:layout_centerHorizontal="true"
                                         android:src="@drawable/btn_more"
                                         android:layout_width="24dp" android:layout_height="24dp"
-                                        android:layout_centerVertical="true" />
+                                        android:layout_centerVertical="true"/>
                             </RelativeLayout>
 
                             <ImageView
@@ -262,13 +262,14 @@
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"/>
 
                 <ImageView
-                        android:layout_marginHorizontal="13dp"
-                        android:background="@color/colorPrimary"
+                        android:layout_marginHorizontal="12dp"
                         android:layout_marginTop="16dp"
+                        android:scaleType="fitXY"
                         android:id="@+id/iv_home_frag_challenge_img"
                         android:layout_below="@+id/tv_home_frag_challenge"
-                        android:layout_width="match_parent" android:layout_height="134dp"
-                        android:src="@drawable/img_artwork_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="134dp"
+                        android:src="@drawable/img_home_weeklychalenge"
                         android:layout_alignParentStart="true"/>
 
                 <!--TOP10 : 장르-->
@@ -333,7 +334,7 @@
                         android:layout_below="@+id/rv_home_frag_top10_mood"
                         android:layout_marginHorizontal="4dp"
                         android:layout_marginTop="16dp"
-                        android:layout_width="match_parent" android:layout_height="132dp">
+                        android:layout_width="match_parent" android:layout_height="140dp">
 
                 </android.support.v7.widget.RecyclerView>
             </RelativeLayout>
