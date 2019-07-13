@@ -14,7 +14,6 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import com.song2.wave.R;
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity;
-import com.song2.wave.UI.MusicTestActivity;
 
 import java.io.IOException;
 

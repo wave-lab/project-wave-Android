@@ -13,6 +13,8 @@ import retrofit2.http.*
 import com.song2.wave.Data.GET.*
 import com.song2.wave.Data.GET.GetSearchResponse
 import com.song2.wave.Data.POST.PostEmailData
+import com.song2.wave.Data.POST.PostLogin
+import com.song2.wave.Data.POST.PostRating
 import com.song2.wave.Data.POST.PostSignUpData
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -131,6 +133,12 @@ interface NetworkService {
         @Header("Content-Type") content_type: String
     ): Call<GetOriginArtistResponse>
 
+    // 로그인
+    @POST("/core/signin")
+    fun postLogin(
+            @Body postLogin : PostLogin
+    ) : Call<PostResponse>
+
 /*
     @GET("/core/users/{userIdx}")
     fun getArtistInfoRespnose(
@@ -154,11 +162,17 @@ interface NetworkService {
             @Part("originArtist") originArtist : ArrayList<RequestBody?>
     ) : Call<PostResponse>
 
+<<<<<<< HEAD
     //곡업로드
     @Multipart
     @POST("/songs")
     fun postSongUploadResponse(
         @Header("Authorization") authorization: String,
+=======
+    @Multipart
+    @POST("/songs")
+    fun postSongUploadResponse(
+>>>>>>> 16b23c7e114869a370e555c099e08eb0b877d944
         @Part("originTitle") originTitle : RequestBody,
         @Part artwork : MultipartBody.Part?,
         @Part("originArtistName") originArtistName : RequestBody,
@@ -172,7 +186,18 @@ interface NetworkService {
     // 이메일 중복 확인
     @POST("/core/users/emailCheck")
     fun postEmailCheckResponse(
-        @Header("Content-Type") content_type: String,
+        @Header("Authorization") authorization: String,
         @Body() body: JsonObject
     ): Call<PostResponse>
+<<<<<<< HEAD
+=======
+
+
+
+    @POST("/core/songs/{songIdx}/rate")
+    fun postRating(
+            @Header("Authorization") authorization: String,
+            @Body postRating : PostRating
+    ): Call<PostResponse>
+>>>>>>> 16b23c7e114869a370e555c099e08eb0b877d944
 }

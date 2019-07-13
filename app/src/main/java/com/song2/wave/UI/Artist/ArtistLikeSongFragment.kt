@@ -47,7 +47,7 @@ class ArtistLikeSongFragment : Fragment() {
         songDataArr.add(SongData("er","asdf","https://pgnqdrjultom1827145.cdn.ntruss.com/img/f8/b9/f8b99005f6cc026302a55f0cba36c19ecbf1f2109f36639664a1c4217bbb41cd_v1.jpg", "무릎", "아이유(IU)", "송제민", songFieldData))
 
 
-        v.recycler_scoring_wait_frag_list.adapter = ScoringWaitAdapter(songDataArr, requestManager)
+        v.recycler_scoring_wait_frag_list.adapter = ScoringWaitAdapter(context!!, songDataArr, requestManager)
         v.recycler_scoring_wait_frag_list.layoutManager = LinearLayoutManager(v.context)
     }
 }

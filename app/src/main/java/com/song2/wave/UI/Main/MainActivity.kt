@@ -9,6 +9,7 @@ import com.song2.wave.UI.Main.Scoring.ScoringFragment
 import com.song2.wave.UI.Main.Search.SearchFragment
 import android.util.Log
 import com.song2.wave.UI.Main.Home.HomeFragment
+import com.song2.wave.UI.Main.MyPage.PointHistoryFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import com.song2.wave.Util.Interface.OnBackPressedListener
 
@@ -64,8 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         iv_main_act_bottom_play.setOnClickListener {
             // 재생 또는 일시정지
-            getSearch()
-            //AudioApplication.getInstance().serviceInterface.togglePlay()
+            AudioApplication.getInstance().serviceInterface.togglePlay()
         }
 
         mainActivity = this
@@ -188,7 +188,7 @@ class MainActivity : AppCompatActivity() {
                 nowFrag = LibraryFragment()
             }
             "myPage" ->{
-                nowFrag = MyPageFragment()
+                nowFrag = PointHistoryFragment()
             }
         }
 

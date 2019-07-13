@@ -15,7 +15,6 @@ import com.song2.wave.Data.model.PlayListData
 import com.song2.wave.Data.model.SongData
 import com.song2.wave.UI.Main.Scoring.Adapter.ScoringWaitAdapter
 import com.song2.wave.Util.Network.ApiClient
-import com.song2.wave.Util.Network.ApplicationController
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_scoring_wait.*
 import retrofit2.Call
@@ -68,7 +67,7 @@ class ScoringWaitingFragment : Fragment() {
                     for(i in playlistDataList.songList.indices)
                         songDataArr.add(SongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].songUrl, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName, playlistDataList.songList[i].genre))
 
-                    recycler_scoring_wait_frag_list.adapter = ScoringWaitAdapter(songDataArr, requestManager)
+                    recycler_scoring_wait_frag_list.adapter = ScoringWaitAdapter(context!!, songDataArr, requestManager)
                     recycler_scoring_wait_frag_list.layoutManager = LinearLayoutManager(context)
                 }
             }

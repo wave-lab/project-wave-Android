@@ -2,6 +2,7 @@ package com.song2.wave.UI.Main.Home.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.support.annotation.IntegerRes
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,10 +13,20 @@ import com.song2.wave.Util.Audio.AudioApplication
 import com.song2.wave.Data.model.Home.MyWaitingSongData
 import com.song2.wave.R
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity
+import org.jetbrains.anko.db.INTEGER
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MyWaitingSongHomeAdapter (context : Context, private var waitingSongData: ArrayList<MyWaitingSongData>, var requestManager : RequestManager) : RecyclerView.Adapter<MyWaitingSongHomeViewHolder>(){
 
     var mContext = context
+    var format1 = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+
+    var time = Date()
+
+    var time1 = format1.format(time)
+    var currentData = time1.substring(8, 10)
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyWaitingSongHomeViewHolder {
         val mainView : View = LayoutInflater.from(parent.context)
@@ -26,9 +37,13 @@ class MyWaitingSongHomeAdapter (context : Context, private var waitingSongData: 
     override fun getItemCount(): Int = waitingSongData.size
 
     override fun onBindViewHolder(holder: MyWaitingSongHomeViewHolder, position: Int) {
+
+        Log.v("Asdf", "현재 날짜 = " + currentData)
+        var currentDateNum : Int = Integer.parseInt(currentData)
+        var deleteDateNum : Int = Integer.parseInt(waitingSongData[position].songWaitingDay_mine)
         requestManager.load(waitingSongData[position].songCoverImg_mine).into(holder.songCoverImg)
         holder.songInfo.text = waitingSongData[position].songName_mine +" - "+ waitingSongData[position].originArtistName_mine
-        holder.songDDay.text = "D - "+ waitingSongData[position].songWaitingDay_mine
+        holder.songDDay.text = "D - "+ (deleteDateNum - currentDateNum).toString()
 
         holder.itemView.setOnClickListener{
             var intent = Intent(mContext, MainPlayerActivity::class.java)

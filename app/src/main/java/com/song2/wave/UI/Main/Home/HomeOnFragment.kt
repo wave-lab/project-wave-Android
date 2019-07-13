@@ -13,6 +13,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ScrollView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.Util.Audio.AudioAdapter
@@ -71,6 +73,10 @@ class HomeOnFragment : Fragment() {
     lateinit var top10GenreAdapter: Top10GenreAdapter
     lateinit var top10MoodAdapter: Top10GenreAdapter
 
+
+    //lateinit var top10MoodAdapter: Top10MoodAdapter
+
+
     lateinit var requestManager: RequestManager
 
     var bundleGenre = Bundle()
@@ -121,6 +127,10 @@ class HomeOnFragment : Fragment() {
         attachRecyclerView()
         waitSongDataArr = ArrayList<PlaySongData>()
 
+        //성은이 기기 기준 1500
+        home_on_scroll_btn.setOnClickListener {
+            home_on_scroll.smoothScrollTo(0,1500)
+        }
     }
 
     fun attachRecyclerView(){
@@ -179,7 +189,7 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
                     for(i in playlistDataList.songList.indices) {
-                        myWaitingSongDataList.add(MyWaitingSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].songUrl, 3, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
+                        myWaitingSongDataList.add(MyWaitingSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].songUrl, playlistDataList.songList[i].deleteTime.substring(8,10), playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
                     }
                     myWaitingSongHomeAdapter = MyWaitingSongHomeAdapter(context!!, myWaitingSongDataList, requestManager)
                     rv_home_frag_scoring_waiting_mine.adapter = myWaitingSongHomeAdapter
