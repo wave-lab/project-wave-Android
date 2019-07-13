@@ -38,7 +38,7 @@ class ScoringPassedListRecyclerViewAdapter (var context: Context, private var so
         holder.itemView.setOnClickListener{
             var intent = Intent(mContext, MainPlayerActivity::class.java)
             //AudioApplication.getInstance().serviceInterface.setPlayList(holder.adapterPosition) // 재생목록등록
-            AudioApplication.getInstance().serviceInterface.play(songData[holder.adapterPosition]._id, songData[holder.adapterPosition].songUrl, songData[position].originArtistName, songData[position].coverArtistName, songData[position].songName) // 선택한 오디오재생
+            AudioApplication.getInstance().serviceInterface.play(context, songData[holder.adapterPosition]._id!!, songData[holder.adapterPosition].songUrl!!, songData[position].originArtistName!!, songData[position].coverArtistName!!, songData[position].songName!!) // 선택한 오디오재생
             intent.putExtra("_id", songData[holder.adapterPosition]._id)
             Log.v("ASdf","테스2 id = " + songData[holder.adapterPosition]._id)
             intent.putExtra("songUrl", songData[holder.adapterPosition].songUrl)

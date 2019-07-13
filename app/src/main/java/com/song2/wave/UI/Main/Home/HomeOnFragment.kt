@@ -1,5 +1,6 @@
 package com.song2.wave.UI.Main.Home
 
+import android.app.Activity
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
@@ -149,7 +150,7 @@ class HomeOnFragment : Fragment() {
 
     //hits
     fun getHitsResponse(){
-        val getHitsResponse = networkService.getHitsResponse("application/json",authorization_info, "success")
+        val getHitsResponse = networkService.getHitsResponse("application/json","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM", "success")
 
         getHitsResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
             override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
@@ -178,7 +179,7 @@ class HomeOnFragment : Fragment() {
 
     //upload
     fun getUploadResponse(){
-        val getUploadResponse = networkService.getUploadResponse("application/json",authorization_info,null)
+        val getUploadResponse = networkService.getUploadResponse("application/json","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM",null)
 
         getUploadResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
             override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
@@ -205,7 +206,7 @@ class HomeOnFragment : Fragment() {
 
     //rateReady
     fun getRateReadyResponse(){
-        val getRateReadyResponse = networkService.getRateReadyResponse("application/json",authorization_info)
+        val getRateReadyResponse = networkService.getRateReadyResponse("application/json","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM")
 
         getRateReadyResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
             override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
@@ -216,14 +217,18 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
 
-                    Log.v("HomeOnFragment", "응답 값 = " + response.body().toString())
-                    for(i in playlistDataList.songList.indices) {
-                        Log.v("Asdf"," 값 = " + playlistDataList.songList[i].songUrl)
-                        waitingSongDataList.add(HomeSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName, playlistDataList.songList[i].songUrl))
+                    if(playlistDataList != null){
+
+                        Log.v("HomeOnFragment", "응답 값 = " + response.body().toString())
+                        for(i in playlistDataList.songList.indices) {
+                            Log.v("Asdf"," 값 = " + playlistDataList.songList[i].songUrl)
+                            waitingSongDataList.add(HomeSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName, playlistDataList.songList[i].songUrl))
+                        }
+                        waitingSongHomeAdapter = WaitingSongHomeAdapter(context!!,waitingSongDataList, requestManager)
+                        rv_home_frag_scoring_waiting.adapter = waitingSongHomeAdapter
+                        rv_home_frag_scoring_waiting.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
                     }
-                    waitingSongHomeAdapter = WaitingSongHomeAdapter(context!!,waitingSongDataList, requestManager)
-                    rv_home_frag_scoring_waiting.adapter = waitingSongHomeAdapter
-                    rv_home_frag_scoring_waiting.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 /*
 
                     waitSongDataArr = response!!.body()!!.data.songList
@@ -267,7 +272,10 @@ class HomeOnFragment : Fragment() {
 
     //recommend
     fun getRecommendResponse(){
-        val getRecommendResponse = networkService.getRecommendResponse("application/json",authorization_info)
+        val pref = context!!.getSharedPreferences("auto", Activity.MODE_PRIVATE)
+        var token : String = ""
+        token = pref.getString("token", "")
+        val getRecommendResponse = networkService.getRecommendResponse("application/json",token)
 
         getRecommendResponse.enqueue(object : retrofit2.Callback<GetRecommendResponse>{
             override fun onFailure(call: Call<GetRecommendResponse>, t: Throwable) {
@@ -307,7 +315,7 @@ class HomeOnFragment : Fragment() {
     //userInfo
     fun getHomeInfoResponse(){
         //xx일 경우
-        val getHomeInfoResponse = networkService.getHomeInfoResponse("application/json",authorization_info)
+        val getHomeInfoResponse = networkService.getHomeInfoResponse("application/json","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM")
 
         getHomeInfoResponse.enqueue(object: retrofit2.Callback<GetHomeInfoResponse>{
             override fun onFailure(call : Call<GetHomeInfoResponse>, t : Throwable){

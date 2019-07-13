@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
                     // 자신의 유저 정보 내부 DB에 저장
                     var pref = applicationContext.getSharedPreferences("auto", Activity.MODE_PRIVATE)
                     var editor: SharedPreferences.Editor = pref.edit()
-                    editor.putString("token", token) // 토란  key값으로 userID 데이터를 저장한다.
+                    editor.putString("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM") // 토란  key값으로 userID 데이터를 저장한다.
                     var intent = Intent(applicationContext, MainActivity::class.java)
                     startActivity(intent)
                 }

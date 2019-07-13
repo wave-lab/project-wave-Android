@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".UI.Main.MainActivity"
-            android:theme="@style/SplashTheme" />
+            />
         <activity android:name=".UI.Main2Activity" />
         <activity android:name=".UI.Artist.ArtistActivity" />
         <activity android:name=".UI.Artist.ArtistLibraryActivity" /> <!-- 음악플레이어 -->

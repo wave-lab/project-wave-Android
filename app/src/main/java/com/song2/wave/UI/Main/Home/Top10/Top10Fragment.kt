@@ -31,11 +31,6 @@ class Top10Fragment: Fragment(){
 
         var textViewList : ArrayList<TextView?> = arrayListOf(tv_top10_tabbar_idx0, tv_top10_tabbar_idx1,tv_top10_tabbar_idx2, tv_top10_tabbar_idx3, tv_top10_tabbar_idx4, tv_top10_tabbar_idx5, tv_top10_tabbar_idx6, tv_top10_tabbar_idx7)
 
-        if (getArguments()!!.getString("genreId") != null){
-
-
-
-        }
 
         //var data = getArguments()!!.getStringArrayList("genreRank")
 /*

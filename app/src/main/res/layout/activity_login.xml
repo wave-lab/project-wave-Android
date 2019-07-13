@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
     android:background="#000000">
     <RelativeLayout
         android:layout_height="match_parent"
@@ -46,6 +47,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
         android:orientation="vertical">
         <TextView
             android:fontFamily="@font/noto_sans_kr_regular_hestia"
@@ -72,6 +75,8 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp">
         <TextView
@@ -96,18 +101,7 @@
             android:inputType="textPassword"
             android:hint="*******"/>
     </LinearLayout>
-    <Button
-        android:layout_alignParentRight="true"
-        android:id="@+id/bt_search_act_email_login"
-        android:fontFamily="@font/noto_sans_kr_regular_hestia"
-        android:layout_width="111dp"
-        android:layout_height="18dp"
-        android:text="아이디 | 비밀번호 찾기"
-        android:layout_marginRight="16dp"
-        android:background="#000000"
-        android:textColor="#9e9e9e"
-        android:textSize="12sp"
-        android:layout_marginTop="306dp"/>
+
     <Button
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
