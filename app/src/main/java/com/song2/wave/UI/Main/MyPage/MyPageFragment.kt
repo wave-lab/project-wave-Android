@@ -19,10 +19,8 @@ import com.song2.wave.R
 import com.song2.wave.UI.Main.MyPage.Adapter.FragmentMypageScoringResultPagerAdapter
 import com.song2.wave.UI.Main.MyPage.Adapter.HitScoreResultAdapter
 import com.song2.wave.Util.Network.ApiClient
-import com.song2.wave.Util.Network.ApplicationController
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_my_page.*
-import kotlinx.android.synthetic.main.fragment_my_page.view.*
 import retrofit2.Call
 import retrofit2.Response
 

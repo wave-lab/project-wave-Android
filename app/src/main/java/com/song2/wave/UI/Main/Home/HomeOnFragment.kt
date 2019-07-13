@@ -79,10 +79,7 @@ class HomeOnFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v : View = inflater.inflate(R.layout.fragment_home_on, container, false)
 
-
-
         authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
-
 
         //통신
         getHomeInfoResponse()
@@ -105,16 +102,16 @@ class HomeOnFragment : Fragment() {
 
         v.iv_home_frag_top10_genre_more_btn.setOnClickListener {
 
-
             HomeFragment.homeFragment.replaceFragment(top10fragment)
         }
 
         v.iv_home_frag_top10_mood_more_btn.setOnClickListener {
-
-
-            HomeFragment.homeFragment.replaceFragment(Top10Fragment())
+            HomeFragment.homeFragment.replaceFragment(top10fragment)
         }
 
+        v.ll_point_container.setOnClickListener {
+            HomeFragment.homeFragment.replaceFragment(top10fragment)
+        }
         return v
     }
 
@@ -380,6 +377,10 @@ class HomeOnFragment : Fragment() {
         tv_home_frag_scoring_cnt.setText(temp.rateSongCount.toString())
         tv_home_frag_perfect_cnt.setText(temp.hitSongCount.toString())
         tv_home_frag_total_point.setText(temp.totalPoint.toString() + "P")
+
+        tv_home_frag_waiting_scoring_mine.setText(temp.nickname + "님이 평가를 기다리고 있는 곡")
+        tv_home_frag_waiting_scoring.setText(temp.nickname + "님의 평가를 기다리고 있는 곡")
+        tv_home_frag_waiting_scoring_mine.setText(temp.nickname + "님을 위한 추천 곡")
 
         //visible
         rl_home_frag_goto_login.visibility = View.GONE
