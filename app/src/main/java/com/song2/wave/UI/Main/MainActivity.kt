@@ -189,7 +189,7 @@ class MainActivity : AppCompatActivity() {
                 nowFrag = LibraryFragment()
             }
             "myPage" ->{
-                nowFrag = PointHistoryFragment()
+                nowFrag = MyPageHitSuccessFragment()
             }
         }
 

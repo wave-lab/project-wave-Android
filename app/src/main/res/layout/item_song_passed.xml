@@ -22,6 +22,8 @@
             android:lineSpacingExtra="9sp"
             android:gravity="center_horizontal"
             android:text="Song name is.."
+            android:maxLines="1"
+            android:ellipsize="end"
             android:fontFamily="@font/noto_sans_kr_bold_hestia"
             android:layout_marginTop="8dp"
 
@@ -36,6 +38,8 @@
             android:lineSpacingExtra="6sp"
             android:gravity="center_horizontal"
             android:text="Cover Artist"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:fontFamily="@font/noto_sans_kr_bold_hestia"
             android:layout_marginTop="2dp"
     />

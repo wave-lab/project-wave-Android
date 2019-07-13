@@ -44,8 +44,8 @@ class MyPageHitSuccessAdapter(val ctx: Context, val datalist: ArrayList<HitSucce
     }
 
     inner class Holder(ItemView : View): RecyclerView.ViewHolder(ItemView){
-        var failFilter : RelativeLayout = itemView!!.findViewById(R.id.rl_hit_success_pass)
-        var passFilter : RelativeLayout = itemView!!.findViewById(R.id.rl_hit_success_fail)
+        var failFilter : RelativeLayout = itemView!!.findViewById(R.id.rl_hit_success_fail)
+        var passFilter : RelativeLayout = itemView!!.findViewById(R.id.rl_hit_success_pass)
 
         var songCoverImg = itemView.findViewById(R.id.img_hit_success) as ImageView
         var songName = itemView.findViewById(R.id.tv_hit_success_song_item_song_name) as TextView
