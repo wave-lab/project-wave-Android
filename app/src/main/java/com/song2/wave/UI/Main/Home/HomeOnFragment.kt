@@ -35,11 +35,13 @@ import com.song2.wave.R
 import com.song2.wave.UI.Main.Home.Adapter.*
 import com.song2.wave.UI.Main.Home.Top10.Top10Fragment
 import com.song2.wave.UI.Main.MyPage.PointHistoryFragment
+import com.song2.wave.UI.Main.MyPage.UpLoadFileActivity
 import com.song2.wave.UI.Signup.SignupFirstActivity
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_home_on.*
 import kotlinx.android.synthetic.main.fragment_home_on.view.*
+import org.jetbrains.anko.support.v4.startActivity
 import retrofit2.Call
 import retrofit2.Response
 
@@ -101,14 +103,18 @@ class HomeOnFragment : Fragment() {
         getUploadResponse()
         getHitsResponse()
 
+
+
         v.iv_home_frag_wavelogo.setOnClickListener {
             var intent = Intent(context, PlayerActivity::class.java)
             startActivity(intent)
         }
 
         v.tv_home_frag_ment.setOnClickListener {
-            var intent = Intent(context, SignupFirstActivity::class.java)
-            startActivity(intent)
+            startActivity<UpLoadFileActivity>()
+
+/*            var intent = Intent(context, SignupFirstActivity::class.java)
+            startActivity(intent)*/
         }
 
         v.iv_home_frag_top10_genre_more_btn.setOnClickListener {

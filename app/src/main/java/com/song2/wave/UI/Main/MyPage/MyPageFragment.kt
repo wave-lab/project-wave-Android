@@ -112,6 +112,9 @@ class MyPageFragment : Fragment() {
             override fun onResponse(call: Call<GetUserInfoResponse>, response: Response<GetUserInfoResponse>) {
                 val userInfoData : UserInfoData = response.body()!!.data
 
+                Log.e("MyPageFrag","userInfoData")
+
+
                 showUserInfo(userInfoData)
 
             }
