@@ -16,19 +16,7 @@ class UploadSongInfoActivity : AppCompatActivity() {
 
         var start_point = intent.getStringExtra("StartPoint")
         var upload_song_uri =  intent.getStringExtra("songURI")
-<<<<<<< HEAD
         var upload_pic_uri =  intent.getStringExtra("picURI")
-=======
-        var selectedPicUri =  intent.getStringExtra("picURI")
-
-        et_upload_song_info_origin_title.onFocusChangeListener = object : View.OnFocusChangeListener {
-            override fun onFocusChange(p0: View?, p1: Boolean) {
-                if (!p1){
-                    //iv_upload_song_info_act_confirm_btn.visibility = View.INVISIBLE
-                }
-            }
-        }
->>>>>>> 16b23c7e114869a370e555c099e08eb0b877d944
 
         tv_title_confirm.setOnClickListener {
             rl_upload_song_info_origin_singer_edt.visibility = View.VISIBLE
@@ -50,7 +38,6 @@ class UploadSongInfoActivity : AppCompatActivity() {
 
 
         iv_upload_song_info_act_confirm_btn.setOnClickListener {
-<<<<<<< HEAD
             startActivity<UpLoadGenreActivity>(
                 "Title" to et_upload_song_info_origin_title.text.toString(),
                 "Artist" to et_upload_song_info_origin_singer.text.toString(),
@@ -59,12 +46,6 @@ class UploadSongInfoActivity : AppCompatActivity() {
                 "songURI" to upload_song_uri,
                 "picURI" to upload_pic_uri
             )
-=======
-            startActivity<SignupGenreActivity>(
-                "Confirm" to "upload",
-                "Title" to et_upload_song_info_origin_title.text.toString(), "Artist" to et_upload_song_info_origin_singer.text.toString(), "Comment" to et_upload_song_info_comment.text.toString()
-                ,"StartPoint" to start_point.toString(), "songURI" to upload_song_uri, "picURI" to selectedPicUri)
->>>>>>> 16b23c7e114869a370e555c099e08eb0b877d944
         }
     }
 }

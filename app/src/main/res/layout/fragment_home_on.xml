@@ -4,14 +4,8 @@
         android:background="#000000"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <ScrollView android:id="@+id/home_on_scroll" android:layout_width="match_parent" android:layout_height="match_parent">
-        android:layout_height="match_parent"
-<<<<<<< HEAD
->
+    <ScrollView android:id="@+id/home_on_scroll" android:layout_width="match_parent" android:layout_height="match_parent">>
 
-    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
-=======
->>>>>>> 16b23c7e114869a370e555c099e08eb0b877d944
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent" android:layout_height="match_parent">
@@ -277,12 +271,12 @@
 
                 <ImageView
                         android:layout_marginHorizontal="13dp"
-                        android:background="@color/colorPrimary"
                         android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
                         android:id="@+id/iv_home_frag_challenge_img"
                         android:layout_below="@+id/tv_home_frag_challenge"
                         android:layout_width="match_parent" android:layout_height="134dp"
-                        android:src="@drawable/img_artwork_1"
+                        android:src="@drawable/img_home_weeklychalenge"
                         android:layout_alignParentStart="true"/>
 
                 <!--TOP10 : 장르-->

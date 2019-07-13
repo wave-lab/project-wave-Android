@@ -1,5 +1,6 @@
 package com.song2.wave.UI.Main.MyPage
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -16,13 +17,16 @@ import com.song2.wave.Data.model.Mypage.ScoreHitResultData
 import com.song2.wave.Data.model.PlayListData
 import com.song2.wave.Data.model.UserInfoData
 import com.song2.wave.R
+import com.song2.wave.UI.Main.MainActivity
 import com.song2.wave.UI.Main.MyPage.Adapter.FragmentMypageScoringResultPagerAdapter
 import com.song2.wave.UI.Main.MyPage.Adapter.HitScoreResultAdapter
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_my_page.*
+import org.jetbrains.anko.support.v4.startActivity
 import retrofit2.Call
 import retrofit2.Response
+
 
 class MyPageFragment : Fragment() {
 
@@ -42,7 +46,18 @@ class MyPageFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         configureTopNavigation()
 
-        authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
+        var pref = context!!.getSharedPreferences("auto", Activity.MODE_PRIVATE)
+
+        //authorization_info = pref.getString("token","")
+        authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM"
+
+        iv_mypage_song_upload.setOnClickListener {
+            startActivity<UpLoadFileActivity>()
+        }
+
+        rl_mypage_frag_goto_score_result.setOnClickListener {
+            MainActivity.mainActivity.replaceFragment(MyPageFragment())
+        }
 
         //통신
         getHitsResponse()

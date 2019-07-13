@@ -310,7 +310,11 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
         playerBtn()
         registerBroadcast();
-        updateUI();
+        updateUI()
+
+        iv_maim_player_close.setOnClickListener {
+            finish()
+        }
 
     }
 
@@ -331,6 +335,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
             override fun onFailure(call: Call<PostResponse>, t: Throwable?) {
+
             }
         })
     }

@@ -162,17 +162,10 @@ interface NetworkService {
             @Part("originArtist") originArtist : ArrayList<RequestBody?>
     ) : Call<PostResponse>
 
-<<<<<<< HEAD
-    //곡업로드
     @Multipart
     @POST("/songs")
     fun postSongUploadResponse(
         @Header("Authorization") authorization: String,
-=======
-    @Multipart
-    @POST("/songs")
-    fun postSongUploadResponse(
->>>>>>> 16b23c7e114869a370e555c099e08eb0b877d944
         @Part("originTitle") originTitle : RequestBody,
         @Part artwork : MultipartBody.Part?,
         @Part("originArtistName") originArtistName : RequestBody,
@@ -189,8 +182,6 @@ interface NetworkService {
         @Header("Authorization") authorization: String,
         @Body() body: JsonObject
     ): Call<PostResponse>
-<<<<<<< HEAD
-=======
 
 
 
@@ -199,5 +190,4 @@ interface NetworkService {
             @Header("Authorization") authorization: String,
             @Body postRating : PostRating
     ): Call<PostResponse>
->>>>>>> 16b23c7e114869a370e555c099e08eb0b877d944
 }

@@ -1,5 +1,6 @@
 package com.song2.wave.UI.Main.Home
 
+import android.app.Activity
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
@@ -33,6 +34,7 @@ import com.song2.wave.Data.model.Top10CategoryData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.Home.Adapter.*
 import com.song2.wave.UI.Main.Home.Top10.Top10Fragment
+import com.song2.wave.UI.Main.MyPage.PointHistoryFragment
 import com.song2.wave.UI.Signup.SignupFirstActivity
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
@@ -84,8 +86,11 @@ class HomeOnFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v : View = inflater.inflate(R.layout.fragment_home_on, container, false)
+        var pref = context!!.getSharedPreferences("auto", Activity.MODE_PRIVATE)
 
-        authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
+        //authorization_info = pref.getString("token","")
+        authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM"
+9
 
         //통신
         getHomeInfoResponse()
@@ -107,7 +112,6 @@ class HomeOnFragment : Fragment() {
         }
 
         v.iv_home_frag_top10_genre_more_btn.setOnClickListener {
-
             HomeFragment.homeFragment.replaceFragment(top10fragment)
         }
 
@@ -116,7 +120,7 @@ class HomeOnFragment : Fragment() {
         }
 
         v.ll_point_container.setOnClickListener {
-            HomeFragment.homeFragment.replaceFragment(top10fragment)
+            HomeFragment.homeFragment.replaceFragment(PointHistoryFragment())
         }
         return v
     }
@@ -194,13 +198,9 @@ class HomeOnFragment : Fragment() {
                     myWaitingSongHomeAdapter = MyWaitingSongHomeAdapter(context!!, myWaitingSongDataList, requestManager)
                     rv_home_frag_scoring_waiting_mine.adapter = myWaitingSongHomeAdapter
                     rv_home_frag_scoring_waiting_mine.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
-
                 }
-
             }
-
         })
-
     }
 
     //rateReady
@@ -390,7 +390,7 @@ class HomeOnFragment : Fragment() {
 
         tv_home_frag_waiting_scoring_mine.setText(temp.nickname + "님이 평가를 기다리고 있는 곡")
         tv_home_frag_waiting_scoring.setText(temp.nickname + "님의 평가를 기다리고 있는 곡")
-        tv_home_frag_waiting_scoring_mine.setText(temp.nickname + "님을 위한 추천 곡")
+        tv_home_frag_recommend_song.setText(temp.nickname + "을 위한 추천 곡")
 
         //visible
         rl_home_frag_goto_login.visibility = View.GONE

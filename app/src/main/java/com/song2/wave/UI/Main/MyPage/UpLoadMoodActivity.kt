@@ -1,5 +1,6 @@
 package com.song2.wave.UI.Main.MyPage
 
+import android.app.Activity
 import android.content.Context
 import android.database.Cursor
 import android.graphics.Bitmap
@@ -13,6 +14,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.song2.wave.R
+import com.song2.wave.UI.Main.MainActivity
 import com.song2.wave.Util.Network.ApiClientSec
 import com.song2.wave.Util.Network.NetworkService
 import com.song2.wave.Util.Network.POST.PostResponse
@@ -20,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_upload_mood.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.jetbrains.anko.startActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,13 +30,12 @@ import java.io.*
 
 class UpLoadMoodActivity : AppCompatActivity(), View.OnClickListener {
 
-
+    lateinit var authorization_info: String
     val networkService: NetworkService by lazy {
         ApiClientSec.getRetrofit().create(NetworkService::class.java)
     }
 
-    val authorization_info =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
+
     lateinit var data: Uri
 
     lateinit var selectedArtistArr: ArrayList<String>
@@ -67,6 +69,11 @@ class UpLoadMoodActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload_mood)
+
+
+        var pref = this!!.getSharedPreferences("auto", Activity.MODE_PRIVATE)
+        //authorization_info = pref.getString("token", "")
+        authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM"
 
         selectedMoodArr = ArrayList<String>()
         selectedGenreArr = ArrayList<String>()
@@ -158,7 +165,8 @@ class UpLoadMoodActivity : AppCompatActivity(), View.OnClickListener {
 
         audioFile = MultipartBody.Part.createFormData("songUrl", audio.name, audioBody)
 
-        val postSongUploadResponse = networkService.postSongUploadResponse(authorization_info,
+        val postSongUploadResponse = networkService.postSongUploadResponse(
+            authorization_info,
             title, coverImg, originArtistName, audioFile,
             genre, mood, songComment, highlightTime
         )
@@ -169,9 +177,9 @@ class UpLoadMoodActivity : AppCompatActivity(), View.OnClickListener {
                     if (response.body()!!.success == true) {
                         Toast.makeText(applicationContext, "곡업로드 완료", Toast.LENGTH_SHORT).show()
                         Log.e("UploadMoodActivity", "곡업로드 성공")
+                        startActivity<MainActivity>()
                     } else {
                         Log.e("UploadMoodActivity", "실패message : " + response.body()!!.message)
-
                     }
                 } else {
                     Log.e("response", response.body().toString())
@@ -179,7 +187,7 @@ class UpLoadMoodActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             override fun onFailure(call: Call<PostResponse>, t: Throwable) {
-                Log.e("UploadMoodActivity", "곡업로드 실패")
+                Log.e("UploadMoodActivity", "곡업로드 실패" + t.toString())
 
             }
 

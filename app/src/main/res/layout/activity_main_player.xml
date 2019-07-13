@@ -19,11 +19,13 @@
                 android:layout_height="27dp"/>
 
         <ImageView
+                android:id="@+id/iv_maim_player_close"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/btn_down"
-                android:layout_width="24dp" android:layout_height="24dp"/>
+                android:paddingHorizontal="6dp"
+                android:layout_width="36dp" android:layout_height="36dp"/>
     </RelativeLayout>
 
     <TextView
