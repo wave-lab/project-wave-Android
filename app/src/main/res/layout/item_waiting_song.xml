@@ -28,6 +28,8 @@
             android:includeFontPadding="false"
             android:textColor="#ffffff"
             android:lineSpacingExtra="6sp"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:gravity="center_horizontal"
             android:text="Song2-name"/>
 
@@ -43,6 +45,9 @@
             android:lineSpacingExtra="5sp"
             android:gravity="center_horizontal"
             android:text="Song 2 name"
+            android:maxLines="1"
+            android:ellipsize="end"
+
             android:layout_centerHorizontal="true"/>
 
 

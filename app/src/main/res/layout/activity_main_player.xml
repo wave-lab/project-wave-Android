@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/rl_main_player_act_all"
+        android:id="@+id/rl_main_player_act_all"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="#000000"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <VideoView
+            android:id="@+id/video"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
     <RelativeLayout
             android:id="@+id/rl_main_player_act_main_toolbar"
             android:layout_width="match_parent" android:layout_height="56dp">
@@ -40,6 +46,8 @@
             android:fontFamily="@font/noto_sans_kr_bold_hestia"
             android:layout_marginLeft="16dp"
             android:textColor="#e5e5e5"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="22sp"
             android:includeFontPadding="false"/>
 
@@ -55,6 +63,8 @@
             android:lineSpacingExtra="8sp"
             android:gravity="center_horizontal"
             android:text="Covered by Blotto"
+        android:maxLines="1"
+        android:ellipsize="end"
     />
     <ImageView
         android:id="@+id/img_main_player_act_cover_img"
@@ -228,7 +238,9 @@
                 android:textColor="#ffffff"
                 android:lineSpacingExtra="6sp"
                 android:gravity="center_horizontal"
-                android:text="록  메탈  POP"/>
+                android:text="록  메탈  POP"
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
         <ImageView
                 android:layout_gravity="right"
@@ -292,5 +304,18 @@
                 android:src="@drawable/like_selector"
                 android:layout_centerVertical="true"
                 android:layout_width="32dp" android:layout_height="32dp"/>
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+        <com.airbnb.lottie.LottieAnimationView
+                android:layout_marginRight="88.5dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/lottie_main_act_like"
+                android:layout_width="73dp"
+                android:layout_height="73dp"
+                app:lottie_rawRes="@raw/wave_heart_animation"
+                android:layout_marginBottom="12dp"
+                app:lottie_loop="false"
+                app:lottie_autoPlay="false"/>
     </RelativeLayout>
 </RelativeLayout>

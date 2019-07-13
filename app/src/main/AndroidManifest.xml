@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
+
         android:name=".Util.Audio.AudioApplication"
         android:allowBackup="true"
         android:icon="@drawable/android_app_icon"
@@ -61,14 +62,7 @@
         <activity android:name=".UI.Main.MyPage.UpLoadSongCoverActivity"></activity>
         <activity android:name=".UI.Main.MyPage.UpLoadMoodActivity"/>
         <activity android:name=".UI.Main.MyPage.UpLoadGenreActivity"/>
-
-        <!-- 음악플레이어 -->
-        <activity android:name=".UI.MainPlayer.MainPlayerActivity"/>
-
-        <activity android:name=".SplashActivity">
-        </activity>
-
-        <service android:name=".Util.Player.Service.MusicService" />
+        <service android:name=".Util.Player.Service.MusicService"/>
         <service
             android:name=".Util.Audio.AudioService"
             android:enabled="true"
@@ -79,10 +73,7 @@
                 <action android:name="FORWARD" />
                 <action android:name="CLOSE" />
             </intent-filter>
-        </service>
-
-        <!-- Declare foreground service -->
-
+        </service> <!-- Declare foreground service -->
         <service
             android:name=".Util.Player.Service.MyForeGroundService"
             android:enabled="true"
