@@ -62,8 +62,6 @@ class UpLoadFileActivity : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 data?.let {
                     selectedAudioUri = it.data
-                    var mediaPlayer = MediaPlayer()
-
                     //Log.e("error selectedAudioUri", selectedAudioUri.toString())
                     //Log.v("UploadActivity", "음악 실제 경로 = " + getRealPathFromURI(applicationContext, it.data))
 

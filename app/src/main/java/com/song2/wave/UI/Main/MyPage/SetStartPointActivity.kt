@@ -50,6 +50,7 @@ class SetStartPointActivity : AppCompatActivity() {
         iv_set_start_act_upload_btn.setOnClickListener {
             try {
                 startActivity<UpLoadSongCoverActivity>("StartPoint" to currentPosition.toString(), "songURI" to upload_song_uri)
+                mediaPlayer.stop()
                 finish()
                 //killMediaPlayer()
                 Log.e("startPoint", currentPosition.toString())

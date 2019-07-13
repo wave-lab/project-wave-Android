@@ -57,7 +57,7 @@ class UpLoadSongCoverActivity : AppCompatActivity() {
 
         iv_up_load_cover_act_confirm_btn.setOnClickListener {
             Log.e("er","StartPoint: " + start_point.toString() +"/songURI: " + upload_song_uri +"/picURI: " + selectedPicUri.toString())
-            startActivity<UploadSongInfoActivity>("StartPoint" to start_point.toString(), "songURI" to upload_song_uri , "picURI" to selectedPicUri)
+            startActivity<UploadSongInfoActivity>("StartPoint" to start_point.toString(), "songURI" to upload_song_uri , "picURI" to selectedPicUri.toString())
         }
 
     }
