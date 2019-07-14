@@ -198,6 +198,19 @@ class HomeOnFragment : Fragment() {
             override fun onResponse(call: Call<GetPlaylistResponse>, response: Response<GetPlaylistResponse>) {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
+
+                    Log.e("playlistDataList.songList", playlistDataList.songList.size.toString())
+                    if( playlistDataList.songList.size == 0){
+                        tv_home_frag_waiting_scoring_mine.visibility = View.GONE
+                        rv_home_frag_scoring_waiting_mine.visibility = View.GONE
+
+                    }else
+                    {
+
+                        tv_home_frag_waiting_scoring_mine.visibility = View.VISIBLE
+                        rv_home_frag_scoring_waiting_mine.visibility = View.VISIBLE
+                    }
+
                     for(i in playlistDataList.songList.indices) {
                         myWaitingSongDataList.add(MyWaitingSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].songUrl, playlistDataList.songList[i].deleteTime.substring(8,10), playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
                     }

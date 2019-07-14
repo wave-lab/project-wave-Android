@@ -79,6 +79,7 @@
             android:enabled="true"
             android:exported="true" />
 
+        <activity android:name=".UI.MainPlayer.MainPlayerActivity" />
         <activity android:name=".Util.Audio.PlayerActivity" />
         <activity android:name=".UI.Signup.SignupSelectArtistActivity" />
         <activity android:name=".UI.Signup.SignupGenreActivity" />

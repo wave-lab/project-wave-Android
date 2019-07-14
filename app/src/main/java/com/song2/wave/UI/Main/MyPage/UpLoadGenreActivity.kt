@@ -25,7 +25,7 @@ class UpLoadGenreActivity : AppCompatActivity(), View.OnClickListener {
         for(i in 0..7){
             if (v!!.id == genreArr[i].getId()) {
                 selectedGenreArr.add("g" + ((i+1).toString()))
-                Toast.makeText(applicationContext, "장르 " +"m" + (i+1).toString() + "번 버튼 선택", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "장르 " +"g" + (i+1).toString() + "번 버튼 선택", Toast.LENGTH_LONG).show()
             }
         }
         for(i in 0..selectedGenreArr.size-1)

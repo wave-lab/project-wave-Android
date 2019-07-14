@@ -161,7 +161,6 @@
 
                 <!--평가대기중인 내 곡-->
                 <TextView
-
                         android:id="@+id/tv_home_frag_waiting_scoring_mine"
                         android:includeFontPadding="false"
                         android:layout_marginTop="30dp"
