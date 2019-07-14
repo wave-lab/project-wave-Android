@@ -140,6 +140,7 @@ public class NotificationPlayer {
             playActivity.putExtra("title", MainPlayerActivity.mainPlayerActivity.getTitle());
             playActivity.putExtra("originArtist", MainPlayerActivity.mainPlayerActivity.getOriginArtist());
             playActivity.putExtra("coverArtist", MainPlayerActivity.mainPlayerActivity.getCoverArtist());
+            playActivity.putExtra("rating_flag", 0);
             //playActivity.putExtra("songImgUrl", MainPlayerActivity.mainPlayerActivity.getSongImgUrl());
             playActivity.putExtra("flag", 1);
             mMainPendingIntent = PendingIntent.getActivity(mService, 0, playActivity, PendingIntent.FLAG_UPDATE_CURRENT);

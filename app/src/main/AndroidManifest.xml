@@ -1,87 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.song2.wave">
+    package="com.song2.wave">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:usesCleartextTraffic="true"
+
         android:name=".Util.Audio.AudioApplication"
         android:allowBackup="true"
         android:icon="@drawable/android_app_icon"
         android:label="@string/app_name"
         android:roundIcon="@drawable/android_app_icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:usesCleartextTraffic="true">
+
+        <activity android:name=".ArtistSongListActivity"></activity>
+        <activity android:name=".StartActivity"></activity>
 
         <!-- 로그인 -->
-        <activity android:name=".UI.Login.LoginActivity2"/>
-        <activity android:name=".Util.Kakao.service.ScoringPlayerActivity"/>
+        <activity android:name=".UI.Login.LoginActivity2" />
+        <activity android:name=".Util.Kakao.service.ScoringPlayerActivity" />
 
         <meta-data
-                android:name="com.kakao.sdk.AppKey"
-                android:value="@string/kakao_app_key"/>
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+
+        <!-- 회원가입 -->
+        <activity android:name=".UI.Signup.SignupFirstActivity"></activity>
+        <activity android:name=".UI.Signup.SignupMoodActivity" />
+
+        <!--로그인-->
+        <activity android:name=".UI.Login.LoginActivity"
+                  android:windowSoftInputMode="adjustResize"></activity>
 
         <!-- 메인 -->
-        <activity android:name=".UI.Main.MyPage.UpLoadFileActivity">
+        <activity android:name=".UI.Main.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
-        <activity android:name=".UI.Signup.SignupFirstActivity">
-        </activity>
-        <activity android:name=".UI.Signup.SignupMoodActivity"></activity>
+        <activity android:name=".UI.NetworkServiceTest.NetworkTestActivity"></activity>
+        <activity android:name=".UI.Main.MyPage.MyPageProfileSettingActivity"></activity>
 
         <activity android:name=".UI.Main2Activity"/>
         <activity android:name=".UI.Artist.ArtistActivity"/>
         <activity android:name=".UI.Artist.ArtistLibraryActivity"/>
 
         <!-- 음악업로드 -->
-        <activity android:name=".UI.Main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+        <activity android:name=".UI.Main.MyPage.UpLoadFileActivity"></activity>
         <activity android:name=".UI.Main.MyPage.SetStartPointActivity"/>
-        <activity android:name=".UI.Main.MyPage.UploadSongInfoActivity">
-
-        </activity>
-
-        <!-- 음악플레이어 -->
-        <activity android:name=".UI.MainPlayer.MainPlayerActivity"/>
-
+        <activity android:name=".UI.Main.MyPage.UploadSongInfoActivity"/>
+        <activity android:name=".UI.Main.MyPage.UpLoadSongCoverActivity"></activity>
+        <activity android:name=".UI.Main.MyPage.UpLoadMoodActivity"/>
+        <activity android:name=".UI.Main.MyPage.UpLoadGenreActivity"/>
         <service android:name=".Util.Player.Service.MusicService"/>
         <service
-                android:name=".Util.Audio.AudioService"
-                android:enabled="true"
-                android:exported="true">
+            android:name=".Util.Audio.AudioService"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
-                <action android:name="REWIND"/>
-                <action android:name="TOGGLE_PLAY"/>
-                <action android:name="FORWARD"/>
-                <action android:name="CLOSE"/>
+                <action android:name="REWIND" />
+                <action android:name="TOGGLE_PLAY" />
+                <action android:name="FORWARD" />
+                <action android:name="CLOSE" />
             </intent-filter>
-        </service>
-
-        <!-- Declare foreground service -->
-
+        </service> <!-- Declare foreground service -->
         <service
-                android:name=".Util.Player.Service.MyForeGroundService"
-                android:enabled="true"
-                android:exported="true"/>
+            android:name=".Util.Player.Service.MyForeGroundService"
+            android:enabled="true"
+            android:exported="true" />
 
-        <activity android:name=".UI.MusicTestActivity"/>
-        <activity android:name=".Util.Audio.PlayerActivity"/>
-        <activity android:name=".UI.Signup.SignupSelectArtistActivity"/>
-        <activity android:name=".UI.Signup.SignupGenreActivity"/>
-        <activity android:name=".UI.Signup.SignupFirstActivity"/>
-        <activity android:name=".UI.Main.MyPage.UpLoadSongCoverActivity">
-        </activity>
+        <activity android:name=".UI.MainPlayer.MainPlayerActivity" />
+        <activity android:name=".Util.Audio.PlayerActivity" />
+        <activity android:name=".UI.Signup.SignupSelectArtistActivity" />
+        <activity android:name=".UI.Signup.SignupGenreActivity" />
     </application>
 
 </manifest>

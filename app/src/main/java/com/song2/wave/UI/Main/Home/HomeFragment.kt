@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.song2.wave.R
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity
-import com.song2.wave.UI.MusicTestActivity
 import com.song2.wave.UI.Main.Home.Adapter.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*

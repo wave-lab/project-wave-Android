@@ -10,9 +10,12 @@
             android:layout_width="54dp"
             android:layout_height="54dp"
             android:background="@drawable/kakaostory_icon"/>
-    <RelativeLayout android:layout_width="54dp"
-                    android:layout_height="54dp"
-                    android:background="#99000000">
+
+    <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/rl_hit_success_pass"
+            android:layout_width="54dp"
+                    android:layout_height="54dp">
 
 
         <ImageView
@@ -22,6 +25,15 @@
                 android:layout_marginLeft="9dp"
                 android:layout_marginTop="19.5dp"
                 android:src="@drawable/img_pass_sm"/>
+
+        <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/rl_hit_success_fail"
+                android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:background="#99000000">
+
+        </RelativeLayout>
         <ImageView
                 android:id="@+id/img_hit_success_fail"
                 android:layout_width="38dp"
@@ -37,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:text="Song Name"
-            android:textColor="#616161"
+            android:textColor="#ffffff"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/img_hit_success"
             android:fontFamily="@font/noto_sans_kr_bold_hestia"
@@ -52,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:text="-  Original Arti…"
-            android:textColor="#616161"
+            android:textColor="#ffffff"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/tv_hit_success_song_item_song_name"
             android:fontFamily="@font/noto_sans_kr_bold_hestia"

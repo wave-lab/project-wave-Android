@@ -15,10 +15,8 @@ import com.song2.wave.Data.model.PlayListData
 import com.song2.wave.Data.model.SongData
 import com.song2.wave.UI.Main.Library.Adapter.PlaylistAdapter
 import com.song2.wave.Util.Network.ApiClient
-import com.song2.wave.Util.Network.ApplicationController
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_library_like.*
-import kotlinx.android.synthetic.main.fragment_library_like.view.*
 import retrofit2.Call
 import retrofit2.Response
 
@@ -78,13 +76,21 @@ class LibraryLikeFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
 
-                    if(playlistDataList == null)
+                    if(playlistDataList == null){
+                        recycler_library_like_frag_list.visibility = View.GONE
+                        iv_library_like_list.visibility = View.VISIBLE
                         return
+                    }
+                    recycler_library_like_frag_list.visibility = View.VISIBLE
+                    iv_library_like_list.visibility = View.GONE
+
+
+
 
                     for(i in playlistDataList.songList.indices)
                         songDataArr.add(SongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].songUrl, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName,playlistDataList.songList[i].genre))
 
-                    recycler_library_like_frag_list.adapter = PlaylistAdapter(songDataArr, requestManager)
+                    recycler_library_like_frag_list.adapter = PlaylistAdapter(context!!, songDataArr, requestManager)
                     recycler_library_like_frag_list.layoutManager = LinearLayoutManager(context)
 
                 }

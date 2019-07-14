@@ -1,5 +1,6 @@
 package com.song2.wave.UI.Main.Home
 
+import android.app.Activity
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
@@ -13,6 +14,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ScrollView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.Util.Audio.AudioAdapter
@@ -31,11 +34,14 @@ import com.song2.wave.Data.model.Top10CategoryData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.Home.Adapter.*
 import com.song2.wave.UI.Main.Home.Top10.Top10Fragment
+import com.song2.wave.UI.Main.MyPage.PointHistoryFragment
+import com.song2.wave.UI.Main.MyPage.UpLoadFileActivity
 import com.song2.wave.UI.Signup.SignupFirstActivity
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_home_on.*
 import kotlinx.android.synthetic.main.fragment_home_on.view.*
+import org.jetbrains.anko.support.v4.startActivity
 import retrofit2.Call
 import retrofit2.Response
 
@@ -71,6 +77,10 @@ class HomeOnFragment : Fragment() {
     lateinit var top10GenreAdapter: Top10GenreAdapter
     lateinit var top10MoodAdapter: Top10GenreAdapter
 
+
+    //lateinit var top10MoodAdapter: Top10MoodAdapter
+
+
     lateinit var requestManager: RequestManager
 
     var bundleGenre = Bundle()
@@ -78,8 +88,11 @@ class HomeOnFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v : View = inflater.inflate(R.layout.fragment_home_on, container, false)
+        var pref = context!!.getSharedPreferences("auto", Activity.MODE_PRIVATE)
 
-        authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
+        //authorization_info = pref.getString("token","")
+        authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM"
+9
 
         //통신
         getHomeInfoResponse()
@@ -90,28 +103,31 @@ class HomeOnFragment : Fragment() {
         getUploadResponse()
         getHitsResponse()
 
+
+
         v.iv_home_frag_wavelogo.setOnClickListener {
             var intent = Intent(context, PlayerActivity::class.java)
             startActivity(intent)
         }
 
         v.tv_home_frag_ment.setOnClickListener {
-            var intent = Intent(context, SignupFirstActivity::class.java)
-            startActivity(intent)
+            startActivity<UpLoadFileActivity>()
+
+/*            var intent = Intent(context, SignupFirstActivity::class.java)
+            startActivity(intent)*/
         }
 
         v.iv_home_frag_top10_genre_more_btn.setOnClickListener {
-
-
             HomeFragment.homeFragment.replaceFragment(top10fragment)
         }
 
         v.iv_home_frag_top10_mood_more_btn.setOnClickListener {
-
-
-            HomeFragment.homeFragment.replaceFragment(Top10Fragment())
+            HomeFragment.homeFragment.replaceFragment(top10fragment)
         }
 
+        v.ll_point_container.setOnClickListener {
+            HomeFragment.homeFragment.replaceFragment(PointHistoryFragment())
+        }
         return v
     }
 
@@ -121,6 +137,10 @@ class HomeOnFragment : Fragment() {
         attachRecyclerView()
         waitSongDataArr = ArrayList<PlaySongData>()
 
+        //성은이 기기 기준 1500
+        home_on_scroll_btn.setOnClickListener {
+            home_on_scroll.smoothScrollTo(0,1500)
+        }
     }
 
     fun attachRecyclerView(){
@@ -178,19 +198,28 @@ class HomeOnFragment : Fragment() {
             override fun onResponse(call: Call<GetPlaylistResponse>, response: Response<GetPlaylistResponse>) {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
+
+                    Log.e("playlistDataList.songList", playlistDataList.songList.size.toString())
+                    if( playlistDataList.songList.size == 0){
+                        tv_home_frag_waiting_scoring_mine.visibility = View.GONE
+                        rv_home_frag_scoring_waiting_mine.visibility = View.GONE
+
+                    }else
+                    {
+
+                        tv_home_frag_waiting_scoring_mine.visibility = View.VISIBLE
+                        rv_home_frag_scoring_waiting_mine.visibility = View.VISIBLE
+                    }
+
                     for(i in playlistDataList.songList.indices) {
-                        myWaitingSongDataList.add(MyWaitingSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].songUrl, 3, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
+                        myWaitingSongDataList.add(MyWaitingSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].songUrl, playlistDataList.songList[i].deleteTime.substring(8,10), playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
                     }
                     myWaitingSongHomeAdapter = MyWaitingSongHomeAdapter(context!!, myWaitingSongDataList, requestManager)
                     rv_home_frag_scoring_waiting_mine.adapter = myWaitingSongHomeAdapter
                     rv_home_frag_scoring_waiting_mine.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
-
                 }
-
             }
-
         })
-
     }
 
     //rateReady
@@ -377,6 +406,10 @@ class HomeOnFragment : Fragment() {
         tv_home_frag_scoring_cnt.setText(temp.rateSongCount.toString())
         tv_home_frag_perfect_cnt.setText(temp.hitSongCount.toString())
         tv_home_frag_total_point.setText(temp.totalPoint.toString() + "P")
+
+        tv_home_frag_waiting_scoring_mine.setText(temp.nickname + "님이 평가를 기다리고 있는 곡")
+        tv_home_frag_waiting_scoring.setText(temp.nickname + "님의 평가를 기다리고 있는 곡")
+        tv_home_frag_recommend_song.setText(temp.nickname + "을 위한 추천 곡")
 
         //visible
         rl_home_frag_goto_login.visibility = View.GONE

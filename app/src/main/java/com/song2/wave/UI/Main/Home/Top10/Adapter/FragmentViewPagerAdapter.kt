@@ -9,13 +9,13 @@ class FragmentViewPagerAdapter(fm: FragmentManager, private val num_fragment: In
     override fun getItem(p0: Int): Fragment? {
         return when(p0){
             0 -> Idx0Fragment()
-            1 -> Idx0Fragment()
-            2 -> Idx0Fragment()
-            3 -> Idx0Fragment()
-            4 -> Idx0Fragment()
-            5 -> Idx0Fragment()
-            6 -> Idx0Fragment()
-            7 -> Idx0Fragment()
+            1 -> Idx1Fragment()
+            2 -> Idx2Fragment()
+            3 -> Idx3Fragment()
+            4 -> Idx4Fragment()
+            5 -> Idx5Fragment()
+            6 -> Idx6Fragment()
+            7 -> Idx7Fragment()
             else -> null
         }
     }

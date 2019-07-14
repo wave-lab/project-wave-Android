@@ -44,6 +44,8 @@
             android:lineSpacingExtra="6sp"
             android:gravity="center_horizontal"
             android:text="Song name - alice"
+            android:maxLines="1"
+             android:ellipsize="end"
             android:fontFamily="@font/noto_sans_kr_regular_hestia"
     />
 

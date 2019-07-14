@@ -1,5 +1,7 @@
 package com.song2.wave.UI.MainPlayer
 
+import android.animation.Animator
+import android.app.Activity
 import android.content.*
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
@@ -11,13 +13,21 @@ import android.view.View
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.VideoView
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.song2.wave.Util.Audio.AudioApplication
 import com.song2.wave.Util.Audio.AudioService
 import com.song2.wave.Util.Audio.BroadcastActions
 import com.song2.wave.Data.GET.GetSongDetailResponse
+import com.song2.wave.Data.POST.PostLogin
+import com.song2.wave.Data.POST.PostRating
 import com.song2.wave.R
+import com.song2.wave.UI.Main.MainActivity
 import com.song2.wave.UI.MainPlayer.Adapter.CoverImgViewPager
+import com.song2.wave.Util.DB.DBHelper
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
 import com.song2.wave.Util.Player.Service.MyForeGroundService
@@ -26,8 +36,59 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import com.song2.wave.Util.DB.DbOpenHelper
+import com.song2.wave.Util.Network.POST.PostResponse
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_signup_first.*
+import org.jetbrains.anko.toast
+import org.json.JSONObject
 
-class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
+
+class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var playTime: String
     var playbackPosition : Int = 0
@@ -42,11 +103,13 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
     var songImgUrl : String = ""
     var flag : Int = 0
     var _id : String = ""
+    var ratingFlag = 0
+    var score : Int = 0
 
     var selectedFlag : Int = 0
     lateinit var durationTimeTv : TextView
     lateinit var lengthTimeTv : TextView
-
+    private var mDbOpenHelper: DbOpenHelper? = null
 
     var currentPosition = 0
     var prevSongIdx = 0
@@ -60,7 +123,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
     val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
     }
-
 
     override fun onClick(v: View) {
         when (v.id) {
@@ -76,7 +138,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
 
     fun addCoverImgViewPager() {
-
 
         var imageList = arrayListOf<String>(
                 "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
@@ -214,10 +275,72 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         durationTimeTv = findViewById(R.id.tv_main_player_duration_time)
         lengthTimeTv = findViewById(R.id.tv_main_player_length_of_song)
 
+        //--------------------------------------애니메이션---------
+        // val video : VideoView = findViewById(R.id.video)
+        //com.airbnb.lottie.LottieAnimationView 아이디
+        val love : LottieAnimationView = findViewById(R.id.lottie_main_act_like)
+        val videoView = findViewById<VideoView>(R.id.video)
+        val path = "android.resource://" + packageName + "/" + R.raw.try_11
+        videoView?.setVideoURI(Uri.parse(path))
+        //val button = findViewById<Button>(R.id.button)
+
+        lottie_main_act_like.setOnClickListener {
+            love.playAnimation()
+            val isPlaying = videoView.isPlaying
+            if (isPlaying) {
+                //videoView.pause()
+            } else {
+                videoView.start()
+            }
+        }
+        love.addAnimatorListener(object : Animator. AnimatorListener{
+            override fun onAnimationRepeat(animation: Animator?) {
+                Log.e("Animation:","repeat")
+            }
+            override fun onAnimationEnd(animation: Animator?) {
+                //Toast.makeText( application , "끝~",Toast. LENGTH_SHORT ).show()
+            }
+            override fun onAnimationCancel(animation: Animator?) {
+                Log.e("Animation:","cancel")  //취소
+            }
+            override fun onAnimationStart(animation: Animator?) {
+                Log.e("Animation ","star") //시작
+            }
+        })
+
+        //------------------------------------------------애니메이션
         iv_main_player_act_stop_btn.setOnClickListener(this)
         mPosition = intent.getIntExtra("mPosition", 0)
 
         flag = intent.getIntExtra("flag", 0)
+        ratingFlag = intent.getIntExtra("rating_flag", 0)
+
+        if(ratingFlag == 0){
+
+        }
+        else if(ratingFlag == 1){
+            img_main_player_act_cover_img.setOnClickListener {
+                rl_main_player_act_trans.visibility = View.VISIBLE
+                rl_main_player_act_rating.visibility = View.VISIBLE
+                ll_main_player_act_commnet.visibility = View.INVISIBLE
+            }
+            rl_main_player_act_all.setOnClickListener {
+                rl_main_player_act_trans.visibility = View.INVISIBLE
+            }
+
+            iv_main_player_like_btn.setOnClickListener {
+                iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected
+            }
+
+            btn_main_player_act_comment.setOnClickListener {
+                ll_main_player_act_commnet.visibility = View.VISIBLE
+                rl_main_player_act_rating.visibility = View.INVISIBLE
+            }
+            rb_main_player_act_rating.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+                score = rating.toInt()
+                postRating()
+            }
+        }
 
         // 노래 선택으로 입장
         authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
@@ -248,42 +371,55 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
         }
 
+
+
         Log.v("Asdf","플래그 = " + flag)
 
         getSongDetail()
 
         tv_main_player_act_title_sing.text = title + " - " + originArtist
-        tv_main_player_cover_artist_name.text = "Covered by " + coverArtist
+        tv_main_player_cover_artist_name.text =  coverArtist
         img_main_player_act_cover_img.visibility = View.VISIBLE
         vp_main_player_act_cover_img.visibility = View.INVISIBLE
 
+        tv_main_player_artist_name.text = originArtist
+        tv_main_player_act_introduce_short.text = "한 줄 코멘트"
         Glide.with(this).load(songImgUrl).into(img_main_player_act_cover_img)
 
         initialSetting()
 
         playerBtn()
         registerBroadcast();
-        updateUI();
+        updateUI()
 
-        img_main_player_act_cover_img.setOnClickListener {
-            rl_main_player_act_trans.visibility = View.VISIBLE
-            rl_main_player_act_rating.visibility = View.VISIBLE
-            ll_main_player_act_commnet.visibility = View.INVISIBLE
-        }
-        rl_main_player_act_all.setOnClickListener {
-            rl_main_player_act_trans.visibility = View.INVISIBLE
-        }
-
-        iv_main_player_like_btn.setOnClickListener {
-            iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected
-        }
-
-        btn_main_player_act_comment.setOnClickListener {
-            ll_main_player_act_commnet.visibility = View.VISIBLE
-            rl_main_player_act_rating.visibility = View.INVISIBLE
+        iv_maim_player_close.setOnClickListener {
+            finish()
         }
 
     }
+
+    fun postRating()
+    {
+        val pref = applicationContext.getSharedPreferences("auto", Activity.MODE_PRIVATE)
+        var token : String = ""
+        token = pref.getString("token", "")
+
+        val networkService = ApiClient.getRetrofit().create(NetworkService::class.java)
+        var postRating = PostRating(score)
+        var postLoginResponse = networkService.postRating(token, postRating)
+        postLoginResponse.enqueue(object : retrofit2.Callback<PostResponse>{
+
+            override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {
+                if(response.isSuccessful){
+                    Log.v("TAG","평가 완료")
+                }
+            }
+            override fun onFailure(call: Call<PostResponse>, t: Throwable?) {
+
+            }
+        })
+    }
+
 
     private fun registerBroadcast() {
         val filter = IntentFilter()
@@ -305,14 +441,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
     fun initialSetting(){
 
         addSeekBar()
-        //addTimer()
 
-//        var play_duration = audioService.getDuration()
-  //      var lengthOfSong =
-    //            String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
-        //tv_set_start_act_length_of_song.setText(lengthOfSong)
-
-      //  seekbar.setMax(play_duration)
     }
 
 
@@ -328,10 +457,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 //                mediaPlayer.seekTo(playbackPosition)
 
                 Log.e("onStopTrackingTouch", sb_scoring_player_act_seekbar.isSelected.toString())
-//                if (!sb_scoring_player_act_seekbar.isSelected) {
-//                    mediaPlayer.start()
-//                } else
-//                    mediaPlayer.pause()
             }
 
             //seek바의 값을 변경하기 위해 터치했을 때
@@ -354,57 +479,10 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
     fun playerBtn() {
 
-
-        /*
-        //if Looping == False
-        mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
-            override fun onCompletion(p0: MediaPlayer?) {
-                Log.v("Complete", "Complete")
-                //musicThread.nextSong()
-                nextSong()
-            }
-        })
-*/
-
-/*
-       iv_main_player_act_stop_btn.setOnClickListener {
-
-          // if (iv_main_player_act_stop_btn.isSelected and (myService.currentDuration == 0)) {
-           if (!iv_main_player_act_stop_btn.isSelected && selectedFlag == 0) {
-               try {
-                   startService()
-
-/*                if (mediaPlayer != null) {
-                   mediaPlayer!!.stop()
-                   mediaPlayer = null
-               }*/
-                   //musicThread.playAudio(sourceMusicArray[currentPosition])
-                   playAudio(sourceMusicArray[currentPosition])
-
-               } catch (e: Exception) {
-                   e.printStackTrace()
-                   //Log.e("ERROR", mediaPlayer.toString())
-               }
-
-           } else if (iv_main_player_act_stop_btn.isSelected) {
-               //musicThread.pauseAudio()
-               pauseAudio()
-
-           } else {
-               //musicThread.restart()
-               restart()
-           }
-           iv_main_player_act_stop_btn.isSelected = !iv_main_player_act_stop_btn.isSelected
-
-
-       }
-*/
-   }
+    }
 
    //미디어를 재생하는 사용자 정의 메소드
    fun playAudio(url: String) {
-
-
 
        var play_duration = audioService.getDuration()
        var lenthOfSong =
@@ -515,6 +593,9 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
                 if(response.isSuccessful){
                     var data = response!!.body()!!.data
                     Glide.with(applicationContext).load(data.artwork).into(img_main_player_act_cover_img)
+                    val dbHelper = DBHelper(applicationContext)
+                    dbHelper.insert(_id, songUrl, originArtist, coverArtist, title, data.artwork);
+                    Log.v("asfd","디비 값 = " + (dbHelper.getResult()));
 
                     var genreValue : String = ""
                     for(i in 0.. data.genre.size-1){
