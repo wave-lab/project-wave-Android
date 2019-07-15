@@ -9,10 +9,12 @@ import android.util.Log
 import com.song2.wave.Data.POST.PostLogin
 import com.song2.wave.R
 import com.song2.wave.UI.Main.MainActivity
+import com.song2.wave.UI.Signup.SignupFirstActivity
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
 import com.song2.wave.Util.Network.POST.PostResponse
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_start.*
 import retrofit2.Call
 import retrofit2.Response
 
@@ -25,6 +27,12 @@ class LoginActivity : AppCompatActivity() {
         bt_submit_act_login.setOnClickListener {
             postLogin()
         }
+
+        bt_start_act_email_login.setOnClickListener {
+            var intent = Intent(applicationContext, SignupFirstActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     // 로그인
