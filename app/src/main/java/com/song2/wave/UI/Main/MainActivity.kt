@@ -17,8 +17,7 @@ import com.song2.wave.Util.Interface.OnBackPressedListener
 
 
 
-class
-MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     var TAG = "MainActivity"
     lateinit var nowFrag: Fragment
