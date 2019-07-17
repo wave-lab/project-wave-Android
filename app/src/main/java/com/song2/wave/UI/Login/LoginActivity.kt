@@ -9,10 +9,12 @@ import android.util.Log
 import com.song2.wave.Data.POST.PostLogin
 import com.song2.wave.R
 import com.song2.wave.UI.Main.MainActivity
+import com.song2.wave.UI.Signup.SignupFirstActivity
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
 import com.song2.wave.Util.Network.POST.PostResponse
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_start.*
 import retrofit2.Call
 import retrofit2.Response
 
@@ -25,6 +27,12 @@ class LoginActivity : AppCompatActivity() {
         bt_submit_act_login.setOnClickListener {
             postLogin()
         }
+
+        bt_start_act_email_login.setOnClickListener {
+            var intent = Intent(applicationContext, SignupFirstActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     // 로그인
@@ -43,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
                     // 자신의 유저 정보 내부 DB에 저장
                     var pref = applicationContext.getSharedPreferences("auto", Activity.MODE_PRIVATE)
                     var editor: SharedPreferences.Editor = pref.edit()
-                    editor.putString("token", token) // 토란  key값으로 userID 데이터를 저장한다.
+                    editor.putString("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM") // 토란  key값으로 userID 데이터를 저장한다.
                     var intent = Intent(applicationContext, MainActivity::class.java)
                     startActivity(intent)
                 }

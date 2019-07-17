@@ -47,13 +47,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".UI.Main2Activity" />
+        <activity android:name=".UI.Artist.ArtistActivity" />
+        <activity android:name=".UI.Artist.ArtistLibraryActivity" /> <!-- 음악플레이어 -->
+        <activity android:name=".UI.MainPlayer.MainPlayerActivity" />
+
+        <service android:name=".Util.Player.Service.MusicService" />
 
         <activity android:name=".UI.NetworkServiceTest.NetworkTestActivity"></activity>
         <activity android:name=".UI.Main.MyPage.MyPageProfileSettingActivity"></activity>
 
-        <activity android:name=".UI.Main2Activity"/>
-        <activity android:name=".UI.Artist.ArtistActivity"/>
-        <activity android:name=".UI.Artist.ArtistLibraryActivity"/>
 
         <!-- 음악업로드 -->
         <activity android:name=".UI.Main.MyPage.UpLoadFileActivity"></activity>
@@ -79,7 +82,6 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".UI.MainPlayer.MainPlayerActivity" />
         <activity android:name=".Util.Audio.PlayerActivity" />
         <activity android:name=".UI.Signup.SignupSelectArtistActivity" />
         <activity android:name=".UI.Signup.SignupGenreActivity" />

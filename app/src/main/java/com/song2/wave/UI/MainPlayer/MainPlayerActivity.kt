@@ -116,7 +116,7 @@ MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
     var mPosition : Int = 0
 
-    var authorization_info : String = ""
+    var authorization_info : String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
 
     // var n_sbHandler = sbHandler()
      //var seekBarThread = sbThread()
@@ -346,6 +346,7 @@ MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
 
         val extras = intent.extras
+        Log.v("","엑스트라 = "+extras)
 
         // 노래 선택으로 입장 시
         if (extras == null) {
@@ -356,8 +357,10 @@ MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
             originArtist = intent.getStringExtra("originArtist")
             coverArtist = intent.getStringExtra("coverArtist")
             songUrl = intent.getStringExtra("songUrl")
-            AudioApplication.getInstance().serviceInterface.play(_id, songUrl, originArtist, coverArtist,  title) // 선택한 오디오재생
+            AudioApplication.getInstance().serviceInterface.play(applicationContext, _id, songUrl, originArtist, coverArtist,  title) // 선택한 오디오재생
+
         }
+
         // notification으로 입장 시
         else {
             Log.v("asdf", "선택 - 노티피케이션")
@@ -366,11 +369,9 @@ MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
             originArtist = extras.getString("originArtist")
             coverArtist = extras.getString("coverArtist")
         }
-        if(flag == 0){
+               if(flag == 0){
             songUrl = intent.getStringExtra("songUrl")
-
         }
-
 
 
         Log.v("Asdf","플래그 = " + flag)
@@ -396,6 +397,11 @@ MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
             finish()
         }
 
+    }
+
+    override fun onStop() {
+        super.onStop()
+        finish()
     }
 
     fun postRating()
@@ -594,7 +600,7 @@ MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
                     var data = response!!.body()!!.data
                     Glide.with(applicationContext).load(data.artwork).into(img_main_player_act_cover_img)
                     val dbHelper = DBHelper(applicationContext)
-                    dbHelper.insert(_id, songUrl, originArtist, coverArtist, title, data.artwork);
+                    dbHelper.insert(_id, data.songUrl, originArtist, coverArtist, title, data.artwork);
                     Log.v("asfd","디비 값 = " + (dbHelper.getResult()));
 
                     var genreValue : String = ""

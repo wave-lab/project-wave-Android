@@ -2,6 +2,7 @@ package com.song2.wave.Util.Audio;
 
 import android.app.*;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -24,6 +25,7 @@ public class AudioService extends Service {
     private MediaPlayer mMediaPlayer;
     boolean isPrepared;
     int playbackPosition = 0;
+    String lengthOfSong;
     boolean isPlaying = false;
     private int mCurrentPosition;
     private AudioAdapter.AudioItem mAudioItem;
@@ -51,7 +53,7 @@ public class AudioService extends Service {
                 isPrepared = true;
                 mp.start();
 
-                String lengthOfSong = String.format("%02d:%02d", ((mp.getDuration() / 1000) % 3600 / 60), ((mp.getDuration() / 1000) % 3600 % 60));
+                lengthOfSong = String.format("%02d:%02d", ((mp.getDuration() / 1000) % 3600 / 60), ((mp.getDuration() / 1000) % 3600 % 60));
                 MainPlayerActivity.mainPlayerActivity.lengthTimeTv.setText(lengthOfSong);
                 MainPlayerActivity.mainPlayerActivity.seekbar.setMax(mp.getDuration());
 
@@ -77,6 +79,7 @@ public class AudioService extends Service {
                                 getMpCurrentPosition2()
                         );
                         MainPlayerActivity.mainPlayerActivity.durationTimeTv.setText(playTime);
+                        MainPlayerActivity.mainPlayerActivity.lengthTimeTv.setText(lengthOfSong);
                     }
 
                     MainPlayerActivity.mainPlayerActivity.seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

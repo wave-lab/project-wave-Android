@@ -35,7 +35,7 @@ class  ScoringFailedRecyclerViewAdapter(val ctx: Context, val datalist: ArrayLis
         holder.itemView.setOnClickListener{
             var intent = Intent(ctx, MainPlayerActivity::class.java)
             //AudioApplication.getInstance().serviceInterface.setPlayList(holder.adapterPosition) // 재생목록등록
-            AudioApplication.getInstance().serviceInterface.play(datalist[holder.adapterPosition]._id, datalist[holder.adapterPosition].songUrl, datalist[position].originArtistName, datalist[position].coverArtistName, datalist[position].songName) // 선택한 오디오재생
+            AudioApplication.getInstance().serviceInterface.play(ctx, datalist[holder.adapterPosition]._id!!, datalist[holder.adapterPosition].songUrl!!, datalist[position].originArtistName!!, datalist[position].coverArtistName!!, datalist[position].songName!!) // 선택한 오디오재생
             intent.putExtra("_id", datalist[holder.adapterPosition]._id)
             intent.putExtra("songUrl", datalist[holder.adapterPosition].songUrl)
             intent.putExtra("title", datalist[holder.adapterPosition].songName)

@@ -5,8 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@drawable/image_8"
     tools:context=".StartActivity">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+      />
     <TextView
         android:id="@+id/tv_start_act_login_btn"
         android:fontFamily="@font/noto_sans_kr_regular_hestia"
@@ -33,10 +38,12 @@
         android:textSize="18sp"
         android:textColor="#ffffff"
         android:lineSpacingExtra="3sp"
+        android:includeFontPadding="false"
         android:gravity="center_horizontal"
         android:layout_marginTop="422dp"
         android:layout_centerHorizontal="true"
-        android:text="WAVE에서\n고퀄리티 커버곡을 무료로 즐기세요"/>
+        android:text="WAVE에서
+고퀄리티 커버곡을 무료로 즐기세요"/>
     <Button
         android:id="@+id/bt_start_act_email_login"
         android:fontFamily="@font/noto_sans_kr_bold_hestia"
