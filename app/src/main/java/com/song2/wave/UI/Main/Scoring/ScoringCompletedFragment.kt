@@ -1,5 +1,6 @@
 package com.song2.wave.UI.Main.Scoring
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -46,6 +47,9 @@ class ScoringCompletedFragment : Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        var pref = context!!.getSharedPreferences("auto", Activity.MODE_PRIVATE)
+
+        //authorization_info = pref.getString("token","")
         authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM"
 
         getRatedResponse()

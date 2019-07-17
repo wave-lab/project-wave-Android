@@ -25,7 +25,8 @@ class MyPlaylistAdapter (private var songData : ArrayList<PlaylistListData>, var
 
         var thumbList : ArrayList<ImageView> = arrayListOf(holder.playListImg0,holder.playListImg1,holder.playListImg2, holder.playListImg3)
 
-        for (i in songData[position].imgList!!.indices)
+        Log.v("df", "크기 = " + songData[position].imgList!!.size)
+        for (i in 0..3)
             requestManager.load(songData[position].imgList!![i]).centerCrop().into(thumbList[i])
         Log.e("imgList size",songData[position].imgList!!.indices.toString())
         // ex)

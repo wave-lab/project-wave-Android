@@ -188,7 +188,7 @@ class MainActivity : AppCompatActivity() {
                 nowFrag = LibraryFragment()
             }
             "myPage" ->{
-                nowFrag = PointHistoryFragment()
+                nowFrag = MyPageFragment()
             }
         }
 
@@ -280,5 +280,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    fun addFragment(fragment : android.support.v4.app.Fragment){
+        val fm = supportFragmentManager
+        val transaction = fm.beginTransaction()
+        transaction.add(R.id.ll_home_frag_layout, fragment)
+        transaction.commit()
+    }
+
+    fun replaceFragment(fragment: android.support.v4.app.Fragment)
+    {
+        val fm = supportFragmentManager
+        val transaction = fm.beginTransaction()
+        transaction.replace(R.id.ll_home_frag_layout, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,6 @@ import com.bumptech.glide.RequestManager
 import com.song2.wave.Data.GET.GetSearchResponse
 import com.song2.wave.Data.model.*
 import com.song2.wave.Data.model.SignUp.OriginArtistData
-import com.song2.wave.R
 import com.song2.wave.UI.Main.MainActivity
 import com.song2.wave.UI.Main.Search.Adapter.CoverArtistSearchAdapter
 import com.song2.wave.UI.Main.Search.Adapter.OriginArtistSearchAdapter
@@ -27,6 +27,15 @@ import kotlinx.android.synthetic.main.fragment_search_home.view.*
 import org.jetbrains.anko.support.v4.toast
 import retrofit2.Call
 import retrofit2.Response
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import android.text.InputType
+
+
+
+
+
+
 
 class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
@@ -60,23 +69,29 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
     var searchBackFlag: Int = 0 // editText 비활성화 : 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var v: View = inflater.inflate(R.layout.fragment_search_home, container, false)
+        var v: View = inflater.inflate(com.song2.wave.R.layout.fragment_search_home, container, false)
 
         originDataArr = ArrayList<OriginArtistData>()
 /*        if(getArguments() != null){
             getSearchResponse(getArguments()!!.getString("searchData"))
         }*/
 
+
+
+
         v.btn_search_home_frag_searchbar.setOnClickListener {
             getSearchResponse(edit_search_home_frag_searchbar.text.toString())
 
+
+
             ll_search_home_frag_focus_off.visibility = View.VISIBLE
             ll_search_home_frag_focus_on.visibility = View.GONE
+            rv_search_background.visibility = View.GONE
+
             edit_search_home_frag_searchbar.clearFocus()
             searchBackFlag = 0
 
         }
-
 
 
         v.ll_search_home_frag_focus_on.visibility = View.GONE
@@ -87,15 +102,18 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         // Edittext focus off
         v.ll_search_home_frag_focus.setOnClickListener {
             searchEditTextFocusOff()
+            //rv_search_background.visibility = View.VISIBLE
+
         }
 
         insertExampleData()
 
 
-        insertSearchHistoryData(v)
+       insertSearchHistoryData(v)
 
         // Edittext focus ON
         v.edit_search_home_frag_searchbar.setOnFocusChangeListener { view, hasFocus ->
+            rv_search_background.visibility = View.GONE
             if (hasFocus) {
                 searchEditTextFocusOn()
             }
@@ -104,12 +122,13 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
 
         // "all delte" button is clicked
-        v.tv_search_home_frag_all_delete.setOnClickListener {
+       v.tv_search_home_frag_all_delete.setOnClickListener {
             searchData.clear()
             searchDataHistoryAdapter = SearchDataHistoryAdapter(searchData)
             v.recycler_search_home_frag_search_home_hisory.adapter = searchDataHistoryAdapter
             v.recycler_search_home_frag_search_home_hisory.layoutManager = LinearLayoutManager(context)
             v.recycler_search_home_frag_search_home_hisory.isNestedScrollingEnabled = false
+            v.rv_search_background.visibility = View.VISIBLE
         }
 
         // artist is clicked

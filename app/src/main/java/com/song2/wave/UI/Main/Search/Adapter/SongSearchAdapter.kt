@@ -16,6 +16,7 @@ class SongSearchAdapter (private var songData : ArrayList<SongData>, var request
         val mainView : View = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_song_view, parent, false)
         return SongSearchViewHolder(mainView)
+
     }
 
     override fun getItemCount(): Int = songData.size

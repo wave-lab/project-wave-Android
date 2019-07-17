@@ -76,8 +76,16 @@ class LibraryLikeFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
 
-                    if(playlistDataList == null)
+                    if(playlistDataList == null){
+                        recycler_library_like_frag_list.visibility = View.GONE
+                        iv_library_like_list.visibility = View.VISIBLE
                         return
+                    }
+                    recycler_library_like_frag_list.visibility = View.VISIBLE
+                    iv_library_like_list.visibility = View.GONE
+
+
+
 
                     for(i in playlistDataList.songList.indices)
                         songDataArr.add(SongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].songUrl, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName,playlistDataList.songList[i].genre))
