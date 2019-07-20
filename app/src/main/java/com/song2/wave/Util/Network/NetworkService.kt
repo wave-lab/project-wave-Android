@@ -162,7 +162,7 @@ interface NetworkService {
             @Part("originArtist") originArtist : ArrayList<RequestBody?>
     ) : Call<PostResponse>
 
-    @Multipart
+/*    @Multipart
     @POST("/songs")
     fun postSongUploadResponse(
         @Header("Authorization") authorization: String,
@@ -174,6 +174,20 @@ interface NetworkService {
         @Part("mood") mood : ArrayList<RequestBody?>,
         @Part("songComment") songComment : RequestBody,
         @Part("highlightTime") highlightTime : RequestBody
+    ) : Call<PostResponse>*/
+
+    @Multipart
+    @POST("/songs")
+    fun postSongUploadResponse(
+        @Header("Authorization") authorization: String,
+        @Part("originTitle") originTitle : RequestBody,
+        @Part("originArtistName") originArtistName : RequestBody,
+        @Part("genre") genre : ArrayList<RequestBody?>,
+        @Part("mood") mood : ArrayList<RequestBody?>,
+        @Part("songComment") songComment : RequestBody,
+        @Part("highlightTime") highlightTime : RequestBody,
+        @Part artwork : MultipartBody.Part?,
+        @Part songUrl : MultipartBody.Part?
     ) : Call<PostResponse>
 
     // 이메일 중복 확인

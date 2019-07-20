@@ -20,6 +20,7 @@ import com.song2.wave.R
 import com.song2.wave.UI.Main.MainActivity
 import com.song2.wave.UI.Main.MyPage.Adapter.FragmentMypageScoringResultPagerAdapter
 import com.song2.wave.UI.Main.MyPage.Adapter.HitScoreResultAdapter
+import com.song2.wave.UI.Main.MyPage.UpLoadSong.UpLoadFileActivity
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_my_page.*

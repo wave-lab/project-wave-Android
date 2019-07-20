@@ -1,4 +1,4 @@
-package com.song2.wave.UI.Main.MyPage
+package com.song2.wave.UI.Main.MyPage.UpLoadSong
 
 import android.media.MediaPlayer
 import android.net.Uri

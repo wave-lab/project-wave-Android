@@ -1,4 +1,4 @@
-package com.song2.wave.UI.Main.MyPage
+package com.song2.wave.UI.Main.MyPage.UpLoadSong
 
 import android.app.Activity
 import android.content.Context
@@ -24,7 +24,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.jetbrains.anko.startActivity
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 import java.io.*
 
@@ -128,12 +127,16 @@ class UpLoadMoodActivity : AppCompatActivity(), View.OnClickListener {
         Log.v("UploadActivity", "songComment " + songCommentValue)
         Log.v("UploadActivity", "songHigilight " + highlightTimeValue)
 
+        //장르&무드 형변환
         for (i in genreValue.indices) {
             genre.add(RequestBody.create(MediaType.parse("text.plain"), genreValue[i]))
+            Log.v("UploadMoodAct","GenreValue "+i+" : "+genreValue[i])
         }
 
         for (i in selectedMoodArr.indices) {
             mood.add(RequestBody.create(MediaType.parse("text.plain"), selectedMoodArr[i]))
+            Log.v("UploadMoodAct","selectedMoodArr "+i+" : "+selectedMoodArr[i])
+
         }
 
         val title = RequestBody.create(MediaType.parse("text.plain"), originTitleValue)
@@ -166,10 +169,7 @@ class UpLoadMoodActivity : AppCompatActivity(), View.OnClickListener {
         audioFile = MultipartBody.Part.createFormData("songUrl", audio.name, audioBody)
 
         val postSongUploadResponse = networkService.postSongUploadResponse(
-            authorization_info,
-            title, coverImg, originArtistName, audioFile,
-            genre, mood, songComment, highlightTime
-        )
+            authorization_info, title,  originArtistName, genre, mood, songComment, highlightTime, coverImg, audioFile)
 
         postSongUploadResponse.enqueue(object : retrofit2.Callback<PostResponse> {
             override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {

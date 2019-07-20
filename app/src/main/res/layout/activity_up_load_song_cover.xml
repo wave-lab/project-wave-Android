@@ -25,7 +25,7 @@
                         android:id="@+id/dqd"
                         android:text="아트워크를 등록 해 주세요"
                         android:fontFamily="@font/noto_sans_kr_bold_hestia"
-                        android:textSize="18sp"
+                        android:textSize="18dp"
                         android:textColor="#fafafa"
                         android:lineSpacingExtra="9sp"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"/>

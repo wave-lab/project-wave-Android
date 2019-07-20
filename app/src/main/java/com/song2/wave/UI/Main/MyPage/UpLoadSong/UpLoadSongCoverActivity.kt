@@ -1,4 +1,4 @@
-package com.song2.wave.UI.Main.MyPage
+package com.song2.wave.UI.Main.MyPage.UpLoadSong
 
 import android.app.Activity
 import android.content.Context
@@ -13,7 +13,6 @@ import android.util.Log
 import android.widget.SeekBar
 import com.bumptech.glide.Glide
 import com.song2.wave.R
-import kotlinx.android.synthetic.main.activity_set_start_point.*
 import kotlinx.android.synthetic.main.activity_up_load_song_cover.*
 import org.jetbrains.anko.startActivity
 
@@ -80,7 +79,7 @@ class UpLoadSongCoverActivity : AppCompatActivity() {
                     Log.e("TestAudioData", data.toString())
                     Log.v("UploadActivity", "실제 경로 = " + getRealPathFromURI(applicationContext, it.data).toString())
                     selectedPicUri = it.data
-                    Glide.with(this).load(selectedPicUri)
+                    Glide.with(this).load(selectedPicUri).fitCenter()
                         .thumbnail(0.1f).into(iv_upload_cover_file_act_thumb)
 
                     Log.e("Imgurl",selectedPicUri.toString())

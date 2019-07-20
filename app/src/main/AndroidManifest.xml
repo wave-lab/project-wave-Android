@@ -60,12 +60,13 @@
 
 
         <!-- 음악업로드 -->
-        <activity android:name=".UI.Main.MyPage.UpLoadFileActivity"></activity>
-        <activity android:name=".UI.Main.MyPage.SetStartPointActivity"/>
-        <activity android:name=".UI.Main.MyPage.UploadSongInfoActivity"/>
-        <activity android:name=".UI.Main.MyPage.UpLoadSongCoverActivity"></activity>
-        <activity android:name=".UI.Main.MyPage.UpLoadMoodActivity"/>
-        <activity android:name=".UI.Main.MyPage.UpLoadGenreActivity"/>
+        <activity android:name=".UI.Main.MyPage.UpLoadSong.UpLoadFileActivity"></activity>
+        <activity android:name=".UI.Main.MyPage.UpLoadSong.SetStartPointActivity"/>
+        <activity android:name=".UI.Main.MyPage.UpLoadSong.UploadSongInfoActivity"
+                  android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".UI.Main.MyPage.UpLoadSong.UpLoadSongCoverActivity"></activity>
+        <activity android:name=".UI.Main.MyPage.UpLoadSong.UpLoadMoodActivity"/>
+        <activity android:name=".UI.Main.MyPage.UpLoadSong.UpLoadGenreActivity"/>
         <service android:name=".Util.Player.Service.MusicService"/>
         <service
             android:name=".Util.Audio.AudioService"
