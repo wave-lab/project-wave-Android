@@ -52,11 +52,14 @@ class UpLoadSongCoverActivity : AppCompatActivity() {
         seekbar.setProgress(start_point)
 
         //음원
-        tv_up_load_cover_act_mp3_name.setText(upload_song_uri)
+        tv_up_load_cover_act_mp3_name.setText(getRealPathFromURI(applicationContext, Uri.parse(upload_song_uri)))
 
         iv_up_load_cover_act_confirm_btn.setOnClickListener {
             Log.e("er","StartPoint: " + start_point.toString() +"/songURI: " + upload_song_uri +"/picURI: " + selectedPicUri.toString())
-            startActivity<UploadSongInfoActivity>("StartPoint" to start_point.toString(), "songURI" to upload_song_uri , "picURI" to selectedPicUri.toString())
+            startActivity<UploadSongInfoActivity>(
+                "StartPoint" to start_point.toString(),
+                "songURI" to upload_song_uri ,
+                "picURI" to selectedPicUri.toString())
         }
 
     }

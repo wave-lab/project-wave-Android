@@ -55,14 +55,12 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginLeft="31dp"
-            android:layout_marginTop="213dp"
-    >
+            android:layout_marginTop="213dp">
         <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_upload_genre_act_pop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="#00b6de"
-        />
+                android:src="#00b6de"/>
         <TextView
                 android:id="@+id/tv_upload_genre_act_pop"
                 android:layout_width="wrap_content"
@@ -82,26 +80,22 @@
             android:layout_marginLeft="31dp"
             android:layout_marginTop="161dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="48dp"
-    >
+            android:layout_marginRight="48dp">
         <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_upload_genre_act_soul"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="#00b6de"
-        />
+                android:src="#00b6de"/>
         <TextView
                 android:id="@+id/tv_upload_genre_act_soul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="RB
-SOUL"
+                android:text="RB\nSOUL"
                 android:textSize="16sp"
                 android:textColor="#ffffff"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/noto_sans_kr_bold_hestia"
-                android:includeFontPadding="true"
-        />
+                android:includeFontPadding="true"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -109,14 +103,12 @@ SOUL"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginLeft="146dp"
-            android:layout_marginTop="256dp"
-    >
+            android:layout_marginTop="256dp">
         <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_upload_genre_act_ballad"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="#00b6de"
-        />
+                android:src="#00b6de"/>
         <TextView
                 android:id="@+id/tv_upload_genre_act_ballad"
                 android:layout_width="wrap_content"
@@ -126,8 +118,7 @@ SOUL"
                 android:textColor="#ffffff"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/noto_sans_kr_bold_hestia"
-                android:includeFontPadding="true"
-        />
+                android:includeFontPadding="true"/>
     </RelativeLayout>
     <RelativeLayout
             android:id="@+id/rl_upload_genre_act_hiphop"
@@ -135,14 +126,12 @@ SOUL"
             android:layout_height="80dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="31dp"
-            android:layout_marginTop="296dp"
-    >
+            android:layout_marginTop="296dp">
         <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_upload_genre_act_hiphop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="#00b6de"
-        />
+                android:src="#00b6de"/>
         <TextView
                 android:id="@+id/tv_upload_genre_act_hiphop"
                 android:layout_width="wrap_content"
