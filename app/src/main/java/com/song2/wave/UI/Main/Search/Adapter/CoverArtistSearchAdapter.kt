@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
-import com.song2.wave.Data.model.Search.CoverArtistData
+import com.song2.wave.Data.model.CoverArtistData
 import com.song2.wave.R
 
 class CoverArtistSearchAdapter (private var coverArtistData : ArrayList<CoverArtistData>, var requestManager : RequestManager) : RecyclerView.Adapter<CoverArtistSearchViewHolder>(){
@@ -22,9 +22,9 @@ class CoverArtistSearchAdapter (private var coverArtistData : ArrayList<CoverArt
 
     override fun onBindViewHolder(holder: CoverArtistSearchViewHolder, position: Int) {
 
-        //requestManager.load(songData[position].songCoverImg).centerCrop().into(holder.songCoverImg)
+        requestManager.load(coverArtistData[position].coverArtistImg).centerCrop().into(holder.coverArtistImg)
         // ex)
-        requestManager.load(EXAMPLE_IMG_URL).into(holder.coverArtistImg)
+        //requestManager.load(EXAMPLE_IMG_URL).into(holder.coverArtistImg)
         holder.coverArtistName.text = coverArtistData[position].coverArtistName
     }
 }

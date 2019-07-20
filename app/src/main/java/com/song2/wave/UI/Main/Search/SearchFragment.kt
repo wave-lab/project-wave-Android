@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.song2.wave.R
+import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_search.view.*
 
 class SearchFragment : android.support.v4.app.Fragment(){
 
@@ -15,9 +17,19 @@ class SearchFragment : android.support.v4.app.Fragment(){
 
         addFragment(SearchHomeFragment())
 
+        v.btn_search_home_frag_searchbar.setOnClickListener {
+            var bundle = Bundle()
+            bundle.putString("searchData",edit_search_home_frag_searchbar.text.toString())
+
+            val searchhomeFragment = SearchHomeFragment()
+            searchhomeFragment.setArguments(bundle)
+
+            replaceFragment(searchhomeFragment)
+        }
+
+
         return v
     }
-
 
 
     fun addFragment(fragment : android.support.v4.app.Fragment){

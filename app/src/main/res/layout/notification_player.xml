@@ -1,0 +1,115 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="96dp"
+    android:background="@drawable/progress_effect"
+              android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="13dp"
+            >
+            <ImageView
+                android:id="@+id/wave_logo"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/img_home_wavelogo"
+                android:layout_marginLeft="25.3dp"
+                />
+            <TextView
+                android:id="@+id/wave_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wave"
+                android:layout_toRightOf="@+id/wave_logo"
+                android:textSize="12sp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
+                android:layout_marginLeft="9.3dp"
+                android:textColor="@color/colorPrimaryDark"
+                />
+
+            <ImageButton
+                android:id="@+id/btn_close"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="35dp"
+                android:src="@drawable/delete_btn"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:orientation="horizontal"
+            android:layout_marginTop="6dp"
+            >
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="159dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:text="Sample Title"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:includeFontPadding="false"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:orientation="horizontal"
+                >
+                <ImageButton
+                    android:id="@+id/btn_rewind"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="27dp"
+                    android:src="@drawable/prev_btn"/>
+
+                <ImageButton
+                    android:id="@+id/btn_play_pause"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@null"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/restart_btn"/>
+
+                <ImageButton
+                    android:id="@+id/btn_forward"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@null"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="24dp"
+                    android:src="@drawable/next_btn"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    <TextView
+        android:id="@+id/cover_atist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="3dp"
+        android:text="Cover Artist Name"
+        android:textSize="12sp"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/noto_sans_kr_regular_hestia"
+        android:includeFontPadding="false"
+        />
+
+</LinearLayout>
+

@@ -4,13 +4,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#000000"
     >
+    <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/rl_search_home_frag_searchbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/img_searchbar_def"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+    >
+
+        <Button
+                android:id="@+id/btn_search_home_frag_searchbar"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_search"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+        />
+
+        <EditText
+                android:id="@+id/edit_search_home_frag_searchbar"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:hint="검색어를 입력해주세요"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:textSize="14sp"
+                android:textColor="#979797"
+                android:textColorHint="#979797"
+                android:layout_centerVertical="true"
+                android:background="@color/transparent"
+                android:layout_toRightOf="@id/btn_search_home_frag_searchbar"
+        />
+
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/ll_search_frag_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
+
+
 
     </LinearLayout>
 

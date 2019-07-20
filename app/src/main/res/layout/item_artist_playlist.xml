@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        >
+    <RelativeLayout android:id="@+id/rl_square"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:layout_marginLeft="16dp">
+
+        <ImageView android:id="@+id/img_one"
+                   android:layout_width="41dp"
+                   android:layout_height="41dp"
+                    android:src="@drawable/img_artwork_1"/>
+        <ImageView android:id="@+id/img_two"
+                   android:layout_width="41dp"
+                   android:layout_height="41dp"
+                   android:layout_toRightOf="@+id/img_one"
+                   android:src="@drawable/img_home_wavelogo"/>
+        <ImageView android:id="@+id/img_three"
+                   android:layout_width="41dp"
+                   android:layout_height="41dp"
+                   android:layout_below="@+id/img_one"
+                   android:src="@drawable/img_artistprofile"/>
+        <ImageView android:id="@+id/img_four"
+                   android:layout_width="41dp"
+                   android:layout_height="41dp"
+                   android:layout_below="@+id/img_two"
+                   android:layout_toRightOf="@+id/img_three"
+                   android:src="@drawable/heart_selector"/>
+
+    </RelativeLayout>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"/>
+    <TextView
+            android:id="@+id/tv_artist_playlist_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="10sp"
+            android:text="Play List Name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/rl_square"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:includeFontPadding="false"
+    />
+    <TextView
+            android:id="@+id/tv_artist_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#616161"
+            android:lineSpacingExtra="10sp"
+            android:text="한줄 설명"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/rl_square"
+            android:layout_below="@+id/tv_artist_playlist_name"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:includeFontPadding="false"
+    />
+
+    <ImageView
+            android:id="@+id/iv_playlist_item_more_btn"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+               android:src="@drawable/btn_threedot"
+               android:layout_marginRight="10dp"
+               android:layout_alignParentRight="true"
+               android:layout_centerVertical="true"/>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".UI.Signup.SignupFirstActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@drawable/btn_login_beforenav"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:scaleType="fitXY"
+            />
+
+        <RelativeLayout
+            android:id="@+id/rl_signup_act_profile"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_signup_act_profile"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:src="@drawable/icn_login_profile"
+                android:layout_centerInParent="true"
+                />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/btn_login_edit_photo"
+                android:layout_marginTop="60dp"
+                android:layout_marginRight="4dp"
+                android:layout_alignParentRight="true"
+                />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_signup_act_passwd"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            >
+            <TextView
+                android:id="@+id/tv_signup_act_passwd"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:text="비밀번호"
+                android:textSize="12sp"
+                android:textColor="#9e9e9e"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="3dp"
+                >
+                <EditText
+                    android:id="@+id/edit_signup_act_passwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:background="@drawable/signup_border_off"
+                    android:textColor="#ffffff"
+                    android:inputType="textPassword"
+                    />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_signup_act_passwd_check_pattern"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8-20글자 사이로 영어 숫자로만 입력해주세요"
+                android:textColor="#9e9e9e"
+                android:textSize="12sp"
+                android:layout_below="@+id/edit_signup_act_email"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
+                android:layout_marginLeft="16dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_signup_act_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:text="닉네임"
+                android:textSize="12sp"
+                android:textColor="#9e9e9e"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="3dp"
+                >
+                <EditText
+                    android:id="@+id/edit_signup_act_nickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:background="@drawable/signup_border_off"
+                    android:textColor="#ffffff"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_signup_act_nickname_confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="중복확인"
+                    android:textSize="16sp"
+                    android:textColor="#bdbdbd"
+                    android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:includeFontPadding="false"
+                    />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_signup_act_nickname_pattern_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2-8글자 사이로 한글과 영어로 숫자로만 입력해주세요"
+                android:textColor="#9e9e9e"
+                android:textSize="12sp"
+                android:layout_below="@+id/edit_signup_act_email"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
+                android:layout_marginLeft="16dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_signup_act_verify_num"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            >
+            <TextView
+                android:id="@+id/tv_signup_act_verify_num"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:text="인증번호"
+                android:textSize="12sp"
+                android:textColor="#9e9e9e"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="3dp"
+                >
+                <EditText
+                    android:id="@+id/edit_signup_act_verify_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/signup_border_off"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_signup_act_verify_num_confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="확인"
+                    android:textSize="16sp"
+                    android:textColor="#bdbdbd"
+                    android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:includeFontPadding="false"
+                    />
+
+            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인증번호를 입력해주세요"
+                android:textColor="#9e9e9e"
+                android:textSize="12sp"
+                android:layout_below="@+id/edit_signup_act_email"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
+                android:layout_marginLeft="16dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_signup_act_email"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/tv_signup_act_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이메일"
+                android:textSize="12sp"
+                android:textColor="#9e9e9e"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="3dp"
+                >
+                <EditText
+                    android:id="@+id/edit_signup_act_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:background="@drawable/signup_border_off"
+                    android:textColor="#ffffff"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_signup_act_email_confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="인증"
+                    android:textSize="16sp"
+                    android:textColor="#bdbdbd"
+                    android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:includeFontPadding="false"
+                    />
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_signup_act_email_pattern_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인증가능한 이메일을 입력해주세요"
+                android:textColor="#9e9e9e"
+                android:textSize="12sp"
+                android:layout_below="@+id/edit_signup_act_email"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
+                android:layout_marginLeft="16dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_signup_act_next"
+        android:layout_width="220dp"
+        android:layout_height="44dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="38dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_login_next_lg"
+        android:visibility="gone"
+        />
+
+
+</RelativeLayout>

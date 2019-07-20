@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <RelativeLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+            <RelativeLayout
+                    android:layout_width="match_parent" android:layout_height="360dp">
+                <ImageView android:layout_width="match_parent" android:layout_height="match_parent"
+                           android:scaleType="fitXY"
+                           android:src="@drawable/img_artwork_1"/>
+                <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                                android:background="@drawable/bg_mypage_blackgradient"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/rl_artist_act_toolbar"
+                    android:layout_width="match_parent" android:layout_height="56dp">
+                <TextView
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="6sp"
+                        android:gravity="center_horizontal"
+                        android:text="아티스트"/>
+
+            </RelativeLayout>
+
+            <TextView
+                    android:id="@+id/tv_artist_act_introduce"
+                    android:layout_marginTop="41dp"
+                    android:layout_marginStart="20dp"
+                    android:includeFontPadding="false"
+                    android:layout_below="@+id/rl_artist_act_toolbar"
+                    android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:lineSpacingExtra="12sp"
+                    android:text="혹시 슬픈일이 있었나요? \n웨이브가 항상 응원할게요! \nㅋㅋㅋㅋㅋ승수대지"
+            />
+            <RelativeLayout
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="51dp"
+                    android:layout_below="@+id/tv_artist_act_introduce"
+                    android:layout_width="match_parent" android:layout_height="171dp"
+                    android:layout_centerHorizontal="true">
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cv_artist_act_profile_img"
+                        android:src="@drawable/b_101"
+                        android:layout_centerVertical="true"
+                        android:layout_width="100dp" android:layout_height="100dp"
+                />
+                <RelativeLayout
+                        android:layout_alignTop="@+id/cv_artist_act_profile_img"
+                        android:layout_alignBottom="@+id/cv_artist_act_profile_img"
+                        android:layout_marginStart="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/cv_artist_act_profile_img"
+                        android:layout_width="wrap_content" android:layout_height="107dp">
+
+                    <TextView
+                            android:id="@+id/tv_actist_nickname"
+                            android:layout_marginStart="3dp"
+                            android:includeFontPadding="false"
+                            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="#ffffff"
+                            android:lineSpacingExtra="4sp"
+                            android:gravity="center_horizontal"
+                            android:text="닉네임여덟글자다"/>
+
+                   <View
+                            android:layout_below="@+id/tv_actist_nickname"
+                            android:layout_height="4dp"
+                            android:layout_width="53dp"
+                            android:background="#00b6de"
+                            android:layout_alignStart="@+id/tv_actist_nickname"
+                            android:layout_alignEnd="@+id/tv_actist_nickname"/>
+
+                    <ImageView
+                            android:id="@+id/iv_artist_act_like"
+                            android:layout_below="@id/tv_actist_nickname"
+                            android:layout_marginTop="12dp"
+                            android:padding="6dp"
+                            android:layout_width="36dp" android:layout_height="36dp"
+                               android:src="@drawable/like_selector"/>
+
+                    <TextView
+                            android:id="@+id/tv_artist_act_like_cnt"
+                            android:layout_marginStart="6dp"
+                            android:layout_alignTop="@+id/iv_artist_act_like"
+                            android:layout_below="@+id/tv_actist_nickname"
+                            android:layout_toRightOf="@+id/iv_artist_act_like"
+                            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="#ffffff"
+                            android:lineSpacingExtra="11sp"
+                            android:text="72"
+                    />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_marginHorizontal="15dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent" android:layout_height="match_parent">
+
+            <RelativeLayout
+                    android:layout_marginTop="63dp"
+                    android:layout_width="match_parent" android:layout_height="56dp">
+                <TextView
+                        android:id="@+id/tv_artist_act_song_list"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="6sp"
+                        android:layout_centerVertical="true"
+                        android:text="아티스트의 곡"/>
+
+
+                <ImageView
+                        android:id="@+id/iv_mypage_frag_more_hit_result"
+                        android:layout_toRightOf="@+id/tv_artist_act_song_list"
+                        android:padding="6dp"
+                        android:layout_marginStart="1dp"
+                        android:src="@drawable/btn_more"
+                        android:layout_width="36dp" android:layout_height="36dp"
+                        android:layout_centerVertical="true" />
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_artist_act_song_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="458dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <RelativeLayout
+                    android:layout_marginTop="63dp"
+                    android:layout_width="match_parent" android:layout_height="56dp">
+                <TextView
+                        android:id="@+id/tv_artist_act_artist_library"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="#ffffff"
+                        android:lineSpacingExtra="6sp"
+                        android:layout_centerVertical="true"
+                        android:text="아티스트의 보관함"/>
+
+
+                <ImageView
+                        android:id="@+id/iv_mypage_frag_more_result"
+                        android:padding="6dp"
+                        android:layout_toRightOf="@+id/tv_artist_act_artist_library"
+                        android:layout_marginStart="1dp"
+                        android:src="@drawable/btn_more"
+                        android:layout_width="36dp" android:layout_height="36dp"
+                        android:layout_centerVertical="true" />
+
+            </RelativeLayout>
+            <android.support.design.widget.TabLayout
+                    android:id="@+id/tl_artist_act_artist_library"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"/>
+
+            <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_artist_act_artist_library"
+                    android:layout_width="match_parent"
+                    android:layout_height="460dp"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

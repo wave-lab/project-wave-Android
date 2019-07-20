@@ -2,41 +2,56 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
+        android:background="#000000"
         android:layout_height="match_parent" android:layout_width="match_parent">
+    <include
+            layout="@layout/toolbar_mypage"/>
 
-    <LinearLayout
-            android:id="@+id/ll_upload_act_upload_music"
+    <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:orientation="vertical">
+        <TextView
+                android:id="@+id/tv_upload_file_act_info_text"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textColor="#fafafa"
+                android:lineSpacingExtra="9sp"
+                android:text="음원을 등록해주세요"
+        />
+        <View android:layout_width="34dp" android:layout_height="3dp"
+              android:background="@color/colorPrimary"
+              android:layout_alignStart="@+id/tv_upload_file_act_info_text"
+              android:layout_below="@+id/tv_upload_file_act_info_text"
+
+        />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+            android:id="@+id/rl_upload_act_upload_music"
+            android:layout_marginTop="153dp"
             android:paddingHorizontal="40dp"
             android:orientation="vertical"
-            android:layout_width="match_parent" android:layout_height="wrap_content">
+            android:layout_width="match_parent" android:layout_height="35dp">
 
         <TextView
                 android:text="음원"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-        <TextView
-                android:text="음원파일 불러오기"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                android:textSize="18dp"
+                android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
-    </LinearLayout>
+        <ImageView android:layout_width="24dp" android:layout_height="24dp"
+                   android:src="@drawable/btn_more"
+                   android:layout_alignParentRight="true"
+        />
+        <View
+                android:layout_marginTop="8dp"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent" android:layout_height="2dp"
+                android:background="@color/colorPrimary"/>
+
+    </RelativeLayout>
 
 
-    <LinearLayout
-            android:id="@+id/ll_upload_act_upload_artwork"
-            android:paddingHorizontal="40dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent" android:layout_height="wrap_content">
-
-        <TextView
-                android:text="아트워크"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-
-        <TextView
-                android:text="웨이버의 음악과 어울리는 아트워크를 추가 해 주세요"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-
-        <ImageView
-                android:id="@+id/iv_upload_file_act_thumb"
-                android:layout_width="300dp" android:layout_height="300dp"
-                android:src="@drawable/ic_launcher_background"/>
-    </LinearLayout>
 </LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        android:id="@+id/rl_item_home_hit_song_result_container"
+        android:layout_marginStart="12dp"
+        android:layout_height="146dp"
+        android:layout_width="104dp"
+        android:background="#000000"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+            android:id="@+id/iv_song_hit_result_item_coverImg"
+            android:scaleType="centerCrop"
+            android:layout_width="104dp" android:layout_height="104dp"
+            android:src="@drawable/img_artwork_1"/>
+
+    <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/rl_hit_result_item_fail"
+            android:layout_width="match_parent" android:layout_height="104dp"
+                    android:background="#99000000">
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:src="@drawable/img_fail_md"
+        android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/rl_hit_result_item_pass"
+            android:layout_width="match_parent" android:layout_height="104dp">
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                   android:src="@drawable/img_pass_md"
+                   android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <TextView
+            android:paddingHorizontal="3dp"
+            android:id="@+id/tv_song_hit_result_item_songInfo"
+            android:layout_below="@+id/iv_song_hit_result_item_coverImg"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="8sp"
+            android:text="Song name..."
+            android:layout_alignParentStart="true" android:layout_marginTop="2dp"/>
+    <TextView
+            android:id="@+id/tv_song_hit_result_item_cover_artist"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_song_hit_result_item_songInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#616161"
+            android:lineSpacingExtra="6sp"
+            android:gravity="center_horizontal"
+            android:text="Cover Artist"
+    />
+
+</RelativeLayout>

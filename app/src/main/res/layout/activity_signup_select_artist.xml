@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".UI.Signup.SignupSelectArtistActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:layout_marginTop="20dp"
+            >
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/btn_login_beforenav"
+                android:layout_marginLeft="16dp"
+                android:scaleType="fitXY"
+                />
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/btn_login_nextnav"
+                android:layout_marginRight="16dp"
+                android:layout_alignParentRight="true"
+                android:scaleType="fitXY"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="어떤 아티스트를 좋아하는지 말해주세요"
+            android:layout_gravity="center"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:textColor="#ffffff"
+            android:includeFontPadding="false"
+            />
+        <View
+            android:layout_width="64dp"
+            android:layout_height="3dp"
+            android:background="#00b6de"
+            android:layout_marginLeft="100.5dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="선택을 바탕으로 곡들을 추천해드릴게요
+1명 이상 선택해주세요"
+            android:layout_gravity="center"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:fontFamily="@font/noto_sans_kr_regular_hestia"
+            android:textColor="#ffffff"
+            android:includeFontPadding="false"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_signup_artist_selecct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="30dp"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="13dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#00b6de"
+                android:text="리셋"
+                android:textSize="14sp"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:includeFontPadding="false"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="44dp"
+                />
+            <Button
+                android:id="@+id/btn_signup_artist_next"
+                android:layout_width="160dp"
+                android:layout_height="44dp"
+                android:background="@drawable/btn_login_next_lg"
+                android:layout_centerInParent="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#00b6de"
+                android:text="1/3"
+                android:textSize="14sp"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:includeFontPadding="false"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="44dp"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>

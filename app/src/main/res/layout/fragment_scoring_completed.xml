@@ -1,29 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+<LinearLayout
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:background="#000000"
+              android:orientation="vertical"
+              android:layout_marginTop="24dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp">
 
     <TextView
-            android:text="패스 >"
-            android:textSize="22dp"
-            android:lineSpacingExtra="10sp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView1"/>
-    <TextView
-            android:text="웨잇 >"
-            android:textSize="22dp"
-            android:lineSpacingExtra="10sp"
+            android:text="통과"
+            android:lineSpacingExtra="11sp"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:layout_marginLeft="16dp"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:includeFontPadding="false"    />
+        <Button
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/btn_more"
+                android:layout_marginLeft="8dp"
+                android:layout_gravity="center"/>
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_scoring_song_passed"
+            android:layout_width="match_parent"
+            android:layout_height="197dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp">
 
+    </android.support.v7.widget.RecyclerView>
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView2"/>
-    <TextView
-            android:text="페일 >"
-            android:textSize="22dp"
-            android:lineSpacingExtra="10sp"
+    android:layout_marginTop="24dp">
+
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="대기"
+                android:lineSpacingExtra="11sp"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:layout_marginLeft="16dp"
+                android:textColor="#ffffff"
+                android:textSize="22sp"
+                android:includeFontPadding="false"
+        />
+
+
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_scoring_song_passing"
+            android:layout_width="match_parent"
+            android:layout_height="104dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp">
+
+    </android.support.v7.widget.RecyclerView>
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView3"/>
+    android:layout_marginTop="24dp">
+
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="탈락"
+                android:lineSpacingExtra="11sp"
+                android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                android:layout_marginLeft="16dp"
+                android:textColor="#ffffff"
+                android:textSize="22sp"
+                android:includeFontPadding="false"
+        />
+
+
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="50dp"
+            android:id="@+id/rv_scoring_song_failed"
+            android:layout_width="match_parent"
+            android:layout_height="104dp">
+
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>
+</ScrollView>

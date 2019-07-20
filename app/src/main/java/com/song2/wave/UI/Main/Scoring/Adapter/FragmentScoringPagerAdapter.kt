@@ -7,6 +7,7 @@ import com.song2.wave.UI.Main.Scoring.ScoringCompletedFragment
 import com.song2.wave.UI.Main.Scoring.ScoringWaitingFragment
 
 class FragmentScoringPagerAdapter(fm: FragmentManager, private val num_fragment: Int): FragmentStatePagerAdapter(fm){
+
     override fun getItem(p0: Int): Fragment? {
         return when(p0){
             0 -> ScoringWaitingFragment()

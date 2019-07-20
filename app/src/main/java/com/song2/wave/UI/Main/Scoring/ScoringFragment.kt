@@ -21,6 +21,13 @@ class ScoringFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_scoring, container, false)
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+       // setContentView(R.layout.activity_main)
+        //rv_scoring_song_passed.adapter = ScoringPassAdapter()
+        //rv_scoring_song_passed.layoutManager = LinearLayoutManager(this)
+    }
+
 
     private fun configureTopNavigation() {
         vp_scoring.adapter = FragmentScoringPagerAdapter(childFragmentManager,2)
@@ -31,5 +38,6 @@ class ScoringFragment : Fragment() {
         //탭 하나하나 TabLayout에 연결시켜줍니다.
         tl_scoring_tabbar.getTabAt(0)!!.customView = topNaviLayout.findViewById(R.id.rl_scoring_tabbar_frag_waiting) as RelativeLayout
         tl_scoring_tabbar.getTabAt(1)!!.customView = topNaviLayout.findViewById(R.id.rl_scoring_tabbar_frag_completed) as RelativeLayout
+
     }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        android:id="@+id/rl_top10_item_container"
+        android:layout_height="132dp"
+        android:layout_width="104dp"
+        android:layout_marginStart="12dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <ImageView
+            android:id="@+id/iv_top10_item_kinds_img"
+            android:scaleType="centerCrop"
+            android:layout_width="104dp" android:layout_height="104dp"
+            android:src="@drawable/img_artwork_1"/>
+    <TextView
+            android:id="@+id/tv_top10_item_song_kinds"
+            android:layout_below="@+id/iv_top10_item_kinds_img"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/noto_sans_kr_bold_hestia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:includeFontPadding="false"
+            android:textColor="#ffffff"
+            android:lineSpacingExtra="6sp"
+            android:text="힙합"
+    />
+</RelativeLayout>

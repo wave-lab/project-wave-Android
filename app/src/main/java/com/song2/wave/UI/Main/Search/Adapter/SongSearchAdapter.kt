@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
-import com.song2.wave.Data.model.Search.SongData
+import com.song2.wave.Data.model.SongData
 import com.song2.wave.R
 
 class SongSearchAdapter (private var songData : ArrayList<SongData>, var requestManager : RequestManager) : RecyclerView.Adapter<SongSearchViewHolder>(){
@@ -16,18 +16,19 @@ class SongSearchAdapter (private var songData : ArrayList<SongData>, var request
         val mainView : View = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_song_view, parent, false)
         return SongSearchViewHolder(mainView)
+
     }
 
     override fun getItemCount(): Int = songData.size
 
     override fun onBindViewHolder(holder: SongSearchViewHolder, position: Int) {
 
-        //requestManager.load(songData[position].songCoverImg).centerCrop().into(holder.songCoverImg)
+        requestManager.load(songData[position].songCoverImg).centerCrop().into(holder.songCoverImg)
         // ex)
-        requestManager.load(EXAMPLE_IMG_URL).into(holder.songCoverImg)
+        //requestManager.load(EXAMPLE_IMG_URL).into(holder.songCoverImg)
         holder.songName.text = songData[position].songName
         holder.originArtistName.text = " - " + songData[position].originArtistName
         holder.coverArtistName.text = songData[position].coverArtistName
-        holder.songField.text = songData[position].songField[0]
+        holder.songField.text = songData[position].songField!![0]
     }
 }

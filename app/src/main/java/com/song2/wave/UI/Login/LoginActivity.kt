@@ -1,65 +1,63 @@
 package com.song2.wave.UI.Login
 
+import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.kakao.auth.ISessionCallback
-import com.kakao.auth.Session
-import com.kakao.util.exception.KakaoException
-import com.kakao.util.helper.log.Logger
+import com.song2.wave.Data.POST.PostLogin
 import com.song2.wave.R
+import com.song2.wave.UI.Main.MainActivity
+import com.song2.wave.UI.Signup.SignupFirstActivity
+import com.song2.wave.Util.Network.ApiClient
+import com.song2.wave.Util.Network.NetworkService
+import com.song2.wave.Util.Network.POST.PostResponse
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_start.*
+import retrofit2.Call
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
-    private var callback: SessionCallback? = null
-
-    /**
-     * 로그인 버튼을 클릭 했을시 access token을 요청하도록 설정한다.
-     *
-     * @param savedInstanceState 기존 session 정보가 저장된 객체
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        callback = SessionCallback()
-        Session.getCurrentSession().addCallback(callback)
-        Session.getCurrentSession().checkAndImplicitOpen()
-
-        val token = Session.getCurrentSession().tokenInfo.accessToken
-        Log.v("TAG", "토큰값 = " + token)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            return
+        bt_submit_act_login.setOnClickListener {
+            postLogin()
         }
 
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Session.getCurrentSession().removeCallback(callback)
-    }
-
-    private inner class SessionCallback : ISessionCallback {
-
-        override fun onSessionOpened() {
-            redirectSignupActivity()
+        bt_start_act_email_login.setOnClickListener {
+            var intent = Intent(applicationContext, SignupFirstActivity::class.java)
+            startActivity(intent)
         }
 
-        override fun onSessionOpenFailed(exception: KakaoException?) {
-            if (exception != null) {
-                Logger.e(exception)
+    }
+
+    // 로그인
+    fun postLogin()
+    {
+        val networkService = ApiClient.getRetrofit().create(NetworkService::class.java)
+        var postLogin = PostLogin(edt_id_act_email_login.text.toString(), edt_pw_act_email_login.text.toString())
+        var postLoginResponse = networkService.postLogin(postLogin)
+        postLoginResponse.enqueue(object : retrofit2.Callback<PostResponse>{
+
+            override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {
+                if(response.isSuccessful){
+                    Log.v("Asdf","승인 = " + response.body())
+                    var token = response.body()!!.data
+                    Log.v("ASdf"," 토큰 = " + token)
+                    // 자신의 유저 정보 내부 DB에 저장
+                    var pref = applicationContext.getSharedPreferences("auto", Activity.MODE_PRIVATE)
+                    var editor: SharedPreferences.Editor = pref.edit()
+                    editor.putString("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM") // 토란  key값으로 userID 데이터를 저장한다.
+                    var intent = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(intent)
+                }
             }
-        }
-    }
-
-    protected fun redirectSignupActivity() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
+            override fun onFailure(call: Call<PostResponse>, t: Throwable?) {
+            }
+        })
     }
 }

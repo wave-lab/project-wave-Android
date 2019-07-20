@@ -5,6 +5,7 @@
     android:layout_height="110dp"
     android:orientation="vertical"
     android:layout_marginLeft="16dp"
+    android:background="#000000"
     >
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_cover_artist_item_profile"
@@ -20,6 +21,8 @@
         android:text="Post Ma…"
         android:textSize="16sp"
         android:textColor="#ffffff"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:fontFamily="@font/noto_sans_kr_bold_hestia"
         android:includeFontPadding="false"
         android:layout_gravity="center"
