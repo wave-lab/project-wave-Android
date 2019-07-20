@@ -1,25 +1,21 @@
-package com.song2.wave.UI.Main.MyPage
+package com.song2.wave.UI.Main.MyPage.UpLoadSong
 
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.song2.wave.R
-import kotlinx.android.synthetic.main.activity_signup_genre.*
 import kotlinx.android.synthetic.main.activity_upload_genre.*
 import org.jetbrains.anko.startActivity
 
 class UpLoadGenreActivity : AppCompatActivity(), View.OnClickListener {
 
 
-    lateinit var receivedImgUri : Uri
     lateinit var genreArr : Array<ImageView>
     var selectedGenreArr = ArrayList<String>()
-    lateinit var selectedArtistArr : ArrayList<String>
 
     override fun onClick(v: View?) {
         for(i in 0..7){
@@ -28,7 +24,7 @@ class UpLoadGenreActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(applicationContext, "장르 " +"g" + (i+1).toString() + "번 버튼 선택", Toast.LENGTH_LONG).show()
             }
         }
-        for(i in 0..selectedGenreArr.size-1)
+        for(i in selectedGenreArr.indices)
             Log.v("act", "장르 배열 값 = " + selectedGenreArr[i])
 
     }

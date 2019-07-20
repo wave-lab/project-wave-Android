@@ -1,9 +1,12 @@
-package com.song2.wave.UI.Main.MyPage
+package com.song2.wave.UI.Main.MyPage.UpLoadSong
 
+import android.content.Context
+import android.database.Cursor
 import android.media.MediaPlayer
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.SeekBar
 import com.song2.wave.R
@@ -29,9 +32,10 @@ class SetStartPointActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_start_point)
 
-        var upload_song_uri: String = intent.getStringExtra("musicDataURI")
+        var upload_song_uri = Uri.parse(intent.getStringExtra("musicDataURI"))
+        var upload_song_real_form: String = getRealPathFromURI(applicationContext, upload_song_uri)
 
-        initialSetting(upload_song_uri)
+        initialSetting(upload_song_real_form)
 
         iv_set_start_act_play_btn.setOnClickListener {
             Log.e("seekbarSelectorBefore", sb_set_start_act_seekbar.isSelected.toString())
@@ -49,7 +53,7 @@ class SetStartPointActivity : AppCompatActivity() {
 
         iv_set_start_act_upload_btn.setOnClickListener {
             try {
-                startActivity<UpLoadSongCoverActivity>("StartPoint" to currentPosition.toString(), "songURI" to upload_song_uri)
+                startActivity<UpLoadSongCoverActivity>("StartPoint" to currentPosition.toString(), "songURI" to upload_song_uri.toString())
                 mediaPlayer.stop()
                 finish()
                 //killMediaPlayer()
@@ -168,5 +172,18 @@ class SetStartPointActivity : AppCompatActivity() {
         mediaPlayer.release()
     }
 
+    // 이미지 파일을 확장자까지 표시해주는 메소드
+    fun getRealPathFromURI(context: Context, contentUri: Uri): String {
+        var cursor: Cursor? = null
+        try {
+            val proj = arrayOf(MediaStore.Images.Media.DATA)
+            cursor = context.contentResolver.query(contentUri, proj, null, null, null)
+            val column_index = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            return cursor.getString(column_index)
+        } finally {
+            cursor?.close()
+        }
+    }
 
 }

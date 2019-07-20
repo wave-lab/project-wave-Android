@@ -14,8 +14,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ScrollView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.song2.wave.Util.Audio.AudioAdapter
@@ -35,8 +33,7 @@ import com.song2.wave.R
 import com.song2.wave.UI.Main.Home.Adapter.*
 import com.song2.wave.UI.Main.Home.Top10.Top10Fragment
 import com.song2.wave.UI.Main.MyPage.PointHistoryFragment
-import com.song2.wave.UI.Main.MyPage.UpLoadFileActivity
-import com.song2.wave.UI.Signup.SignupFirstActivity
+import com.song2.wave.UI.Main.MyPage.UpLoadSong.UpLoadFileActivity
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
 import kotlinx.android.synthetic.main.fragment_home_on.*
