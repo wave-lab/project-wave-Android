@@ -1,13 +1,11 @@
-package com.song2.wave
+package com.song2.wave.UI.Artist
 
 import android.app.Fragment
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.song2.wave.Data.model.SongData
-import kotlinx.android.synthetic.main.fragment_artist_song_list.*
+import com.song2.wave.R
 
 class ArtistSongListFragment : Fragment() {
     lateinit var artist_song_view_adapter : ArtistSongListViewAdapter

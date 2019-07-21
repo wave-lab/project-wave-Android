@@ -16,21 +16,19 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:clickable="true"
-        android:focusableInTouchMode="true"
-        >
+        android:focusableInTouchMode="true">
 
         <Button
             android:id="@+id/btn_search_home_frag_searchbar"
+            android:layout_marginStart="16dp"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/tab_btn_search_active"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
-            android:layout_toRightOf="@id/edit_search_home_frag_searchbar"
-            />
+            android:layout_centerVertical="true"/>
 
         <EditText
                 android:id="@+id/edit_search_home_frag_searchbar"
+                android:layout_toRightOf="@id/btn_search_home_frag_searchbar"
                 android:layout_width="290dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="12dp"
@@ -43,11 +41,10 @@
                 android:layout_centerVertical="true"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
-                android:background="@color/transparent"
+                android:background="@color/transparent"/>
 
-        />
+    </RelativeLayout> //검색창
 
-    </RelativeLayout>
     <RelativeLayout
             android:id="@+id/rv_search_background"
             android:layout_centerInParent="true"
@@ -56,22 +53,21 @@
             android:layout_marginTop="192dp"
             android:background="@drawable/img_search_before_def">
 
-    </RelativeLayout>
+    </RelativeLayout> //검색 이전
+
     <LinearLayout
         android:id="@+id/ll_search_home_frag_focus_on"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_below="@+id/rl_search_home_frag_searchbar"
-        android:layout_marginTop="24dp"
-        >
+        android:layout_marginTop="24dp"     >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:orientation="horizontal"
-            android:gravity="center"
-            >
+            android:gravity="center">
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -90,7 +86,7 @@
 
                 <TextView
                         android:visibility="gone"
-                    android:id="@+id/tv_search_home_frag_all_delete"
+                        android:id="@+id/tv_search_home_frag_all_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="전체삭제"
@@ -104,7 +100,8 @@
 
             </RelativeLayout>
 
-        </LinearLayout>
+        </LinearLayout> //최근검색어 setting
+
         <android.support.v7.widget.RecyclerView
                 android:visibility="gone"
             android:id="@+id/recycler_search_home_frag_search_home_hisory"
@@ -113,36 +110,35 @@
             android:layout_marginTop="18dp"
             >
 
-        </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView> //최근검색어
 
         <LinearLayout
                 android:id="@+id/ll_search_home_frag_focus"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-        >
+                android:orientation="vertical">
         </LinearLayout>
-    </LinearLayout>
+    </LinearLayout> //최근검색
+
     <ScrollView
             android:visibility="gone"
-        android:id="@+id/ll_search_home_frag_focus_off"
+            android:id="@+id/ll_search_home_frag_focus_off"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:layout_below="@+id/rl_search_home_frag_searchbar"
-        >
-        <LinearLayout
+        android:layout_below="@+id/rl_search_home_frag_searchbar">
 
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
+            //원곡아티스트
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:orientation="horizontal"
-                android:layout_marginBottom="12dp"
-                >
+                android:layout_marginBottom="12dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -151,26 +147,22 @@
                     android:layout_marginLeft="16dp"
                     android:textColor="#ffffff"
                     android:textSize="22sp"
-                    android:includeFontPadding="false"
-                    />
-
+                    android:includeFontPadding="false" />
             </LinearLayout>
-
             <RelativeLayout
                 android:id="@+id/rel_search_home_frag_artist"
-                android:layout_width="100dp"
-                android:layout_height="86dp"
-                android:layout_marginLeft="16dp"
-                >
+                android:layout_width="120dp"
+                android:layout_height="110dp"
+                android:layout_marginLeft="16dp">
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_search_home_frag_origin_artist"
-                    android:layout_width="86dp"
-                    android:layout_height="86dp"
-                    android:background="@drawable/img_artistprofile"
-                    />
+                    android:layout_width="100dp"
+                    android:layout_height="110dp"/>
 
             </RelativeLayout>
 
+            //곡
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
@@ -197,7 +189,6 @@
                     />
 
             </LinearLayout>
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_search_home_frag_song"
                 android:layout_width="match_parent"
@@ -206,6 +197,7 @@
                 >
             </android.support.v7.widget.RecyclerView>
 
+            //커버아티스트
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
@@ -224,23 +216,21 @@
                     />
 
             </LinearLayout>
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_search_home_frag_artist"
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="12dp"
                 ></android.support.v7.widget.RecyclerView>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                >
+                android:layout_height="62dp">
 
             </LinearLayout>
         </LinearLayout>
 
 
-    </ScrollView>
+    </ScrollView> //검색결과
 
 </RelativeLayout>
