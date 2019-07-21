@@ -1,8 +1,9 @@
-package com.song2.wave
+package com.song2.wave.UI
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.song2.wave.R
 import com.song2.wave.UI.Login.LoginActivity
 import com.song2.wave.UI.Main.MainActivity
 import com.song2.wave.UI.Signup.SignupFirstActivity

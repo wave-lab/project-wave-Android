@@ -1,10 +1,8 @@
-package com.song2.wave
+package com.song2.wave.UI.Artist
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import com.song2.wave.Data.model.SongData
-import kotlinx.android.synthetic.main.activity_artist_song_list.*
+import com.song2.wave.R
 
 class ArtistSongListActivity : AppCompatActivity() {
     lateinit var artist_song_list_view_adapter : ArtistSongListViewAdapter

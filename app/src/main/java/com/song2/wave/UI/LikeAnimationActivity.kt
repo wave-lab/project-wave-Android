@@ -1,4 +1,4 @@
-package com.song2.wave
+package com.song2.wave.UI
 
 import android.animation.Animator
 import android.net.Uri
@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.VideoView
 import com.airbnb.lottie.LottieAnimationView
+import com.song2.wave.R
 import kotlinx.android.synthetic.main.activity_like_animation.*
 
 class LikeAnimationActivity : AppCompatActivity() {

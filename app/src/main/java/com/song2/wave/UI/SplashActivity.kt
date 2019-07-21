@@ -1,9 +1,10 @@
-package com.song2.wave
+package com.song2.wave.UI
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
+import com.song2.wave.R
 
 
 class SplashActivity : AppCompatActivity() {
