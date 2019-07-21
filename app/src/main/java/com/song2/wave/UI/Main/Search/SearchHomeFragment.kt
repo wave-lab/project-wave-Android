@@ -30,17 +30,15 @@ import retrofit2.Response
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.text.InputType
-
-
-
-
-
+import android.widget.Toast
+import com.song2.wave.Data.model.Scoring.TitleData
 
 
 class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
 
-    val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
+    val networkService: NetworkService by lazy {
+        ApiClient.getRetrofit().create(NetworkService::class.java)
     }
     var TAG = "SearchFragment"
 
@@ -76,10 +74,8 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
             getSearchResponse(getArguments()!!.getString("searchData"))
         }*/
 
-
-
-
-        v.btn_search_home_frag_searchbar.setOnClickListener {
+        //검색버튼
+/*        v.btn_search_home_frag_searchbar.setOnClickListener {
             getSearchResponse(edit_search_home_frag_searchbar.text.toString())
 
 
@@ -91,7 +87,26 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
             edit_search_home_frag_searchbar.clearFocus()
             searchBackFlag = 0
 
-        }
+        }*/
+
+        v.edit_search_home_frag_searchbar.setOnEditorActionListener({ textView, actionId, keyEvent ->
+
+            var handled = false
+
+            if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                //perform search
+                getSearchResponse(edit_search_home_frag_searchbar.text.toString())
+
+                ll_search_home_frag_focus_off.visibility = View.VISIBLE
+                ll_search_home_frag_focus_on.visibility = View.GONE
+                rv_search_background.visibility = View.GONE
+
+                edit_search_home_frag_searchbar.clearFocus()
+                searchBackFlag = 0
+            }
+            handled
+
+        })
 
 
         v.ll_search_home_frag_focus_on.visibility = View.GONE
@@ -109,11 +124,10 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         insertExampleData()
 
 
-       insertSearchHistoryData(v)
+        insertSearchHistoryData(v)
 
         // Edittext focus ON
         v.edit_search_home_frag_searchbar.setOnFocusChangeListener { view, hasFocus ->
-            rv_search_background.visibility = View.GONE
             if (hasFocus) {
                 searchEditTextFocusOn()
             }
@@ -122,7 +136,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
 
         // "all delte" button is clicked
-       v.tv_search_home_frag_all_delete.setOnClickListener {
+        v.tv_search_home_frag_all_delete.setOnClickListener {
             searchData.clear()
             searchDataHistoryAdapter = SearchDataHistoryAdapter(searchData)
             v.recycler_search_home_frag_search_home_hisory.adapter = searchDataHistoryAdapter
@@ -186,6 +200,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
     }
 
     fun searchEditTextFocusOn() {
+        rv_search_background.visibility = View.GONE
         ll_search_home_frag_focus_off.visibility = View.GONE
         ll_search_home_frag_focus_on.visibility = View.VISIBLE
         searchBackFlag = 1
@@ -210,67 +225,85 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
                 toast("성공")
                 Log.v("Asdf", "성공")
-                var originArtistDataList = response.body()!!.data!!.originArtistName
-                var originTitleDataList = response.body()!!.data!!.originTitle
-                var coverArtistDataList = response.body()!!.data!!.artistName
 
-                if (originArtistDataList.indices.equals(0))
-                    return
+                lateinit var originArtistDataList : ArrayList<OriginArtistData>
+                lateinit var originTitleDataList: ArrayList<TitleData>
+                lateinit var coverArtistDataList:ArrayList<SearchCoverArtistData>
 
-                for (i in originArtistDataList.indices) {
-                    originDataArr.add(
-                        OriginArtistData(
-                            originArtistDataList[i].originArtistIdx,
-                            originArtistDataList[i].originArtistName,
-                            originArtistDataList[i].originArtistImg
+                if(response.body()!!.data!!.originArtistName != null) {
+                    originArtistDataList = response.body()!!.data!!.originArtistName!!
+
+                    for (i in originArtistDataList.indices) {
+                        originDataArr.add(
+                            OriginArtistData(
+                                originArtistDataList[i].originArtistIdx,
+                                originArtistDataList[i].originArtistName,
+                                originArtistDataList[i].originArtistImg
+                            )
                         )
-                    )
+                    }
+
+                    originArtistSearchAdapter = OriginArtistSearchAdapter(originDataArr, requestManager)
+                    recycler_search_home_frag_artist.adapter = originArtistSearchAdapter
+                    recycler_search_home_frag_song.layoutManager =
+                            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    recycler_search_home_frag_song.isNestedScrollingEnabled = false
+
+                    Log.v("SearchHomeFragment_searchResult : ", "originArtistName="+response.body()!!.data!!.originArtistName.toString())
+                    Log.v("SearchHomeFragment_searchResult : ","originTitleDataList="+response.body()!!.data!!.originTitle.toString())
+                    Log.v("SearchHomeFragment_searchResult : ","coverArtistDataList="+response.body()!!.data!!.artistName.toString())
+                }else
+
+
+                if(response.body()!!.data!!.originTitle != null) {
+
+                    originTitleDataList = response.body()!!.data!!.originTitle!!
+
+                    for (i in originTitleDataList.indices) {
+                        songDataArr.add(
+                            SongData(
+                                originTitleDataList[i].id,
+                                originTitleDataList[i].songUrl,
+                                originTitleDataList[i].artwork,
+                                originTitleDataList[i].originTitle,
+                                originTitleDataList[i].originArtistName,
+                                originTitleDataList[i].coverArtistName,
+                                originTitleDataList[i].genre
+                            )
+                        )
+                    }
+
+                    songSearchAdapter = SongSearchAdapter(songDataArr, requestManager)
+                    recycler_search_home_frag_song.adapter = songSearchAdapter
+                    recycler_search_home_frag_song.layoutManager = LinearLayoutManager(context)
+                    recycler_search_home_frag_song.isNestedScrollingEnabled = false
+
+                    Log.v("SearchHomeFragment_searchResult : ", "originArtistName="+response.body()!!.data!!.originArtistName.toString())
+                    Log.v("SearchHomeFragment_searchResult : ","originTitleDataList="+response.body()!!.data!!.originTitle.toString())
+                    Log.v("SearchHomeFragment_searchResult : ","coverArtistDataList="+response.body()!!.data!!.artistName.toString())
                 }
 
-                originArtistSearchAdapter = OriginArtistSearchAdapter(originDataArr, requestManager)
-                recycler_search_home_frag_artist.adapter = originArtistSearchAdapter
-                recycler_search_home_frag_song.layoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                recycler_search_home_frag_song.isNestedScrollingEnabled = false
+                if(response.body()!!.data!!.artistName != null) {
+                    coverArtistDataList = response.body()!!.data!!.artistName!!
 
-                if (originTitleDataList.indices.equals(0))
-                    return
-                Log.v("Asdf", "테스트 값= " + originTitleDataList)
-                for (i in originTitleDataList.indices) {
-                    songDataArr.add(
-                        SongData(
-                            originTitleDataList[i].id,
-                            originTitleDataList[i].songUrl,
-                            originTitleDataList[i].artwork,
-                            originTitleDataList[i].originTitle,
-                            originTitleDataList[i].originArtistName,
-                            originTitleDataList[i].coverArtistName,
-                            originTitleDataList[i].genre
+                    for (i in coverArtistDataList.indices) {
+                        coverArtistDataArr.add(
+                            CoverArtistData(
+                                coverArtistDataList[i].profileImg,
+                                coverArtistDataList[i].nickname
+                            )
                         )
-                    )
+                    }
+                    coverArtistAdapter = CoverArtistSearchAdapter(coverArtistDataArr, requestManager)
+                    recycler_search_home_frag_artist.adapter = coverArtistAdapter
+                    recycler_search_home_frag_artist.layoutManager =
+                            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    recycler_search_home_frag_artist.isNestedScrollingEnabled = false
+
+                    Log.v("SearchHomeFragment_searchResult : ", "originArtistName="+response.body()!!.data!!.originArtistName.toString())
+                    Log.v("SearchHomeFragment_searchResult : ","originTitleDataList="+response.body()!!.data!!.originTitle.toString())
+                    Log.v("SearchHomeFragment_searchResult : ","coverArtistDataList="+response.body()!!.data!!.artistName.toString())
                 }
-
-                songSearchAdapter = SongSearchAdapter(songDataArr, requestManager)
-                recycler_search_home_frag_song.adapter = songSearchAdapter
-                recycler_search_home_frag_song.layoutManager = LinearLayoutManager(context)
-                recycler_search_home_frag_song.isNestedScrollingEnabled = false
-
-                if (coverArtistDataList.indices.equals(0))
-                    return
-                for (i in coverArtistDataList.indices) {
-                    coverArtistDataArr.add(
-                        CoverArtistData(
-                            coverArtistDataList[i].profileImg,
-                            coverArtistDataList[i].nickname
-                        )
-                    )
-                }
-
-                coverArtistAdapter = CoverArtistSearchAdapter(coverArtistDataArr, requestManager)
-                recycler_search_home_frag_artist.adapter = coverArtistAdapter
-                recycler_search_home_frag_artist.layoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                recycler_search_home_frag_artist.isNestedScrollingEnabled = false
             }
         })
     }
