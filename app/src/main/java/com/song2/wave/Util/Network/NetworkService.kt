@@ -139,13 +139,12 @@ interface NetworkService {
             @Body postLogin : PostLogin
     ) : Call<PostResponse>
 
-/*
+    //아티스트 정보
     @GET("/core/users/{userIdx}")
     fun getArtistInfoRespnose(
-        @Header("Content-Type") content_type: String
-        @Path("userIdx") userIdx
-    ) : Call<GetArtistInfoRespnose>
-*/
+        @Header("Content-Type") content_type: String,
+        @Path("userIdx") userIdx: Long
+    ) : Call<GetArtistInfoResponse>
 
     ////////////////////* POST *///////////////////////////
 
