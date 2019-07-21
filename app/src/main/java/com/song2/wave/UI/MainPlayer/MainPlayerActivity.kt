@@ -44,51 +44,7 @@ import org.jetbrains.anko.toast
 import org.json.JSONObject
 
 
-class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
+class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var playTime: String
     var playbackPosition : Int = 0

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +34,6 @@ import com.song2.wave.Data.model.Scoring.TitleData
 
 
 class SearchHomeFragment : Fragment(), OnBackPressedListener {
-
 
     val networkService: NetworkService by lazy {
         ApiClient.getRetrofit().create(NetworkService::class.java)
@@ -70,24 +68,6 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         var v: View = inflater.inflate(com.song2.wave.R.layout.fragment_search_home, container, false)
 
         originDataArr = ArrayList<OriginArtistData>()
-/*        if(getArguments() != null){
-            getSearchResponse(getArguments()!!.getString("searchData"))
-        }*/
-
-        //검색버튼
-/*        v.btn_search_home_frag_searchbar.setOnClickListener {
-            getSearchResponse(edit_search_home_frag_searchbar.text.toString())
-
-
-
-            ll_search_home_frag_focus_off.visibility = View.VISIBLE
-            ll_search_home_frag_focus_on.visibility = View.GONE
-            rv_search_background.visibility = View.GONE
-
-            edit_search_home_frag_searchbar.clearFocus()
-            searchBackFlag = 0
-
-        }*/
 
         v.edit_search_home_frag_searchbar.setOnEditorActionListener({ textView, actionId, keyEvent ->
 
@@ -121,7 +101,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
         }
 
-        insertExampleData()
+        //insertExampleData()
 
 
         insertSearchHistoryData(v)
@@ -230,6 +210,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                 lateinit var originTitleDataList: ArrayList<TitleData>
                 lateinit var coverArtistDataList:ArrayList<SearchCoverArtistData>
 
+                //원곡아티스트
                 if(response.body()!!.data!!.originArtistName != null) {
                     originArtistDataList = response.body()!!.data!!.originArtistName!!
 
@@ -244,17 +225,17 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                     }
 
                     originArtistSearchAdapter = OriginArtistSearchAdapter(originDataArr, requestManager)
-                    recycler_search_home_frag_artist.adapter = originArtistSearchAdapter
-                    recycler_search_home_frag_song.layoutManager =
-                            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    recycler_search_home_frag_song.isNestedScrollingEnabled = false
+                    recycler_search_home_frag_origin_artist.adapter = originArtistSearchAdapter
+                    recycler_search_home_frag_origin_artist.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    recycler_search_home_frag_origin_artist.isNestedScrollingEnabled = false
 
                     Log.v("SearchHomeFragment_searchResult : ", "originArtistName="+response.body()!!.data!!.originArtistName.toString())
                     Log.v("SearchHomeFragment_searchResult : ","originTitleDataList="+response.body()!!.data!!.originTitle.toString())
                     Log.v("SearchHomeFragment_searchResult : ","coverArtistDataList="+response.body()!!.data!!.artistName.toString())
-                }else
+                }else{}
 
 
+                //원곡타이틀
                 if(response.body()!!.data!!.originTitle != null) {
 
                     originTitleDataList = response.body()!!.data!!.originTitle!!
@@ -283,6 +264,8 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                     Log.v("SearchHomeFragment_searchResult : ","coverArtistDataList="+response.body()!!.data!!.artistName.toString())
                 }
 
+
+                //커버가수
                 if(response.body()!!.data!!.artistName != null) {
                     coverArtistDataList = response.body()!!.data!!.artistName!!
 
