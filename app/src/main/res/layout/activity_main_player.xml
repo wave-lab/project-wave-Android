@@ -278,13 +278,6 @@
             android:thumb="@android:color/transparent"
             android:progressTint="#00b6de"
             android:layout_height="12dp"
-            android:id="@+id/sb_scoring_player_act_seekbar"/>    <SeekBar
-            android:layout_below="@+id/ll_main_player_act_time"
-            android:layout_centerHorizontal="true"
-            android:layout_width="330dp"
-            android:thumb="@android:color/transparent"
-            android:progressTint="#00b6de"
-            android:layout_height="12dp"
             android:id="@+id/sb_scoring_player_act_seekbar"/>
 
 

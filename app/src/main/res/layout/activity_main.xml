@@ -21,14 +21,16 @@
 
     </LinearLayout>
     <SeekBar
+        android:id="@+id/seekbar_main_act_seek"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:progressTint="@color/colorPrimary"
-        android:layout_below="@+id/ll_main_act_top_layout"
+        android:layout_above="@+id/ll_main_act_tab_bar"
+        android:background="#000000"
         />
 
     <LinearLayout
-            android:background="#000000"
+        android:background="#000000"
         android:id="@+id/ll_main_act_tab_bar"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
@@ -180,7 +182,7 @@
         android:layout_height="64dp"
         android:background="#121212"
         android:orientation="horizontal"
-        android:layout_above="@+id/ll_main_act_tab_bar"
+        android:layout_above="@+id/seekbar_main_act_seek"
         >
 
         <ImageView

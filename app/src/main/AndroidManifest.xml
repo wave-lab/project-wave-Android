@@ -19,7 +19,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".UI.SplashActivity">
+        <activity android:name=".UI.Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,7 +1,5 @@
 package com.song2.wave.UI.MainPlayer
 
-import android.animation.Animator
-import android.app.Activity
 import android.content.*
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
@@ -13,21 +11,13 @@ import android.view.View
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
-import android.widget.VideoView
-import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import com.song2.wave.Util.Audio.AudioApplication
 import com.song2.wave.Util.Audio.AudioService
 import com.song2.wave.Util.Audio.BroadcastActions
 import com.song2.wave.Data.GET.GetSongDetailResponse
-import com.song2.wave.Data.POST.PostLogin
-import com.song2.wave.Data.POST.PostRating
 import com.song2.wave.R
-import com.song2.wave.UI.Main.MainActivity
 import com.song2.wave.UI.MainPlayer.Adapter.CoverImgViewPager
-import com.song2.wave.Util.DB.DBHelper
 import com.song2.wave.Util.Network.ApiClient
 import com.song2.wave.Util.Network.NetworkService
 import com.song2.wave.Util.Player.Service.MyForeGroundService
@@ -36,13 +26,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
-import com.song2.wave.Util.DB.DbOpenHelper
-import com.song2.wave.Util.Network.POST.PostResponse
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_signup_first.*
-import org.jetbrains.anko.toast
-import org.json.JSONObject
-
 
 class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -59,26 +42,25 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
     var songImgUrl : String = ""
     var flag : Int = 0
     var _id : String = ""
-    var ratingFlag = 0
-    var score : Int = 0
 
     var selectedFlag : Int = 0
     lateinit var durationTimeTv : TextView
     lateinit var lengthTimeTv : TextView
-    private var mDbOpenHelper: DbOpenHelper? = null
+
 
     var currentPosition = 0
     var prevSongIdx = 0
 
     var mPosition : Int = 0
 
-    var authorization_info : String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
+    var authorization_info : String = ""
 
     // var n_sbHandler = sbHandler()
-     //var seekBarThread = sbThread()
+    //var seekBarThread = sbThread()
 
     val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
     }
+
 
     override fun onClick(v: View) {
         when (v.id) {
@@ -94,6 +76,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
 
     fun addCoverImgViewPager() {
+
 
         var imageList = arrayListOf<String>(
                 "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
@@ -160,15 +143,15 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     var sourceMusicArray: Array<String> = arrayOf(
-        "https://project-wave-1.s3.ap-northeast-2.amazonaws.com/Roller+Coaster_%EC%B2%AD%ED%95%98_320k.mp3",
-        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-01.mp3",
-        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-02.mp3",
-        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-03.mp3",
-        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-04.mp3",
-        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-05.mp3",
-        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-06.mp3",
-        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-07.mp3",
-        "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-08.mp3"
+            "https://project-wave-1.s3.ap-northeast-2.amazonaws.com/Roller+Coaster_%EC%B2%AD%ED%95%98_320k.mp3",
+            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-01.mp3",
+            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-02.mp3",
+            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-03.mp3",
+            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-04.mp3",
+            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-05.mp3",
+            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-06.mp3",
+            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-07.mp3",
+            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-08.mp3"
     )
 
 
@@ -213,7 +196,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         val audioItem = AudioApplication.getInstance().serviceInterface.audioItem
         if (audioItem != null) {
             val albumArtUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), audioItem.mAlbumId)
-           //Glide.with(applicationContext).load(albumArtUri).into(vp_main_player_act_cover_img)
+            //Glide.with(applicationContext).load(albumArtUri).into(vp_main_player_act_cover_img)
             tv_main_player_act_title_sing.setText(audioItem.mTitle)
         } else {
             vp_main_player_act_cover_img.setBackgroundResource(R.drawable.kakao_default_profile_image)
@@ -231,78 +214,15 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         durationTimeTv = findViewById(R.id.tv_main_player_duration_time)
         lengthTimeTv = findViewById(R.id.tv_main_player_length_of_song)
 
-        //--------------------------------------애니메이션---------
-        // val video : VideoView = findViewById(R.id.video)
-        //com.airbnb.lottie.LottieAnimationView 아이디
-        val love : LottieAnimationView = findViewById(R.id.lottie_main_act_like)
-        val videoView = findViewById<VideoView>(R.id.video)
-        val path = "android.resource://" + packageName + "/" + R.raw.try_11
-        videoView?.setVideoURI(Uri.parse(path))
-        //val button = findViewById<Button>(R.id.button)
-
-        lottie_main_act_like.setOnClickListener {
-            love.playAnimation()
-            val isPlaying = videoView.isPlaying
-            if (isPlaying) {
-                //videoView.pause()
-            } else {
-                videoView.start()
-            }
-        }
-        love.addAnimatorListener(object : Animator. AnimatorListener{
-            override fun onAnimationRepeat(animation: Animator?) {
-                Log.e("Animation:","repeat")
-            }
-            override fun onAnimationEnd(animation: Animator?) {
-                //Toast.makeText( application , "끝~",Toast. LENGTH_SHORT ).show()
-            }
-            override fun onAnimationCancel(animation: Animator?) {
-                Log.e("Animation:","cancel")  //취소
-            }
-            override fun onAnimationStart(animation: Animator?) {
-                Log.e("Animation ","star") //시작
-            }
-        })
-
-        //------------------------------------------------애니메이션
         iv_main_player_act_stop_btn.setOnClickListener(this)
         mPosition = intent.getIntExtra("mPosition", 0)
 
         flag = intent.getIntExtra("flag", 0)
-        ratingFlag = intent.getIntExtra("rating_flag", 0)
-
-        if(ratingFlag == 0){
-
-        }
-        else if(ratingFlag == 1){
-            img_main_player_act_cover_img.setOnClickListener {
-                rl_main_player_act_trans.visibility = View.VISIBLE
-                rl_main_player_act_rating.visibility = View.VISIBLE
-                ll_main_player_act_commnet.visibility = View.INVISIBLE
-            }
-            rl_main_player_act_all.setOnClickListener {
-                rl_main_player_act_trans.visibility = View.INVISIBLE
-            }
-
-            iv_main_player_like_btn.setOnClickListener {
-                iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected
-            }
-
-            btn_main_player_act_comment.setOnClickListener {
-                ll_main_player_act_commnet.visibility = View.VISIBLE
-                rl_main_player_act_rating.visibility = View.INVISIBLE
-            }
-            rb_main_player_act_rating.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
-                score = rating.toInt()
-                postRating()
-            }
-        }
 
         // 노래 선택으로 입장
         authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxMDUsImlhdCI6MTU2MjcyMjQ5MCwiZXhwIjoxNTY1MzE0NDkwfQ.CdVtW28EY4XOWV_xlt2dlYFMdEdFcIRN6lmsmJ8_jKQ"
 
         val extras = intent.extras
-        Log.v("","엑스트라 = "+extras)
 
         // 노래 선택으로 입장 시
         if (extras == null) {
@@ -314,9 +234,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
             coverArtist = intent.getStringExtra("coverArtist")
             songUrl = intent.getStringExtra("songUrl")
             AudioApplication.getInstance().serviceInterface.play(applicationContext, _id, songUrl, originArtist, coverArtist,  title) // 선택한 오디오재생
-
         }
-
         // notification으로 입장 시
         else {
             Log.v("asdf", "선택 - 노티피케이션")
@@ -325,63 +243,47 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
             originArtist = extras.getString("originArtist")
             coverArtist = extras.getString("coverArtist")
         }
-               if(flag == 0){
+        if(flag == 0){
             songUrl = intent.getStringExtra("songUrl")
-        }
 
+        }
 
         Log.v("Asdf","플래그 = " + flag)
 
         getSongDetail()
 
         tv_main_player_act_title_sing.text = title + " - " + originArtist
-        tv_main_player_cover_artist_name.text =  coverArtist
+        tv_main_player_cover_artist_name.text = "Covered by " + coverArtist
         img_main_player_act_cover_img.visibility = View.VISIBLE
         vp_main_player_act_cover_img.visibility = View.INVISIBLE
 
-        tv_main_player_artist_name.text = originArtist
-        tv_main_player_act_introduce_short.text = "한 줄 코멘트"
         Glide.with(this).load(songImgUrl).into(img_main_player_act_cover_img)
 
         initialSetting()
 
         playerBtn()
         registerBroadcast();
-        updateUI()
+        updateUI();
 
-        iv_maim_player_close.setOnClickListener {
-            finish()
+        img_main_player_act_cover_img.setOnClickListener {
+            rl_main_player_act_trans.visibility = View.VISIBLE
+            rl_main_player_act_rating.visibility = View.VISIBLE
+            ll_main_player_act_commnet.visibility = View.INVISIBLE
+        }
+        rl_main_player_act_all.setOnClickListener {
+            rl_main_player_act_trans.visibility = View.INVISIBLE
+        }
+
+        iv_main_player_like_btn.setOnClickListener {
+            iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected
+        }
+
+        btn_main_player_act_comment.setOnClickListener {
+            ll_main_player_act_commnet.visibility = View.VISIBLE
+            rl_main_player_act_rating.visibility = View.INVISIBLE
         }
 
     }
-
-    override fun onStop() {
-        super.onStop()
-        finish()
-    }
-
-    fun postRating()
-    {
-        val pref = applicationContext.getSharedPreferences("auto", Activity.MODE_PRIVATE)
-        var token : String = ""
-        token = pref.getString("token", "")
-
-        val networkService = ApiClient.getRetrofit().create(NetworkService::class.java)
-        var postRating = PostRating(score)
-        var postLoginResponse = networkService.postRating(token, postRating)
-        postLoginResponse.enqueue(object : retrofit2.Callback<PostResponse>{
-
-            override fun onResponse(call: Call<PostResponse>, response: Response<PostResponse>) {
-                if(response.isSuccessful){
-                    Log.v("TAG","평가 완료")
-                }
-            }
-            override fun onFailure(call: Call<PostResponse>, t: Throwable?) {
-
-            }
-        })
-    }
-
 
     private fun registerBroadcast() {
         val filter = IntentFilter()
@@ -403,142 +305,171 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
     fun initialSetting(){
 
         addSeekBar()
+        //addTimer()
 
+//        var play_duration = audioService.getDuration()
+        //      var lengthOfSong =
+        //            String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
+        //tv_set_start_act_length_of_song.setText(lengthOfSong)
+
+        //  seekbar.setMax(play_duration)
     }
 
 
     //seekbar touchListener
     fun addSeekBar() {
         seekbar = sb_scoring_player_act_seekbar
-        seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        seekbar.setOnClickListener(this)
 
-            //값을 변경 한 후 터치를 떼었을 때
-            override fun onStopTrackingTouch(seekbar: SeekBar) {
-                isPlaying = true
-                playbackPosition = seekbar.progress
-//                mediaPlayer.seekTo(playbackPosition)
-
-                Log.e("onStopTrackingTouch", sb_scoring_player_act_seekbar.isSelected.toString())
-            }
-
-            //seek바의 값을 변경하기 위해 터치했을 때
-            override fun onStartTrackingTouch(seekbar: SeekBar) {
-                Log.e("onStartTrackingTouch", sb_scoring_player_act_seekbar.isSelected.toString())
-
-                isPlaying = false
-//                mediaPlayer.pause()
-            }
-
-            //seek바의 값이 변경되었을때 + fromUser: Boolean : 터치를 통해 변경했으면 false , 코드를 통하면 true
-            override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (seekbar!!.getMax() == progress) {
-                    isPlaying = false
-//                    mediaPlayer.stop()
-                }
-            }
-        })
     }
 
     fun playerBtn() {
 
+
+        /*
+        //if Looping == False
+        mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
+            override fun onCompletion(p0: MediaPlayer?) {
+                Log.v("Complete", "Complete")
+                //musicThread.nextSong()
+                nextSong()
+            }
+        })
+*/
+
+/*
+       iv_main_player_act_stop_btn.setOnClickListener {
+
+          // if (iv_main_player_act_stop_btn.isSelected and (myService.currentDuration == 0)) {
+           if (!iv_main_player_act_stop_btn.isSelected && selectedFlag == 0) {
+               try {
+                   startService()
+
+/*                if (mediaPlayer != null) {
+                   mediaPlayer!!.stop()
+                   mediaPlayer = null
+               }*/
+                   //musicThread.playAudio(sourceMusicArray[currentPosition])
+                   playAudio(sourceMusicArray[currentPosition])
+
+               } catch (e: Exception) {
+                   e.printStackTrace()
+                   //Log.e("ERROR", mediaPlayer.toString())
+               }
+
+           } else if (iv_main_player_act_stop_btn.isSelected) {
+               //musicThread.pauseAudio()
+               pauseAudio()
+
+           } else {
+               //musicThread.restart()
+               restart()
+           }
+           iv_main_player_act_stop_btn.isSelected = !iv_main_player_act_stop_btn.isSelected
+
+
+       }
+*/
     }
 
-   //미디어를 재생하는 사용자 정의 메소드
-   fun playAudio(url: String) {
-
-       var play_duration = audioService.getDuration()
-       var lenthOfSong =
-           String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
-
-       tv_main_player_length_of_song.setText(lenthOfSong)
-
-       isPlaying = true
-
-       seekbar.setMax(play_duration)
-       //seekBarThread.start()
-   }
+    //미디어를 재생하는 사용자 정의 메소드
+    fun playAudio(url: String) {
 
 
-   fun prevSong() {
 
-       if (currentPosition > 0) {
-           //mediaPlayer.reset()
-           currentPosition -= 1
-           playAudio(sourceMusicArray[currentPosition])
+        var play_duration = audioService.getDuration()
+        var lenthOfSong =
+                String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
 
-       } else {
-           killMediaPlayer()
-           //mediaPlayer.release()
-       }
+        tv_main_player_length_of_song.setText(lenthOfSong)
 
-   }
+        isPlaying = true
 
-   fun nextSong() {
+        seekbar.setMax(play_duration)
+        //seekBarThread.start()
+    }
 
-       if (currentPosition < sourceMusicArray.size) {
-          // mediaPlayer.reset()
-           currentPosition += 1
-           playAudio(sourceMusicArray[currentPosition])
 
-       } else {
-           killMediaPlayer()
-       }
+    fun prevSong() {
 
-   }
+        if (currentPosition > 0) {
+            //mediaPlayer.reset()
+            currentPosition -= 1
+            playAudio(sourceMusicArray[currentPosition])
 
-   fun pauseAudio() {
+        } else {
+            killMediaPlayer()
+            //mediaPlayer.release()
+        }
 
-       isPlaying = false
-       //musicPause()
-       playbackPosition = myService.currentDuration
-       musicPause()
+    }
 
-   }
+    fun nextSong() {
 
-   fun restart() {
+        if (currentPosition < sourceMusicArray.size) {
+            // mediaPlayer.reset()
+            currentPosition += 1
+            playAudio(sourceMusicArray[currentPosition])
 
-       isPlaying = true // 재생하도록 flag 변경
+        } else {
+            killMediaPlayer()
+        }
 
-       //mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
-       restartMusic()
-       //mediaPlayer.start() // 시작
+    }
 
-       // seekBarThread.run()
-   }
+    fun pauseAudio() {
 
-   fun killMediaPlayer() {
+        isPlaying = false
+        //musicPause()
+        playbackPosition = myService.currentDuration
+        musicPause()
+
+    }
+
+    fun restart() {
+
+        isPlaying = true // 재생하도록 flag 변경
+
+        //mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
+        restartMusic()
+        //mediaPlayer.start() // 시작
+
+        // seekBarThread.run()
+    }
+
+    fun killMediaPlayer() {
 /*      if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
            mediaPlayer!!.release()
        }*/
-       //mediaPlayer!!.release()
-   }
+        //mediaPlayer!!.release()
+    }
 
-   fun startService() {
-       val serviceIntent = Intent(this, MyForeGroundService::class.java)
-       serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android")
-       serviceIntent.putExtra("flag", 0)
-       ContextCompat.startForegroundService(this, serviceIntent)
-   }
+    fun startService() {
+        val serviceIntent = Intent(this, MyForeGroundService::class.java)
+        serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android")
+        serviceIntent.putExtra("flag", 0)
+        ContextCompat.startForegroundService(this, serviceIntent)
+    }
 
-   fun stopService() {
-       val serviceIntent = Intent(this, MyForeGroundService::class.java)
-       stopService(serviceIntent)
-   }
+    fun stopService() {
+        val serviceIntent = Intent(this, MyForeGroundService::class.java)
+        stopService(serviceIntent)
+    }
 
-   fun musicPause(){
-       val pauseIntent = Intent(this, MyForeGroundService::class.java)
-       pauseIntent.putExtra("inputExtra", "중지")
-       pauseIntent.putExtra("flag", 1)
-       stopService(pauseIntent)
-   }
+    fun musicPause(){
+        val pauseIntent = Intent(this, MyForeGroundService::class.java)
+        pauseIntent.putExtra("inputExtra", "중지")
+        pauseIntent.putExtra("flag", 1)
+        stopService(pauseIntent)
+    }
 
-   fun restartMusic(){
-       val restartIntent = Intent(this, MyForeGroundService::class.java)
-       restartIntent.putExtra("inputExtra", "재시작")
-       restartIntent.putExtra("flag", 2)
-       restartIntent.putExtra("playbackPosition", playbackPosition)
-       stopService(restartIntent)
-   }
+    fun restartMusic(){
+        val restartIntent = Intent(this, MyForeGroundService::class.java)
+        restartIntent.putExtra("inputExtra", "재시작")
+        restartIntent.putExtra("flag", 2)
+        restartIntent.putExtra("playbackPosition", playbackPosition)
+        stopService(restartIntent)
+    }
 
     public companion object {
         lateinit var mainPlayerActivity: MainPlayerActivity
@@ -555,9 +486,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
                 if(response.isSuccessful){
                     var data = response!!.body()!!.data
                     Glide.with(applicationContext).load(data.artwork).into(img_main_player_act_cover_img)
-                    val dbHelper = DBHelper(applicationContext)
-                    dbHelper.insert(_id, data.songUrl, originArtist, coverArtist, title, data.artwork);
-                    Log.v("asfd","디비 값 = " + (dbHelper.getResult()));
 
                     var genreValue : String = ""
                     for(i in 0.. data.genre.size-1){

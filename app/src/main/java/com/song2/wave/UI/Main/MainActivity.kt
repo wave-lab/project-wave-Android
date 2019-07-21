@@ -23,6 +23,9 @@ import android.Manifest.permission.READ_CONTACTS
 import android.content.*
 import android.net.Uri
 import android.support.v4.app.ActivityCompat
+import android.view.MotionEvent
+import android.view.View
+import android.widget.SeekBar
 import com.song2.wave.Data.GET.GetRecommendResponse
 import com.song2.wave.Data.GET.GetSearchResponse
 import com.song2.wave.Data.model.PlaySongData
@@ -39,6 +42,9 @@ import kotlinx.android.synthetic.main.activity_main_player.*
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
+import android.view.View.OnTouchListener
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,6 +52,7 @@ class MainActivity : AppCompatActivity() {
     val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1
     var TAG = "MainActivity"
     lateinit var nowFrag: Fragment
+    lateinit var mainSb : SeekBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +74,15 @@ class MainActivity : AppCompatActivity() {
             // 재생 또는 일시정지
             AudioApplication.getInstance().serviceInterface.togglePlay()
         }
+
+        mainSb = findViewById(R.id.seekbar_main_act_seek);
+
+        mainSb.setOnTouchListener(object : OnTouchListener {
+            override fun onTouch(v: View, event: MotionEvent): Boolean {
+                return true
+            }
+        })
+
 
         mainActivity = this
         callFragment("home")

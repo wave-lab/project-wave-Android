@@ -14,7 +14,9 @@ import android.os.PowerManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
+import com.song2.wave.UI.Main.MainActivity;
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity;
 
 import java.util.ArrayList;
@@ -56,6 +58,7 @@ public class AudioService extends Service {
                 lengthOfSong = String.format("%02d:%02d", ((mp.getDuration() / 1000) % 3600 / 60), ((mp.getDuration() / 1000) % 3600 % 60));
                 MainPlayerActivity.mainPlayerActivity.lengthTimeTv.setText(lengthOfSong);
                 MainPlayerActivity.mainPlayerActivity.seekbar.setMax(mp.getDuration());
+                MainActivity.mainActivity.mainSb.setMax(mp.getDuration());
 
                 //mTimer = new Timer();
                 //mTimer.schedule(mTask, 100);
@@ -72,29 +75,44 @@ public class AudioService extends Service {
                 if(isPrepared){
                     Log.v("Asdf","텟텟 = " + mMediaPlayer.getCurrentPosition());
                     MainPlayerActivity.mainPlayerActivity.seekbar.setProgress(mMediaPlayer.getCurrentPosition());
+                    MainActivity.mainActivity.mainSb.setProgress(mMediaPlayer.getCurrentPosition());
+
                     if(MainPlayerActivity.mainPlayerActivity.seekbar.getMax() > 0) {
                         playTime = String.format(
                                 "%02d:%02d",
                                 getMpCurrentPosition1(),
                                 getMpCurrentPosition2()
                         );
+                        Log.v("asdf","현재 시간 = " + playTime);
                         MainPlayerActivity.mainPlayerActivity.durationTimeTv.setText(playTime);
                         MainPlayerActivity.mainPlayerActivity.lengthTimeTv.setText(lengthOfSong);
-                    }
 
+                    }
                     MainPlayerActivity.mainPlayerActivity.seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         //seek바의 값이 변경되었을때 + fromUser: Boolean : 터치를 통해 변경했으면 false , 코드를 통하면 true
                         @Override
                         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                            Log.v("asdf","여기1");
                             if (MainPlayerActivity.mainPlayerActivity.seekbar.getMax() == progress) {
                                 isPlaying = false;
                                 mMediaPlayer.stop();
+                            }
+                            if(fromUser){
+
+                                mMediaPlayer.seekTo(progress);
+                                mMediaPlayer.start();
+                                Log.v("asdf","여기4 = " + progress);
+                            }
+                            else{
+                                Log.v("asdf","여기5");
                             }
                         }
 
                         //seek바의 값을 변경하기 위해 터치했을 때
                         @Override
                         public void onStartTrackingTouch(SeekBar seekBar) {
+                            Log.v("asdf","여기2");
+
                             isPlaying = false;
                             mMediaPlayer.pause();
                         }
@@ -102,8 +120,11 @@ public class AudioService extends Service {
                         //값을 변경 한 후 터치를 떼었을 때
                         @Override
                         public void onStopTrackingTouch(SeekBar SeekBar) {
+                            Log.v("asdf","여기3");
+                            Toast.makeText(getApplicationContext(), "선택 ", Toast.LENGTH_LONG);
                             isPlaying = true;
                             playbackPosition = MainPlayerActivity.mainPlayerActivity.seekbar.getProgress();
+                            Log.v("asdf","시간 이동 = " + playbackPosition);
                             mMediaPlayer.seekTo(playbackPosition);
 
                             if (!SeekBar.isSelected()) {
@@ -112,6 +133,8 @@ public class AudioService extends Service {
                                 mMediaPlayer.pause();
                         }
                     });
+
+
                 }
                 mSeekbarUpdateHandler.postDelayed(this, 50);
             }
