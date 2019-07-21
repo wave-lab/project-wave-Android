@@ -167,7 +167,8 @@ class MyPageFragment : Fragment() {
 
         Glide.with(this).load(userInfoData.profileImg).into(cv_mypage_frag_profile_img)
         tv_mypage_frag_profile_name.setText(userInfoData.nickName)
-        tv_mypage_frag_my_point.setText(userInfoData.totalPoint.toString()+" P")
+        tv_mypage_frag_my_point.setText((userInfoData.totalPoint!!.toInt() / 1000).toString()+","+(userInfoData.totalPoint!!.toInt() % 1000).toString() + "P")
+
 
         if(userInfoData.isArtist.equals(1))
             tv_home_frag_isArtist.setText("Artist")

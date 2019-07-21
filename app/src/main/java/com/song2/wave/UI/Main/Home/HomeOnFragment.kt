@@ -409,7 +409,7 @@ class HomeOnFragment : Fragment() {
         tv_home_frag_ment.setText(temp.nickname+"님!\n업로드 곡이\n평가를 기다리고 있어요!")
         tv_home_frag_scoring_cnt.setText(temp.rateSongCount.toString())
         tv_home_frag_perfect_cnt.setText(temp.hitSongCount.toString())
-        tv_home_frag_total_point.setText(temp.totalPoint.toString() + "P")
+        tv_home_frag_total_point.setText((temp.totalPoint!!.toInt() / 1000).toString()+","+(temp.totalPoint!!.toInt() % 1000).toString() + "P")
 
         tv_home_frag_waiting_scoring_mine.setText(temp.nickname + "님이 평가를 기다리고 있는 곡")
         tv_home_frag_waiting_scoring.setText(temp.nickname + "님의 평가를 기다리고 있는 곡")
