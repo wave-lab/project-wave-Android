@@ -17,34 +17,23 @@ import android.content.pm.PackageManager
 
 import android.graphics.Color
 import com.song2.wave.R
-import com.song2.wave.UI.Main.MyPage.Adapter.MyPageHitSuccessFragment
-import android.Manifest.permission
-import android.Manifest.permission.READ_CONTACTS
 import android.content.*
-import android.net.Uri
-import android.support.v4.app.ActivityCompat
 import android.view.MotionEvent
 import android.view.View
 import android.widget.SeekBar
-import com.song2.wave.Data.GET.GetRecommendResponse
 import com.song2.wave.Data.GET.GetSearchResponse
-import com.song2.wave.Data.model.PlaySongData
-import com.song2.wave.Data.model.Scoring.PassedCompletedSongData
-import com.song2.wave.Data.model.Scoring.PassedSongData
 import com.song2.wave.UI.Main.MyPage.MyPageFragment
-import com.song2.wave.UI.MainPlayer.MainPlayerActivity
 import com.song2.wave.Util.Audio.AudioApplication
 import com.song2.wave.Util.Audio.BroadcastActions
 import com.song2.wave.Util.Network.ApiClientSec
 import com.song2.wave.Util.Network.SecondNetworkService
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main_player.*
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.Retrofit
 import android.view.View.OnTouchListener
-
-
+import android.widget.LinearLayout
+import com.song2.wave.UI.MainPlayer.MainPlayerActivity
+import kotlinx.android.synthetic.main.activity_player.*
+import kotlin.math.min
 
 
 class MainActivity : AppCompatActivity() {
@@ -70,6 +59,11 @@ class MainActivity : AppCompatActivity() {
             return;
         }
 
+      /*  ll_main_act_bottom_main_player.setOnClickListener {
+            val intent = Intent(applicationContext, MainPlayerActivity::class.java)
+            startActivity(intent)
+        }
+*/
         iv_main_act_bottom_play.setOnClickListener {
             // 재생 또는 일시정지
             AudioApplication.getInstance().serviceInterface.togglePlay()
@@ -82,7 +76,6 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
-
 
         mainActivity = this
         callFragment("home")
@@ -211,7 +204,6 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(com.song2.wave.R.id.main_fragment_container, nowFrag)
         transaction.commit()
-
     }
 
     override fun onBackPressed() {

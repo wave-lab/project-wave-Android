@@ -176,7 +176,7 @@
 
     </LinearLayout>
     <LinearLayout
-            android:paddingHorizontal="20dp"
+        android:paddingHorizontal="20dp"
         android:id="@+id/ll_main_act_bottom_main_player"
         android:layout_width="match_parent"
         android:layout_height="64dp"
@@ -195,7 +195,7 @@
             android:src="@drawable/btn_play_sm"/>
 
         <LinearLayout
-                android:layout_gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
             android:layout_width="186dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
