@@ -178,8 +178,7 @@ public class NotificationPlayer {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 NotificationChannel serviceChannel = new NotificationChannel(
                         "123","뮤직",
-                        NotificationManager.IMPORTANCE_LOW);
-                Log.v("asdf","텟시작");
+                        NotificationManager.IMPORTANCE_HIGH);
                 NotificationManager manager = mService.getSystemService(NotificationManager.class);
                 manager.createNotificationChannel(serviceChannel);
             }
