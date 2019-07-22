@@ -45,13 +45,6 @@ class AudioServiceInterface(context: Context) {
         }
     }
 
-    //    public void play(int position) {
-    //        if (mService != null) {
-    //            Log.v("asdf","테스트1");
-    //            mService.play(position);
-    //        }
-    //    }
-
     fun play(context : Context, _id: String, songUrl: String, originArtist: String, coverArtist: String, songName: String) {
         if (mService != null) {
 
@@ -60,18 +53,24 @@ class AudioServiceInterface(context: Context) {
             val token = pref.getString("songNum", "")
             Log.v("d", "서비스 실행, id값 = " + _id)
             Log.v("d", "서비스 실행, 토큰값 = " + pref.getString("songNum", ""))
-            if(pref.getString("songNum", "").equals(_id)){
-                Log.v("d", "서비스 실행, 동일 노래 = " + token) }
 
-                Log.v("d", "서비스 실행X, id값 = " + _id)
+            songTitle = songName
+            originArtistName = originArtist
+            coverartistName = coverArtist
+
+            if(pref.getString("songNum", "").equals(_id) && mService!!.isPrepared){
+
+                Log.v("d", "서비스 실행, 동일 노래 = ")
+            }else{
+                Log.v("d", "서비스 실행X, 동일 노래 X")
                 var editor: SharedPreferences.Editor = pref.edit()
                 editor.putString("songNum", _id) // 토란  key값으로 userID 데이터를 저장한다.
                 editor.commit()
 
-                songTitle = songName
-                originArtistName = originArtist
-                coverartistName = coverArtist
                 mService!!.play(_id, songUrl, originArtist, coverArtist, songName)
+            }
+
+
             }
 
     }
