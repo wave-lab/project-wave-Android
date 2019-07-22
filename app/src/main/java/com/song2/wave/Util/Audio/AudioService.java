@@ -14,7 +14,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.SeekBar;
 import android.widget.Toast;
-
 import com.song2.wave.UI.Main.MainActivity;
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity;
 
@@ -31,10 +30,9 @@ public class AudioService extends Service {
     private int mCurrentPosition;
     private AudioAdapter.AudioItem mAudioItem;
     private NotificationPlayer mNotificationPlayer;
-
     String playTime;
     String songUrl, songName, originArtist, coverArtist, title, songImgUrl, _id;
-
+    int ratingFlag;
 
     public class AudioServiceBinder extends Binder {
         AudioService getService() {
@@ -47,7 +45,6 @@ public class AudioService extends Service {
         super.onCreate();
         mMediaPlayer = new MediaPlayer();
         mMediaPlayer.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
-
 
         mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -290,13 +287,14 @@ public class AudioService extends Service {
         return ((mMediaPlayer.getCurrentPosition() / 1000) % 3600 % 60);
     }
 
-    public void play(String _id, String songUrl, String originArtist, String coverArtist, String songName) {
+    public void play(String _id, String songUrl, String originArtist, String coverArtist, String songName, int ratingFlag) {
 //        queryAudioItem(position);
         this._id = _id;
         this.songUrl = songUrl;
         this.originArtist = originArtist;
         this.coverArtist = coverArtist;
         this.songName = songName;
+        this.ratingFlag = ratingFlag;
         stop();
         prepare(songUrl);
     }

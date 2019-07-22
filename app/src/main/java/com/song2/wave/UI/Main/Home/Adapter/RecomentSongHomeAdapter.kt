@@ -32,12 +32,13 @@ class RecomentSongHomeAdapter(var context : Context, private var homeSongData: A
         holder.itemView.setOnClickListener{
             var intent = Intent(mContext, MainPlayerActivity::class.java)
             //AudioApplication.getInstance().serviceInterface.setPlayList(holder.adapterPosition) // 재생목록등록
-            AudioApplication.getInstance().serviceInterface.play(mContext,homeSongData[holder.adapterPosition]._id, homeSongData[holder.adapterPosition].songUrl!!, homeSongData[position].originArtistName, homeSongData[position].coverArtistName, homeSongData[position].songName!!) // 선택한 오디오재생
+            AudioApplication.getInstance().serviceInterface.play(mContext,homeSongData[holder.adapterPosition]._id, homeSongData[holder.adapterPosition].songUrl!!, homeSongData[position].originArtistName, homeSongData[position].coverArtistName, homeSongData[position].songName!!, 0) // 선택한 오디오재생
             intent.putExtra("_id", homeSongData[holder.adapterPosition]._id)
             intent.putExtra("songUrl", homeSongData[holder.adapterPosition].songUrl)
             intent.putExtra("title", homeSongData[holder.adapterPosition].songName)
             intent.putExtra("originArtist", homeSongData[holder.adapterPosition].originArtistName)
             intent.putExtra("coverArtist", homeSongData[holder.adapterPosition].coverArtistName)
+            intent.putExtra("rating_flag", 0)
             mContext.startActivity(intent)
         }
 

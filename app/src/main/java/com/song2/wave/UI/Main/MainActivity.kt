@@ -60,11 +60,18 @@ class MainActivity : AppCompatActivity() {
             return;
         }
 
-      /*  ll_main_act_bottom_main_player.setOnClickListener {
+        // 하단 미니 플레이어 클릭 시 메인 플레이어 화면으로
+        ll_main_act_bottom_main_player.setOnClickListener {
             val intent = Intent(applicationContext, MainPlayerActivity::class.java)
+            intent.putExtra("_id", AudioApplication.getInstance().serviceInterface.songID)
+            intent.putExtra("title", AudioApplication.getInstance().serviceInterface.songTitle)
+            intent.putExtra("originArtist", AudioApplication.getInstance().serviceInterface.originArtistName )
+            intent.putExtra("coverArtist", AudioApplication.getInstance().serviceInterface.coverartistName)
+            intent.putExtra("songUrl", AudioApplication.getInstance().serviceInterface.songUrlValue)
+            intent.putExtra("rating_flag", AudioApplication.getInstance().serviceInterface.ratingFlagValue)
             startActivity(intent)
         }
-*/
+
         iv_main_act_bottom_play.setOnClickListener {
             // 재생 또는 일시정지
             AudioApplication.getInstance().serviceInterface.togglePlay()
