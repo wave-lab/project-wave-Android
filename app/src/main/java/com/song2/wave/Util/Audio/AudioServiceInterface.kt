@@ -14,6 +14,7 @@ class AudioServiceInterface(context: Context) {
     var songTitle: String = ""
     var originArtistName: String = ""
     var coverartistName: String = ""
+    var ratingFlagValue : Int = 0
 
     val isPlaying: Boolean
         get() = if (mService != null) {
@@ -45,7 +46,7 @@ class AudioServiceInterface(context: Context) {
         }
     }
 
-    fun play(context : Context, _id: String, songUrl: String, originArtist: String, coverArtist: String, songName: String) {
+    fun play(context : Context, _id: String, songUrl: String, originArtist: String, coverArtist: String, songName: String, ratingFlag : Int) {
         if (mService != null) {
 
             var pref = context.getSharedPreferences("auto", Activity.MODE_PRIVATE)
@@ -57,6 +58,7 @@ class AudioServiceInterface(context: Context) {
             songTitle = songName
             originArtistName = originArtist
             coverartistName = coverArtist
+            ratingFlagValue = ratingFlag
 
             if(pref.getString("songNum", "").equals(_id) && mService!!.isPrepared){
 
@@ -67,7 +69,7 @@ class AudioServiceInterface(context: Context) {
                 editor.putString("songNum", _id) // 토란  key값으로 userID 데이터를 저장한다.
                 editor.commit()
 
-                mService!!.play(_id, songUrl, originArtist, coverArtist, songName)
+                mService!!.play(_id, songUrl, originArtist, coverArtist, songName, ratingFlag)
             }
 
 

@@ -38,9 +38,8 @@ class WaitingSongHomeAdapter (context : Context, private var waitingSongData: Ar
         holder.itemView.setOnClickListener{
             var intent = Intent(mContext, MainPlayerActivity::class.java)
             //AudioApplication.getInstance().serviceInterface.setPlayList(holder.adapterPosition) // 재생목록등록
-            AudioApplication.getInstance().serviceInterface.play(mContext, waitingSongData[holder.adapterPosition]._id, waitingSongData[holder.adapterPosition].songUrl!!, waitingSongData[position].originArtistName, waitingSongData[position].coverArtistName, waitingSongData[position].songName!!) // 선택한 오디오재생
+            AudioApplication.getInstance().serviceInterface.play(mContext, waitingSongData[holder.adapterPosition]._id, waitingSongData[holder.adapterPosition].songUrl!!, waitingSongData[position].originArtistName, waitingSongData[position].coverArtistName, waitingSongData[position].songName!!, 1) // 선택한 오디오재생
             intent.putExtra("_id", waitingSongData[holder.adapterPosition]._id)
-            Log.v("ASdf","테스트2 id = " + waitingSongData[holder.adapterPosition]._id)
             intent.putExtra("songUrl", waitingSongData[holder.adapterPosition].songUrl)
             intent.putExtra("title", waitingSongData[holder.adapterPosition].songName)
             intent.putExtra("originArtist", waitingSongData[holder.adapterPosition].originArtistName)

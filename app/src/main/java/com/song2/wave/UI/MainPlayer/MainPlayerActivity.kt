@@ -42,6 +42,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
     var songImgUrl : String = ""
     var flag : Int = 0
     var _id : String = ""
+    var rating_flag : Int = 0
 
     var selectedFlag : Int = 0
     lateinit var durationTimeTv : TextView
@@ -104,7 +105,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
                 var normalizedposition = Math.abs(Math.abs(position) - 1)
 
                 page.setScaleX(normalizedposition / 2 + 0.65f)
-//                page.setScaleY(normalizedposition / 2 + 0.8f)
                 page.setScaleY(normalizedposition / 2 + 0.65f)
             }
 
@@ -224,8 +224,9 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
         val extras = intent.extras
 
+        Log.v("asdf","선택 = " + extras.toString())
         // 노래 선택으로 입장 시
-        if (extras == null) {
+        if (intent.getStringExtra("songUrl") != null) {
             Log.v("asdf", "선택 - 노래")
             _id = intent.getStringExtra("_id")
             Log.v("asdf","받아온 값 = " + _id)
@@ -233,7 +234,8 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
             originArtist = intent.getStringExtra("originArtist")
             coverArtist = intent.getStringExtra("coverArtist")
             songUrl = intent.getStringExtra("songUrl")
-            AudioApplication.getInstance().serviceInterface.play(applicationContext, _id, songUrl, originArtist, coverArtist,  title) // 선택한 오디오재생
+            rating_flag = intent.getIntExtra("rating_flag", 0)
+            AudioApplication.getInstance().serviceInterface.play(applicationContext, _id, songUrl, originArtist, coverArtist,  title, rating_flag) // 선택한 오디오재생
         }
         // notification으로 입장 시
         else {
@@ -242,13 +244,12 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
             title = extras.getString("title")
             originArtist = extras.getString("originArtist")
             coverArtist = extras.getString("coverArtist")
+            rating_flag = intent.getIntExtra("rating_flag", 0)
         }
         if(flag == 0){
             songUrl = intent.getStringExtra("songUrl")
-
         }
 
-        Log.v("Asdf","플래그 = " + flag)
 
         getSongDetail()
 
@@ -266,12 +267,15 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         updateUI();
 
         img_main_player_act_cover_img.setOnClickListener {
-            rl_main_player_act_trans.visibility = View.VISIBLE
-            rl_main_player_act_rating.visibility = View.VISIBLE
-            ll_main_player_act_commnet.visibility = View.INVISIBLE
+            if(rating_flag == 1){
+                rl_main_player_act_trans.visibility = View.VISIBLE
+                rl_main_player_act_rating.visibility = View.VISIBLE
+                ll_main_player_act_commnet.visibility = View.INVISIBLE
+
+            }
         }
         rl_main_player_act_all.setOnClickListener {
-            rl_main_player_act_trans.visibility = View.INVISIBLE
+            rl_main_player_act_trans.visibility = View.GONE
         }
 
         iv_main_player_like_btn.setOnClickListener {
