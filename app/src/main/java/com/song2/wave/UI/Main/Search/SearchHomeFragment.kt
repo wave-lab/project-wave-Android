@@ -31,6 +31,7 @@ import android.widget.TextView
 import android.text.InputType
 import android.widget.Toast
 import com.song2.wave.Data.model.Scoring.TitleData
+import org.jetbrains.anko.support.v4.ctx
 
 
 class SearchHomeFragment : Fragment(), OnBackPressedListener {
@@ -272,19 +273,18 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                     for (i in coverArtistDataList.indices) {
                         coverArtistDataArr.add(
                             CoverArtistData(
+                                coverArtistDataList[i].userIdx,
                                 coverArtistDataList[i].profileImg,
                                 coverArtistDataList[i].nickname
                             )
                         )
+                        Log.v("userIdx",coverArtistDataList[i].userIdx.toString())
                     }
-                    coverArtistAdapter = CoverArtistSearchAdapter(coverArtistDataArr, requestManager)
+                    coverArtistAdapter = CoverArtistSearchAdapter(ctx, coverArtistDataArr, requestManager)
                     recycler_search_home_frag_artist.adapter = coverArtistAdapter
-                    recycler_search_home_frag_artist.layoutManager =
-                            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    recycler_search_home_frag_artist.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     recycler_search_home_frag_artist.isNestedScrollingEnabled = false
 
-                    Log.v("SearchHomeFragment_searchResult : ", "originArtistName="+response.body()!!.data!!.originArtistName.toString())
-                    Log.v("SearchHomeFragment_searchResult : ","originTitleDataList="+response.body()!!.data!!.originTitle.toString())
                     Log.v("SearchHomeFragment_searchResult : ","coverArtistDataList="+response.body()!!.data!!.artistName.toString())
                 }
             }
