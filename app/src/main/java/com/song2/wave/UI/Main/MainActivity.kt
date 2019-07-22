@@ -31,6 +31,7 @@ import retrofit2.Call
 import retrofit2.Response
 import android.view.View.OnTouchListener
 import android.widget.LinearLayout
+import com.song2.wave.R.id.iv_main_act_bottom_play
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity
 import kotlinx.android.synthetic.main.activity_player.*
 import kotlin.math.min
