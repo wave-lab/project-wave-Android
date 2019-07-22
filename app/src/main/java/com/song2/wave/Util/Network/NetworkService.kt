@@ -146,6 +146,14 @@ interface NetworkService {
         @Path("userIdx") userIdx: Long
     ) : Call<GetArtistInfoResponse>
 
+    //아티스트 곡 조회
+    @GET("/core/users/{userIdx}/pl/upload")
+    fun getArtistSongRespnose(
+        @Header("Content-Type") content_type: String,
+        @Path("userIdx") userIdx: Long
+    ) : Call<GetArtistInfoResponse>
+
+
     ////////////////////* POST *///////////////////////////
 
     // 회원가입
@@ -195,8 +203,6 @@ interface NetworkService {
         @Header("Authorization") authorization: String,
         @Body() body: JsonObject
     ): Call<PostResponse>
-
-
 
     @POST("/core/songs/{songIdx}/rate")
     fun postRating(

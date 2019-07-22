@@ -1,4 +1,4 @@
-package com.song2.wave.UI.Artist
+package com.song2.wave.UI.Artist.Adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

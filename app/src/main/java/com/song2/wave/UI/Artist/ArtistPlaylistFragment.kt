@@ -23,7 +23,6 @@ class ArtistPlaylistFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_artist_library_playlist, container, false)
         requestManager = Glide.with(this)
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

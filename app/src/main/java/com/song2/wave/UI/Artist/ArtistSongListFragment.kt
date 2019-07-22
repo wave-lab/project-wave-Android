@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.song2.wave.R
+import com.song2.wave.UI.Artist.Adapter.ArtistSongListViewAdapter
 
 class ArtistSongListFragment : Fragment() {
     lateinit var artist_song_view_adapter : ArtistSongListViewAdapter
