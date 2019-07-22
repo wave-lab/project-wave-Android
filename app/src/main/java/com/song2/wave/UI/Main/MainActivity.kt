@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             return;
         }
 
-        // 하단 미니 플레이어 클릭 시 메인 플레이어 화면으로
+        // 하단 미니 플레이어 클릭 시 메인 플레이어 화면으로 이벤트
         ll_main_act_bottom_main_player.setOnClickListener {
             val intent = Intent(applicationContext, MainPlayerActivity::class.java)
             intent.putExtra("_id", AudioApplication.getInstance().serviceInterface.songID)
