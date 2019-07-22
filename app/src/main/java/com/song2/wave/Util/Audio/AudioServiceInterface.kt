@@ -15,6 +15,8 @@ class AudioServiceInterface(context: Context) {
     var originArtistName: String = ""
     var coverartistName: String = ""
     var ratingFlagValue : Int = 0
+    var songID : String = ""
+    var songUrlValue : String = ""
 
     val isPlaying: Boolean
         get() = if (mService != null) {
@@ -59,6 +61,8 @@ class AudioServiceInterface(context: Context) {
             originArtistName = originArtist
             coverartistName = coverArtist
             ratingFlagValue = ratingFlag
+            songID = _id
+            songUrlValue = songUrl
 
             if(pref.getString("songNum", "").equals(_id) && mService!!.isPrepared){
 

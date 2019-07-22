@@ -229,7 +229,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         if (intent.getStringExtra("songUrl") != null) {
             Log.v("asdf", "선택 - 노래")
             _id = intent.getStringExtra("_id")
-            Log.v("asdf","받아온 값 = " + _id)
             title = intent.getStringExtra("title")
             originArtist = intent.getStringExtra("originArtist")
             coverArtist = intent.getStringExtra("coverArtist")
