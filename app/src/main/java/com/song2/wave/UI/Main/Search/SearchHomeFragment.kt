@@ -27,9 +27,6 @@ import org.jetbrains.anko.support.v4.toast
 import retrofit2.Call
 import retrofit2.Response
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
-import android.text.InputType
-import android.widget.Toast
 import com.song2.wave.Data.model.Scoring.TitleData
 import org.jetbrains.anko.support.v4.ctx
 
@@ -65,6 +62,8 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
     lateinit var requestManager: RequestManager
     var searchBackFlag: Int = 0 // editText 비활성화 : 0
 
+    var isInData = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v: View = inflater.inflate(com.song2.wave.R.layout.fragment_search_home, container, false)
 
@@ -91,6 +90,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
 
         v.ll_search_home_frag_focus_on.visibility = View.GONE
+
         songDataArr = ArrayList<SongData>()
         coverArtistDataArr = ArrayList<CoverArtistData>()
         requestManager = Glide.with(this)
@@ -127,7 +127,8 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         }
 
         // artist is clicked
-        v.rel_search_home_frag_artist.setOnClickListener {
+        // 수정 : 아이템 클릭시로 바꿔야 함 adapter에서
+        v.recycler_search_home_frag_origin_artist.setOnClickListener {
             SearchFragment.searchFragment.replaceFragment(SearchArtistFragment())
         }
 
@@ -138,26 +139,6 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         super.onActivityCreated(savedInstanceState)
     }
 
-    fun insertExampleData() {
-        songFieldData = ArrayList<String?>()
-        songFieldData.add("분야1")
-/*        songDataArr.add(SongData("https://t1.daumcdn.net/cfile/tistory/2442394558BBBD1934", "좋은날", "아이유(IU)", "송제민", songFieldData))
-        songDataArr.add(SongData("http://cdn.news2day.co.kr/news-images/peg/news/201709/8r1YZtmQRWoSic7Q6fv6i3cnEuj2RP0sqJwwEWGa-wm-1505700400.jpg", "가을아침", "아이유(IU)", "송제민", songFieldData))
-        songDataArr.add(SongData("data:image/jpeg;base64,K9z4dklLE0/DKH3MOorln2gfzjf0p9KUro6h9pllfaVulKVxHMKUpQClKUApSlAf/Z", "Zeze", "아이유(IU)", "송제민", songFieldData))
-        songDataArr.add(SongData("https://cphoto.asiae.co.kr/listimglink/1/2014051608371615808_1.jpg", "꽃갈피", "아이유(IU)", "송제민", songFieldData))
-        songDataArr.add(SongData("https://pgnqdrjultom1827145.cdn.ntruss.com/img/f8/b9/f8b99005f6cc026302a55f0cba36c19ecbf1f2109f36639664a1c4217bbb41cd_v1.jpg", "무릎", "아이유(IU)", "송제민", songFieldData))
-
-
-        coverArtistDataArr.add(CoverArtistData("https://t1.daumcdn.net/cfile/tistory/2641FF4C5900DDDE1E", "박보영"))
-        coverArtistDataArr.add(CoverArtistData("https://t1.daumcdn.net/cfile/tistory/2641FF4C5900DDDE1E", "박보영"))
-        coverArtistDataArr.add(CoverArtistData("https://t1.daumcdn.net/cfile/tistory/2641FF4C5900DDDE1E", "박보영"))
-        coverArtistDataArr.add(CoverArtistData("https://t1.daumcdn.net/cfile/tistory/2641FF4C5900DDDE1E", "박보영"))
-        coverArtistDataArr.add(CoverArtistData("https://t1.daumcdn.net/cfile/tistory/2641FF4C5900DDDE1E", "박보영"))
-        coverArtistDataArr.add(CoverArtistData("https://t1.daumcdn.net/cfile/tistory/2641FF4C5900DDDE1E", "박보영"))
-        coverArtistDataArr.add(CoverArtistData("https://t1.daumcdn.net/cfile/tistory/2641FF4C5900DDDE1E", "박보영"))
-        coverArtistDataArr.add(CoverArtistData("https://t1.daumcdn.net/cfile/tistory/2641FF4C5900DDDE1E", "박보영"))*/
-
-    }
 
     fun insertSearchHistoryData(v: View) {
         searchData = ArrayList<String>()
@@ -172,6 +153,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         v.recycler_search_home_frag_search_home_hisory.layoutManager = LinearLayoutManager(context)
         v.recycler_search_home_frag_search_home_hisory.isNestedScrollingEnabled = false
     }
+
 
     fun searchEditTextFocusOff() {
         ll_search_home_frag_focus_off.visibility = View.VISIBLE
@@ -194,6 +176,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         (context as MainActivity).setOnBackPressedListener(this, 2)
     }
 
+    //검색결과
     fun getSearchResponse(searchData: String?) {
 
         var getSearchResponse = networkService.getSearchResponse("application/json", searchData, searchData, searchData)
@@ -213,8 +196,15 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
                 //원곡아티스트
                 if(response.body()!!.data!!.originArtistName != null) {
+
+
+                    recycler_search_home_frag_origin_artist.visibility =View.VISIBLE
+                    tv_search_home_frag_artist_result_null.visibility= View.GONE
+
+
                     originArtistDataList = response.body()!!.data!!.originArtistName!!
 
+                    originDataArr.clear()
                     for (i in originArtistDataList.indices) {
                         originDataArr.add(
                             OriginArtistData(
@@ -226,6 +216,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                     }
 
                     originArtistSearchAdapter = OriginArtistSearchAdapter(originDataArr, requestManager)
+                    originArtistSearchAdapter.notifyDataSetChanged()
                     recycler_search_home_frag_origin_artist.adapter = originArtistSearchAdapter
                     recycler_search_home_frag_origin_artist.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     recycler_search_home_frag_origin_artist.isNestedScrollingEnabled = false
@@ -233,13 +224,25 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                     Log.v("SearchHomeFragment_searchResult : ", "originArtistName="+response.body()!!.data!!.originArtistName.toString())
                     Log.v("SearchHomeFragment_searchResult : ","originTitleDataList="+response.body()!!.data!!.originTitle.toString())
                     Log.v("SearchHomeFragment_searchResult : ","coverArtistDataList="+response.body()!!.data!!.artistName.toString())
-                }else{}
+                }else{
+                    //검색결과 없음
+                    //recyclerview 가 안보이게 할 것
+
+                    recycler_search_home_frag_origin_artist.visibility =View.GONE
+                    tv_search_home_frag_artist_result_null.visibility= View.VISIBLE
+                }
 
 
                 //원곡타이틀
                 if(response.body()!!.data!!.originTitle != null) {
 
+                    recycler_search_home_frag_song.visibility =View.VISIBLE
+                    tv_search_home_frag_song_result_null.visibility= View.GONE
+                    btn_search_home_frag_song_more.visibility=View.VISIBLE
+
                     originTitleDataList = response.body()!!.data!!.originTitle!!
+
+                    songDataArr.clear()
 
                     for (i in originTitleDataList.indices) {
                         songDataArr.add(
@@ -256,19 +259,28 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                     }
 
                     songSearchAdapter = SongSearchAdapter(songDataArr, requestManager)
+                    songSearchAdapter.notifyDataSetChanged()
                     recycler_search_home_frag_song.adapter = songSearchAdapter
                     recycler_search_home_frag_song.layoutManager = LinearLayoutManager(context)
                     recycler_search_home_frag_song.isNestedScrollingEnabled = false
 
-                    Log.v("SearchHomeFragment_searchResult : ", "originArtistName="+response.body()!!.data!!.originArtistName.toString())
-                    Log.v("SearchHomeFragment_searchResult : ","originTitleDataList="+response.body()!!.data!!.originTitle.toString())
-                    Log.v("SearchHomeFragment_searchResult : ","coverArtistDataList="+response.body()!!.data!!.artistName.toString())
+                }else{
+                    //검색결과 없음
+                    recycler_search_home_frag_song.visibility =View.GONE
+                    tv_search_home_frag_song_result_null.visibility= View.VISIBLE
+                    btn_search_home_frag_song_more.visibility=View.GONE
                 }
 
 
                 //커버가수
                 if(response.body()!!.data!!.artistName != null) {
+
+                    recycler_search_home_frag_artist.visibility =View.VISIBLE
+                    tv_search_home_frag_cover_artist_result_null.visibility= View.GONE
+
                     coverArtistDataList = response.body()!!.data!!.artistName!!
+
+                    coverArtistDataArr.clear()
 
                     for (i in coverArtistDataList.indices) {
                         coverArtistDataArr.add(
@@ -280,12 +292,22 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                         )
                         Log.v("userIdx",coverArtistDataList[i].userIdx.toString())
                     }
+
                     coverArtistAdapter = CoverArtistSearchAdapter(ctx, coverArtistDataArr, requestManager)
+                    coverArtistAdapter.notifyDataSetChanged()
+                    Log.e("adapter.data.size",coverArtistDataArr.size.toString())
+
                     recycler_search_home_frag_artist.adapter = coverArtistAdapter
                     recycler_search_home_frag_artist.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     recycler_search_home_frag_artist.isNestedScrollingEnabled = false
 
                     Log.v("SearchHomeFragment_searchResult : ","coverArtistDataList="+response.body()!!.data!!.artistName.toString())
+
+                }else{
+                    //검색결과 없음
+                    recycler_search_home_frag_artist.visibility =View.GONE
+                    tv_search_home_frag_cover_artist_result_null.visibility= View.VISIBLE
+
                 }
             }
         })
