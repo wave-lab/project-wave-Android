@@ -2,7 +2,6 @@ package com.song2.wave.Util.Audio;
 
 import android.app.*;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -13,7 +12,6 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -35,7 +33,6 @@ public class AudioService extends Service {
     private NotificationPlayer mNotificationPlayer;
 
     String playTime;
-    long mpCurrentPosition1, mpCurrentPosition2;
     String songUrl, songName, originArtist, coverArtist, title, songImgUrl, _id;
 
 
@@ -59,12 +56,9 @@ public class AudioService extends Service {
                 mp.start();
 
                 lengthOfSong = String.format("%02d:%02d", ((mp.getDuration() / 1000) % 3600 / 60), ((mp.getDuration() / 1000) % 3600 % 60));
-                MainPlayerActivity.mainPlayerActivity.lengthTimeTv.setText(lengthOfSong);
-                MainPlayerActivity.mainPlayerActivity.seekbar.setMax(mp.getDuration());
+                //MainPlayerActivity.mainPlayerActivity.lengthTimeTv.setText(lengthOfSong);
+                //MainPlayerActivity.mainPlayerActivity.seekbar.setMax(mp.getDuration());
                 MainActivity.mainActivity.mainSb.setMax(mp.getDuration());
-
-                //mTimer = new Timer();
-                //mTimer.schedule(mTask, 100);
 
                 sendBroadcast(new Intent(BroadcastActions.PREPARED)); // prepared 전송
                 updateNotificationPlayer();
@@ -76,7 +70,10 @@ public class AudioService extends Service {
             @Override
             public void run() {
                 if(isPrepared){
-                    Log.v("Asdf","텟텟 = " + mMediaPlayer.getCurrentPosition());
+                    // seekbar 곡 시간 계산
+                    MainPlayerActivity.mainPlayerActivity.seekbar.setMax(mMediaPlayer.getDuration());
+
+                    // seekbar 현재 곡 재생되는 시간 위치에 맞게 설정
                     MainPlayerActivity.mainPlayerActivity.seekbar.setProgress(mMediaPlayer.getCurrentPosition());
                     MainActivity.mainActivity.mainSb.setProgress(mMediaPlayer.getCurrentPosition());
 
@@ -86,35 +83,26 @@ public class AudioService extends Service {
                                 getMpCurrentPosition1(),
                                 getMpCurrentPosition2()
                         );
-                        Log.v("asdf","현재 시간 = " + playTime);
                         MainPlayerActivity.mainPlayerActivity.durationTimeTv.setText(playTime);
                         MainPlayerActivity.mainPlayerActivity.lengthTimeTv.setText(lengthOfSong);
-
                     }
                     MainPlayerActivity.mainPlayerActivity.seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         //seek바의 값이 변경되었을때 + fromUser: Boolean : 터치를 통해 변경했으면 false , 코드를 통하면 true
                         @Override
                         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                            Log.v("asdf","여기1");
                             if (MainPlayerActivity.mainPlayerActivity.seekbar.getMax() == progress) {
                                 isPlaying = false;
                                 mMediaPlayer.stop();
                             }
-                            if(fromUser){
-
+                            if(fromUser) {
                                 mMediaPlayer.seekTo(progress);
                                 mMediaPlayer.start();
-                                Log.v("asdf","여기4 = " + progress);
-                            }
-                            else{
-                                Log.v("asdf","여기5");
                             }
                         }
 
                         //seek바의 값을 변경하기 위해 터치했을 때
                         @Override
                         public void onStartTrackingTouch(SeekBar seekBar) {
-                            Log.v("asdf","여기2");
 
                             isPlaying = false;
                             mMediaPlayer.pause();
@@ -123,7 +111,6 @@ public class AudioService extends Service {
                         //값을 변경 한 후 터치를 떼었을 때
                         @Override
                         public void onStopTrackingTouch(SeekBar SeekBar) {
-                            Log.v("asdf","여기3");
                             Toast.makeText(getApplicationContext(), "선택 ", Toast.LENGTH_LONG);
                             isPlaying = true;
                             playbackPosition = MainPlayerActivity.mainPlayerActivity.seekbar.getProgress();
@@ -173,12 +160,7 @@ public class AudioService extends Service {
             }
         });
         mNotificationPlayer = new NotificationPlayer(this);
-
-
-
     }
-
-
 
     @Override
     public IBinder onBind(Intent intent) {
