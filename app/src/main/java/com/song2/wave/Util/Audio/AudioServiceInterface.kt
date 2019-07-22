@@ -45,13 +45,6 @@ class AudioServiceInterface(context: Context) {
         }
     }
 
-    //    public void play(int position) {
-    //        if (mService != null) {
-    //            Log.v("asdf","테스트1");
-    //            mService.play(position);
-    //        }
-    //    }
-
     fun play(context : Context, _id: String, songUrl: String, originArtist: String, coverArtist: String, songName: String) {
         if (mService != null) {
 
@@ -65,7 +58,7 @@ class AudioServiceInterface(context: Context) {
             originArtistName = originArtist
             coverartistName = coverArtist
 
-            if(pref.getString("songNum", "").equals(_id)){
+            if(pref.getString("songNum", "").equals(_id) && mService!!.isPrepared){
 
                 Log.v("d", "서비스 실행, 동일 노래 = ")
             }else{

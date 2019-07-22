@@ -56,8 +56,8 @@ public class AudioService extends Service {
                 mp.start();
 
                 lengthOfSong = String.format("%02d:%02d", ((mp.getDuration() / 1000) % 3600 / 60), ((mp.getDuration() / 1000) % 3600 % 60));
-                //MainPlayerActivity.mainPlayerActivity.lengthTimeTv.setText(lengthOfSong);
-                //MainPlayerActivity.mainPlayerActivity.seekbar.setMax(mp.getDuration());
+//                MainPlayerActivity.mainPlayerActivity.lengthTimeTv.setText(lengthOfSong);
+//                MainPlayerActivity.mainPlayerActivity.seekbar.setMax(mp.getDuration());
                 MainActivity.mainActivity.mainSb.setMax(mp.getDuration());
 
                 sendBroadcast(new Intent(BroadcastActions.PREPARED)); // prepared 전송
