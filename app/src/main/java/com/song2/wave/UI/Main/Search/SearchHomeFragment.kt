@@ -56,13 +56,16 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
     lateinit var requestManager: RequestManager
     var searchBackFlag: Int = 0 // editText 비활성화 : 0
 
+    lateinit var searchDbHelper: DBSearchHelper
+    lateinit var searchDB: SQLiteDatabase
+
     lateinit var cursor: Cursor
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v: View = inflater.inflate(com.song2.wave.R.layout.fragment_search_home, container, false)
 
-        var searchDbHelper = DBSearchHelper(context)
-        var searchDB: SQLiteDatabase = searchDbHelper.writableDatabase
+        searchDbHelper = DBSearchHelper(context)
+        searchDB = searchDbHelper.writableDatabase
 
         originDataArr = ArrayList<OriginArtistData>()
 
@@ -79,8 +82,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
                 if (keyword.equals(""))
                     toast("적어도 한 글자 이상을 입력 해 주세요")
-                else
-                {
+                else {
                     performSearch()
                     insertKeyword(keyword, searchDbHelper)
                 }
@@ -90,19 +92,25 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
         v.ll_search_home_frag_focus_on.visibility = View.GONE
         songDataArr = ArrayList<SongData>()
-       coverArtistDataArr = ArrayList<CoverArtistData>()
+        coverArtistDataArr = ArrayList<CoverArtistData>()
         requestManager = Glide.with(this)
 
-        // Edittext focus off
-/*        v.ll_search_home_frag_focus.setOnClickListener {
+        // Edittext focus OFF
+        v.ll_search_home_frag_focus.setOnClickListener {
             searchEditTextFocusOff()
             //rv_search_background.visibility = View.VISIBLE
-
-        }*/
+        }
 
         // Edittext focus ON
         v.edit_search_home_frag_searchbar.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
+
+                searchDbHelper = DBSearchHelper(context)
+                searchDB= searchDbHelper.writableDatabase
+
+                Log.v(TAG, "edt_search_clickListener")
+                insertSearchHistoryData(searchDB, v)
+
                 searchEditTextFocusOn()
             }
         }
@@ -111,12 +119,13 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         v.tv_search_home_frag_all_delete.setOnClickListener {
             searchDbHelper.deleteAll()
             searchData.clear()
-            searchDataHistoryAdapter = SearchDataHistoryAdapter(ctx,searchData)
+            searchDataHistoryAdapter = SearchDataHistoryAdapter(ctx, searchData)
             v.recycler_search_home_frag_search_home_hisory.adapter = searchDataHistoryAdapter
             v.recycler_search_home_frag_search_home_hisory.layoutManager = LinearLayoutManager(context)
             v.recycler_search_home_frag_search_home_hisory.isNestedScrollingEnabled = false
             v.rv_search_background.visibility = View.VISIBLE
             rv_search_background.visibility = View.GONE
+            tv_search_home_frag_is_not_home_history.visibility = View.VISIBLE
         }
 
         return v
@@ -143,7 +152,6 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         }
     }
 
-    // 수정 : ?
     fun searchEditTextFocusOff() {
         ll_search_home_frag_focus_off.visibility = View.VISIBLE
         ll_search_home_frag_focus_on.visibility = View.GONE
@@ -151,8 +159,8 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         searchBackFlag = 0
     }
 
-    // When searching,
     fun searchEditTextFocusOn() {
+
         rv_search_background.visibility = View.GONE
         ll_search_home_frag_focus_off.visibility = View.GONE
 
@@ -177,8 +185,10 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
         //최근 검색어 없을 경우
         if (cursor.count.equals(0)) {
+            view.tv_search_home_frag_is_not_home_history.visibility = View.VISIBLE
             return
         }
+        view.tv_search_home_frag_is_not_home_history.visibility = View.GONE
 
         searchDataHistoryAdapter = SearchDataHistoryAdapter(ctx, searchData)
         searchDataHistoryAdapter.notifyDataSetChanged()
@@ -187,7 +197,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         view.recycler_search_home_frag_search_home_hisory.isNestedScrollingEnabled = false
     }
 
-    fun deleteKeyword(keyword: String, searchDbHelper: DBSearchHelper){
+    fun deleteKeyword(keyword: String, searchDbHelper: DBSearchHelper) {
         searchDbHelper.delete(keyword)
     }
 
@@ -197,9 +207,12 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         if (searchDbHelper.search(keyword)) {
             searchDbHelper.delete(keyword)
         }
-
         searchDbHelper.insert(keyword)
 
+    }
+
+    fun setSearchBarText(text : String){
+        edit_search_home_frag_searchbar.setText(text)
     }
 
     fun performSearch() {

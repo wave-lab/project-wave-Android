@@ -58,5 +58,9 @@ public class DBSearchHelper extends SQLiteOpenHelper {
         else
             return true;
     }
+
+    public void closeDB() {
+
+    }
 }
 

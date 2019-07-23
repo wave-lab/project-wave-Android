@@ -113,6 +113,15 @@
                 android:layout_marginTop="18dp">
 
         </android.support.v7.widget.RecyclerView>
+
+        <TextView
+                android:id="@+id/tv_search_home_frag_is_not_home_history"
+                android:visibility="gone"
+                android:text="최근 검색 기록이 존재하지 않습니다."
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_height="wrap_content"/>
         //최근검색어
 
         <LinearLayout
