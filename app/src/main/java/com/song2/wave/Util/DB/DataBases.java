@@ -22,13 +22,13 @@ public class DataBases implements BaseColumns{
     }
 
 
-    public static final class CreateSearchDB{
+/*    public static final class CreateSearchDB{
         public static final String KEYWORD = "keyword";
         public static final String _TABLENAME0 = "searchtable";
         public static final String _CREATE0 = "create table if not exists "
                 + _TABLENAME0 +"("
                 + _ID +" integer primary key autoincrement, "
                 + KEYWORD +"text not null );";
-    }
+    }*/
 
 }

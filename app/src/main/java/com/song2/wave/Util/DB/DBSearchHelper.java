@@ -27,14 +27,14 @@ public class DBSearchHelper extends SQLiteOpenHelper {
     public void insert(String keyword){
         SQLiteDatabase db = getWritableDatabase();
 
-        db.execSQL("INSERT INTO SEARCH VALUE(null,"+keyword+");");
+        db.execSQL("INSERT INTO SEARCH VALUES(null,'"+keyword+"');");
         db.close();
     }
 
     public void delete(String keyword){
         SQLiteDatabase db = getWritableDatabase();
 
-        db.execSQL("DELETE FROM SEARCH WHERE keyword = " + keyword + ");");
+        db.execSQL("DELETE FROM SEARCH WHERE keyword = '" + keyword + "');");
         db.close();
     }
 
