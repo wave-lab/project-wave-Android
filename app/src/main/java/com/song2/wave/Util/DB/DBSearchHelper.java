@@ -34,7 +34,7 @@ public class DBSearchHelper extends SQLiteOpenHelper {
     public void delete(String keyword){
         SQLiteDatabase db = getWritableDatabase();
 
-        db.execSQL("DELETE FROM SEARCH WHERE keyword = '" + keyword + "');");
+        db.execSQL("DELETE FROM SEARCH WHERE keyword = '" + keyword + "';");
         db.close();
     }
 
@@ -43,6 +43,20 @@ public class DBSearchHelper extends SQLiteOpenHelper {
 
         db.execSQL("DELETE FROM SEARCH");
         db.close();
+    }
+
+    public boolean search(String keyword){
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT keyword FROM SEARCH WHERE keyword ='"+keyword+"';",null);
+        db.close();
+
+        if ( cursor == null){
+            return false;
+        }
+        else
+            return true;
     }
 }
 

@@ -51,54 +51,40 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
     lateinit var coverArtistAdapter: CoverArtistSearchAdapter
 
     lateinit var searchData: ArrayList<String>
-    lateinit var searchDataHistoryAdapter : SearchDataHistoryAdapter
+    lateinit var searchDataHistoryAdapter: SearchDataHistoryAdapter
     lateinit var requestManager: RequestManager
     var searchBackFlag: Int = 0 // editText 비활성화 : 0
 
-    lateinit var cursor : Cursor
-
+    lateinit var cursor: Cursor
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v: View = inflater.inflate(com.song2.wave.R.layout.fragment_search_home, container, false)
 
         var searchDbHelper = DBSearchHelper(context)
-        var searchDB : SQLiteDatabase = searchDbHelper.writableDatabase
+        var searchDB: SQLiteDatabase = searchDbHelper.writableDatabase
 
         originDataArr = ArrayList<OriginArtistData>()
 
-        //resent_search
-        //호출 될 때 마다
+        //keyboard - searchBtn
         insertSearchHistoryData(searchDB, v)
 
-        //keyboard - searchBtn
-
-        //ll_search_home_frag_recent_search_setting_bar
         v.edit_search_home_frag_searchbar.setOnEditorActionListener({ textView, actionId, keyEvent ->
 
             var handled = false
 
-            if(actionId == EditorInfo.IME_ACTION_SEARCH){
-                //perform search
-                getSearchResponse(edit_search_home_frag_searchbar.text.toString())
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 
-                ll_search_home_frag_focus_off.visibility = View.VISIBLE
-                ll_search_home_frag_focus_on.visibility = View.GONE
-                rv_search_background.visibility = View.GONE
+                var keyword = edit_search_home_frag_searchbar.text.toString()
 
-                edit_search_home_frag_searchbar.clearFocus()
-                searchBackFlag = 0
-
-                //insert keyword to resent search db
-                insertKeyword(edit_search_home_frag_searchbar.text.toString(),searchDbHelper)
-
+                performSearch()
+                insertKeyword(keyword, searchDbHelper)
             }
             handled
-
         })
 
         v.ll_search_home_frag_focus_on.visibility = View.GONE
         songDataArr = ArrayList<SongData>()
-        coverArtistDataArr = ArrayList<CoverArtistData>()
+       coverArtistDataArr = ArrayList<CoverArtistData>()
         requestManager = Glide.with(this)
 
         // Edittext focus off
@@ -115,14 +101,16 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
             }
         }
 
-        // "all delte" button is clicked
+        // "all delete" button is clicked
         v.tv_search_home_frag_all_delete.setOnClickListener {
+            searchDbHelper.deleteAll()
             searchData.clear()
-            searchDataHistoryAdapter = SearchDataHistoryAdapter(searchData)
+            searchDataHistoryAdapter = SearchDataHistoryAdapter(ctx,searchData)
             v.recycler_search_home_frag_search_home_hisory.adapter = searchDataHistoryAdapter
             v.recycler_search_home_frag_search_home_hisory.layoutManager = LinearLayoutManager(context)
             v.recycler_search_home_frag_search_home_hisory.isNestedScrollingEnabled = false
             v.rv_search_background.visibility = View.VISIBLE
+            rv_search_background.visibility = View.GONE
         }
 
         return v
@@ -149,7 +137,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         }
     }
 
-    // 수정 : ?;
+    // 수정 : ?
     fun searchEditTextFocusOff() {
         ll_search_home_frag_focus_off.visibility = View.VISIBLE
         ll_search_home_frag_focus_on.visibility = View.GONE
@@ -160,9 +148,9 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
     // When searching,
     fun searchEditTextFocusOn() {
         rv_search_background.visibility = View.GONE
-        //ll_search_home_frag_focus_off.visibility = View.GONE //최근검색어 보여줄 때 퍌요함..
+        ll_search_home_frag_focus_off.visibility = View.GONE
 
-        //최근검색
+        //recent search view
         recycler_search_home_frag_search_home_hisory.visibility = View.VISIBLE
         ll_search_home_frag_recent_search_setting_bar.visibility = View.VISIBLE
 
@@ -170,35 +158,54 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
         searchBackFlag = 1
     }
 
-    fun insertSearchHistoryData(searchDB : SQLiteDatabase, view: View) {
+    fun insertSearchHistoryData(searchDB: SQLiteDatabase, view: View) {
 
-        cursor = searchDB.rawQuery("SELECT * FROM SEARCH;", null)
+        cursor = searchDB.rawQuery("SELECT * FROM SEARCH ORDER BY _id ASC;", null)
 
         searchData = ArrayList<String>()
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             searchData.add(cursor.getString(1))
-            Log.v("searchData",searchData.toString())
+            Log.v("searchData", searchData.toString())
         }
 
-        //return
-
         //최근 검색어 없을 경우
-        if(cursor.count.equals(0)){
+        if (cursor.count.equals(0)) {
             return
         }
 
-        searchDataHistoryAdapter = SearchDataHistoryAdapter(searchData)
+        searchDataHistoryAdapter = SearchDataHistoryAdapter(ctx, searchData)
         searchDataHistoryAdapter.notifyDataSetChanged()
         view.recycler_search_home_frag_search_home_hisory.adapter = searchDataHistoryAdapter
         view.recycler_search_home_frag_search_home_hisory.layoutManager = LinearLayoutManager(context)
         view.recycler_search_home_frag_search_home_hisory.isNestedScrollingEnabled = false
     }
 
-    fun insertKeyword(keyword : String, searchDbHelper : DBSearchHelper){
+    fun deleteKeyword(keyword: String, searchDbHelper: DBSearchHelper){
+        searchDbHelper.delete(keyword)
+    }
+
+    fun insertKeyword(keyword: String, searchDbHelper: DBSearchHelper) {
+
+        //이미 존재 할 경우, 이전데이터 지우고 insert
+        if (searchDbHelper.search(keyword)) {
+            searchDbHelper.delete(keyword)
+        }
 
         searchDbHelper.insert(keyword)
 
+    }
+
+    fun performSearch() {
+        //perform search
+        getSearchResponse(edit_search_home_frag_searchbar.text.toString())
+
+        ll_search_home_frag_focus_off.visibility = View.VISIBLE
+        ll_search_home_frag_focus_on.visibility = View.GONE
+        rv_search_background.visibility = View.GONE
+
+        edit_search_home_frag_searchbar.clearFocus()
+        searchBackFlag = 0
     }
 
     fun getSearchResponse(searchData: String?) {
@@ -214,16 +221,16 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                 toast("성공")
                 Log.v("Asdf", "성공")
 
-                lateinit var originArtistDataList : ArrayList<OriginArtistData>
+                lateinit var originArtistDataList: ArrayList<OriginArtistData>
                 lateinit var originTitleDataList: ArrayList<TitleData>
-                lateinit var coverArtistDataList:ArrayList<SearchCoverArtistData>
+                lateinit var coverArtistDataList: ArrayList<SearchCoverArtistData>
 
                 //원곡아티스트
-                if(response.body()!!.data!!.originArtistName != null) {
+                if (response.body()!!.data!!.originArtistName != null) {
 
 
-                    recycler_search_home_frag_origin_artist.visibility =View.VISIBLE
-                    tv_search_home_frag_artist_result_null.visibility= View.GONE
+                    recycler_search_home_frag_origin_artist.visibility = View.VISIBLE
+                    tv_search_home_frag_artist_result_null.visibility = View.GONE
 
 
                     originArtistDataList = response.body()!!.data!!.originArtistName!!
@@ -242,24 +249,25 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                     originArtistSearchAdapter = OriginArtistSearchAdapter(originDataArr, requestManager)
                     originArtistSearchAdapter.notifyDataSetChanged()
                     recycler_search_home_frag_origin_artist.adapter = originArtistSearchAdapter
-                    recycler_search_home_frag_origin_artist.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    recycler_search_home_frag_origin_artist.layoutManager =
+                            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     recycler_search_home_frag_origin_artist.isNestedScrollingEnabled = false
 
-                }else{
+                } else {
                     //검색결과 없음
                     //recyclerview 가 안보이게 할 것
 
-                    recycler_search_home_frag_origin_artist.visibility =View.GONE
-                    tv_search_home_frag_artist_result_null.visibility= View.VISIBLE
+                    recycler_search_home_frag_origin_artist.visibility = View.GONE
+                    tv_search_home_frag_artist_result_null.visibility = View.VISIBLE
                 }
 
 
                 //원곡타이틀
-                if(response.body()!!.data!!.originTitle != null) {
+                if (response.body()!!.data!!.originTitle != null) {
 
-                    recycler_search_home_frag_song.visibility =View.VISIBLE
-                    tv_search_home_frag_song_result_null.visibility= View.GONE
-                    btn_search_home_frag_song_more.visibility=View.VISIBLE
+                    recycler_search_home_frag_song.visibility = View.VISIBLE
+                    tv_search_home_frag_song_result_null.visibility = View.GONE
+                    btn_search_home_frag_song_more.visibility = View.VISIBLE
 
                     originTitleDataList = response.body()!!.data!!.originTitle!!
 
@@ -285,19 +293,19 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                     recycler_search_home_frag_song.layoutManager = LinearLayoutManager(context)
                     recycler_search_home_frag_song.isNestedScrollingEnabled = false
 
-                }else{
+                } else {
                     //검색결과 없음
                     //recyclerview 가 안보이게 할 것
-                    recycler_search_home_frag_song.visibility =View.GONE
-                    tv_search_home_frag_song_result_null.visibility= View.VISIBLE
-                    btn_search_home_frag_song_more.visibility=View.GONE
+                    recycler_search_home_frag_song.visibility = View.GONE
+                    tv_search_home_frag_song_result_null.visibility = View.VISIBLE
+                    btn_search_home_frag_song_more.visibility = View.GONE
                 }
 
                 //커버가수
-                if(response.body()!!.data!!.artistName != null) {
+                if (response.body()!!.data!!.artistName != null) {
 
-                    recycler_search_home_frag_artist.visibility =View.VISIBLE
-                    tv_search_home_frag_cover_artist_result_null.visibility= View.GONE
+                    recycler_search_home_frag_artist.visibility = View.VISIBLE
+                    tv_search_home_frag_cover_artist_result_null.visibility = View.GONE
 
                     coverArtistDataList = response.body()!!.data!!.artistName!!
 
@@ -311,25 +319,32 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                                 coverArtistDataList[i].nickname
                             )
                         )
-                        Log.v("userIdx",coverArtistDataList[i].userIdx.toString())
+                        Log.v("userIdx", coverArtistDataList[i].userIdx.toString())
                     }
 
                     coverArtistAdapter = CoverArtistSearchAdapter(ctx, coverArtistDataArr, requestManager)
                     coverArtistAdapter.notifyDataSetChanged()
                     recycler_search_home_frag_artist.adapter = coverArtistAdapter
-                    recycler_search_home_frag_artist.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    recycler_search_home_frag_artist.layoutManager =
+                            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     recycler_search_home_frag_artist.isNestedScrollingEnabled = false
 
-                    Log.v("SearchHomeFragment_searchResult : ","coverArtistDataList="+response.body()!!.data!!.artistName.toString())
-                }else{
+                    Log.v(
+                        "SearchHomeFragment_searchResult : ",
+                        "coverArtistDataList=" + response.body()!!.data!!.artistName.toString()
+                    )
+                } else {
                     //검색결과 없음
-                    //recyclerview 가 안보이게 할 것
-                    recycler_search_home_frag_artist.visibility =View.GONE
-                    tv_search_home_frag_cover_artist_result_null.visibility= View.VISIBLE
+                    recycler_search_home_frag_artist.visibility = View.GONE
+                    tv_search_home_frag_cover_artist_result_null.visibility = View.VISIBLE
 
                 }
             }
         })
+    }
+
+    companion object {
+        lateinit var searchHomeFragment: SearchHomeFragment
     }
 
 }

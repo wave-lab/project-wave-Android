@@ -8,4 +8,5 @@ import com.song2.wave.R
 
 class SearchDataHistoryViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
     var searchDataName: TextView = itemView!!.findViewById(R.id.tv_search_item_search_data)
+    var searchDataDelete : ImageView = itemView!!.findViewById(R.id.iv_search_home_frag_delete_keyword_item)
 }
