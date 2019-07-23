@@ -11,20 +11,22 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:orientation="horizontal"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginLeft="24dp"
         >
         <TextView
             android:id="@+id/tv_search_item_search_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="27dp"
+            android:padding="1dp"
             android:text="blotto"
-            android:textSize="14sp"
+            android:textSize="14dp"
+            android:layout_marginRight="100dp"
             android:fontFamily="@font/noto_sans_kr_regular_hestia"
             android:layout_alignParentLeft="true"
-            android:includeFontPadding="false"
-            />
+            android:includeFontPadding="false"/>
         <ImageView
+                android:id="@+id/iv_search_home_frag_delete_keyword_item"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/btn_close"

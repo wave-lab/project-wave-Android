@@ -66,6 +66,8 @@
             android:layout_marginTop="24dp">
 
         <LinearLayout
+                android:id="@+id/ll_search_home_frag_recent_search_setting_bar"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:orientation="horizontal"
@@ -75,7 +77,6 @@
                     android:layout_height="wrap_content">
 
                 <TextView
-                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="최근 검색어"
@@ -87,7 +88,6 @@
                         android:layout_marginBottom="25dp"/>
 
                 <TextView
-                        android:visibility="gone"
                         android:id="@+id/tv_search_home_frag_all_delete"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -110,10 +110,18 @@
                 android:id="@+id/recycler_search_home_frag_search_home_hisory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-        >
+                android:layout_marginTop="18dp">
 
         </android.support.v7.widget.RecyclerView>
+
+        <TextView
+                android:id="@+id/tv_search_home_frag_is_not_home_history"
+                android:visibility="gone"
+                android:text="최근 검색 기록이 존재하지 않습니다."
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_height="wrap_content"/>
         //최근검색어
 
         <LinearLayout

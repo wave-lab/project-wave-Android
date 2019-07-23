@@ -30,7 +30,7 @@
         />
 
     <LinearLayout
-        android:background="#000000"
+            android:background="#000000"
         android:id="@+id/ll_main_act_tab_bar"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
