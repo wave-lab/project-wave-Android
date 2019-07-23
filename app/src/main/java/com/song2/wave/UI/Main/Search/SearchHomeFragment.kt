@@ -1,6 +1,8 @@
 package com.song2.wave.UI.Main.Search
 
 import android.content.Context
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -28,6 +30,7 @@ import retrofit2.Call
 import retrofit2.Response
 import android.view.inputmethod.EditorInfo
 import com.song2.wave.Data.model.Scoring.TitleData
+import com.song2.wave.Util.DB.DBSearchHelper
 import org.jetbrains.anko.support.v4.ctx
 
 
@@ -48,18 +51,28 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
     lateinit var coverArtistAdapter: CoverArtistSearchAdapter
 
     lateinit var searchData: ArrayList<String>
-    lateinit var searchDataHistoryAdapter: SearchDataHistoryAdapter
+    lateinit var searchDataHistoryAdapter : SearchDataHistoryAdapter
     lateinit var requestManager: RequestManager
     var searchBackFlag: Int = 0 // editText 비활성화 : 0
+
+    lateinit var cursor : Cursor
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v: View = inflater.inflate(com.song2.wave.R.layout.fragment_search_home, container, false)
 
+        var searchDbHelper = DBSearchHelper(context)
+        var searchDB : SQLiteDatabase = searchDbHelper.writableDatabase
+
         originDataArr = ArrayList<OriginArtistData>()
 
-        insertSearchHistoryData(v)
+        //resent_search
+        //호출 될 때 마다
+        insertSearchHistoryData(searchDB, v)
 
         //keyboard - searchBtn
+
+        //ll_search_home_frag_recent_search_setting_bar
         v.edit_search_home_frag_searchbar.setOnEditorActionListener({ textView, actionId, keyEvent ->
 
             var handled = false
@@ -74,6 +87,10 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
                 edit_search_home_frag_searchbar.clearFocus()
                 searchBackFlag = 0
+
+                //insert keyword to resent search db
+                insertKeyword(edit_search_home_frag_searchbar.text.toString(),searchDbHelper)
+
             }
             handled
 
@@ -106,12 +123,6 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
             v.recycler_search_home_frag_search_home_hisory.layoutManager = LinearLayoutManager(context)
             v.recycler_search_home_frag_search_home_hisory.isNestedScrollingEnabled = false
             v.rv_search_background.visibility = View.VISIBLE
-        }
-
-        // artist is clicked
-        // 수정 : 아이템 클릭시로 바꿔야 함 artist adapter에서
-        v.recycler_search_home_frag_origin_artist.setOnClickListener {
-            SearchFragment.searchFragment.replaceFragment(SearchArtistFragment())
         }
 
         return v
@@ -149,23 +160,45 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
     // When searching,
     fun searchEditTextFocusOn() {
         rv_search_background.visibility = View.GONE
-        ll_search_home_frag_focus_off.visibility = View.GONE //최근검색어 보여줄 때 퍌요함..
+        //ll_search_home_frag_focus_off.visibility = View.GONE //최근검색어 보여줄 때 퍌요함..
+
+        //최근검색
+        recycler_search_home_frag_search_home_hisory.visibility = View.VISIBLE
+        ll_search_home_frag_recent_search_setting_bar.visibility = View.VISIBLE
+
         ll_search_home_frag_focus_on.visibility = View.VISIBLE
         searchBackFlag = 1
     }
 
-    fun insertSearchHistoryData(v: View) {
+    fun insertSearchHistoryData(searchDB : SQLiteDatabase, view: View) {
+
+        cursor = searchDB.rawQuery("SELECT * FROM SEARCH;", null)
+
         searchData = ArrayList<String>()
-        searchData.add("example Data1")
-        searchData.add("example Data2")
-        searchData.add("example Data3")
-        searchData.add("example Data4")
-        searchData.add("example Data5")
+
+        while(cursor.moveToNext()){
+            searchData.add(cursor.getString(1))
+            Log.v("searchData",searchData.toString())
+        }
+
+        //return
+
+        //최근 검색어 없을 경우
+        if(cursor.count.equals(0)){
+            return
+        }
 
         searchDataHistoryAdapter = SearchDataHistoryAdapter(searchData)
-        v.recycler_search_home_frag_search_home_hisory.adapter = searchDataHistoryAdapter
-        v.recycler_search_home_frag_search_home_hisory.layoutManager = LinearLayoutManager(context)
-        v.recycler_search_home_frag_search_home_hisory.isNestedScrollingEnabled = false
+        searchDataHistoryAdapter.notifyDataSetChanged()
+        view.recycler_search_home_frag_search_home_hisory.adapter = searchDataHistoryAdapter
+        view.recycler_search_home_frag_search_home_hisory.layoutManager = LinearLayoutManager(context)
+        view.recycler_search_home_frag_search_home_hisory.isNestedScrollingEnabled = false
+    }
+
+    fun insertKeyword(keyword : String, searchDbHelper : DBSearchHelper){
+
+        searchDbHelper.insert(keyword)
+
     }
 
     fun getSearchResponse(searchData: String?) {
