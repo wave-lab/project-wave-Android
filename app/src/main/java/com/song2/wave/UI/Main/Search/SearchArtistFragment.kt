@@ -53,7 +53,4 @@ class SearchArtistFragment : android.support.v4.app.Fragment(), OnBackPressedLis
         Log.e(TAG, "onAttach()")
         (context as MainActivity).setOnBackPressedListener(this, 1)
     }
-
-
-
 }
