@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#000000"
-    android:orientation="vertical"
-    >
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:orientation="vertical"
+>
 
     <RelativeLayout
-        android:id="@+id/rl_search_home_frag_searchbar"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/img_searchbar_def"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:clickable="true"
-        android:focusableInTouchMode="true">
+            android:id="@+id/rl_search_home_frag_searchbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/img_searchbar_def"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusableInTouchMode="true">
 
         <Button
-            android:id="@+id/btn_search_home_frag_searchbar"
-            android:layout_marginStart="16dp"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/tab_btn_search_active"
-            android:layout_centerVertical="true"/>
+                android:id="@+id/btn_search_home_frag_searchbar"
+                android:layout_marginStart="16dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/tab_btn_search_active"
+                android:layout_centerVertical="true"/>
 
         <EditText
                 android:id="@+id/edit_search_home_frag_searchbar"
@@ -43,7 +43,8 @@
                 android:inputType="text"
                 android:background="@color/transparent"/>
 
-    </RelativeLayout> //검색창
+    </RelativeLayout>
+    //검색창
 
     <RelativeLayout
             android:id="@+id/rv_search_background"
@@ -53,24 +54,25 @@
             android:layout_marginTop="192dp"
             android:background="@drawable/img_search_before_def">
 
-    </RelativeLayout> //검색 이전
+    </RelativeLayout>
+    //검색 이전
 
     <LinearLayout
-        android:id="@+id/ll_search_home_frag_focus_on"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_below="@+id/rl_search_home_frag_searchbar"
-        android:layout_marginTop="24dp"     >
+            android:id="@+id/ll_search_home_frag_focus_on"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/rl_search_home_frag_searchbar"
+            android:layout_marginTop="24dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="horizontal"
+                android:gravity="center">
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
                 <TextView
                         android:visibility="gone"
@@ -87,30 +89,32 @@
                 <TextView
                         android:visibility="gone"
                         android:id="@+id/tv_search_home_frag_all_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="전체삭제"
-                    android:textColor="#00b6de"
-                    android:textSize="14sp"
-                    android:includeFontPadding="false"
-                    android:fontFamily="@font/noto_sans_kr_regular_hestia"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="24dp"
-                    />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="전체삭제"
+                        android:textColor="#00b6de"
+                        android:textSize="14sp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="24dp"
+                />
 
             </RelativeLayout>
 
-        </LinearLayout> //최근검색어 setting
+        </LinearLayout>
+        //최근검색어 setting
 
         <android.support.v7.widget.RecyclerView
                 android:visibility="gone"
-            android:id="@+id/recycler_search_home_frag_search_home_hisory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            >
+                android:id="@+id/recycler_search_home_frag_search_home_hisory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+        >
 
-        </android.support.v7.widget.RecyclerView> //최근검색어
+        </android.support.v7.widget.RecyclerView>
+        //최근검색어
 
         <LinearLayout
                 android:id="@+id/ll_search_home_frag_focus"
@@ -118,119 +122,137 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
         </LinearLayout>
-    </LinearLayout> //최근검색
+    </LinearLayout>
+    //최근검색
 
     <ScrollView
             android:visibility="gone"
             android:id="@+id/ll_search_home_frag_focus_off"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_below="@+id/rl_search_home_frag_searchbar">
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/rl_search_home_frag_searchbar">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             //원곡아티스트
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="33dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="원곡 아티스트"
-                    android:fontFamily="@font/noto_sans_kr_bold_hestia"
-                    android:layout_marginLeft="16dp"
-                    android:textColor="#ffffff"
-                    android:textSize="22sp"
-                    android:includeFontPadding="false" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="원곡 아티스트"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                        android:layout_marginLeft="16dp"
+                        android:textColor="#ffffff"
+                        android:textSize="22sp"
+                        android:includeFontPadding="false"/>
             </LinearLayout>
-            <RelativeLayout
-                android:id="@+id/rel_search_home_frag_artist"
-                android:layout_width="120dp"
-                android:layout_height="110dp"
-                android:layout_marginLeft="16dp">
 
-                <android.support.v7.widget.RecyclerView
+            <android.support.v7.widget.RecyclerView
+                    android:visibility="visible"
                     android:id="@+id/recycler_search_home_frag_origin_artist"
                     android:layout_width="100dp"
                     android:layout_height="110dp"/>
 
-            </RelativeLayout>
+
+            <TextView
+                    android:id="@+id/tv_search_home_frag_artist_result_null"
+                    android:visibility="visible"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="아티스트 검색결과가 존재하지 않습니다."/>
 
             //곡
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="36dp"
-                >
+                    android:layout_width="match_parent"
+                    android:layout_height="33dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="36dp"
+            >
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="곡"
-                    android:fontFamily="@font/noto_sans_kr_bold_hestia"
-                    android:layout_marginLeft="16dp"
-                    android:textColor="#ffffff"
-                    android:textSize="22sp"
-                    android:includeFontPadding="false"
-                    />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="곡"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                        android:layout_marginLeft="16dp"
+                        android:textColor="#ffffff"
+                        android:textSize="22sp"
+                        android:includeFontPadding="false"
+                />
 
                 <Button
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/btn_more"
-                    android:layout_marginLeft="8dp"
-                    android:layout_gravity="center"
-                    />
+                        android:id="@+id/btn_search_home_frag_song_more"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/btn_more"
+                        android:layout_marginLeft="8dp"
+                        android:layout_gravity="center"
+                />
 
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_search_home_frag_song"
-                android:layout_width="match_parent"
-                android:layout_height="458dp"
-                android:layout_marginTop="10dp"
-                >
+                    android:visibility="visible"
+                    android:id="@+id/recycler_search_home_frag_song"
+                    android:layout_width="match_parent"
+                    android:layout_height="458dp"
+                    android:layout_marginTop="10dp"
+            >
             </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                    android:id="@+id/tv_search_home_frag_song_result_null"
+                    android:visibility="visible"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="곡 검색결과가 존재하지 않습니다."/>
 
             //커버아티스트
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp"
-                >
+                    android:layout_width="match_parent"
+                    android:layout_height="33dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp"
+            >
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="커버 아티스트"
-                    android:layout_marginLeft="16dp"
-                    android:textColor="#ffffff"
-                    android:textSize="22sp"
-                    android:fontFamily="@font/noto_sans_kr_bold_hestia"
-                    android:includeFontPadding="false"
-                    />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="커버 아티스트"
+                        android:layout_marginLeft="16dp"
+                        android:textColor="#ffffff"
+                        android:textSize="22sp"
+                        android:fontFamily="@font/noto_sans_kr_bold_hestia"
+                        android:includeFontPadding="false"
+                />
 
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_search_home_frag_artist"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginTop="12dp"
-                ></android.support.v7.widget.RecyclerView>
+                    android:visibility="visible"
+                    android:id="@+id/recycler_search_home_frag_artist"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="12dp">
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                    android:id="@+id/tv_search_home_frag_cover_artist_result_null"
+                    android:visibility="visible"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="커버 아티스트 검색결과가 존재하지 않습니다."/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="62dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="62dp">
 
             </LinearLayout>
         </LinearLayout>
 
 
-    </ScrollView> //검색결과
+    </ScrollView>
+    //검색결과
 
 </RelativeLayout>

@@ -8,6 +8,8 @@ import com.bumptech.glide.RequestManager
 import com.song2.wave.Data.model.CoverArtistData
 import com.song2.wave.Data.model.SignUp.OriginArtistData
 import com.song2.wave.R
+import com.song2.wave.UI.Main.Search.SearchArtistFragment
+import com.song2.wave.UI.Main.Search.SearchFragment
 
 class OriginArtistSearchAdapter (private var originArtistData: ArrayList<OriginArtistData>, var requestManager : RequestManager) : RecyclerView.Adapter<OriginArtistSearchViewHolder>(){
 
@@ -27,5 +29,10 @@ class OriginArtistSearchAdapter (private var originArtistData: ArrayList<OriginA
         // ex)
         //requestManager.load(EXAMPLE_IMG_URL).into(holder.coverArtistImg)
         holder.originArtistName.text = originArtistData[position].originArtistName
+
+        holder.originArtistContainer.setOnClickListener {
+            SearchFragment.searchFragment.replaceFragment(SearchArtistFragment())
+        }
+
     }
 }

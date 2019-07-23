@@ -173,6 +173,7 @@ class HomeOnFragment : Fragment() {
                     if(playlistDataList == null)
                         return
 
+                    // 수정 : *error
                     hitSongHomeAdapter = HitSongHomeAdapter(context!!, hitSongHomeDataList, requestManager)
                     rv_home_frag_scoring_hit_list.adapter = hitSongHomeAdapter
                     rv_home_frag_scoring_hit_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
