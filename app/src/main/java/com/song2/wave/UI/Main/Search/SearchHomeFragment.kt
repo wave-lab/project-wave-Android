@@ -29,6 +29,7 @@ import org.jetbrains.anko.support.v4.toast
 import retrofit2.Call
 import retrofit2.Response
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import com.song2.wave.Data.model.Scoring.TitleData
 import com.song2.wave.Util.DB.DBSearchHelper
 import org.jetbrains.anko.support.v4.ctx
@@ -76,8 +77,13 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
                 var keyword = edit_search_home_frag_searchbar.text.toString()
 
-                performSearch()
-                insertKeyword(keyword, searchDbHelper)
+                if (keyword.equals(""))
+                    toast("적어도 한 글자 이상을 입력 해 주세요")
+                else
+                {
+                    performSearch()
+                    insertKeyword(keyword, searchDbHelper)
+                }
             }
             handled
         })
@@ -160,7 +166,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
     fun insertSearchHistoryData(searchDB: SQLiteDatabase, view: View) {
 
-        cursor = searchDB.rawQuery("SELECT * FROM SEARCH ORDER BY _id ASC;", null)
+        cursor = searchDB.rawQuery("SELECT * FROM SEARCH ORDER BY _id DESC;", null)
 
         searchData = ArrayList<String>()
 

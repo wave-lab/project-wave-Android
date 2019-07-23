@@ -46,7 +46,8 @@
         <activity android:name=".UI.Signup.SignupSelectArtistActivity" />
 
         <!-- 메인 -->
-        <activity android:name=".UI.Main.MainActivity">
+        <activity android:name=".UI.Main.MainActivity"
+                  android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
