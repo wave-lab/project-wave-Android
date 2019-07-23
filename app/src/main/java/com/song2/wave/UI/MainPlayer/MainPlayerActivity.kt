@@ -142,19 +142,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    var sourceMusicArray: Array<String> = arrayOf(
-            "https://project-wave-1.s3.ap-northeast-2.amazonaws.com/Roller+Coaster_%EC%B2%AD%ED%95%98_320k.mp3",
-            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-01.mp3",
-            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-02.mp3",
-            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-03.mp3",
-            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-04.mp3",
-            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-05.mp3",
-            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-06.mp3",
-            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-07.mp3",
-            "https://my-data-server.s3.ap-northeast-2.amazonaws.com/JangBumJune3rd-08.mp3"
-    )
-
-
     fun addTimer(){
         val tt = object : TimerTask() {
             override fun run() {
@@ -286,6 +273,10 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
             rl_main_player_act_rating.visibility = View.INVISIBLE
         }
 
+        // 화면 닫기 버튼 이벤트
+        iv_maim_player_close.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun registerBroadcast() {
@@ -309,13 +300,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
         addSeekBar()
         //addTimer()
-
-//        var play_duration = audioService.getDuration()
-        //      var lengthOfSong =
-        //            String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
-        //tv_set_start_act_length_of_song.setText(lengthOfSong)
-
-        //  seekbar.setMax(play_duration)
     }
 
 
@@ -395,28 +379,10 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
     fun prevSong() {
 
-        if (currentPosition > 0) {
-            //mediaPlayer.reset()
-            currentPosition -= 1
-            playAudio(sourceMusicArray[currentPosition])
-
-        } else {
-            killMediaPlayer()
-            //mediaPlayer.release()
-        }
-
     }
 
     fun nextSong() {
 
-        if (currentPosition < sourceMusicArray.size) {
-            // mediaPlayer.reset()
-            currentPosition += 1
-            playAudio(sourceMusicArray[currentPosition])
-
-        } else {
-            killMediaPlayer()
-        }
 
     }
 
