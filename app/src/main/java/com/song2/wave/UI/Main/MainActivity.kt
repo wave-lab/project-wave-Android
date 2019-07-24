@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.song2.wave.UI.Main.Library.LibraryFragment
 import com.song2.wave.UI.Main.Scoring.ScoringFragment
-import com.song2.wave.UI.Main.Search.SearchFragment
 import android.util.Log
 import com.song2.wave.UI.Main.Home.HomeFragment
 import com.song2.wave.UI.Main.MyPage.PointHistoryFragment
@@ -18,6 +17,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import com.song2.wave.R
 import android.content.*
+import android.support.v4.app.FragmentManager
 import android.view.MotionEvent
 import android.view.View
 import android.widget.SeekBar
@@ -32,12 +32,25 @@ import retrofit2.Response
 import android.view.View.OnTouchListener
 import android.widget.LinearLayout
 import com.song2.wave.R.id.iv_main_act_bottom_play
+import com.song2.wave.UI.Main.Search.SearchHomeFragment
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity
 import kotlinx.android.synthetic.main.activity_player.*
 import kotlin.math.min
+import android.widget.Toast
+
+
 
 
 class MainActivity : AppCompatActivity() {
+
+    var FINISH_INTERVAL_TIME = 2000
+    var backPressedTime : Long = 0
+
+    var home= false
+    var search= false
+    var scoring= false
+    var library= false
+    var mypage= false
 
     val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1
     var TAG = "MainActivity"
@@ -47,6 +60,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.song2.wave.R.layout.activity_main)
+
+
+        addFragment(HomeFragment())
+        addFragment(SearchHomeFragment())
+        addFragment(ScoringFragment())
+        addFragment(LibraryFragment())
+        addFragment(MyPageFragment())
+
+
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
 
@@ -57,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                 MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
             )
-            return;
+            return
         }
 
         // 하단 미니 플레이어 클릭 시 메인 플레이어 화면으로 이벤트
@@ -86,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         mainActivity = this
-        callFragment("home")
+        replaceFragment(HomeFragment())
         addBottomTab()
         backPressInFragment()
         registerBroadcast()
@@ -104,10 +126,10 @@ class MainActivity : AppCompatActivity() {
     var listenerFlag : Int = 0
 
     // 리스너 설정 메소드
-    fun setOnBackPressedListener(listener: OnBackPressedListener?, flag: Int ) {
+/*    fun setOnBackPressedListener(listener: OnBackPressedListener?, flag: Int ) {
         mBackListener = listener
         listenerFlag = flag
-    }
+    }*/
 
     fun backPressInFragment(){
 
@@ -134,6 +156,7 @@ class MainActivity : AppCompatActivity() {
 
 
         ll_main_act_search_tab!!.setOnClickListener { callFragment("search")
+
             txt_main_act_home.setTextColor(Color.parseColor("#9e9e9e"))
             txt_main_act_scoring.setTextColor(Color.parseColor("#9e9e9e"))
             txt_main_act_search.setTextColor(Color.parseColor("#00b6de"))
@@ -148,6 +171,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         ll_main_act_scoring_tab!!.setOnClickListener { callFragment("scoring")
+
             txt_main_act_home.setTextColor(Color.parseColor("#9e9e9e"))
             txt_main_act_scoring.setTextColor(Color.parseColor("#00b6de"))
             txt_main_act_search.setTextColor(Color.parseColor("#9e9e9e"))
@@ -161,6 +185,7 @@ class MainActivity : AppCompatActivity() {
             ib_main_act_mypage_tab.setImageResource(R.drawable.tab_btn_mypage_def)
         }
         ll_main_act_library_tab!!.setOnClickListener { callFragment("library")
+
             txt_main_act_home.setTextColor(Color.parseColor("#9e9e9e"))
             txt_main_act_scoring.setTextColor(Color.parseColor("#9e9e9e"))
             txt_main_act_search.setTextColor(Color.parseColor("#9e9e9e"))
@@ -174,6 +199,7 @@ class MainActivity : AppCompatActivity() {
             ib_main_act_mypage_tab.setImageResource(R.drawable.tab_btn_mypage_def)
         }
         ll_main_act_mypage_tab!!.setOnClickListener { callFragment("myPage")
+
             txt_main_act_home.setTextColor(Color.parseColor("#9e9e9e"))
             txt_main_act_scoring.setTextColor(Color.parseColor("#9e9e9e"))
             txt_main_act_search.setTextColor(Color.parseColor("#9e9e9e"))
@@ -191,31 +217,105 @@ class MainActivity : AppCompatActivity() {
 
     fun callFragment(frag: String) {
 
-        when (frag) {
-            "home" -> {
-                nowFrag = HomeFragment()
-            }
-            "search" -> {
-                nowFrag = SearchFragment()
-            }
-            "scoring" -> {
-                nowFrag = ScoringFragment()
-            }
-            "library" -> {
-                nowFrag = LibraryFragment()
-            }
-            "myPage" ->{
-                nowFrag = MyPageFragment()
-            }
+        if(frag == "home"){
+
+            supportFragmentManager.beginTransaction().show(HomeFragment()).commit()
+
+            supportFragmentManager.beginTransaction().hide(SearchHomeFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(ScoringFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(LibraryFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(MyPageFragment()).commit()
         }
 
-        val transaction = supportFragmentManager.beginTransaction()
+        //
+        if(frag == "search"){
+            supportFragmentManager.beginTransaction().show(SearchHomeFragment()).commit()
+
+            supportFragmentManager.beginTransaction().hide(HomeFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(ScoringFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(LibraryFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(MyPageFragment()).commit()
+        }
+        else{
+            Log.v("search","re ADD")
+        }
+
+        //
+        if(frag == "scoring") {
+
+            supportFragmentManager.beginTransaction().show(ScoringFragment()).commit()
+
+            supportFragmentManager.beginTransaction().hide(HomeFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(SearchHomeFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(LibraryFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(MyPageFragment()).commit()
+        }
+        else{
+            Log.v("scoring","re ADD")
+
+        }
+
+        //
+        if(frag == "library"){
+            supportFragmentManager.beginTransaction().show(LibraryFragment()).commit()
+
+            supportFragmentManager.beginTransaction().hide(HomeFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(SearchHomeFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(ScoringFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(MyPageFragment()).commit()
+        }
+        else{
+            Log.v("library","re ADD")
+
+
+        }
+
+        //
+        if(frag == "myPage") {
+            supportFragmentManager.beginTransaction().show(MyPageFragment()).commit()
+
+            supportFragmentManager.beginTransaction().hide(HomeFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(SearchHomeFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(ScoringFragment()).commit()
+            supportFragmentManager.beginTransaction().hide(LibraryFragment()).commit()
+        }
+        else{
+//            fragmentArray.add(MyPageFragment())
+            Log.v("myPage","re ADD")
+
+
+        }
+
+/*        val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(com.song2.wave.R.id.main_fragment_container, nowFrag)
-        transaction.commit()
+        transaction.commit()   */
+
+/*        var fm = supportFragmentManager
+        fm.beginTransaction().show(nowFrag).commit()
+        Log.v("showFrag",nowFrag.toString())*/
+/*        var fm = supportFragmentManager
+
+        for (i in fragmentArray.indices){
+            fm.beginTransaction().hide(fragmentArray[i]).commit()
+        }*/
+
     }
 
     override fun onBackPressed() {
 
+        //메인 탭에 위치 햘 경만 적용 되도록 해야 할 것 같음....
+        val tempTime = System.currentTimeMillis()
+        val intervalTime = tempTime - backPressedTime
+
+        if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
+            super.onBackPressed()
+        } else {
+            backPressedTime = tempTime
+            Toast.makeText(applicationContext, "'뒤로' 버튼을 한번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
+        }
+        //
+
+/*
         // SearchArtistFragment
         if (mBackListener != null && listenerFlag == 1) {
             Log.v(TAG, "아티스트 세부사항 프래그먼트 실행")
@@ -236,7 +336,7 @@ class MainActivity : AppCompatActivity() {
         }
         else {
             Log.v(TAG, "MainActivity onBackPressed")
-        }
+        }*/
 
     }
 
@@ -301,7 +401,7 @@ class MainActivity : AppCompatActivity() {
     fun addFragment(fragment : android.support.v4.app.Fragment){
         val fm = supportFragmentManager
         val transaction = fm.beginTransaction()
-        transaction.add(R.id.ll_home_frag_layout, fragment)
+        transaction.add(R.id.main_fragment_container, fragment)
         transaction.commit()
     }
 
@@ -309,7 +409,7 @@ class MainActivity : AppCompatActivity() {
     {
         val fm = supportFragmentManager
         val transaction = fm.beginTransaction()
-        transaction.replace(R.id.ll_home_frag_layout, fragment)
+        transaction.replace(R.id.main_fragment_container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }

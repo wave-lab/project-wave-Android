@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.RequestManager
-import com.song2.wave.Data.model.CoverArtistData
 import com.song2.wave.Data.model.SignUp.OriginArtistData
 import com.song2.wave.R
 import com.song2.wave.UI.Main.Search.SearchArtistFragment
-import com.song2.wave.UI.Main.Search.SearchFragment
 
 class OriginArtistSearchAdapter (private var originArtistData: ArrayList<OriginArtistData>, var requestManager : RequestManager) : RecyclerView.Adapter<OriginArtistSearchViewHolder>(){
 
@@ -31,7 +29,7 @@ class OriginArtistSearchAdapter (private var originArtistData: ArrayList<OriginA
         holder.originArtistName.text = originArtistData[position].originArtistName
 
         holder.originArtistContainer.setOnClickListener {
-            SearchFragment.searchFragment.replaceFragment(SearchArtistFragment())
+            //SearchFragment.searchFragment.replaceFragment(SearchArtistFragment())
         }
 
     }

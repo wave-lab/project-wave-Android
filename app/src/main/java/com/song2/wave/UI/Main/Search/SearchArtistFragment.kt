@@ -29,9 +29,9 @@ class SearchArtistFragment : android.support.v4.app.Fragment(), OnBackPressedLis
     override fun onBackPressed() {
         Log.e(TAG, "onBack()")
         // 한번 뒤로가기 버튼을 누르면 Listener 를 null, flag = 0 으로 해제
-        MainActivity.mainActivity.setOnBackPressedListener(null, 0)
+        //MainActivity.mainActivity.setOnBackPressedListener(null, 0)
         // SearchHomeFragment 로 교체
-        SearchFragment.searchFragment.replaceFragment(searchHomeFragment)
+        //SearchFragment.searchFragment.replaceFragment(searchHomeFragment)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -51,6 +51,6 @@ class SearchArtistFragment : android.support.v4.app.Fragment(), OnBackPressedLis
     override fun onAttach(context: Context) {
         super.onAttach(context)
         Log.e(TAG, "onAttach()")
-        (context as MainActivity).setOnBackPressedListener(this, 1)
+        //(context as MainActivity).setOnBackPressedListener(this, 1)
     }
 }

@@ -93,7 +93,7 @@ class HomeOnFragment : Fragment() {
 9
 
         //통신
-        getHomeInfoResponse()
+        getHomeInfoResponse(v)
         getTop10CategoryResponse()
         getRecommendResponse()
 
@@ -334,7 +334,7 @@ class HomeOnFragment : Fragment() {
     }
 
     //userInfo
-    fun getHomeInfoResponse(){
+    fun getHomeInfoResponse(view: View){
         //xx일 경우
         val getHomeInfoResponse = networkService.getHomeInfoResponse("application/json","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM")
 
@@ -347,7 +347,7 @@ class HomeOnFragment : Fragment() {
                     val temp: HomeUserInfoData = response.body()!!.data
 
                     if (temp.auth){
-                        showUserInfo(temp)
+                        showUserInfo(temp, view)
                     }else{
                         showNonUserInfo()
                     }
@@ -409,13 +409,13 @@ class HomeOnFragment : Fragment() {
     }
 
 
-    fun showUserInfo(temp: HomeUserInfoData){
+    fun showUserInfo(temp: HomeUserInfoData, v: View){
 
         //info
-        tv_home_frag_ment.setText(temp.nickname+"님!\n업로드 곡이\n평가를 기다리고 있어요!")
-        tv_home_frag_scoring_cnt.setText(temp.rateSongCount.toString())
-        tv_home_frag_perfect_cnt.setText(temp.hitSongCount.toString())
-        tv_home_frag_total_point.setText((temp.totalPoint!!.toInt() / 1000).toString()+","+(temp.totalPoint!!.toInt() % 1000).toString() + "P")
+        v.tv_home_frag_ment.setText(temp.nickname+"님!\n업로드 곡이\n평가를 기다리고 있어요!")
+        v.tv_home_frag_scoring_cnt.setText(temp.rateSongCount.toString())
+        v.tv_home_frag_perfect_cnt.setText(temp.hitSongCount.toString())
+        v.tv_home_frag_total_point.setText((temp.totalPoint!!.toInt() / 1000).toString()+","+(temp.totalPoint!!.toInt() % 1000).toString() + "P")
 
         tv_home_frag_waiting_scoring_mine.setText(temp.nickname + "님이 평가를 기다리고 있는 곡")
         tv_home_frag_waiting_scoring.setText(temp.nickname + "님의 평가를 기다리고 있는 곡")

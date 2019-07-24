@@ -135,7 +135,7 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         Log.e(TAG, "onAttach()")
-        (context as MainActivity).setOnBackPressedListener(this, 2)
+        //(context as MainActivity).setOnBackPressedListener(this, 2)
     }
 
     override fun onBackPressed() {

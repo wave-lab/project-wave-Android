@@ -1,3 +1,4 @@
+/*
 package com.song2.wave.UI.Main.Search
 
 import android.os.Bundle
@@ -13,7 +14,7 @@ class SearchFragment : android.support.v4.app.Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_search,container,false)
 
-        searchFragment = this
+        //searchFragment = this
 
         addFragment(SearchHomeFragment())
 
@@ -38,7 +39,9 @@ class SearchFragment : android.support.v4.app.Fragment(){
         transaction.commit()
     }
 
-    companion object {
+*/
+/*    companion object {
         lateinit var searchFragment: SearchFragment
-    }
-}
+    }*//*
+
+}*/
