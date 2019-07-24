@@ -5,19 +5,19 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="#cc000000"
-        android:layout_height="698dp">
+        android:background="#70000000"
+        android:layout_height="match_parent">
     <View
             android:layout_marginTop="340dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#cc000000"/>
     <LinearLayout
-            android:layout_marginTop="293dp"
             android:layout_width="match_parent"
             android:gravity="center_horizontal"
             android:layout_height="142dp"
             android:background="#000000"
+        android:layout_above="@+id/ll_library_more_act_middle"
             android:orientation="vertical">
         <TextView
                 android:id="@+id/tv_library_more_act_title"
@@ -25,9 +25,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="8sp"
-                tools:text="WARNING! - Day6(데이식스)"
-                android:textColor="#FFFFFF"
+            android:text="WARNING! - Day6(데이식스)"
+                android:textColor="#ffffff"
                 android:gravity="center_horizontal"
+            android:fontFamily="@font/noto_sans_kr_regular_hestia"
+            android:includeFontPadding="false"
                 android:textSize="16sp"/>
         <TextView
                 android:id="@+id/tv_library_more_act_artist"
@@ -38,7 +40,10 @@
                 android:textSize="14sp"
                 android:textColor="#616161"
                 android:lineSpacingExtra="6sp"
-                tools:text="blotto_archyan"/>
+            android:text="blotto_archyan"
+            android:fontFamily="@font/noto_sans_kr_regular_hestia"
+            android:includeFontPadding="false"
+            />
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
@@ -48,7 +53,7 @@
                     android:layout_height="24dp"
                     android:layout_width="24dp"
                     android:layout_marginBottom="16dp"
-                    android:src="@drawable/btn_threedot_like"
+                    android:src="@drawable/like_selector"
                     android:layout_marginRight="25dp"/>
             <ImageView
                     android:id="@+id/iv_library_more_act_share"
@@ -66,29 +71,34 @@
             android:background="@drawable/img_border_more_info"
             android:layout_width="82dp"
             android:layout_height="82dp"
-            android:layout_marginTop="234dp"/>
+        android:layout_above="@+id/ll_library_more_act_middle"
+        android:layout_marginBottom="119dp"
+        />
     <LinearLayout
-            android:layout_marginTop="435dp"
+        android:id="@+id/ll_library_more_act_middle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="206dp"
+            android:layout_above="@+id/bt_library_more_act_cancel"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             android:background="#000000"
             android:orientation="vertical">
-        <view
+        <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginHorizontal="16dp"/>
+                android:layout_marginHorizontal="16dp"
+            android:background="#333333"
+            />
         <LinearLayout
                 android:id="@+id/ll_library_more_act_play_list"
                 android:layout_width="match_parent"
-                android:layout_height="53dp"
+                android:layout_height="24dp"
+            android:layout_marginTop="22dp"
                 android:orientation="horizontal">
             <ImageView
                     android:layout_height="24dp"
                     android:layout_width="24dp"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/btn_plus"
-                    android:layout_gravity="center_vertical"
                     android:textColor="#FFFFFF"/>
             <TextView
                     android:layout_width="wrap_content"
@@ -97,19 +107,21 @@
                     android:textSize="16sp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
                     android:text="플레이리스트에 추가"/>
         </LinearLayout>
         <LinearLayout
                 android:id="@+id/ll_library_more_act_artist_profile"
                 android:layout_width="match_parent"
-                android:layout_height="53dp"
+                android:layout_height="24dp"
+            android:layout_marginTop="22dp"
                 android:orientation="horizontal">
             <ImageView
                     android:layout_height="24dp"
                     android:layout_width="24dp"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/btn_mypage"
-                    android:layout_gravity="center_vertical"
                     android:textColor="#FFFFFF"/>
             <TextView
                     android:layout_width="wrap_content"
@@ -118,19 +130,21 @@
                     android:textSize="16sp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
                     android:text="아티스트 프로필 추가"/>
         </LinearLayout>
         <LinearLayout
                 android:id="@+id/ll_library_more_act_delete"
                 android:layout_width="match_parent"
-                android:layout_height="53dp"
+                android:layout_height="24dp"
+            android:layout_marginTop="22dp"
                 android:orientation="horizontal">
             <ImageView
                     android:layout_height="24dp"
                     android:layout_width="24dp"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/bt_close"
-                    android:layout_gravity="center_vertical"
                     android:textColor="#FFFFFF"/>
             <TextView
                     android:layout_width="wrap_content"
@@ -139,19 +153,21 @@
                     android:textSize="16sp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
                     android:text="삭제"/>
         </LinearLayout>
         <LinearLayout
                 android:id="@+id/ll_library_more_act_notify"
                 android:layout_width="match_parent"
-                android:layout_height="53dp"
+                android:layout_height="24dp"
+            android:layout_marginTop="22dp"
                 android:orientation="horizontal">
             <ImageView
                     android:layout_height="24dp"
                     android:layout_width="24dp"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/btn_report"
-                    android:layout_gravity="center_vertical"
                     android:textColor="#FFFFFF"/>
             <TextView
                     android:layout_width="wrap_content"
@@ -160,19 +176,27 @@
                     android:textSize="16sp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
+                android:fontFamily="@font/noto_sans_kr_regular_hestia"
+                android:includeFontPadding="false"
                     android:text="신고"/>
         </LinearLayout>
-        <view
+        <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+            android:background="#333333"
+            android:layout_marginTop="22dp"
                 android:layout_marginHorizontal="16dp"/>
-        <Button
-                android:id="@+id/bt_library_more_act_cancel"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:textSize="14sp"
-                android:textColor="#FFFFFF"
-                android:background="#000000"
-                android:text="취소"/>
+
     </LinearLayout>
+    <Button
+        android:id="@+id/bt_library_more_act_cancel"
+        android:layout_height="56dp"
+        android:layout_width="match_parent"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:background="#000000"
+        android:fontFamily="@font/noto_sans_kr_regular_hestia"
+        android:includeFontPadding="false"
+        android:layout_alignParentBottom="true"
+        android:text="취소"/>
 </RelativeLayout>

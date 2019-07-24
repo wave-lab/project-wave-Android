@@ -16,4 +16,14 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
+    // 배경 투명
+    <style name="Theme.TransparentInfo" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
 </resources>
