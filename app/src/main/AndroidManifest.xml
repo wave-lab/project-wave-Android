@@ -61,6 +61,9 @@
 
         <!-- 음악플레이어 -->
         <activity android:name=".UI.MainPlayer.MainPlayerActivity" />
+        <activity android:name=".UI.MainPlayer.PlayerMoreActivity"
+            android:theme="@style/Theme.TransparentInfo"/>
+
         <service android:name=".Util.Player.Service.MusicService"/>
         <activity android:name=".Util.Audio.PlayerActivity" />
         <service

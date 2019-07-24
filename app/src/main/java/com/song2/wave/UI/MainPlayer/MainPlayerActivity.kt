@@ -249,6 +249,12 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
             onBackPressed()
         }
 
+        // 더보기 버튼 클릭시
+        iv_main_player_act_more.setOnClickListener {
+            var intent = Intent(applicationContext, PlayerMoreActivity::class.java)
+            startActivity(intent)
+        }
+
         // 신고 버튼 클릭시
         iv_main_player_act_report.setOnClickListener {
             showReportDialog()
