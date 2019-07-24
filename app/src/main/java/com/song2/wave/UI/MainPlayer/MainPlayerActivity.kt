@@ -207,7 +207,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         tv_main_player_cover_artist_name.text = "Covered by " + coverArtist
         img_main_player_act_cover_img.visibility = View.VISIBLE
         vp_main_player_act_cover_img.visibility = View.INVISIBLE
-        Glide.with(this).load(songImgUrl).into(img_main_player_act_cover_img)
 
         // Seekbar 등록
         addSeekBar()
@@ -252,6 +251,13 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         // 더보기 버튼 클릭시
         iv_main_player_act_more.setOnClickListener {
             var intent = Intent(applicationContext, PlayerMoreActivity::class.java)
+            intent.putExtra("songId", _id)
+            intent.putExtra("title", title)
+            intent.putExtra("originAtist", originArtist)
+            intent.putExtra("coverArtist", coverArtist)
+            intent.putExtra("imgUrl", songImgUrl)
+            Log.v("asdf", "확인1 = " + songImgUrl)
+            Log.v("asdf", "확인2 = " + songImgUrl)
             startActivity(intent)
         }
 
@@ -343,10 +349,11 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         getSongDetailResponse.enqueue(object : Callback<GetSongDetailResponse> {
 
             override fun onResponse(call: Call<GetSongDetailResponse>, response: Response<GetSongDetailResponse>) {
-                Log.v("TAG", "곡 세부사항 GET 통신 성공")
+                Log.v("MainPlayerActivity", "곡 세부사항 GET 통신 성공")
                 if(response.isSuccessful){
                     var data = response!!.body()!!.data
-                    Glide.with(applicationContext).load(data.artwork).into(img_main_player_act_cover_img)
+                    songImgUrl = data.artwork
+                    Glide.with(applicationContext).load(songImgUrl).into(img_main_player_act_cover_img)
 
                     var genreValue : String = ""
                     for(i in 0.. data.genre.size-1){
