@@ -246,10 +246,20 @@
                 android:ellipsize="end"/>
 
         <ImageView
+                android:id="@+id/iv_main_player_act_more"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_width="24dp" android:layout_height="24dp"
                 android:src="@drawable/btn_play_info"/>
+        <ImageView
+            android:id="@+id/iv_main_player_act_report"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="24dp" android:layout_height="24dp"
+            android:src="@drawable/btn_report"
+            android:visibility="gone"
+            />
+
 
     </RelativeLayout>
 
