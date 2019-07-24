@@ -17,17 +17,6 @@ class SearchFragment : android.support.v4.app.Fragment(){
 
         addFragment(SearchHomeFragment())
 
-        v.btn_search_home_frag_searchbar.setOnClickListener {
-            var bundle = Bundle()
-            bundle.putString("searchData",edit_search_home_frag_searchbar.text.toString())
-
-            val searchhomeFragment = SearchHomeFragment()
-            searchhomeFragment.setArguments(bundle)
-
-            replaceFragment(searchhomeFragment)
-        }
-
-
         return v
     }
 
@@ -36,6 +25,7 @@ class SearchFragment : android.support.v4.app.Fragment(){
         val fm = childFragmentManager
         val transaction = fm.beginTransaction()
         transaction.add(R.id.ll_search_frag_layout, fragment)
+        transaction.addToBackStack(null)
         transaction.commit()
     }
 

@@ -69,7 +69,7 @@ class SignupSelectArtistActivity : AppCompatActivity() {
                     val originArtistData = response.body()!!.data
 
                     for (i in originArtistData.indices){
-                        artistDataArr.add(RealArtistData(originArtistData[i].originArtistIdx.toInt(), originArtistData[i].originArtistImg, originArtistData[i].originArtistName))
+                        artistDataArr.add(RealArtistData(originArtistData[i].originArtistIdx.toInt(), originArtistData[i].originArtistImg!!, originArtistData[i].originArtistName))
                     }
 
                     signArtistAdapter = SignupArtistAdapter(artistDataArr,requestManager)
