@@ -90,20 +90,21 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
             handled
         })
 
+        // edt delete
+        v.iv_search_home_frag_delete_keyword.setOnClickListener {
+            edit_search_home_frag_searchbar.setText("")
+        }
+
         v.ll_search_home_frag_focus_on.visibility = View.GONE
         songDataArr = ArrayList<SongData>()
         coverArtistDataArr = ArrayList<CoverArtistData>()
         requestManager = Glide.with(this)
 
-        // Edittext focus OFF
-        v.ll_search_home_frag_focus.setOnClickListener {
-            searchEditTextFocusOff()
-            //rv_search_background.visibility = View.VISIBLE
-        }
-
         // Edittext focus ON
         v.edit_search_home_frag_searchbar.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
+
+                iv_search_home_frag_delete_keyword.visibility = View.VISIBLE
 
                 searchDbHelper = DBSearchHelper(context)
                 searchDB= searchDbHelper.writableDatabase
@@ -112,6 +113,8 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                 insertSearchHistoryData(searchDB, v)
 
                 searchEditTextFocusOn()
+            }else{
+                iv_search_home_frag_delete_keyword.visibility = View.GONE
             }
         }
 
@@ -217,6 +220,10 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
     }
 
+    fun setKeyword(keyword: String){
+        edit_search_home_frag_searchbar.setText(keyword)
+    }
+
 
     fun performSearch(keyword: String) {
 
@@ -284,6 +291,9 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
 
                     recycler_search_home_frag_origin_artist.visibility = View.GONE
                     tv_search_home_frag_artist_result_null.visibility = View.VISIBLE
+
+                    tv_search_home_frag_artist_result_null.setText("'"+searchData+"' 에 대한 아티스트 검색결과가 존재하지 않습니다.")
+
                 }
 
 
@@ -324,6 +334,9 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                     recycler_search_home_frag_song.visibility = View.GONE
                     tv_search_home_frag_song_result_null.visibility = View.VISIBLE
                     btn_search_home_frag_song_more.visibility = View.GONE
+
+                    tv_search_home_frag_song_result_null.setText("'"+searchData+"' 에 대한 곡 검색결과가 존재하지 않습니다.")
+
                 }
 
                 //커버가수
@@ -362,6 +375,8 @@ class SearchHomeFragment : Fragment(), OnBackPressedListener {
                     //검색결과 없음
                     recycler_search_home_frag_artist.visibility = View.GONE
                     tv_search_home_frag_cover_artist_result_null.visibility = View.VISIBLE
+
+                    tv_search_home_frag_cover_artist_result_null.setText("'"+searchData+"' 에 대한 커버 아티스트 검색결과가 존재하지 않습니다.")
 
                 }
             }
