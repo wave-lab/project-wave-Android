@@ -31,8 +31,13 @@ class SearchDataHistoryAdapter (ctx: Context, val homeFragment: SearchHomeFragme
         }
 
         holder.searchDataDelete.setOnClickListener {
-            homeFragment.deleteKeyword(searchData[position],searchDbHelper)
+
+            var keyword = searchData[position]
+
+            searchData.removeAt(position)
+            homeFragment.deleteKeyword(keyword,searchDbHelper)
             notifyItemRemoved(position)
+            notifyItemRangeChanged(position, searchData.size)
         }
     }
 }
