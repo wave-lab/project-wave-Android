@@ -5,8 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000000"
-        android:orientation="vertical"
->
+        android:orientation="vertical">
 
     <RelativeLayout
             android:id="@+id/rl_search_home_frag_searchbar"
@@ -35,7 +34,7 @@
                 android:hint="검색어를 입력해주세요"
                 android:includeFontPadding="false"
                 android:fontFamily="@font/noto_sans_kr_regular_hestia"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:textColor="#979797"
                 android:textColorHint="#979797"
                 android:layout_centerVertical="true"
@@ -80,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="최근 검색어"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         android:includeFontPadding="false"
                         android:textColor="#616161"
                         android:layout_marginLeft="24dp"
@@ -93,12 +92,11 @@
                         android:layout_height="wrap_content"
                         android:text="전체삭제"
                         android:textColor="#00b6de"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         android:includeFontPadding="false"
                         android:fontFamily="@font/noto_sans_kr_regular_hestia"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="24dp"
-                />
+                        android:layout_marginRight="24dp"/>
 
             </RelativeLayout>
 
