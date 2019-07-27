@@ -44,6 +44,7 @@ import retrofit2.Response
 
 class HomeOnFragment : Fragment() {
     private val LOADER_ID = 0x001
+    private val TAG = "HomeOnFragment"
 
     val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
     }
@@ -302,8 +303,12 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playSongDataList: ArrayList<PlaySongData> = response.body()!!.data
 
+
                     if(playSongDataList == null)
+                    {
+                        Log.v(TAG,response.body()!!.status.toString())
                         return
+                    }
 
                     for(i in playSongDataList.indices) {
                         recommendSongHomeDataList.add(
