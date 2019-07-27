@@ -26,7 +26,6 @@ public class NotificationPlayer {
     private boolean isForeground;
     String title, originArtist, coverArtist, songImgUrl, _id;
     int rating_flag;
-    int flag;
 
     public NotificationPlayer(AudioService service) {
         mService = service;
@@ -36,78 +35,36 @@ public class NotificationPlayer {
 
     @SuppressLint("StaticFieldLeak")
     public void updateNotificationPlayer() {
-        cancel();
+        //cancel();
         mNotificationManagerBuilder = new NotificationManagerBuilder();
         mNotificationManagerBuilder.execute();
-        /*
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                Uri albumArtUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), mService.getAudioItem().mAlbumId);
-                Bitmap largIcon = null;
-                try {
-                    largIcon = Picasso.with(mService).load(albumArtUri).get();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
 
-                Intent actionTogglePlay = new Intent(CommandActions.TOGGLE_PLAY);
-                Intent actionForward = new Intent(CommandActions.FORWARD);
-                Intent actionRewind = new Intent(CommandActions.REWIND);
-                Intent actionClose = new Intent(CommandActions.CLOSE);
-                PendingIntent togglePlay = PendingIntent.getService(mService, 0, actionTogglePlay, 0);
-                PendingIntent forward = PendingIntent.getService(mService, 0, actionForward, 0);
-                PendingIntent rewind = PendingIntent.getService(mService, 0, actionRewind, 0);
-                PendingIntent close = PendingIntent.getService(mService, 0, actionClose, 0);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    NotificationChannel serviceChannel = new NotificationChannel(
-                            "123","뮤직",
-                            NotificationManager.IMPORTANCE_LOW);
-                    Log.v("asdf","텟시작");
-                    NotificationManager manager = mService.getSystemService(NotificationManager.class);
-                    manager.createNotificationChannel(serviceChannel);
-                }
-
-                android.support.v4.app.NotificationCompat.Builder builder = new android.support.v4.app.NotificationCompat.Builder(mService);
-                builder
-                        .setContentTitle(mService.getAudioItem().mTitle)
-                        .setContentText(mService.getAudioItem().mArtist)
-                        .setLargeIcon(largIcon)
-                        .setContentIntent(PendingIntent.getActivity(mService, 0, new Intent(mService, PlayerActivity.class), 0));
-
-                builder.addAction(new android.support.v4.app.NotificationCompat.Action(R.drawable.btn_stop_md, "", rewind));
-                builder.addAction(new android.support.v4.app.NotificationCompat.Action(mService.isPlaying() ? R.drawable.btn_stop_md : R.drawable.btn_play_md, "", togglePlay));
-                builder.addAction(new android.support.v4.app.NotificationCompat.Action(R.drawable.btn_play_md, "", forward));
-                builder.addAction(new android.support.v4.app.NotificationCompat.Action(R.drawable.btn_stop_md, "", close));
-                int[] actionsViewIndexs = new int[]{1,2,3};
-                builder.setStyle(new android.support.v4.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(actionsViewIndexs));
-                builder.setSmallIcon(R.drawable.img_home_wavelogo);
-
-                Notification notification = builder.build();
-
-                NotificationManagerCompat.from(mService).notify(NOTIFICATION_PLAYER_ID, notification);
-
-                if (!isForeground) {
-                    isForeground = true;
-                    // 서비스를 Foreground 상태로 만든다
-                    mService.startForeground(NOTIFICATION_PLAYER_ID, notification);
-                }
-
-                return null;
-            }
-        }.execute();
-        */
     }
 
     public void removeNotificationPlayer() {
-        cancel();
+
+        Log.v("asdf", "테스트12");
+       speicialCancel();
+        // cancel();
         mService.stopForeground(true);
         isForeground = false;
     }
 
-    private void cancel() {
+    private void speicialCancel(){
+
         if (mNotificationManagerBuilder != null) {
+
+            Log.v("asdf", "테스트종료2");
+            mNotificationManager.cancelAll();
+            mNotificationManagerBuilder = null;
+        }
+    }
+
+    private void cancel() {
+        Log.v("asdf", "테스트종료1");
+        if (mNotificationManagerBuilder != null) {
+
+            Log.v("asdf", "테스트종료2");
             mNotificationManagerBuilder.cancel(true);
             mNotificationManagerBuilder = null;
         }

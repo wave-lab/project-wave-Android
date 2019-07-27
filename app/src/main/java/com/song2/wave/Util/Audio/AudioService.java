@@ -179,7 +179,8 @@ public class AudioService extends Service {
             } else if (CommandActions.FORWARD.equals(action)) {
                 forward();
             } else if (CommandActions.CLOSE.equals(action)) {
-                pause();
+                deleteForeground();
+                //pause();
                 removeNotificationPlayer();
             }
         }
@@ -314,6 +315,13 @@ public class AudioService extends Service {
             mMediaPlayer.pause();
             sendBroadcast(new Intent(BroadcastActions.PLAY_STATE_CHANGED)); // 재생상태 변경 전송
             updateNotificationPlayer();
+        }
+    }
+
+    public void deleteForeground(){
+        if (isPrepared) {
+            mMediaPlayer.pause();
+            sendBroadcast(new Intent(BroadcastActions.PLAY_STATE_CHANGED)); // 재생상태 변경 전송
         }
     }
 
