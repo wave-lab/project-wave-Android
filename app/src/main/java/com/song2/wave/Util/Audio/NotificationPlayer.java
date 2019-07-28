@@ -27,11 +27,18 @@ public class NotificationPlayer {
     String title, originArtist, coverArtist, songImgUrl, _id;
     int rating_flag;
 
+    String channelId = "12345";
+    String channelName = "Channel Name";
+
+
     public NotificationPlayer(AudioService service) {
         mService = service;
         mNotificationManager = (NotificationManager) service.getSystemService(Context.NOTIFICATION_SERVICE);
 
+
+
     }
+
 
     @SuppressLint("StaticFieldLeak")
     public void updateNotificationPlayer() {
@@ -83,11 +90,11 @@ public class NotificationPlayer {
             Intent playActivity = new Intent(mService, MainPlayerActivity.class);
 
             mRemoteViews = createRemoteView(R.layout.notification_player);
-            mNotificationBuilder = new NotificationCompat.Builder(mService, "123");
+            mNotificationBuilder = new NotificationCompat.Builder(mService, channelId);
             mNotificationBuilder.setSmallIcon(R.drawable.img_home_wavelogo)
-                    .setContentTitle("Foreground Service")
+//                    .setContentTitle("Foreground Service")
                     .setOngoing(true)
-                    .setContentIntent(mMainPendingIntent)
+//                    .setContentIntent(mMainPendingIntent)
                     .setContent(mRemoteViews);
 
             Notification notification = mNotificationBuilder.build();
@@ -132,12 +139,21 @@ public class NotificationPlayer {
         }
 
         private void createNotificationChannel() {
+
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
                 NotificationChannel serviceChannel = new NotificationChannel(
-                        "123","뮤직",
-                        NotificationManager.IMPORTANCE_HIGH);
-                NotificationManager manager = mService.getSystemService(NotificationManager.class);
-                manager.createNotificationChannel(serviceChannel);
+                        channelId, channelName, importance);
+
+//                NotificationChannel serviceChannel = new NotificationChannel(
+//                        "1","뮤직",
+//                        NotificationManager.IMPORTANCE_HIGH);
+//                NotificationManager manager = mService.getSystemService(NotificationManager.class);
+//                manager.createNotificationChannel(serviceChannel);
+                mNotificationManager.createNotificationChannel(serviceChannel);
+
             }
         }
 

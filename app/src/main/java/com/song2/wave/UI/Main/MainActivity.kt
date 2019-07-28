@@ -9,7 +9,6 @@ import com.song2.wave.UI.Main.Scoring.ScoringFragment
 import com.song2.wave.UI.Main.Search.SearchFragment
 import android.util.Log
 import com.song2.wave.UI.Main.Home.HomeFragment
-import com.song2.wave.UI.Main.MyPage.PointHistoryFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import com.song2.wave.Util.Interface.OnBackPressedListener
 
@@ -30,11 +29,9 @@ import com.song2.wave.Util.Network.SecondNetworkService
 import retrofit2.Call
 import retrofit2.Response
 import android.view.View.OnTouchListener
-import android.widget.LinearLayout
-import com.song2.wave.R.id.iv_main_act_bottom_play
 import com.song2.wave.UI.MainPlayer.MainPlayerActivity
-import kotlinx.android.synthetic.main.activity_player.*
-import kotlin.math.min
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -92,6 +89,12 @@ class MainActivity : AppCompatActivity() {
         registerBroadcast()
         updateUI()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterBroadcast()
+    }
+
 
     private val mBroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {

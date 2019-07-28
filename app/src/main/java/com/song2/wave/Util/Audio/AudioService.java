@@ -45,7 +45,6 @@ public class AudioService extends Service {
         super.onCreate();
         mMediaPlayer = new MediaPlayer();
         mMediaPlayer.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
-
         mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
