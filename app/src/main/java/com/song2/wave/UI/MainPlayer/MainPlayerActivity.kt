@@ -256,8 +256,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
             intent.putExtra("originAtist", originArtist)
             intent.putExtra("coverArtist", coverArtist)
             intent.putExtra("imgUrl", songImgUrl)
-            Log.v("asdf", "확인1 = " + songImgUrl)
-            Log.v("asdf", "확인2 = " + songImgUrl)
             startActivity(intent)
         }
 
