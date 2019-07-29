@@ -27,15 +27,12 @@ public class NotificationPlayer {
     String title, originArtist, coverArtist, songImgUrl, _id;
     int rating_flag;
 
-    String channelId = "12345";
     String channelName = "Channel Name";
 
 
     public NotificationPlayer(AudioService service) {
         mService = service;
         mNotificationManager = (NotificationManager) service.getSystemService(Context.NOTIFICATION_SERVICE);
-
-
 
     }
 
@@ -61,7 +58,6 @@ public class NotificationPlayer {
 
         if (mNotificationManagerBuilder != null) {
 
-            Log.v("asdf", "테스트종료2");
             mNotificationManager.cancelAll();
             mNotificationManagerBuilder = null;
         }
@@ -90,15 +86,15 @@ public class NotificationPlayer {
             Intent playActivity = new Intent(mService, MainPlayerActivity.class);
 
             mRemoteViews = createRemoteView(R.layout.notification_player);
-            mNotificationBuilder = new NotificationCompat.Builder(mService, channelId);
+            mNotificationBuilder = new NotificationCompat.Builder(mService, "123");
             mNotificationBuilder.setSmallIcon(R.drawable.img_home_wavelogo)
 //                    .setContentTitle("Foreground Service")
                     .setOngoing(true)
 //                    .setContentIntent(mMainPendingIntent)
+                    .setPriority(NotificationCompat.PRIORITY_MAX)
                     .setContent(mRemoteViews);
 
             Notification notification = mNotificationBuilder.build();
-            notification.priority = Notification.PRIORITY_MAX;
             notification.contentIntent = mMainPendingIntent;
 
             playActivity.putExtra("_id", MainPlayerActivity.mainPlayerActivity.get_id());
@@ -122,7 +118,6 @@ public class NotificationPlayer {
         protected Notification doInBackground(Void... params) {
             mNotificationBuilder.setContent(mRemoteViews);
             mNotificationBuilder.setContentIntent(mMainPendingIntent);
-            mNotificationBuilder.setPriority(Notification.PRIORITY_MAX);
             Notification notification = mNotificationBuilder.build();
             updateRemoteView(mRemoteViews, notification);
             return notification;
@@ -144,15 +139,12 @@ public class NotificationPlayer {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-                NotificationChannel serviceChannel = new NotificationChannel(
-                        channelId, channelName, importance);
 
-//                NotificationChannel serviceChannel = new NotificationChannel(
-//                        "1","뮤직",
-//                        NotificationManager.IMPORTANCE_HIGH);
-//                NotificationManager manager = mService.getSystemService(NotificationManager.class);
-//                manager.createNotificationChannel(serviceChannel);
-                mNotificationManager.createNotificationChannel(serviceChannel);
+                NotificationChannel serviceChannel = new NotificationChannel(
+                        "123","뮤직",
+                        NotificationManager.IMPORTANCE_HIGH);
+                NotificationManager manager = mService.getSystemService(NotificationManager.class);
+                manager.createNotificationChannel(serviceChannel);
 
             }
         }
