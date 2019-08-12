@@ -31,9 +31,10 @@ import retrofit2.Response
 
 class MyPageFragment : Fragment() {
 
-    val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
+    val networkService: NetworkService by lazy {
+        ApiClient.getRetrofit().create(NetworkService::class.java)
     }
-    lateinit var authorization_info : String
+    lateinit var authorization_info: String
 
     lateinit var hitScoreResultAdapter: HitScoreResultAdapter
     lateinit var scoreHitResultData: ArrayList<ScoreHitResultData>
@@ -50,7 +51,8 @@ class MyPageFragment : Fragment() {
         var pref = context!!.getSharedPreferences("auto", Activity.MODE_PRIVATE)
 
         //authorization_info = pref.getString("token","")
-        authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM"
+        authorization_info =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM"
 
         iv_mypage_song_upload.setOnClickListener {
             startActivity<UpLoadFileActivity>()
@@ -76,14 +78,78 @@ class MyPageFragment : Fragment() {
 
     fun insertExampleData() {
 
-        scoreHitResultData.add(ScoreHitResultData(false,"https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬","지훈", "승희"))
-        scoreHitResultData.add(ScoreHitResultData(true,"https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬","지훈", "승희"))
-        scoreHitResultData.add(ScoreHitResultData(false,"https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬","지훈", "승희"))
-        scoreHitResultData.add(ScoreHitResultData(true,"https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬","지훈", "승희"))
-        scoreHitResultData.add(ScoreHitResultData(true,"https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬","지훈", "승희"))
-        scoreHitResultData.add(ScoreHitResultData(false,"https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬","지훈", "승희"))
-        scoreHitResultData.add(ScoreHitResultData(false,"https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬","지훈", "승희"))
-        scoreHitResultData.add(ScoreHitResultData(true,"https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E", "똥꼬","지훈", "승희"))
+        scoreHitResultData.add(
+            ScoreHitResultData(
+                false,
+                "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
+                "똥꼬",
+                "지훈",
+                "승희"
+            )
+        )
+        scoreHitResultData.add(
+            ScoreHitResultData(
+                true,
+                "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
+                "똥꼬",
+                "지훈",
+                "승희"
+            )
+        )
+        scoreHitResultData.add(
+            ScoreHitResultData(
+                false,
+                "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
+                "똥꼬",
+                "지훈",
+                "승희"
+            )
+        )
+        scoreHitResultData.add(
+            ScoreHitResultData(
+                true,
+                "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
+                "똥꼬",
+                "지훈",
+                "승희"
+            )
+        )
+        scoreHitResultData.add(
+            ScoreHitResultData(
+                true,
+                "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
+                "똥꼬",
+                "지훈",
+                "승희"
+            )
+        )
+        scoreHitResultData.add(
+            ScoreHitResultData(
+                false,
+                "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
+                "똥꼬",
+                "지훈",
+                "승희"
+            )
+        )
+        scoreHitResultData.add(
+            ScoreHitResultData(
+                false,
+                "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
+                "똥꼬",
+                "지훈",
+                "승희"
+            )
+        )
+        scoreHitResultData.add(
+            ScoreHitResultData(
+                true,
+                "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
+                "똥꼬",
+                "지훈",
+                "승희"
+            )
+        )
 
     }
 
@@ -95,38 +161,38 @@ class MyPageFragment : Fragment() {
         val topNaviLayout: View = this.layoutInflater.inflate(R.layout.fragment_mypage_score_result_tabbar, null, false)
         //탭 하나하나 TabLayout에 연결시켜줍니다.
         tl_mypage_frag_tabbar.getTabAt(0)!!.customView =
-                topNaviLayout.findViewById(R.id.rl_mypage_tabbar_score_passed) as RelativeLayout
+            topNaviLayout.findViewById(R.id.rl_mypage_tabbar_score_passed) as RelativeLayout
         tl_mypage_frag_tabbar.getTabAt(1)!!.customView =
-                topNaviLayout.findViewById(R.id.rl_mypage_tabbar_score_waiting) as RelativeLayout
+            topNaviLayout.findViewById(R.id.rl_mypage_tabbar_score_waiting) as RelativeLayout
         tl_mypage_frag_tabbar.getTabAt(2)!!.customView =
-                topNaviLayout.findViewById(R.id.rl_mypage_tabbar_score_fail) as RelativeLayout
+            topNaviLayout.findViewById(R.id.rl_mypage_tabbar_score_fail) as RelativeLayout
     }
 
-    fun getUserInfoResponse(){
-        val getUserInfoResponse = networkService.getUserInfoResponse("application/json",authorization_info)
+    fun getUserInfoResponse() {
+        val getUserInfoResponse = networkService.getUserInfoResponse("application/json", authorization_info)
 
-        getUserInfoResponse.enqueue(object : retrofit2.Callback<GetUserInfoResponse>{
+        getUserInfoResponse.enqueue(object : retrofit2.Callback<GetUserInfoResponse> {
             override fun onFailure(call: Call<GetUserInfoResponse>, t: Throwable) {
                 Log.e("mypage userinfo fail", t.toString())
             }
 
             override fun onResponse(call: Call<GetUserInfoResponse>, response: Response<GetUserInfoResponse>) {
-                val userInfoData : UserInfoData = response.body()!!.data
+                val userInfoData: UserInfoData = response.body()!!.data
 
-                Log.e("MyPageFrag","userInfoData")
+                Log.e("MyPageFrag", "userInfoData")
 
-
-                showUserInfo(userInfoData)
-
+                if(userInfoData != null){
+                    showUserInfo(userInfoData)
+                }
             }
         })
     }
 
     //hits
-    fun getHitsResponse(){
-        val getHitsResponse = networkService.getHitsResponse("application/json",authorization_info,null)
+    fun getHitsResponse() {
+        val getHitsResponse = networkService.getHitsResponse("application/json", authorization_info, null)
 
-        getHitsResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
+        getHitsResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse> {
             override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
                 Log.e("mypage hits song list fail", t.toString())
             }
@@ -135,42 +201,54 @@ class MyPageFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
 
-                    for(i in playlistDataList.songList.indices)
-                    {
-                        var songstatus : Boolean
+                    if (playlistDataList != null) {
+                        for (i in playlistDataList.songList.indices) {
+                            var songstatus: Boolean
 
-                        if(playlistDataList.songList[i].songStatus == 1)
-                            songstatus = true
-                        else if (playlistDataList.songList[i].songStatus == 2)
-                            songstatus = false
-                        else
-                            continue
+                            if (playlistDataList.songList[i].songStatus == 1)
+                                songstatus = true
+                            else if (playlistDataList.songList[i].songStatus == 2)
+                                songstatus = false
+                            else
+                                continue
 
-                        Log.e("songstatus", songstatus.toString())
+                            Log.e("songstatus", songstatus.toString())
 
-                        scoreHitResultData.add(ScoreHitResultData(songstatus,playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle,playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
+                            scoreHitResultData.add(
+                                ScoreHitResultData(
+                                    songstatus,
+                                    playlistDataList.songList[i].artwork,
+                                    playlistDataList.songList[i].originTitle,
+                                    playlistDataList.songList[i].originArtistName,
+                                    playlistDataList.songList[i].coverArtistName
+                                )
+                            )
+                        }
+
+                        hitScoreResultAdapter = HitScoreResultAdapter(scoreHitResultData, requestManager)
+                        rv_mypage_frag_score_hit_result.adapter = hitScoreResultAdapter
+                        rv_mypage_frag_score_hit_result.layoutManager =
+                            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
                     }
 
-                    hitScoreResultAdapter = HitScoreResultAdapter(scoreHitResultData, requestManager)
-                    rv_mypage_frag_score_hit_result.adapter = hitScoreResultAdapter
-                    rv_mypage_frag_score_hit_result.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 }
             }
 
         })
     }
 
-    fun showUserInfo(userInfoData : UserInfoData){
+    fun showUserInfo(userInfoData: UserInfoData) {
 
         tv_mypage_frag_scoring_cnt.setText(userInfoData.rateSongCount.toString())
         tv_mypage_frag_perfect_cnt.setText(userInfoData.hitSongCount.toString())
 
         Glide.with(this).load(userInfoData.profileImg).into(cv_mypage_frag_profile_img)
         tv_mypage_frag_profile_name.setText(userInfoData.nickName)
-        tv_mypage_frag_my_point.setText((userInfoData.totalPoint!!.toInt() / 1000).toString()+","+(userInfoData.totalPoint!!.toInt() % 1000).toString() + "P")
+        tv_mypage_frag_my_point.setText((userInfoData.totalPoint!!.toInt() / 1000).toString() + "," + (userInfoData.totalPoint!!.toInt() % 1000).toString() + "P")
 
 
-        if(userInfoData.isArtist.equals(1))
+        if (userInfoData.isArtist.equals(1))
             tv_home_frag_isArtist.setText("Artist")
         else
             tv_home_frag_isArtist.setText("Listener")

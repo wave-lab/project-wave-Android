@@ -45,20 +45,21 @@ import retrofit2.Response
 class HomeOnFragment : Fragment() {
     private val LOADER_ID = 0x001
 
-    val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
+    val networkService: NetworkService by lazy {
+        ApiClient.getRetrofit().create(NetworkService::class.java)
     }
 
     var top10fragment = Top10Fragment()
 
-    lateinit var authorization_info : String
+    lateinit var authorization_info: String
 
     var genreRank = ArrayList<String>()
     var moodRank = ArrayList<String>()
 
     var mAdapter: AudioAdapter? = null
-    lateinit var projection : Array<String>
-    lateinit var waitSongDataArr : ArrayList<PlaySongData>
-    lateinit var playSongData : PlaySongData
+    lateinit var projection: Array<String>
+    lateinit var waitSongDataArr: ArrayList<PlaySongData>
+    lateinit var playSongData: PlaySongData
 
     lateinit var myWaitingSongDataList: ArrayList<MyWaitingSongData>
     lateinit var waitingSongDataList: ArrayList<HomeSongData>
@@ -84,12 +85,13 @@ class HomeOnFragment : Fragment() {
     var bundleMood = Bundle()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var v : View = inflater.inflate(R.layout.fragment_home_on, container, false)
+        var v: View = inflater.inflate(R.layout.fragment_home_on, container, false)
         var pref = context!!.getSharedPreferences("auto", Activity.MODE_PRIVATE)
 
         //authorization_info = pref.getString("token","")
-        authorization_info = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM"
-9
+        authorization_info =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM"
+        9
 
         //통신
         getHomeInfoResponse()
@@ -136,11 +138,11 @@ class HomeOnFragment : Fragment() {
 
         //성은이 기기 기준 1500
         home_on_scroll_btn.setOnClickListener {
-            home_on_scroll.smoothScrollTo(0,1500)
+            home_on_scroll.smoothScrollTo(0, 1500)
         }
     }
 
-    fun attachRecyclerView(){
+    fun attachRecyclerView() {
         waitingSongDataList = ArrayList()
         myWaitingSongDataList = ArrayList()
         hitSongHomeDataList = ArrayList()
@@ -155,10 +157,14 @@ class HomeOnFragment : Fragment() {
 
 
     //hits
-    fun getHitsResponse(){
-        val getHitsResponse = networkService.getHitsResponse("application/json","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM", "success")
+    fun getHitsResponse() {
+        val getHitsResponse = networkService.getHitsResponse(
+            "application/json",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM",
+            "success"
+        )
 
-        getHitsResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
+        getHitsResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse> {
             override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
                 Log.e("home hits song list fail", t.toString())
             }
@@ -167,16 +173,30 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
 
-                    for (i in playlistDataList.songList.indices){
-                        hitSongHomeDataList.add(HomeSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName, playlistDataList.songList[i].songUrl))
-                    }
-                    if(playlistDataList == null)
-                        return
+                    if (playlistDataList != null) {
+                        for (i in playlistDataList.songList.indices) {
+                            hitSongHomeDataList.add(
+                                HomeSongData(
+                                    playlistDataList.songList[i]._id,
+                                    playlistDataList.songList[i].artwork,
+                                    playlistDataList.songList[i].originTitle,
+                                    playlistDataList.songList[i].originArtistName,
+                                    playlistDataList.songList[i].coverArtistName,
+                                    playlistDataList.songList[i].songUrl
+                                )
+                            )
+                        }
+/*                    if(playlistDataList == null)
+                        return*/
 
-                    // 수정 : *error
-                    hitSongHomeAdapter = HitSongHomeAdapter(context!!, hitSongHomeDataList, requestManager)
-                    rv_home_frag_scoring_hit_list.adapter = hitSongHomeAdapter
-                    rv_home_frag_scoring_hit_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                        // 수정 : *error
+                        hitSongHomeAdapter = HitSongHomeAdapter(context!!, hitSongHomeDataList, requestManager)
+                        rv_home_frag_scoring_hit_list.adapter = hitSongHomeAdapter
+                        rv_home_frag_scoring_hit_list.layoutManager =
+                            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+                    }
+
                 }
 
             }
@@ -185,10 +205,14 @@ class HomeOnFragment : Fragment() {
     }
 
     //upload
-    fun getUploadResponse(){
-        val getUploadResponse = networkService.getUploadResponse("application/json","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM",null)
+    fun getUploadResponse() {
+        val getUploadResponse = networkService.getUploadResponse(
+            "application/json",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM",
+            null
+        )
 
-        getUploadResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
+        getUploadResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse> {
             override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
                 Log.e("home hits song list fail", t.toString())
             }
@@ -197,34 +221,54 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
 
-                    Log.e("playlistDataList.songList", playlistDataList.songList.size.toString())
-                    if( playlistDataList.songList.size == 0){
-                        tv_home_frag_waiting_scoring_mine.visibility = View.GONE
-                        rv_home_frag_scoring_waiting_mine.visibility = View.GONE
+                    //데이터가 없을 경우,
 
-                    }else
-                    {
+                    if (playlistDataList != null) {
 
-                        tv_home_frag_waiting_scoring_mine.visibility = View.VISIBLE
-                        rv_home_frag_scoring_waiting_mine.visibility = View.VISIBLE
+                        //Log.e("playlistDataList.songList", playlistDataList.songList.size.toString())
+                        if (playlistDataList.songList.size == 0) {
+                            tv_home_frag_waiting_scoring_mine.visibility = View.GONE
+                            rv_home_frag_scoring_waiting_mine.visibility = View.GONE
+
+                        } else {
+
+                            tv_home_frag_waiting_scoring_mine.visibility = View.VISIBLE
+                            rv_home_frag_scoring_waiting_mine.visibility = View.VISIBLE
+                        }
+
+                        for (i in playlistDataList.songList.indices) {
+                            myWaitingSongDataList.add(
+                                MyWaitingSongData(
+                                    playlistDataList.songList[i]._id,
+                                    playlistDataList.songList[i].songUrl,
+                                    playlistDataList.songList[i].deleteTime.substring(8, 10),
+                                    playlistDataList.songList[i].artwork,
+                                    playlistDataList.songList[i].originTitle,
+                                    playlistDataList.songList[i].originArtistName,
+                                    playlistDataList.songList[i].coverArtistName
+                                )
+                            )
+                        }
+                        myWaitingSongHomeAdapter =
+                            MyWaitingSongHomeAdapter(context!!, myWaitingSongDataList, requestManager)
+                        rv_home_frag_scoring_waiting_mine.adapter = myWaitingSongHomeAdapter
+                        rv_home_frag_scoring_waiting_mine.layoutManager =
+                            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     }
 
-                    for(i in playlistDataList.songList.indices) {
-                        myWaitingSongDataList.add(MyWaitingSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].songUrl, playlistDataList.songList[i].deleteTime.substring(8,10), playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName))
-                    }
-                    myWaitingSongHomeAdapter = MyWaitingSongHomeAdapter(context!!, myWaitingSongDataList, requestManager)
-                    rv_home_frag_scoring_waiting_mine.adapter = myWaitingSongHomeAdapter
-                    rv_home_frag_scoring_waiting_mine.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
                 }
             }
         })
     }
 
     //rateReady
-    fun getRateReadyResponse(){
-        val getRateReadyResponse = networkService.getRateReadyResponse("application/json","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM")
+    fun getRateReadyResponse() {
+        val getRateReadyResponse = networkService.getRateReadyResponse(
+            "application/json",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM"
+        )
 
-        getRateReadyResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse>{
+        getRateReadyResponse.enqueue(object : retrofit2.Callback<GetPlaylistResponse> {
             override fun onFailure(call: Call<GetPlaylistResponse>, t: Throwable) {
                 Log.e("home hits song list fail", t.toString())
             }
@@ -233,16 +277,26 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playlistDataList: PlayListData = response.body()!!.data
 
-                    if(playlistDataList != null){
+                    if (playlistDataList != null) {
 
                         Log.v("HomeOnFragment", "응답 값 = " + response.body().toString())
-                        for(i in playlistDataList.songList.indices) {
-                            Log.v("Asdf"," 값 = " + playlistDataList.songList[i].songUrl)
-                            waitingSongDataList.add(HomeSongData(playlistDataList.songList[i]._id, playlistDataList.songList[i].artwork, playlistDataList.songList[i].originTitle, playlistDataList.songList[i].originArtistName, playlistDataList.songList[i].coverArtistName, playlistDataList.songList[i].songUrl))
+                        for (i in playlistDataList.songList.indices) {
+                            Log.v("Asdf", " 값 = " + playlistDataList.songList[i].songUrl)
+                            waitingSongDataList.add(
+                                HomeSongData(
+                                    playlistDataList.songList[i]._id,
+                                    playlistDataList.songList[i].artwork,
+                                    playlistDataList.songList[i].originTitle,
+                                    playlistDataList.songList[i].originArtistName,
+                                    playlistDataList.songList[i].coverArtistName,
+                                    playlistDataList.songList[i].songUrl
+                                )
+                            )
                         }
-                        waitingSongHomeAdapter = WaitingSongHomeAdapter(context!!,waitingSongDataList, requestManager)
+                        waitingSongHomeAdapter = WaitingSongHomeAdapter(context!!, waitingSongDataList, requestManager)
                         rv_home_frag_scoring_waiting.adapter = waitingSongHomeAdapter
-                        rv_home_frag_scoring_waiting.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                        rv_home_frag_scoring_waiting.layoutManager =
+                            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
                     }
 /*
@@ -254,9 +308,8 @@ class HomeOnFragment : Fragment() {
                     layoutManager.orientation = LinearLayoutManager.VERTICAL
                     rv_home_frag_scoring_waiting.setLayoutManager(layoutManager)
                     */
-                }
-                else{
-                    Log.v("Asdf","응답값없음")
+                } else {
+                    Log.v("Asdf", "응답값없음")
 
                 }
 
@@ -266,34 +319,43 @@ class HomeOnFragment : Fragment() {
     }
 
     private fun getAudioListFromMediaDatabase() {
-        activity!!.getSupportLoaderManager().initLoader(LOADER_ID, null, object : LoaderManager.LoaderCallbacks<Cursor> {
-            override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-                val uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-                projection = arrayOf(waitSongDataArr.get(0)._id)
-                val projection = arrayOf(MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.ALBUM, MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.DURATION, MediaStore.Audio.Media.DATA)
-                val selection = MediaStore.Audio.Media.IS_MUSIC + " = 1"
-                val sortOrder = MediaStore.Audio.Media.TITLE + " COLLATE LOCALIZED ASC"
-                return CursorLoader(context!!, uri, projection, selection, null, sortOrder)
-            }
+        activity!!.getSupportLoaderManager()
+            .initLoader(LOADER_ID, null, object : LoaderManager.LoaderCallbacks<Cursor> {
+                override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
+                    val uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                    projection = arrayOf(waitSongDataArr.get(0)._id)
+                    val projection = arrayOf(
+                        MediaStore.Audio.Media._ID,
+                        MediaStore.Audio.Media.TITLE,
+                        MediaStore.Audio.Media.ARTIST,
+                        MediaStore.Audio.Media.ALBUM,
+                        MediaStore.Audio.Media.ALBUM_ID,
+                        MediaStore.Audio.Media.DURATION,
+                        MediaStore.Audio.Media.DATA
+                    )
+                    val selection = MediaStore.Audio.Media.IS_MUSIC + " = 1"
+                    val sortOrder = MediaStore.Audio.Media.TITLE + " COLLATE LOCALIZED ASC"
+                    return CursorLoader(context!!, uri, projection, selection, null, sortOrder)
+                }
 
-            override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
-                mAdapter!!.swapCursor(data)
-            }
+                override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
+                    mAdapter!!.swapCursor(data)
+                }
 
-            override fun onLoaderReset(loader: Loader<Cursor>) {
-                mAdapter!!.swapCursor(null)
-            }
-        })
+                override fun onLoaderReset(loader: Loader<Cursor>) {
+                    mAdapter!!.swapCursor(null)
+                }
+            })
     }
 
     //recommend
-    fun getRecommendResponse(){
+    fun getRecommendResponse() {
         val pref = context!!.getSharedPreferences("auto", Activity.MODE_PRIVATE)
-        var token : String = ""
+        var token: String = ""
         token = pref.getString("token", "")
-        val getRecommendResponse = networkService.getRecommendResponse("application/json",token)
+        val getRecommendResponse = networkService.getRecommendResponse("application/json", token)
 
-        getRecommendResponse.enqueue(object : retrofit2.Callback<GetRecommendResponse>{
+        getRecommendResponse.enqueue(object : retrofit2.Callback<GetRecommendResponse> {
             override fun onFailure(call: Call<GetRecommendResponse>, t: Throwable) {
                 Log.e("home recommend song list fail", t.toString())
             }
@@ -302,24 +364,26 @@ class HomeOnFragment : Fragment() {
                 if (response.isSuccessful) {
                     val playSongDataList: ArrayList<PlaySongData> = response.body()!!.data
 
-                    if(playSongDataList == null)
-                        return
+                    if (playSongDataList != null){
 
-                    for(i in playSongDataList.indices) {
-                        recommendSongHomeDataList.add(
-                            HomeSongData(
-                                playSongDataList[i]._id,
-                                playSongDataList[i].artwork,
-                                playSongDataList[i].originTitle,
-                                playSongDataList[i].originArtistName,
-                                playSongDataList[i].coverArtistName,
+                        for (i in playSongDataList.indices) {
+                            recommendSongHomeDataList.add(
+                                HomeSongData(
+                                    playSongDataList[i]._id,
+                                    playSongDataList[i].artwork,
+                                    playSongDataList[i].originTitle,
+                                    playSongDataList[i].originArtistName,
+                                    playSongDataList[i].coverArtistName,
                                     playSongDataList[i].songUrl
+                                )
                             )
-                        )
+                        }
+                        recommendSongHomeAdapter =
+                            RecomentSongHomeAdapter(context!!, recommendSongHomeDataList, requestManager)
+                        rv_home_frag_scoring_recommend_list.adapter = recommendSongHomeAdapter
+                        rv_home_frag_scoring_recommend_list.layoutManager =
+                            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     }
-                    recommendSongHomeAdapter = RecomentSongHomeAdapter(context!!, recommendSongHomeDataList, requestManager)
-                    rv_home_frag_scoring_recommend_list.adapter = recommendSongHomeAdapter
-                    rv_home_frag_scoring_recommend_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 }
 
 
@@ -329,21 +393,29 @@ class HomeOnFragment : Fragment() {
     }
 
     //userInfo
-    fun getHomeInfoResponse(){
+    fun getHomeInfoResponse() {
         //xx일 경우
-        val getHomeInfoResponse = networkService.getHomeInfoResponse("application/json","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM")
+        val getHomeInfoResponse = networkService.getHomeInfoResponse(
+            "application/json",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWR4IjoxNiwiaWF0IjoxNTYyOTY3NzY2LCJleHAiOjE1NjU1NTk3NjZ9.PmlhTASv3yT75I_RG9T6YRL-BdCAGZaE7fpB4r_G3BM"
+        )
 
-        getHomeInfoResponse.enqueue(object: retrofit2.Callback<GetHomeInfoResponse>{
-            override fun onFailure(call : Call<GetHomeInfoResponse>, t : Throwable){
+        getHomeInfoResponse.enqueue(object : retrofit2.Callback<GetHomeInfoResponse> {
+            override fun onFailure(call: Call<GetHomeInfoResponse>, t: Throwable) {
                 Log.e("home user info fail", t.toString())
             }
-            override fun onResponse(call : Call<GetHomeInfoResponse>, response: Response<GetHomeInfoResponse>){
+
+            override fun onResponse(call: Call<GetHomeInfoResponse>, response: Response<GetHomeInfoResponse>) {
                 if (response.isSuccessful) {
                     val temp: HomeUserInfoData = response.body()!!.data
 
-                    if (temp.auth){
+                    if (temp == null) {
+                        return
+                    }
+
+                    if (temp.auth) {
                         showUserInfo(temp)
-                    }else{
+                    } else {
                         showNonUserInfo()
                     }
                 }
@@ -352,51 +424,68 @@ class HomeOnFragment : Fragment() {
     }
 
     //top10Category
-    fun getTop10CategoryResponse(){
+    fun getTop10CategoryResponse() {
         val getTop10CategoryResponse = networkService.getTop10CategoryResonse("application/json")
 
-        getTop10CategoryResponse.enqueue(object : retrofit2.Callback<GetTop10CategoryResponse>{
+        getTop10CategoryResponse.enqueue(object : retrofit2.Callback<GetTop10CategoryResponse> {
 
             override fun onFailure(call: Call<GetTop10CategoryResponse>, t: Throwable) {
                 Log.e("top10 category fail", t.toString())
             }
 
-            override fun onResponse(call: Call<GetTop10CategoryResponse>, response: Response<GetTop10CategoryResponse>) {
+            override fun onResponse(
+                call: Call<GetTop10CategoryResponse>,
+                response: Response<GetTop10CategoryResponse>
+            ) {
                 if (response.isSuccessful) {
 
                     val top10CategoryDataList: ArrayList<ArrayList<Top10CategoryData>> = response.body()!!.data
 
-                    if(top10CategoryDataList[0] == null)
+                    if (top10CategoryDataList[0] == null)
                         return
 
                     //장르데이터
-                    for (i in top10CategoryDataList[0].indices){
+                    for (i in top10CategoryDataList[0].indices) {
                         genreRank.add(top10CategoryDataList[0][i].top10Name)
-                        bundleGenre.putStringArrayList("bundleGenre",genreRank)
-                        top10GenreDataList.add(TOP10Data(top10CategoryDataList[0][i]._id,top10CategoryDataList[0][i].top10Thumbnail, top10CategoryDataList[0][i].top10Name))
+                        bundleGenre.putStringArrayList("bundleGenre", genreRank)
+                        top10GenreDataList.add(
+                            TOP10Data(
+                                top10CategoryDataList[0][i]._id,
+                                top10CategoryDataList[0][i].top10Thumbnail,
+                                top10CategoryDataList[0][i].top10Name
+                            )
+                        )
                     }
                     top10GenreAdapter = Top10GenreAdapter(context!!, top10GenreDataList, requestManager)
                     rv_home_frag_top10_genre_list.adapter = top10GenreAdapter
-                    rv_home_frag_top10_genre_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    rv_home_frag_top10_genre_list.layoutManager =
+                        LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-                    if(top10CategoryDataList[1] == null)
+                    if (top10CategoryDataList[1] == null)
                         return
 
                     //무드데이터
-                    for (i in top10CategoryDataList[1].indices){
+                    for (i in top10CategoryDataList[1].indices) {
                         moodRank.add(top10CategoryDataList[0][i].top10Name)
-                        bundleMood.putStringArrayList("bundleGenre",moodRank)
-                        top10MoodDataList.add(TOP10Data(top10CategoryDataList[0][i]._id,top10CategoryDataList[1][i].top10Thumbnail, top10CategoryDataList[1][i].top10Name))
+                        bundleMood.putStringArrayList("bundleGenre", moodRank)
+                        top10MoodDataList.add(
+                            TOP10Data(
+                                top10CategoryDataList[0][i]._id,
+                                top10CategoryDataList[1][i].top10Thumbnail,
+                                top10CategoryDataList[1][i].top10Name
+                            )
+                        )
                     }
                     top10MoodAdapter = Top10GenreAdapter(context!!, top10MoodDataList, requestManager)
                     rv_home_frag_top10_mood_list.adapter = top10MoodAdapter
-                    rv_home_frag_top10_mood_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    rv_home_frag_top10_mood_list.layoutManager =
+                        LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
 
-                    bundleGenre.putStringArrayList("genreRank",genreRank)
+                    bundleGenre.putStringArrayList("genreRank", genreRank)
                     top10fragment.arguments = bundleGenre
 
-                    bundleMood.putStringArrayList("moodRank",moodRank)
+                    bundleMood.putStringArrayList("moodRank", moodRank)
                     top10fragment.arguments = bundleMood
                 }
             }
@@ -404,13 +493,13 @@ class HomeOnFragment : Fragment() {
     }
 
 
-    fun showUserInfo(temp: HomeUserInfoData){
+    fun showUserInfo(temp: HomeUserInfoData) {
 
         //info
-        tv_home_frag_ment.setText(temp.nickname+"님!\n업로드 곡이\n평가를 기다리고 있어요!")
+        tv_home_frag_ment.setText(temp.nickname + "님!\n업로드 곡이\n평가를 기다리고 있어요!")
         tv_home_frag_scoring_cnt.setText(temp.rateSongCount.toString())
         tv_home_frag_perfect_cnt.setText(temp.hitSongCount.toString())
-        tv_home_frag_total_point.setText((temp.totalPoint!!.toInt() / 1000).toString()+","+(temp.totalPoint!!.toInt() % 1000).toString() + "P")
+        tv_home_frag_total_point.setText((temp.totalPoint!!.toInt() / 1000).toString() + "," + (temp.totalPoint!!.toInt() % 1000).toString() + "P")
 
         tv_home_frag_waiting_scoring_mine.setText(temp.nickname + "님이 평가를 기다리고 있는 곡")
         tv_home_frag_waiting_scoring.setText(temp.nickname + "님의 평가를 기다리고 있는 곡")
@@ -421,7 +510,7 @@ class HomeOnFragment : Fragment() {
         ll_home_frag_point_layout.visibility = View.VISIBLE
     }
 
-    fun showNonUserInfo(){
+    fun showNonUserInfo() {
 
         //info
         tv_home_frag_ment.setText("로그인 후\n더 많은 정보를 확인해보세요!")
@@ -431,7 +520,7 @@ class HomeOnFragment : Fragment() {
         ll_home_frag_point_layout.visibility = View.GONE
     }
 
-    fun waitdata(){
+    fun waitdata() {
 
     }
 }
