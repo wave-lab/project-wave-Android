@@ -1,10 +1,9 @@
 package com.song2.wave.UI.MainPlayer
 
+import android.app.Dialog
 import android.content.*
-import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.util.Log
 import android.view.View
@@ -25,11 +24,15 @@ import kotlinx.android.synthetic.main.activity_main_player.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
+import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.support.v7.app.AlertDialog
+import kotlinx.android.synthetic.main.dialog_report.*
+
 
 class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
-    lateinit var playTime: String
     var playbackPosition : Int = 0
     var isPlaying : Boolean = false
     lateinit var seekbar: SeekBar
@@ -44,24 +47,16 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
     var _id : String = ""
     var rating_flag : Int = 0
 
-    var selectedFlag : Int = 0
     lateinit var durationTimeTv : TextView
     lateinit var lengthTimeTv : TextView
 
-
-    var currentPosition = 0
     var prevSongIdx = 0
 
     var mPosition : Int = 0
-
     var authorization_info : String = ""
-
-    // var n_sbHandler = sbHandler()
-    //var seekBarThread = sbThread()
 
     val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
     }
-
 
     override fun onClick(v: View) {
         when (v.id) {
@@ -75,10 +70,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         }// 플레이어 화면으로 이동할 코드가 들어갈 예정
     }
 
-
     fun addCoverImgViewPager() {
-
-
         var imageList = arrayListOf<String>(
                 "https://images.otwojob.com/product/P/o/M/PoM0Lnkz9z54kZS.png/o2j/resize/900%3E",
                 "https://images.otwojob.com/product/x/U/6/xU6PzuxMzIFfSQ9.jpg/o2j/resize/852x622%3E",
@@ -95,7 +87,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         val margin = (60 * d).toInt()
         val marginRight = (60 * d).toInt()
 
-
         coverImgViewPager.setPadding(margin, 0, marginRight, 0)
         coverImgViewPager.setAdapter(CoverImgViewPager(this, imageList))
 
@@ -107,16 +98,11 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
                 page.setScaleX(normalizedposition / 2 + 0.65f)
                 page.setScaleY(normalizedposition / 2 + 0.65f)
             }
-
         })
-
-
         coverImgViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
-
                 Log.v("onPageScrollStateChanged", state.toString())
-
             }
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
@@ -128,44 +114,13 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
                     nextSong()
 
                 prevSongIdx = position
-
-
                 //이전으로 가면 preview
             }
 
             override fun onPageSelected(position: Int) {
                 Log.v("onPageSeleted", position.toString())
             }
-
         })
-
-
-    }
-
-    fun addTimer(){
-        val tt = object : TimerTask() {
-            override fun run() {
-                runOnUiThread {
-                    if(seekbar.max > 0){
-                        playTime = String.format(
-                                "%02d:%02d",
-                                audioService.getMpCurrentPosition1(),
-                                audioService.getMpCurrentPosition2()
-                        )
-
-                        tv_main_player_duration_time.setText(playTime)
-                        seekbar.setProgress(audioService.getCurrentPosition())
-                    }
-
-                }
-            }
-        }
-
-        /////////// / Timer 생성 //////////////
-        val timer = Timer()
-        timer.schedule(tt, 0, 1000)
-        //////////////////////////////////////
-
     }
 
     private val mBroadcastReceiver = object : BroadcastReceiver() {
@@ -174,6 +129,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // 플레이어 재생, 정지 버튼 UI 업데이트
     private fun updateUI() {
         if (AudioApplication.getInstance().serviceInterface.isPlaying) {
             iv_main_player_act_stop_btn.setImageResource(R.drawable.btn_stop_md)
@@ -182,8 +138,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         }
         val audioItem = AudioApplication.getInstance().serviceInterface.audioItem
         if (audioItem != null) {
-            val albumArtUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), audioItem.mAlbumId)
-            //Glide.with(applicationContext).load(albumArtUri).into(vp_main_player_act_cover_img)
             tv_main_player_act_title_sing.setText(audioItem.mTitle)
         } else {
             vp_main_player_act_cover_img.setBackgroundResource(R.drawable.kakao_default_profile_image)
@@ -203,7 +157,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
         iv_main_player_act_stop_btn.setOnClickListener(this)
         mPosition = intent.getIntExtra("mPosition", 0)
-
         flag = intent.getIntExtra("flag", 0)
 
         // 노래 선택으로 입장
@@ -211,7 +164,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
         val extras = intent.extras
 
-        Log.v("asdf","선택 = " + extras.toString())
         // 노래 선택으로 입장 시
         if (intent.getStringExtra("songUrl") != null) {
             Log.v("asdf", "선택 - 노래")
@@ -236,38 +188,56 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
             songUrl = intent.getStringExtra("songUrl")
         }
 
+        // 평가 목적으로 화면 들어왔을 경우
+        if(rating_flag == 1){
+            iv_main_player_act_report.visibility = View.VISIBLE // 신고 버튼 활성화
+            iv_main_player_act_more.visibility = View.GONE // 더보기 버튼 비활성화
+        }
+        // 평가 목적으로 들어오지 않은 경우
+        else{
+            iv_main_player_act_report.visibility = View.GONE // 신고 버튼 비활성화
+            iv_main_player_act_more.visibility = View.VISIBLE // 더보기 버튼 활성화
+        }
 
+        // 곡 세부사항 데이터 가져오기
         getSongDetail()
 
+        // 곡 정보에 관한 데이터로 화면 구성
         tv_main_player_act_title_sing.text = title + " - " + originArtist
         tv_main_player_cover_artist_name.text = "Covered by " + coverArtist
         img_main_player_act_cover_img.visibility = View.VISIBLE
         vp_main_player_act_cover_img.visibility = View.INVISIBLE
 
-        Glide.with(this).load(songImgUrl).into(img_main_player_act_cover_img)
+        // Seekbar 등록
+        addSeekBar()
 
-        initialSetting()
-
-        playerBtn()
+        // 브로드캐스트 등록
         registerBroadcast();
+
+        // 화면 업데이트
         updateUI();
 
+        // 이미지 커버 사진 클릭 시
         img_main_player_act_cover_img.setOnClickListener {
+            // 평가 목적인 경우, 평가 화면 활성화
             if(rating_flag == 1){
                 rl_main_player_act_trans.visibility = View.VISIBLE
                 rl_main_player_act_rating.visibility = View.VISIBLE
                 ll_main_player_act_commnet.visibility = View.INVISIBLE
-
             }
         }
+
+        // 화면 전체를 클릭 시
         rl_main_player_act_all.setOnClickListener {
             rl_main_player_act_trans.visibility = View.GONE
         }
 
+        // 좋아요 버튼 클릭시
         iv_main_player_like_btn.setOnClickListener {
             iv_main_player_like_btn.isSelected = !iv_main_player_like_btn.isSelected
         }
 
+        // 코멘트 내용 클릭시
         btn_main_player_act_comment.setOnClickListener {
             ll_main_player_act_commnet.visibility = View.VISIBLE
             rl_main_player_act_rating.visibility = View.INVISIBLE
@@ -277,8 +247,47 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         iv_maim_player_close.setOnClickListener {
             onBackPressed()
         }
+
+        // 더보기 버튼 클릭시
+        iv_main_player_act_more.setOnClickListener {
+            var intent = Intent(applicationContext, PlayerMoreActivity::class.java)
+            intent.putExtra("songId", _id)
+            intent.putExtra("title", title)
+            intent.putExtra("originAtist", originArtist)
+            intent.putExtra("coverArtist", coverArtist)
+            intent.putExtra("imgUrl", songImgUrl)
+            startActivity(intent)
+        }
+
+        // 신고 버튼 클릭시
+        iv_main_player_act_report.setOnClickListener {
+            showReportDialog()
+        }
     }
 
+    // 신고 커스텀 다이얼로그 메서드
+    protected fun showReportDialog() {
+        var reportDialog = Dialog(this)
+        reportDialog.setCancelable(true)
+        reportDialog.getWindow().setBackgroundDrawable( ColorDrawable(Color.TRANSPARENT));
+        val exitDialogView = this!!.layoutInflater.inflate(R.layout.dialog_report, null)
+        reportDialog.setContentView(exitDialogView)
+
+        // 신고 완료 버튼 클릭 시
+        reportDialog.tv_report_dialog_confirm.setOnClickListener {
+           Toast.makeText(applicationContext, "신고 완료", Toast.LENGTH_LONG).show()
+            reportDialog.dismiss()
+        }
+
+        // 신고 취소 버튼 클릭 시
+        reportDialog.tv_report_dialog_cancel.setOnClickListener {
+            Toast.makeText(applicationContext, "취소", Toast.LENGTH_LONG).show()
+            reportDialog.dismiss()
+        }
+        reportDialog.show()
+    }
+
+    // 브로드캐스트 등록
     private fun registerBroadcast() {
         val filter = IntentFilter()
         filter.addAction(BroadcastActions.PREPARED)
@@ -286,6 +295,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         registerReceiver(mBroadcastReceiver, filter)
     }
 
+    // 화면 종료시
     override fun onDestroy() {
         super.onDestroy()
         unregisterBroadcast()
@@ -296,140 +306,25 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         unregisterReceiver(mBroadcastReceiver)
     }
 
-    fun initialSetting(){
-
-        addSeekBar()
-        //addTimer()
-    }
-
-
     //seekbar touchListener
     fun addSeekBar() {
         seekbar = sb_scoring_player_act_seekbar
         seekbar.setOnClickListener(this)
-
     }
-
-    fun playerBtn() {
-
-
-        /*
-        //if Looping == False
-        mediaPlayer.setOnCompletionListener(object : MediaPlayer.OnCompletionListener {
-            override fun onCompletion(p0: MediaPlayer?) {
-                Log.v("Complete", "Complete")
-                //musicThread.nextSong()
-                nextSong()
-            }
-        })
-*/
-
-/*
-       iv_main_player_act_stop_btn.setOnClickListener {
-
-          // if (iv_main_player_act_stop_btn.isSelected and (myService.currentDuration == 0)) {
-           if (!iv_main_player_act_stop_btn.isSelected && selectedFlag == 0) {
-               try {
-                   startService()
-
-/*                if (mediaPlayer != null) {
-                   mediaPlayer!!.stop()
-                   mediaPlayer = null
-               }*/
-                   //musicThread.playAudio(sourceMusicArray[currentPosition])
-                   playAudio(sourceMusicArray[currentPosition])
-
-               } catch (e: Exception) {
-                   e.printStackTrace()
-                   //Log.e("ERROR", mediaPlayer.toString())
-               }
-
-           } else if (iv_main_player_act_stop_btn.isSelected) {
-               //musicThread.pauseAudio()
-               pauseAudio()
-
-           } else {
-               //musicThread.restart()
-               restart()
-           }
-           iv_main_player_act_stop_btn.isSelected = !iv_main_player_act_stop_btn.isSelected
-
-
-       }
-*/
-    }
-
-    //미디어를 재생하는 사용자 정의 메소드
-    fun playAudio(url: String) {
-
-
-
-        var play_duration = audioService.getDuration()
-        var lenthOfSong =
-                String.format("%02d:%02d", ((play_duration / 1000) % 3600 / 60), ((play_duration / 1000) % 3600 % 60))
-
-        tv_main_player_length_of_song.setText(lenthOfSong)
-
-        isPlaying = true
-
-        seekbar.setMax(play_duration)
-        //seekBarThread.start()
-    }
-
 
     fun prevSong() {
-
     }
 
     fun nextSong() {
-
-
-    }
-
-    fun pauseAudio() {
-
-        isPlaying = false
-        //musicPause()
-        playbackPosition = myService.currentDuration
-        musicPause()
-
     }
 
     fun restart() {
 
         isPlaying = true // 재생하도록 flag 변경
-
         //mediaPlayer.seekTo(playbackPosition) // 일시정지 시점으로 이동
         restartMusic()
         //mediaPlayer.start() // 시작
-
         // seekBarThread.run()
-    }
-
-    fun killMediaPlayer() {
-/*      if (mediaPlayer != null && !mediaPlayer!!.isPlaying()) {
-           mediaPlayer!!.release()
-       }*/
-        //mediaPlayer!!.release()
-    }
-
-    fun startService() {
-        val serviceIntent = Intent(this, MyForeGroundService::class.java)
-        serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android")
-        serviceIntent.putExtra("flag", 0)
-        ContextCompat.startForegroundService(this, serviceIntent)
-    }
-
-    fun stopService() {
-        val serviceIntent = Intent(this, MyForeGroundService::class.java)
-        stopService(serviceIntent)
-    }
-
-    fun musicPause(){
-        val pauseIntent = Intent(this, MyForeGroundService::class.java)
-        pauseIntent.putExtra("inputExtra", "중지")
-        pauseIntent.putExtra("flag", 1)
-        stopService(pauseIntent)
     }
 
     fun restartMusic(){
@@ -440,21 +335,23 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         stopService(restartIntent)
     }
 
-    public companion object {
+    companion object {
         lateinit var mainPlayerActivity: MainPlayerActivity
         //일종의 스태틱
     }
 
+    // 곡 세부사항 get 통신
     fun getSongDetail()
     {
         val getSongDetailResponse = networkService.getSongDetailResonse(authorization_info, _id)
         getSongDetailResponse.enqueue(object : Callback<GetSongDetailResponse> {
 
             override fun onResponse(call: Call<GetSongDetailResponse>, response: Response<GetSongDetailResponse>) {
-                Log.v("TAG", "곡 세부사항 통신 성공")
+                Log.v("MainPlayerActivity", "곡 세부사항 GET 통신 성공")
                 if(response.isSuccessful){
                     var data = response!!.body()!!.data
-                    Glide.with(applicationContext).load(data.artwork).into(img_main_player_act_cover_img)
+                    songImgUrl = data.artwork
+                    Glide.with(applicationContext).load(songImgUrl).into(img_main_player_act_cover_img)
 
                     var genreValue : String = ""
                     for(i in 0.. data.genre.size-1){
@@ -464,9 +361,8 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
                     }
                     tv_main_player_act_genre.text = genreValue
                     Glide.with(applicationContext).load(data.artwork)
-                    Log.v("Asf","테스트 장르 = " + genreValue)
                 }else{
-                    Log.v("ASdf", "테스트 에러 = " + response.code())
+                    Log.v("MainPlayerActivity", "통신 에러 = " + response.code())
                 }
             }
 

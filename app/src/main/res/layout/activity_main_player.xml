@@ -20,6 +20,7 @@
                 android:layout_centerInParent="true"
                 android:lineSpacingExtra="6sp"
                 android:text="커버곡"
+                android:textColor="#ffffff"
                 android:includeFontPadding="false"
                 android:layout_width="50dp"
                 android:layout_height="27dp"/>
@@ -37,7 +38,7 @@
     <TextView
             android:id="@+id/tv_main_player_act_title_sing"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_below="@+id/rl_main_player_act_main_toolbar"
             android:layout_marginHorizontal="24dp"
             android:layout_width="wrap_content"
@@ -54,7 +55,7 @@
     <TextView
         android:id="@+id/tv_main_player_cover_artist_name"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="16dp"
             android:layout_below="@+id/tv_main_player_act_title_sing"
             android:layout_width="252dp"
             android:layout_height="21dp"
@@ -68,7 +69,7 @@
     />
     <ImageView
         android:id="@+id/img_main_player_act_cover_img"
-        android:layout_marginTop="106dp"
+        android:layout_marginTop="120dp"
         android:layout_below="@+id/rl_main_player_act_main_toolbar"
         android:layout_centerInParent="true"
         android:layout_width="300dp"
@@ -196,7 +197,6 @@
 
     </RelativeLayout>
 
-
     <android.support.v4.view.ViewPager
             android:id="@+id/vp_main_player_act_cover_img"
             android:layout_marginTop="106dp"
@@ -216,21 +216,21 @@
             android:layout_marginHorizontal="30dp"
             android:src="@drawable/img_artwork_1" android:layout_centerInParent="true"/>
 
-    <LinearLayout
+    <RelativeLayout
             android:layout_marginHorizontal="30dp"
             android:id="@+id/ll_main_player_act_more"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:layout_below="@+id/vp_main_player_act_cover_img"
+            android:layout_below="@+id/img_main_player_act_cover_img"
             android:layout_width="300dp" android:layout_height="24dp" android:orientation="horizontal">
 
         <ImageView android:layout_width="24dp" android:layout_height="24dp"
-                   android:src="@drawable/btn_shuffle"/>
+                   android:src="@drawable/btn_shuffle"
+        android:layout_centerVertical="true"
+        />
 
         <TextView
                 android:id="@+id/tv_main_player_act_genre"
-                android:layout_marginHorizontal="92dp"
-                android:layout_gravity="center_vertical"
                 android:fontFamily="@font/noto_sans_kr_regular_hestia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -239,22 +239,44 @@
                 android:lineSpacingExtra="6sp"
                 android:gravity="center_horizontal"
                 android:text="록  메탈  POP"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:maxLines="1"
                 android:ellipsize="end"/>
 
         <ImageView
-                android:layout_gravity="right"
+                android:id="@+id/iv_main_player_act_more"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_width="24dp" android:layout_height="24dp"
                 android:src="@drawable/btn_play_info"/>
+        <ImageView
+            android:id="@+id/iv_main_player_act_report"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="24dp" android:layout_height="24dp"
+            android:src="@drawable/btn_report"
+            android:visibility="gone"
+            />
 
-    </LinearLayout>
+    </RelativeLayout>
+
+    <SeekBar
+            android:layout_below="@+id/ll_main_player_act_more"
+            android:layout_centerHorizontal="true"
+            android:layout_width="330dp"
+            android:thumb="@android:color/transparent"
+            android:progressTint="#00b6de"
+            android:layout_height="12dp"
+            android:layout_marginTop="42dp"
+            android:id="@+id/sb_scoring_player_act_seekbar"/>
 
     <RelativeLayout
             android:layout_centerHorizontal="true"
             android:id="@+id/ll_main_player_act_time"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="4dp"
             android:layout_marginHorizontal="24dp"
-            android:layout_below="@+id/ll_main_player_act_more"
+            android:layout_below="@+id/sb_scoring_player_act_seekbar"
             android:layout_width="302dp" android:layout_height="wrap_content">
 
         <TextView
@@ -271,20 +293,13 @@
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"/>
     </RelativeLayout>
-    <SeekBar
-            android:layout_below="@+id/ll_main_player_act_time"
-            android:layout_centerHorizontal="true"
-            android:layout_width="330dp"
-            android:thumb="@android:color/transparent"
-            android:progressTint="#00b6de"
-            android:layout_height="12dp"
-            android:id="@+id/sb_scoring_player_act_seekbar"/>
-
 
     <RelativeLayout
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_width="360dp" android:layout_height="96dp">
+            android:layout_below="@+id/ll_main_player_act_time"
+            android:layout_above="@+id/rl_main_player_act_bottom"
+            android:layout_marginBottom="10dp"
+            android:layout_width="360dp" android:layout_height="56dp">
         <ImageView
                 android:layout_toLeftOf="@+id/iv_main_player_act_stop_btn"
                 android:id="@+id/iv_main_player_act_share"
@@ -304,6 +319,22 @@
                 android:src="@drawable/like_selector"
                 android:layout_centerVertical="true"
                 android:layout_width="32dp" android:layout_height="32dp"/>
+    </RelativeLayout>
+    <RelativeLayout
+            android:id="@+id/rl_main_player_act_bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_width="360dp" android:layout_height="56dp">
+        <ImageView
+                android:id="@+id/btn_main_player_act_list"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/play_btn_playlist_sm"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="24dp"
+                android:layout_centerVertical="true"/>
+
     </RelativeLayout>
     <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
         <com.airbnb.lottie.LottieAnimationView

@@ -35,7 +35,6 @@ class HitSongHomeAdapter(var context : Context, private var homeSongData: ArrayL
             //AudioApplication.getInstance().serviceInterface.setPlayList(holder.adapterPosition) // 재생목록등록
             AudioApplication.getInstance().serviceInterface.play(mContext, homeSongData[holder.adapterPosition]._id, homeSongData[holder.adapterPosition].songUrl!!, homeSongData[position].originArtistName, homeSongData[position].coverArtistName, homeSongData[position].songName!!, 0) // 선택한 오디오재생
             intent.putExtra("_id", homeSongData[holder.adapterPosition]._id)
-            Log.v("ASdf","테스2 id = " + homeSongData[holder.adapterPosition]._id)
             intent.putExtra("songUrl", homeSongData[holder.adapterPosition].songUrl)
             intent.putExtra("title", homeSongData[holder.adapterPosition].songName)
             intent.putExtra("originArtist", homeSongData[holder.adapterPosition].originArtistName)

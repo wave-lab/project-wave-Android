@@ -44,6 +44,7 @@ import retrofit2.Response
 
 class HomeOnFragment : Fragment() {
     private val LOADER_ID = 0x001
+    private val TAG = "HomeOnFragment"
 
     val networkService: NetworkService by lazy {
         ApiClient.getRetrofit().create(NetworkService::class.java)
@@ -383,6 +384,10 @@ class HomeOnFragment : Fragment() {
                         rv_home_frag_scoring_recommend_list.adapter = recommendSongHomeAdapter
                         rv_home_frag_scoring_recommend_list.layoutManager =
                             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    }else
+                    {
+                        Log.v(TAG,response.body()!!.status.toString())
+                        return
                     }
                 }
 
