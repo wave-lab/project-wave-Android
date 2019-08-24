@@ -165,6 +165,7 @@ interface NetworkService {
     @Multipart
     @POST("/songs")
     fun postSongUploadResponse(
+        @Header("Authorization") authorization: String,
         @Part("originTitle") originTitle : RequestBody,
         @Part artwork : MultipartBody.Part?,
         @Part("originArtistName") originArtistName : RequestBody,

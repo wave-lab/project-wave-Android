@@ -11,8 +11,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.song2.wave.R
 import kotlinx.android.synthetic.main.activity_signup_genre.*
-import okhttp3.MediaType
-import okhttp3.RequestBody
 
 class SignupGenreActivity : AppCompatActivity(), View.OnClickListener {
 

@@ -1,5 +1,6 @@
 package com.song2.wave.UI.MainPlayer
 
+import android.animation.Animator
 import android.app.Activity
 import android.content.*
 import android.net.Uri
@@ -12,6 +13,8 @@ import android.view.View
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.VideoView
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -41,7 +44,51 @@ import org.jetbrains.anko.toast
 import org.json.JSONObject
 
 
-class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
+class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var playTime: String
     var playbackPosition : Int = 0
@@ -76,7 +123,6 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
     val networkService: NetworkService by lazy { ApiClient.getRetrofit().create(NetworkService::class.java)
     }
-
 
     override fun onClick(v: View) {
         when (v.id) {
@@ -229,6 +275,40 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
         durationTimeTv = findViewById(R.id.tv_main_player_duration_time)
         lengthTimeTv = findViewById(R.id.tv_main_player_length_of_song)
 
+        //--------------------------------------애니메이션---------
+        // val video : VideoView = findViewById(R.id.video)
+        //com.airbnb.lottie.LottieAnimationView 아이디
+        val love : LottieAnimationView = findViewById(R.id.lottie_main_act_like)
+        val videoView = findViewById<VideoView>(R.id.video)
+        val path = "android.resource://" + packageName + "/" + R.raw.try_11
+        videoView?.setVideoURI(Uri.parse(path))
+        //val button = findViewById<Button>(R.id.button)
+
+        lottie_main_act_like.setOnClickListener {
+            love.playAnimation()
+            val isPlaying = videoView.isPlaying
+            if (isPlaying) {
+                //videoView.pause()
+            } else {
+                videoView.start()
+            }
+        }
+        love.addAnimatorListener(object : Animator. AnimatorListener{
+            override fun onAnimationRepeat(animation: Animator?) {
+                Log.e("Animation:","repeat")
+            }
+            override fun onAnimationEnd(animation: Animator?) {
+                //Toast.makeText( application , "끝~",Toast. LENGTH_SHORT ).show()
+            }
+            override fun onAnimationCancel(animation: Animator?) {
+                Log.e("Animation:","cancel")  //취소
+            }
+            override fun onAnimationStart(animation: Animator?) {
+                Log.e("Animation ","star") //시작
+            }
+        })
+
+        //------------------------------------------------애니메이션
         iv_main_player_act_stop_btn.setOnClickListener(this)
         mPosition = intent.getIntExtra("mPosition", 0)
 
@@ -310,7 +390,11 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
 
         playerBtn()
         registerBroadcast();
-        updateUI();
+        updateUI()
+
+        iv_maim_player_close.setOnClickListener {
+            finish()
+        }
 
     }
 
@@ -331,6 +415,7 @@ class MainPlayerActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
             override fun onFailure(call: Call<PostResponse>, t: Throwable?) {
+
             }
         })
     }

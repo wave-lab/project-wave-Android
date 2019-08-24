@@ -15,7 +15,7 @@
                 android:fontFamily="@font/noto_sans_kr_bold_hestia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:textColor="#fafafa"
                 android:lineSpacingExtra="9sp"
                 android:text="음원을 등록해주세요"

@@ -25,6 +25,8 @@
             android:textColor="#ffffff"
             android:lineSpacingExtra="9sp"
             android:text="Song name is..."
+            android:maxLines="1"
+            android:ellipsize="end"
     />
     <TextView
             android:id="@+id/tv_item_home_song_artist"
@@ -38,6 +40,8 @@
             android:lineSpacingExtra="6sp"
             android:gravity="center_horizontal"
             android:text="John Doe"
+            android:maxLines="1"
+            android:ellipsize="end"
     />
 
 </RelativeLayout>
