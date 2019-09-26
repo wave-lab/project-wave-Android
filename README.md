@@ -11,8 +11,12 @@
   
 ## 개발 언어
   - JAVA
+  - Java Script
   - SQL
 
+## 사용 라이브러리
+  - AJAX
+  
 ## 개발 환경
   - Eclipse
   - Apache Tomcat Web Server
