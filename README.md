@@ -46,8 +46,8 @@ implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
 
 - **송제민** - [SongJemin](https://github.com/SongJemin) 
 - **양승희** - [seunghee63](https://github.com/seunghee63) 
-- **이성은** - [leeleess](https://github.com/leeleess) 
-- **이선** - [sssungeun](https://github.com/sssungeun) 
+- **이성은** - [sssungeun](https://github.com/sssungeun) 
+- **이선** - [leeleess](https://github.com/leeleess) 
 
 ## wave의 다른 프로젝트
 
